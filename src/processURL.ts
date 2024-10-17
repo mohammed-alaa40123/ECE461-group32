@@ -131,3 +131,26 @@ export async function processURLs(filePath: string) {
   logger.info(`Results: ${JSON.stringify(results)}`);
   return results;
 }
+export type GithubRepoInfo = {
+	url: string;
+	owner: string;
+	repo: string;
+};
+
+
+/**
+ * Extract the GitHub repository information from a given URL
+ * @param url The URL to process
+ * @returns The GitHub repository information
+ */
+export async function getGithubRepoInfoFromUrl(url: string): Promise<GithubRepoInfo | null> {
+  const repoInfo = await getGithubRepo(url);
+  if (repoInfo) {
+    return {
+      url,
+      owner: repoInfo.owner,
+      repo: repoInfo.packageName,
+    };
+  }
+  return null;
+}
