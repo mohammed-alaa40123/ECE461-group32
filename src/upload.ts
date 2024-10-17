@@ -8,14 +8,15 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import fs from "fs";
 // Setup
 const app = express();
-const port = 3000;
+const port = 4000;
+dotenv.config();
 
 // Initialize the S3 client
 const s3Client = new S3Client({
   region: "us-east-1", // e.g., 'us-west-2'
   credentials: {
-    accessKeyId: "AKIAWMFUPINLI3KEL6T2",
-    secretAccessKey: "LSrcuT9q44HvPsVAeG5oskfE1MiDg7YdTB+gq0af",
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
   },
   endpoint: "https://s3.us-east-1.amazonaws.com/", // Use the region-specific endpoint, e.g., 'https://s3.us-east-1.amazonaws.com/'
 
@@ -69,16 +70,16 @@ const key = "express-4.21.1.zip"; // Name for the file in S3
 app.use(bodyParser.json());
 
 // Multer to handle file uploads
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: 'packages/' });
 
 
 //Set up PostgreSQL connection
 const { Pool } = pkg;
 const db = new Pool({
-  host: 'packagesdb.ctgsmc6cetjm.us-east-1.rds.amazonaws.com',//process.env.DB_HOST,
-  user: "postgres",//process.env.DB_USER,
-  password: "MbnRHpRAxvsTEaGD54rY",//process.env.DB_PASSWORD,
-  database: 'packagesdb',//process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  user:process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   port: 5432,//Number(process.env.DB_PORT),
 })
 
