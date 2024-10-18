@@ -1,12 +1,12 @@
-import { PackageId, User, PackageData } from '../types.ts';
+import { PackageId, User, PackageData } from '../utils/types';
 import { S3Client } from "@aws-sdk/client-s3";
 import dotenv from 'dotenv';
 import crypto from 'crypto';
 import pg from 'pg';
 import { PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
-import {getGithubRepoInfoFromUrl} from "../../src/processURL.ts";
-import { calculateNetScore } from '../../src/metrics/netScore.ts';
-import { getLogger, logTestResults } from "../../src/logger.ts";
+import {getGithubRepoInfoFromUrl} from "../rating/processURL";
+import { calculateNetScore } from '../rating/metrics/netScore';
+import { getLogger, logTestResults } from "../rating/logger";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -31,6 +31,11 @@ export const pool = new Pool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     port: 5432,//Number(process.env.DB_PORT),
+    
+      ssl: {
+        rejectUnauthorized: false // This line will fix new error
+      }
+    
   });
 
 export async function uploadToS3(bucketName: string, key: string, body: Buffer): Promise<void> {
@@ -38,6 +43,7 @@ export async function uploadToS3(bucketName: string, key: string, body: Buffer):
       Bucket: bucketName,
       Key: key,
       Body: body,
+      ContentType: 'application/zip', // Since you're uploading a zip file
     };
   
     await s3client.send(new PutObjectCommand(s3params))

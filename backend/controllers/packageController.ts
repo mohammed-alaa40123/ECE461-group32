@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getLogger, logTestResults } from "../../src/logger.ts";
+import { getLogger, logTestResults } from "../src/rating/logger.ts";
 import { generatePackageId, PackageInfo, uploadToS3,insertIntoDatabase,updateDatabase,deleteFromDatabase,deleteFromS3, defaultUser,metricCalcFromUrlUsingNetScore } from './controllerHelpers.ts';
 import AdmZip, { IZipEntry } from 'adm-zip';
 
@@ -124,7 +124,7 @@ export async function createPackage(req: Request, res: Response) {
     }
 
     // Store package metadata in PostgreSQL
-    // await insertIntoDatabase(pkgeId, pkgName, pkgVersion, info.URL, defaultUser.name);
+    await insertIntoDatabase(pkgeId, pkgName, pkgVersion, info.URL, defaultUser.name);
 
     // Respond with a success message
     logger.console('Package created successfully');

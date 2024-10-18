@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Package rater for npm packages",
   "scripts": {
-    "start": "tsx src/upload.ts",
+    "start": "tsx backend/app.ts",
     "lint": "eslint '**/*.{ts,mjs,json}' --fix",
     "format": "prettier --write '**/*.{ts,mjs,json}'",
     "quality": "npm run format && npm run lint",

@@ -3,7 +3,7 @@ import routes from './routes.ts';
 import cors from 'cors';
 
 const app = express();
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 4000;
 
 app.use(express.json({ limit: '50mb' })); // Middleware to parse JSON request bodies
 
