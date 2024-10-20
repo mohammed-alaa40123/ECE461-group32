@@ -84,7 +84,8 @@ export async function createPackage(req: Request, res: Response) {
       // Upload package content to S3
       // await uploadToS3(process.env.AWS_S3_BUCKET_NAME || "", "packages/" + pkgeId + ".zip", base64Buffer);
     } else if (data.URL) {
-      logger.console(`createPackage request via public ingest: ${data.URL}`);
+      //logger.console(`createPackage request via public ingest`);
+      logger.console(`createPackage request via public ingest:${data.URL}`);
 
       info = await metricCalcFromUrlUsingNetScore(data.URL);
 
@@ -124,7 +125,7 @@ export async function createPackage(req: Request, res: Response) {
     }
 
     // Store package metadata in PostgreSQL
-    // await insertIntoDatabase(pkgeId, pkgName, pkgVersion, info.URL, defaultUser.name);
+    await insertIntoDatabase(pkgeId, pkgName, pkgVersion, info.URL, defaultUser.name);
 
     // Respond with a success message
     logger.console('Package created successfully');
