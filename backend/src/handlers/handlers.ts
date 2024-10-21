@@ -123,12 +123,12 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
     }
     
     const packageData: Package = res.rows[0];
-
+    console.log(res.rows[0]);
     // If Content is null and URL is null, retrieve from S3
-    if (!packageData.data.content && !packageData.data.URL) {
+    if (!packageData.data.Content && !packageData.data.URL) {
       try {
         const content = await getPackageContent(id);
-        packageData.data.content = content;
+        packageData.data.Content = content;
       } catch (s3Error) {
         console.error('S3 Retrieval Error:', s3Error);
         return sendResponse(500, { message: 'Failed to retrieve package content.' });
