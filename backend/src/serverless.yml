@@ -1,0 +1,60 @@
+service: my-api-service
+
+frameworkVersion: '4'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    DB_HOST: ''
+    DB_USER: ''
+    DB_PASSWORD: ''
+    DB_NAME: ''
+    DB_PORT: '' # Default to '5432' if not set
+
+ 
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - http:
+          path: authenticate
+          method: PUT
+      - http:
+          path: packages
+          method: POST
+      - http:
+          path: reset
+          method: DELETE
+      - http:
+          path: package/byRegEx
+          method: POST
+      - http:
+          path: package/byName/{name}
+          method: GET
+      - http:
+          path: package
+          method: POST
+      - http:
+          path: package/{id}/rate
+          method: GET
+      - http:
+          path: package/{id}/cost
+          method: GET
+      - http:
+          path: package/{id}
+          method: GET
+      - http:
+          path: package/{id}
+          method: PUT
+      - http:
+          path: package/{id}
+          method: DELETE
+      - http:
+          path: tracks
+          method: GET

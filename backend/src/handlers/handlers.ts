@@ -8,11 +8,16 @@ import { PackageHistoryEntry } from '../models/PackageHistoryEntry';
 import { PackageRating } from '../models/PackageRating';
 import { sendResponse } from '../utils/response';
 import { authenticate, AuthenticatedUser } from '../utils/auth';
+import {metricCalcFromUrlUsingNetScore, PackageInfo, generatePackageId} from '../handlerhelper';
+import {getLogger, logTestResults} from '../rating/logger';
+import AdmZip, {IZipEntry} from 'adm-zip';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { send } from 'process';
 
 
 
+const logger = getLogger();
 
 // Handler for /authenticate - PUT
 export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyResult> => {
@@ -53,6 +58,7 @@ export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyR
 // Handler for /package - POST (Create Package)
 export const handleCreatePackage = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
+  const fetch = (await import("node-fetch")).default;
   let user: AuthenticatedUser = {
     sub: 5445,
     name: "admin",
@@ -68,6 +74,10 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
   const packageData: Package = JSON.parse(body);
   const { metadata, data } = packageData;
 
+  const pkgName: string = metadata.Name;
+  const pkgVersion: string = metadata.Version;
+  const pkgeId: string = generatePackageId(pkgName, pkgVersion);
+
   // Validate required fields
   if (!metadata || !metadata.Name || !metadata.Version || !metadata.ID) {
     return sendResponse(400, { message: 'Missing required package metadata fields.' });
@@ -79,6 +89,118 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
   }
 
   try {
+
+    let info: PackageInfo | null;
+
+    if(data.Content){
+      logger.info("createPackage request via zip upload");
+      const base64Data = data.Content;
+
+      if (!base64Data) {
+        logger.debug("Invalid base64-encoded data");
+        return sendResponse(400, { error: 'Invalid base64-encoded data' });
+      }
+
+      const base64Buffer = Buffer.from(atob(base64Data), 'binary');
+
+      // Extract package.json from zip file
+      const zip = new AdmZip(base64Buffer);
+      const zipEntries = zip.getEntries();
+      let packageJSON: string | null = null;
+      let extractedPackageJson;
+      zipEntries.forEach((entry: IZipEntry) => {
+        const entryPathParts = entry.entryName.split('/');
+        console.log(entryPathParts);
+        if (entryPathParts.length === 2 && entryPathParts[1] === 'package.json') {
+          packageJSON = entry.getData().toString('utf8');
+        }
+      });
+      if (packageJSON == null) {
+        console.log('Invalid package creation request: No package.json found in zip');
+        return sendResponse(400, { error: 'Invalid package creation request: No package.json found in zip' });
+      } else {
+        extractedPackageJson = JSON.parse(packageJSON);
+        logger.console(`repo url: ${extractedPackageJson?.repository?.url}, name: ${extractedPackageJson.name}, version: ${extractedPackageJson.version}`);
+        if (!extractedPackageJson?.repository?.url || !extractedPackageJson.name || !extractedPackageJson.version) {
+          return sendResponse(400, { error: 'Invalid package creation request: package.json must contain repository url, package name, and version' });
+        }
+      }
+
+      // Get the URL from the info in package.json
+      const repoUrl = extractedPackageJson?.repository?.url;
+      info = await metricCalcFromUrlUsingNetScore(repoUrl);
+      console.log("info", info);
+      if (!info) {
+        console.error("No package info returned from URL:", repoUrl);
+        return sendResponse(400, { error: 'Invalid package creation request: Could not get package info from URL' });
+      }
+
+      info.ID = pkgeId;
+      info.NAME = extractedPackageJson.name;
+      info.VERSION = extractedPackageJson.version;
+      info.URL = repoUrl;
+
+      if (info.NET_SCORE < 0.5) {
+        logger.console('Invalid package creation request: Package cannot be uploaded due to disqualifying rating.');
+        return sendResponse(424, { error: 'Invalid package creation request: Package cannot be uploaded due to disqualifying rating.' });
+      }
+
+      // Upload package content to S3
+      // await uploadToS3(process.env.AWS_S3_BUCKET_NAME || "", "packages/" + pkgeId + ".zip", base64Buffer);
+    }
+    else if(data.URL){
+
+    //logger.console(`createPackage request via public ingest`);
+    logger.console(`createPackage request via public ingest:${data.URL}`);
+
+    info = await metricCalcFromUrlUsingNetScore(data.URL);
+
+    if (!info) {
+      console.log("info", info);
+      console.error("No package info returned from URL:", data.URL);
+      return sendResponse(400, { error: 'Invalid package creation request: Could not get package info from URL' });
+    }
+
+    info.ID = pkgeId;
+
+    if (info.NET_SCORE < 0.5) {
+      logger.console('Invalid package creation request: Package cannot be uploaded due to disqualifying rating.');
+      return sendResponse(424, { error: 'Invalid package creation request: Package cannot be uploaded due to disqualifying rating.' });
+    }
+
+    // Download package content from GitHub using info
+    const response = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+      headers: {
+        Authorization: process.env.GITHUB_TOKEN || "",
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+
+    if (!response.ok) {
+      logger.console('Invalid package creation request: Could not get GitHub url for zip package download');
+      return sendResponse(400, { error: 'Invalid package creation request: Could not get GitHub url' });
+    }
+
+    const zipBuffer = Buffer.from(await response.arrayBuffer());
+
+    // Upload package content to S3
+    // await uploadToS3(process.env.AWS_S3_BUCKET_NAME || "", "packages/" + pkgeId + ".zip", zipBuffer);
+  } else {
+    logger.console('Invalid package creation request: Bad set of Content and URL');
+    return sendResponse(400, { error: 'Invalid package creation request: Bad set of Content and URL' });
+  }
+
+  // // Store package metadata in PostgreSQL
+  //   await insertIntoDatabase(pkgeId, pkgName, pkgVersion, info.URL, defaultUser.name);
+
+  //   // Respond with a success message
+  //   logger.console('Package created successfully');
+  //   res.status(200).json({ message: 'Package created successfully' });
+  // } catch (error) {
+  //   console.error('Error handling POST /package:', error);
+  //   res.status(500).json({ error: 'Internal Server Error' });
+  // }
+
     // Insert package into PostgreSQL
     const createdPackage = await createPackage(metadata, data);
 

@@ -9,20 +9,13 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        use: 'ts-loader',
-        exclude: [/node_modules/, /rating/],
+        use: ['ts-loader','html-loader'],
+        exclude: [/node_modules/],
       },
+      // Add more rules here for other file types (e.g., CSS, images) if needed
     ],
   },
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, ''),
-    libraryTarget: 'commonjs2',
-  },
-  externals: [
-    nodeExternals(),
-  ],
 };
