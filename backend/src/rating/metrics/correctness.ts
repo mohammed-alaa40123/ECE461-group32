@@ -2,7 +2,7 @@
  * This module calculates the correctness score of a repository
  */
 import { ESLint } from "eslint";
-import { getLogger } from "../logger.js";
+import { getLogger } from "../logger";
 
 const logger = getLogger();
 /**

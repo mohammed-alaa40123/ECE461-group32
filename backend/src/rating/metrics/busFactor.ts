@@ -1,8 +1,8 @@
 /**
  * Calculate the bus factor score of a repository
  */
-import { graphqlClient, GET_VALUES_FOR_BUS_FACTOR } from "../graphqlClient.js";
-import { BusFactorResponse } from "../types.js";
+import { graphqlClient, GET_VALUES_FOR_BUS_FACTOR } from "../graphqlClient";
+import { BusFactorResponse } from "../types";
 import { getLogger } from "../logger";
 
 const logger = getLogger();

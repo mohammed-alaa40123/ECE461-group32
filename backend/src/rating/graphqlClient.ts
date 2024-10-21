@@ -1,18 +1,47 @@
 /**
  * This file contains the GraphQL client and queries to fetch data from GitHub API.
  */
-import { GraphQLClient, gql } from "graphql-request";
+import axios from "axios";
 import "dotenv/config";
 
-const endpoint = "https://api.github.com/graphql";
+// GraphQLClient class to handle GraphQL requests
+export class GraphQLClient {
+  private endpoint: string;
+  private token: string;
 
-export const graphqlClient = new GraphQLClient(endpoint, {
-  headers: {
-    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+  constructor() {
+    this.endpoint = process.env.GITHUB_GRAPHQL_ENDPOINT || "https://api.github.com/graphql";
+    this.token = process.env.GITHUB_TOKEN || "";
   }
-});
 
-export const GET_VALUES_FOR_LICENSE = gql`
+  // Method to send a GraphQL request using axios
+  public async request(query: string, variables?: Record<string, any>) {
+    try {
+      const response = await axios.post(
+        this.endpoint,
+        {
+          query,
+          variables,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return response.data.data;
+    } catch (error) {
+      console.error("GraphQL request failed:", error);
+      throw error;
+    }
+  }
+}
+
+// Export instance for global usage if needed
+export const graphqlClient = new GraphQLClient();
+
+export const GET_VALUES_FOR_LICENSE = `
   query getLicenseInfo($repoOwner: String!, $repoName: String!) {
     repository(owner: $repoOwner, name: $repoName) {
       licenseInfo {
@@ -25,7 +54,7 @@ export const GET_VALUES_FOR_LICENSE = gql`
   }
 `;
 
-export const GET_VALUES_FOR_RAMP_UP = gql`
+export const GET_VALUES_FOR_RAMP_UP = `
   query getForksAndPRs($repoOwner: String!, $repoName: String!, $firstForks: Int!) {
     repository(owner: $repoOwner, name: $repoName) {
       forks(first: $firstForks) {
@@ -83,7 +112,7 @@ export const GET_VALUES_FOR_RAMP_UP = gql`
   }
 `;
 
-export const GET_VALUES_FOR_RESPONSIVE_MAINTAINER = gql`
+export const GET_VALUES_FOR_RESPONSIVE_MAINTAINER = `
   query getRepoData($repoOwner: String!, $repoName: String!, $firstIssues: Int!) {
     repository(owner: $repoOwner, name: $repoName) {
       issues(first: $firstIssues, states: CLOSED) {
@@ -104,7 +133,7 @@ export const GET_VALUES_FOR_RESPONSIVE_MAINTAINER = gql`
   }
 `;
 
-export const GET_VALUES_FOR_BUS_FACTOR = gql`
+export const GET_VALUES_FOR_BUS_FACTOR = `
   query getCommits($repoOwner: String!, $repoName: String!, $since: GitTimestamp!, $after: String) {
     repository(owner: $repoOwner, name: $repoName) {
       defaultBranchRef {

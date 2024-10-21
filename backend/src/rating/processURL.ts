@@ -2,9 +2,9 @@
  * This module contains functions to process the URLs and get the GitHub repo, package name, and owner from the URL.
  */
 import fs from "fs/promises";
-import { getLogger } from "./logger.js";
-import { returnRepo } from "./types.js";
-import { isValidFilePath } from "./util.js";
+import { getLogger } from "./logger";
+import { returnRepo } from "./types";
+import { isValidFilePath } from "./util";
 
 const logger = getLogger();
 

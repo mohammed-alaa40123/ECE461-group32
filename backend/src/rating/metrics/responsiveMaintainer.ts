@@ -1,10 +1,10 @@
 /**
  * Calculate the responsive maintainer score of a repository
  */
-import { graphqlClient, GET_VALUES_FOR_RESPONSIVE_MAINTAINER } from "../graphqlClient.js";
-import { ResponsiveMaintainerResponse } from "../types.js";
+import { graphqlClient, GET_VALUES_FOR_RESPONSIVE_MAINTAINER } from "../graphqlClient";
+import { ResponsiveMaintainerResponse } from "../types";
 import { differenceInDays } from "date-fns";
-import { getLogger } from "../logger.js";
+import { getLogger } from "../logger";
 
 const logger = getLogger();
 

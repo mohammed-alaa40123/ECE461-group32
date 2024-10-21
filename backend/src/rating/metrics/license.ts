@@ -1,9 +1,9 @@
 /**
  * This file contains the functions to calculate the license score of a repository
  */
-import { graphqlClient, GET_VALUES_FOR_LICENSE } from "../graphqlClient.js";
-import { LicenseReponse } from "../types.js";
-import { getLogger } from "../logger.js";
+import { graphqlClient, GET_VALUES_FOR_LICENSE } from "../graphqlClient";
+import { LicenseReponse } from "../types";
+import { getLogger } from "../logger";
 import path from "path";
 import { readFile } from "fs/promises";
 

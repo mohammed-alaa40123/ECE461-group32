@@ -1,10 +1,10 @@
 /**
  * Calculate the rampUp score of a repository
  */
-import { graphqlClient, GET_VALUES_FOR_RAMP_UP } from "../graphqlClient.js";
-import { RampUpResponse } from "../types.js";
+import { graphqlClient, GET_VALUES_FOR_RAMP_UP } from "../graphqlClient";
+import { RampUpResponse } from "../types";
 import { differenceInDays } from "date-fns";
-import { getLogger } from "../logger.js";
+import { getLogger } from "../logger";
 
 const logger = getLogger();
 

@@ -1,16 +1,16 @@
 /**
  * Calculate the net score of a repository
  */
-import { calculateLicenseScore } from "./license.js";
-import { calculateRampUpScore } from "./rampUp.js";
-import { calculateResponsiveMaintainerScore } from "./responsiveMaintainer.js";
-import { calculateCorrectness } from "./correctness.js";
-import { GithubRepoInfo, processURLs } from "../processURL.js";
-import { calculateBusFactorScore } from "./busFactor.js";
-import { getLogger } from "../logger.js";
+import { calculateLicenseScore } from "./license";
+import { calculateRampUpScore } from "./rampUp";
+import { calculateResponsiveMaintainerScore } from "./responsiveMaintainer";
+import { calculateCorrectness } from "./correctness";
+import { GithubRepoInfo, processURLs } from "../processURL";
+import { calculateBusFactorScore } from "./busFactor";
+import { getLogger } from "../logger";
 import { promisify } from "util";
 import { exec } from "child_process";
-import { cloneRepo } from "../util.js";
+import { cloneRepo } from "../util";
 
 const logger = getLogger();
 

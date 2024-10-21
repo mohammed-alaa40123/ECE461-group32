@@ -92,7 +92,6 @@ export const reinitializeLogger = () => {
  */
 export const logTestResults = async () => {
   const logger = getLogger();
-  const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const asyncExec = promisify(exec);
   // avoid running index.test.ts in E2E tests to prevent infinite loop
