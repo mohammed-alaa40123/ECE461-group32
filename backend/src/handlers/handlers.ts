@@ -107,6 +107,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
 // Handler for /package/{id} - GET (Retrieve Package)
 export const handleRetrievePackage = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
+  console.log("id", id);  
   let user: AuthenticatedUser;
   try {
     user = authenticate(headers);

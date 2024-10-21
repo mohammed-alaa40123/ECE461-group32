@@ -18,7 +18,7 @@ import {
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const { httpMethod, path, pathParameters, queryStringParameters, headers, body } = event;
-  console.log(`Received event: ${JSON.stringify(event)}`)
+  // console.log(`Received event: ${JSON.stringify(event)}`)
   try {
     // Routing logic based on path and method
     if (path === '/authenticate' && httpMethod === 'PUT') {
