@@ -53,6 +53,11 @@ export const createPackage = async (metadata: PackageMetadata, data: PackageData
   const res = await pool.query(insertText, insertValues);
   return res.rows[0];
 };
-
+export const getPackagedatabyID = async (id: string): Promise<Package|null> => {
+  const query = 'select id,name,version,content from packages as p where p.id=$1';
+  const result = await pool.query(query, [id]);
+  if (result.rows.length === 0) return null;
+  return result.rows[0];
+};
 // Additional DB functions for other endpoints...
 
