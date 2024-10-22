@@ -18,9 +18,8 @@ const pool = new Pool({
   max: 20, // Adjust based on expected concurrency
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
-  ssl: {
-    rejectUnauthorized: false // This line will fix new error
-  }
+  ssl: process.env.USE_SSL === 'true' ? { rejectUnauthorized: false } : false
+
 });
 
 // Export pool for use in other modules

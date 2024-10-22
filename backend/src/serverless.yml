@@ -9,12 +9,6 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: us-east-1
-  environment:
-    DB_HOST: ''
-    DB_USER: ''
-    DB_PASSWORD: ''
-    DB_NAME: ''
-    DB_PORT: '' # Default to '5432' if not set
 
  
 

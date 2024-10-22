@@ -9,13 +9,21 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        use: ['ts-loader','html-loader'],
-        exclude: [/node_modules/],
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
-      // Add more rules here for other file types (e.g., CSS, images) if needed
+      {
+        test: /\.html$/,
+        use: 'html-loader',
+      },
+      {
+        loader: 'babel-loader',
+        test: /\.js$|jsx/,
+        exclude: /node_modules/
+    }
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js','.html'],
   },
 };

@@ -1,0 +1,121 @@
+{
+  "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src": {
+    "versionSfCore": null,
+    "versionFramework": "4.4.7",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeServiceName": null,
+    "servicePath": "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "my-api-service",
+      "frameworkVersion": "4",
+      "plugins": [
+        "serverless-offline"
+      ],
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs18.x",
+        "region": "us-east-1"
+      },
+      "functions": {
+        "api": {
+          "handler": "index.handler",
+          "events": [
+            {
+              "http": {
+                "path": "authenticate",
+                "method": "PUT"
+              }
+            },
+            {
+              "http": {
+                "path": "packages",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "reset",
+                "method": "DELETE"
+              }
+            },
+            {
+              "http": {
+                "path": "package/byRegEx",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "package/byName/{name}",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "package",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}/rate",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}/cost",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}",
+                "method": "PUT"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}",
+                "method": "DELETE"
+              }
+            },
+            {
+              "http": {
+                "path": "tracks",
+                "method": "GET"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "serviceRawFile": "service: my-api-service\r\n\r\nframeworkVersion: '4'\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n\r\n \r\n\r\nfunctions:\r\n  api:\r\n    handler: index.handler\r\n    events:\r\n      - http:\r\n          path: authenticate\r\n          method: PUT\r\n      - http:\r\n          path: packages\r\n          method: POST\r\n      - http:\r\n          path: reset\r\n          method: DELETE\r\n      - http:\r\n          path: package/byRegEx\r\n          method: POST\r\n      - http:\r\n          path: package/byName/{name}\r\n          method: GET\r\n      - http:\r\n          path: package\r\n          method: POST\r\n      - http:\r\n          path: package/{id}/rate\r\n          method: GET\r\n      - http:\r\n          path: package/{id}/cost\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: PUT\r\n      - http:\r\n          path: package/{id}\r\n          method: DELETE\r\n      - http:\r\n          path: tracks\r\n          method: GET\r\n",
+    "command": [
+      "offline"
+    ],
+    "options": {
+      "debug": "*"
+    },
+    "error": {
+      "message": "request to https://core.serverless.com/api/bff/ failed, reason: getaddrinfo EAI_AGAIN core.serverless.com",
+      "stack": "Error: request to https://core.serverless.com/api/bff/ failed, reason: getaddrinfo EAI_AGAIN core.serverless.com\n    at Authentication.getClientDataFromAccessKey (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\auth\\index.js:997:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Authentication.getAuthenticatedData (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\auth\\index.js:332:26)\n    at async Authentication.resolverAuthenticate (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\auth\\index.js:1200:12)\n    at async _Meta.authenticate (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\index.js:626:33)\n    at async _Meta.authenticateAndResolve (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\index.js:586:29)\n    at async route (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\router.js:209:3)\n    at async Object.run2 (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\index.js:45:3)\n    at async run3 (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\bin\\sf-core.js:33:3)"
+    },
+    "machineId": "7895ea7141c6e14f190b80e4bcb1d6e5",
+    "stage": "dev",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
