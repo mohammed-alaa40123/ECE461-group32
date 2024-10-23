@@ -1,10 +1,30 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 18 # or the runtime of your Lambda function
     commands:
-      - echo Installing Node.js version 18
-      - nvm install 18       # Install Node.js version 18
-      - nvm use 18           # Use Node.js version 18
-      - node -v              # Verify Node.js version
+      - cd backend/src
+      - echo "Installing dependencies"
+      - npm install
+      - npm run build
+
+  pre_build:
+    commands:
+      - echo "Running tests"
+      - npm test # Make sure your project has a test script
+
+  build:
+    commands:
+      - echo "Zipping the Lambda function"
+      - zip -r function.zip index.js node_modules/ package.json
+  
+artifacts:
+  files:
+    - function.zip
+  discard-paths: yes
+  base-directory: .
+
+
+
