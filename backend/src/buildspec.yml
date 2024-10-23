@@ -3,3 +3,8 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
+    commands:
+      - echo Installing Node.js version 18
+      - nvm install 18       # Install Node.js version 18
+      - nvm use 18           # Use Node.js version 18
+      - node -v              # Verify Node.js version
