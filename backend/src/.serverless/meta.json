@@ -17,7 +17,14 @@
       "provider": {
         "name": "aws",
         "runtime": "nodejs18.x",
-        "region": "us-east-1"
+        "region": "us-east-1",
+        "environment": {
+          "DB_HOST": "${env:RDS_HOST}",
+          "DB_PORT": "${env:RDS_PORT}",
+          "DB_NAME": "${env:RDS_DATABASE}",
+          "DB_USER": "${env:RDS_USER}",
+          "DB_PASSWORD": "<REDACTED>"
+        }
       },
       "functions": {
         "api": {
@@ -99,7 +106,7 @@
         }
       }
     },
-    "serviceRawFile": "service: my-api-service\r\n\r\nframeworkVersion: '4'\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n\r\n \r\n\r\nfunctions:\r\n  api:\r\n    handler: index.handler\r\n    events:\r\n      - http:\r\n          path: authenticate\r\n          method: PUT\r\n      - http:\r\n          path: packages\r\n          method: POST\r\n      - http:\r\n          path: reset\r\n          method: DELETE\r\n      - http:\r\n          path: package/byRegEx\r\n          method: POST\r\n      - http:\r\n          path: package/byName/{name}\r\n          method: GET\r\n      - http:\r\n          path: package\r\n          method: POST\r\n      - http:\r\n          path: package/{id}/rate\r\n          method: GET\r\n      - http:\r\n          path: package/{id}/cost\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: PUT\r\n      - http:\r\n          path: package/{id}\r\n          method: DELETE\r\n      - http:\r\n          path: tracks\r\n          method: GET\r\n",
+    "serviceRawFile": "service: my-api-service\r\n\r\nframeworkVersion: '4'\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n  environment:\r\n    DB_HOST: ${env:RDS_HOST}\r\n    DB_PORT: ${env:RDS_PORT}\r\n    DB_NAME: ${env:RDS_DATABASE}\r\n    DB_USER: ${env:RDS_USER}\r\n    DB_PASSWORD: ${env:RDS_PASSWORD}\r\n\r\n \r\n\r\nfunctions:\r\n  api:\r\n    handler: index.handler\r\n    events:\r\n      - http:\r\n          path: authenticate\r\n          method: PUT\r\n      - http:\r\n          path: packages\r\n          method: POST\r\n      - http:\r\n          path: reset\r\n          method: DELETE\r\n      - http:\r\n          path: package/byRegEx\r\n          method: POST\r\n      - http:\r\n          path: package/byName/{name}\r\n          method: GET\r\n      - http:\r\n          path: package\r\n          method: POST\r\n      - http:\r\n          path: package/{id}/rate\r\n          method: GET\r\n      - http:\r\n          path: package/{id}/cost\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: PUT\r\n      - http:\r\n          path: package/{id}\r\n          method: DELETE\r\n      - http:\r\n          path: tracks\r\n          method: GET\r\n",
     "command": [
       "offline"
     ],
@@ -107,11 +114,29 @@
       "debug": "*"
     },
     "error": {
-      "message": "request to https://core.serverless.com/api/bff/ failed, reason: getaddrinfo EAI_AGAIN core.serverless.com",
-      "stack": "Error: request to https://core.serverless.com/api/bff/ failed, reason: getaddrinfo EAI_AGAIN core.serverless.com\n    at Authentication.getClientDataFromAccessKey (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\auth\\index.js:997:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Authentication.getAuthenticatedData (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\auth\\index.js:332:26)\n    at async Authentication.resolverAuthenticate (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\auth\\index.js:1200:12)\n    at async _Meta.authenticate (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\index.js:626:33)\n    at async _Meta.authenticateAndResolve (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\meta\\index.js:586:29)\n    at async route (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\router.js:209:3)\n    at async Object.run2 (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\index.js:45:3)\n    at async run3 (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\bin\\sf-core.js:33:3)"
+      "message": "Cannot resolve '${env:RDS_HOST}' variable at 'provider.environment.DB_HOST'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.",
+      "stack": "Error: Cannot resolve '${env:RDS_HOST}' variable at 'provider.environment.DB_HOST'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.\n    at _ResolverManager.resolve (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:673:11)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async _ResolverManager.#handlePlaceholderNode (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:590:9)\n    at async <anonymous> (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:483:11)\n    at async processNodeAndHandleCompletion (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\graph.js:20:5)",
+      "code": "MISSING_VARIABLE_RESULT"
     },
-    "machineId": "7895ea7141c6e14f190b80e4bcb1d6e5",
+    "machineId": "f70da5ae2ec0e574bc8c709ac91edb9d",
     "stage": "dev",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "dc31c49c-3e88-44f2-afe3-f6e953945850",
+    "orgName": "eceteam32",
+    "userId": "BQgVq3PVtDRgznyhMr",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "eceteam32",
+    "subscription": null,
+    "userEmail": "mohammedalaa40123@gmail.com",
     "serviceProviderAwsCfStackId": null,
     "serviceProviderAwsCfStackCreated": null,
     "serviceProviderAwsCfStackUpdated": null,

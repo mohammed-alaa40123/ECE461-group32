@@ -245,10 +245,10 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
       return sendResponse(404, { message: 'Package does not exist.' });
     }
     
-    const packageData: Package = res.rows[0];
+    const packageData: any = res.rows[0];
     console.log(res.rows[0]);
     // If Content is null and URL is null, retrieve from S3
-    if (!packageData.data.Content && !packageData.data.URL) {
+    if (!packageData.id && !packageData.url) {
       try {
         const content = await getPackageContent(id);
         packageData.data.Content = content;

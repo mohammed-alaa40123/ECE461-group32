@@ -1,0 +1,43 @@
+23/10/2024 22:22:13 [info]: createPackage request via zip upload
+23/10/2024 22:24:17 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+23/10/2024 22:24:17 [info]: Handling GitHub URL
+23/10/2024 22:24:17 [info]: repoInfo:
+23/10/2024 22:24:19 [info]: Repository cloned to D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+23/10/2024 22:25:48 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+23/10/2024 22:25:48 [info]: Handling GitHub URL
+23/10/2024 22:25:48 [info]: repoInfo:
+23/10/2024 22:25:48 [info]: Repository already cloned to D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+23/10/2024 22:25:50 [debug]: restLicense: 
+23/10/2024 22:25:50 [info]: License found in GraphQL
+23/10/2024 22:25:50 [debug]: Bus factor score for jashkenas/underscore: 0.05
+23/10/2024 22:25:50 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789177793394237 with median response time: 0 days, closure rate: 0.9789177793394237
+23/10/2024 22:28:30 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+23/10/2024 22:28:30 [info]: Handling GitHub URL
+23/10/2024 22:28:30 [info]: repoInfo:
+23/10/2024 22:28:30 [info]: Repository already cloned to D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+23/10/2024 22:32:13 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+23/10/2024 22:32:13 [info]: Handling GitHub URL
+23/10/2024 22:32:13 [info]: repoInfo:
+23/10/2024 22:32:14 [info]: Repository already cloned to D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+23/10/2024 22:32:27 [info]: Error fetching forks and PRs: Client network socket disconnected before secure TLS connection was established
+23/10/2024 22:32:28 [info]: Error calculating bus factor score: Client network socket disconnected before secure TLS connection was established
+23/10/2024 22:32:28 [info]: Error calculating responsive maintainer score: read ECONNRESET
+23/10/2024 22:32:28 [info]: Error retrieving license information: read ECONNRESET
+23/10/2024 22:32:28 [info]: License found in package.json
+23/10/2024 22:32:30 [debug]: ESLint errors: 630, warnings: 933, total lines: 14372, final score: 0.8474116337322571 for D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+23/10/2024 22:32:30 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.55,"NetScore_Latency":16.868,"RampUp":0,"RampUp_Latency":12.261,"Correctness":0.85,"Correctness_Latency":15.105,"BusFactor":0,"BusFactor_Latency":12.261,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":12.265,"License":1,"License_Latency":12.304}
+23/10/2024 22:33:26 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+23/10/2024 22:33:26 [info]: Handling GitHub URL
+23/10/2024 22:33:26 [info]: repoInfo:
+23/10/2024 22:33:26 [info]: Repository already cloned to D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+23/10/2024 22:33:29 [debug]: ESLint errors: 630, warnings: 933, total lines: 14372, final score: 0.8474116337322571 for D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+23/10/2024 22:33:30 [debug]: restLicense: 
+23/10/2024 22:33:30 [info]: License found in GraphQL
+23/10/2024 22:33:30 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789177793394237 with median response time: 0 days, closure rate: 0.9789177793394237
+23/10/2024 22:33:30 [debug]: Bus factor score for jashkenas/underscore: 0.05
+23/10/2024 22:33:33 [debug]: Total days: 1267, Forks with activity: 6
+23/10/2024 22:33:33 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+23/10/2024 22:33:33 [debug]: Lines of code: 138805
+23/10/2024 22:33:33 [debug]: Parts of the Ramp Up score: Main part: 0.7448008734493929, Constant: 614.8780294286356, Documentation Weight: 1, Target Time: 30
+23/10/2024 22:33:33 [debug]: Ramp Up score for jashkenas/underscore: 0.7448008734493929
+23/10/2024 22:33:33 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.78,"NetScore_Latency":7.743,"RampUp":0.74,"RampUp_Latency":5.895,"Correctness":0.85,"Correctness_Latency":1.894,"BusFactor":0.05,"BusFactor_Latency":2.34,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":2.249,"License":1,"License_Latency":2.111}
