@@ -11,3 +11,4 @@ upload_to_s3.ts
 db.ts
 insert_into_db.ts
 undefined
+backend/src/dist
