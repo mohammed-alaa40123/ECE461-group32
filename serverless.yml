@@ -1,3 +1,7 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: eceteam32
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: eceteam32
 service: nodejs-with-typescript-demo
 
 plugins:

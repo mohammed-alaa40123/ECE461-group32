@@ -161,3 +161,25 @@ export const GET_VALUES_FOR_BUS_FACTOR = `
     }
   }
 `;
+
+export const GET_VALUES_FOR_CODE_REVIEW_METRIC = `
+  query GetPullRequests($repoOwner: String!, $repoName: String!, $after: String) {
+    repository(owner: $repoOwner, name: $repoName) {
+      pullRequests(first: 100, after: $after) {
+        edges {
+          node {
+            additions  # Total lines of code added in the pull request
+            reviews {
+              totalCount  # Number of reviews for the pull request
+            }
+          }
+        }
+        pageInfo {
+          endCursor  # Cursor for pagination
+          hasNextPage  # Boolean to check if more pages are available
+        }
+      }
+    }
+  }
+`;
+
