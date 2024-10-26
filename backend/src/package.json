@@ -6,6 +6,8 @@
     "scripts": {
         "build": "webpack",
         "start": "serverless offline --debug",
+        "create": "ts-node handlers/create_user.ts",
+        "dep":"ts-node rating/metrics/dependencyPinning.ts",
         "test": "echo \"No tests specified\" && exit 0"
     },
     "author": "Mohamed Ahmed",

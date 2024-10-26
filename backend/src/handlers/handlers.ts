@@ -54,6 +54,45 @@ export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyR
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };
+/**
+ * Converts various Git URL formats to a normalized HTTPS URL without the .git suffix.
+ * Supports multiple Git hosting services.
+ * 
+* @param gitUrl - The original Git repository URL.
+* @returns The normalized HTTPS URL without the .git suffix.
+* @throws Error if the input URL format is unrecognized.
+*/
+function convertGitUrlToHttpsFlexible(gitUrl: string): string {
+ let httpsUrl: string | null = null;
+
+ // Regex patterns for different Git URL formats
+ const patterns: RegExp[] = [
+   /^git:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/,
+   /^git@([^:]+):([^/]+)\/([^/]+)\.git$/,
+   /^ssh:\/\/git@([^/]+)\/([^/]+)\/([^/]+)\.git$/,
+   /^https:\/\/([^/]+)\/([^/]+)\/([^/]+)(\.git)?$/,
+ ];
+
+ for (const pattern of patterns) {
+   const match = pattern.exec(gitUrl);
+   if (match) {
+     const host = match[1];
+     const user = match[2];
+     const repo = match[3];
+     httpsUrl = `https://${host}/${user}/${repo}`;
+     break;
+   }
+ }
+
+ if (!httpsUrl) {
+   throw new Error(`Unrecognized Git URL format: ${gitUrl}`);
+ }
+
+ return httpsUrl;
+}
+
+// Example usage:
+
 
 // Handler for /package - POST (Create Package)
 export const handleCreatePackage = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
@@ -128,17 +167,18 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
 
       // Get the URL from the info in package.json
       const repoUrl = extractedPackageJson?.repository?.url;
-      info = await metricCalcFromUrlUsingNetScore(repoUrl);
+      const repoUrlFixed = convertGitUrlToHttpsFlexible(repoUrl)
+      info = await metricCalcFromUrlUsingNetScore(repoUrlFixed);
       console.log("info", info);
       if (!info) {
-        console.error("No package info returned from URL:", repoUrl);
+        console.error("No package info returned from URL:", repoUrlFixed);
         return sendResponse(400, { error: 'Invalid package creation request: Could not get package info from URL' });
       }
 
       info.ID = pkgeId;
       info.NAME = extractedPackageJson.name;
       info.VERSION = extractedPackageJson.version;
-      info.URL = repoUrl;
+      info.URL = repoUrlFixed;
 
       if (info.NET_SCORE < 0.5) {
         logger.console('Invalid package creation request: Package cannot be uploaded due to disqualifying rating.');

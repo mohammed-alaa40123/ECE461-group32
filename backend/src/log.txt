@@ -41,3 +41,55 @@
 23/10/2024 22:33:33 [debug]: Parts of the Ramp Up score: Main part: 0.7448008734493929, Constant: 614.8780294286356, Documentation Weight: 1, Target Time: 30
 23/10/2024 22:33:33 [debug]: Ramp Up score for jashkenas/underscore: 0.7448008734493929
 23/10/2024 22:33:33 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.78,"NetScore_Latency":7.743,"RampUp":0.74,"RampUp_Latency":5.895,"Correctness":0.85,"Correctness_Latency":1.894,"BusFactor":0.05,"BusFactor_Latency":2.34,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":2.249,"License":1,"License_Latency":2.111}
+25/10/2024 18:19:29 [info]: createPackage request via zip upload
+25/10/2024 18:19:46 [info]: createPackage request via zip upload
+25/10/2024 18:19:46 [info]: repo url: git://github.com/jashkenas/underscore.git, name: underscore, version: 1.13.7
+25/10/2024 18:19:46 [info]: Handling GitHub URL
+25/10/2024 18:19:46 [info]: repoInfo:
+25/10/2024 18:19:47 [info]: Error cloning repository: Cloning into 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore.git'...
+remote: Repository not found.
+fatal: repository 'https://github.com/jashkenas/underscore.git.git/' not found
+
+25/10/2024 18:19:48 [info]: Could not calculate correctness score: No repository directory provided
+25/10/2024 18:19:48 [info]: Error calculating bus factor score: Cannot read properties of null (reading 'defaultBranchRef')
+25/10/2024 18:19:48 [info]: Error retrieving license information: Cannot read properties of null (reading 'licenseInfo')
+25/10/2024 18:19:48 [info]: Could not calculate license score: No repository directory provided
+25/10/2024 18:19:48 [info]: Error calculating responsive maintainer score: Cannot read properties of null (reading 'issues')
+25/10/2024 18:19:48 [info]: Error fetching forks and PRs: Cannot read properties of null (reading 'forks')
+25/10/2024 18:19:48 [info]: {"URL":"git://github.com/jashkenas/underscore.git","NetScore":0,"NetScore_Latency":1.526,"RampUp":0,"RampUp_Latency":0.371,"Correctness":0,"Correctness_Latency":0,"BusFactor":0,"BusFactor_Latency":0.203,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":0.209,"License":0,"License_Latency":0.221}
+25/10/2024 18:19:48 [info]: Invalid package creation request: Package cannot be uploaded due to disqualifying rating.
+25/10/2024 18:30:18 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+25/10/2024 18:30:18 [info]: Handling GitHub URL
+25/10/2024 18:30:18 [info]: repoInfo:
+25/10/2024 18:30:18 [info]: Repository already cloned to D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+25/10/2024 18:30:19 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+25/10/2024 18:30:20 [debug]: restLicense: 
+25/10/2024 18:30:20 [info]: License found in GraphQL
+25/10/2024 18:30:20 [debug]: Bus factor score for jashkenas/underscore: 0.05
+25/10/2024 18:30:20 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789177793394237 with median response time: 0 days, closure rate: 0.9789177793394237
+25/10/2024 18:30:32 [debug]: Total days: 1267, Forks with activity: 6
+25/10/2024 18:30:32 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+25/10/2024 18:30:32 [debug]: Lines of code: 0
+25/10/2024 18:30:32 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+25/10/2024 18:30:32 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+25/10/2024 18:30:36 [debug]: No lines of code found in D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore
+25/10/2024 18:30:36 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":17.782,"RampUp":0.3,"RampUp_Latency":12.717,"Correctness":0,"Correctness_Latency":16.924,"BusFactor":0.05,"BusFactor_Latency":0.387,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":0.391,"License":1,"License_Latency":0.401}
+25/10/2024 18:30:36 [info]: Invalid package creation request: Package cannot be uploaded due to disqualifying rating.
+25/10/2024 18:32:54 [info]: createPackage request via public ingest:git://github.com/jashkenas/underscore.git
+25/10/2024 18:32:55 [info]: Handling GitHub URL
+25/10/2024 18:32:55 [info]: repoInfo:
+25/10/2024 18:32:55 [info]: Error cloning repository: Cloning into 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\repos\underscore.git'...
+remote: Repository not found.
+fatal: repository 'https://github.com/jashkenas/underscore.git.git/' not found
+
+25/10/2024 18:32:55 [info]: Could not calculate correctness score: No repository directory provided
+25/10/2024 18:32:56 [info]: Error fetching forks and PRs: Cannot read properties of null (reading 'forks')
+25/10/2024 18:32:56 [info]: Error retrieving license information: Cannot read properties of null (reading 'licenseInfo')
+25/10/2024 18:32:56 [info]: Could not calculate license score: No repository directory provided
+25/10/2024 18:32:56 [info]: Error calculating bus factor score: Cannot read properties of null (reading 'defaultBranchRef')
+25/10/2024 18:32:56 [info]: Error calculating responsive maintainer score: Cannot read properties of null (reading 'issues')
+25/10/2024 18:32:56 [info]: {"URL":"git://github.com/jashkenas/underscore.git","NetScore":0,"NetScore_Latency":1.022,"RampUp":0,"RampUp_Latency":0.181,"Correctness":0,"Correctness_Latency":0,"BusFactor":0,"BusFactor_Latency":0.181,"ResponsiveMaintainer":0,"ResponsiveMaintainer_Latency":0.196,"License":0,"License_Latency":0.192}
+25/10/2024 18:32:56 [info]: Invalid package creation request: Package cannot be uploaded due to disqualifying rating.
