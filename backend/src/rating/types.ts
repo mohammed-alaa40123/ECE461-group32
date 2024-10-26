@@ -110,3 +110,23 @@ export type BusFactorResponse = {
     };
   };
 };
+
+export type CodeReviewResponse = {
+  repository: {
+    pullRequests: {
+      edges: {
+        node: {
+          additions: number;  // Total lines of code added in the pull request
+          reviews: {
+            totalCount: number;  // Number of reviews for the pull request
+          };
+        };
+      }[];
+      pageInfo: {
+        endCursor: string | null;  // Cursor for pagination
+        hasNextPage: boolean;  // Flag to indicate if more pages are available
+      };
+    };
+  };
+};
+

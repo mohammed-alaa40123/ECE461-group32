@@ -1,12 +1,12 @@
 {
-  "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src": {
+  "C:\\Users\\calia\\OneDrive\\Documents\\ECE461-group32\\backend\\src": {
     "versionSfCore": null,
     "versionFramework": "4.4.7",
     "isWithinCompose": false,
     "isCompose": false,
     "composeOrgName": null,
     "composeServiceName": null,
-    "servicePath": "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src",
+    "servicePath": "C:\\Users\\calia\\OneDrive\\Documents\\ECE461-group32\\backend\\src",
     "serviceConfigFileName": "serverless.yml",
     "service": {
       "service": "my-api-service",
@@ -23,12 +23,14 @@
           "DB_PORT": "${env:RDS_PORT}",
           "DB_NAME": "${env:RDS_DATABASE}",
           "DB_USER": "${env:RDS_USER}",
-          "DB_PASSWORD": "<REDACTED>"
+          "DB_PASSWORD": "<REDACTED>",
+          "GITHUB_TOKEN": "<REDACTED>"
         }
       },
       "functions": {
         "api": {
           "handler": "index.handler",
+          "timeout": 20,
           "events": [
             {
               "http": {
@@ -106,7 +108,7 @@
         }
       }
     },
-    "serviceRawFile": "service: my-api-service\r\n\r\nframeworkVersion: '4'\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n  environment:\r\n    DB_HOST: ${env:RDS_HOST}\r\n    DB_PORT: ${env:RDS_PORT}\r\n    DB_NAME: ${env:RDS_DATABASE}\r\n    DB_USER: ${env:RDS_USER}\r\n    DB_PASSWORD: ${env:RDS_PASSWORD}\r\n\r\n \r\n\r\nfunctions:\r\n  api:\r\n    handler: index.handler\r\n    events:\r\n      - http:\r\n          path: authenticate\r\n          method: PUT\r\n      - http:\r\n          path: packages\r\n          method: POST\r\n      - http:\r\n          path: reset\r\n          method: DELETE\r\n      - http:\r\n          path: package/byRegEx\r\n          method: POST\r\n      - http:\r\n          path: package/byName/{name}\r\n          method: GET\r\n      - http:\r\n          path: package\r\n          method: POST\r\n      - http:\r\n          path: package/{id}/rate\r\n          method: GET\r\n      - http:\r\n          path: package/{id}/cost\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: PUT\r\n      - http:\r\n          path: package/{id}\r\n          method: DELETE\r\n      - http:\r\n          path: tracks\r\n          method: GET\r\n",
+    "serviceRawFile": "service: my-api-service\r\n\r\nframeworkVersion: '4'\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n  environment:\r\n    DB_HOST: ${env:RDS_HOST}\r\n    DB_PORT: ${env:RDS_PORT}\r\n    DB_NAME: ${env:RDS_DATABASE}\r\n    DB_USER: ${env:RDS_USER}\r\n    DB_PASSWORD: ${env:RDS_PASSWORD}\r\n    GITHUB_TOKEN: ${env:GITHUB_TOKEN}\r\n\r\n \r\n\r\nfunctions:\r\n  api:\r\n    handler: index.handler\r\n    timeout: 20\r\n    events:\r\n      - http:\r\n          path: authenticate\r\n          method: PUT\r\n      - http:\r\n          path: packages\r\n          method: POST\r\n      - http:\r\n          path: reset\r\n          method: DELETE\r\n      - http:\r\n          path: package/byRegEx\r\n          method: POST\r\n      - http:\r\n          path: package/byName/{name}\r\n          method: GET\r\n      - http:\r\n          path: package\r\n          method: POST\r\n      - http:\r\n          path: package/{id}/rate\r\n          method: GET\r\n      - http:\r\n          path: package/{id}/cost\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: PUT\r\n      - http:\r\n          path: package/{id}\r\n          method: DELETE\r\n      - http:\r\n          path: tracks\r\n          method: GET\r\n",
     "command": [
       "offline"
     ],
@@ -115,16 +117,16 @@
     },
     "error": {
       "message": "Cannot resolve '${env:RDS_HOST}' variable at 'provider.environment.DB_HOST'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.",
-      "stack": "Error: Cannot resolve '${env:RDS_HOST}' variable at 'provider.environment.DB_HOST'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.\n    at _ResolverManager.resolve (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:673:11)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async _ResolverManager.#handlePlaceholderNode (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:590:9)\n    at async <anonymous> (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:483:11)\n    at async processNodeAndHandleCompletion (C:\\Users\\MoAlaa\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\graph.js:20:5)",
+      "stack": "Error: Cannot resolve '${env:RDS_HOST}' variable at 'provider.environment.DB_HOST'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.\n    at _ResolverManager.resolve (C:\\Users\\calia\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:673:11)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _ResolverManager.#handlePlaceholderNode (C:\\Users\\calia\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:590:9)\n    at <anonymous> (C:\\Users\\calia\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\manager.js:483:11)\n    at processNodeAndHandleCompletion (C:\\Users\\calia\\.serverless\\releases\\4.4.7\\sf-core\\src\\lib\\resolvers\\graph.js:20:5)",
       "code": "MISSING_VARIABLE_RESULT"
     },
-    "machineId": "f70da5ae2ec0e574bc8c709ac91edb9d",
+    "machineId": "b7ca2530c8fd2f4af84ed41994792c71",
     "stage": "dev",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
     "orgId": "dc31c49c-3e88-44f2-afe3-f6e953945850",
     "orgName": "eceteam32",
-    "userId": "BQgVq3PVtDRgznyhMr",
+    "userId": "1pCZZ8Cbw6lW51SftW",
     "dashboard": {
       "isEnabledForService": false,
       "requiredAuthentication": false,
@@ -134,9 +136,9 @@
       "serviceProvider": null,
       "instanceParameters": null
     },
-    "userName": "eceteam32",
+    "userName": "acali",
     "subscription": null,
-    "userEmail": "mohammedalaa40123@gmail.com",
+    "userEmail": "acali@purdue.edu",
     "serviceProviderAwsCfStackId": null,
     "serviceProviderAwsCfStackCreated": null,
     "serviceProviderAwsCfStackUpdated": null,

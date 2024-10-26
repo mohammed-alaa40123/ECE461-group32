@@ -7,6 +7,7 @@ import { calculateResponsiveMaintainerScore } from "./responsiveMaintainer";
 import { calculateCorrectness } from "./correctness";
 import { GithubRepoInfo, processURLs } from "../processURL";
 import { calculateBusFactorScore } from "./busFactor";
+import {calculateCodeReviewFractionMetric} from "./ReviewFraction";
 import { getLogger } from "../logger";
 import { promisify } from "util";
 import { exec } from "child_process";
@@ -48,13 +49,14 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
       }
     }
 
-    const [licenseScoreResult, rampUpScoreResult, responsiveMaintainerScoreResult, busFactorResult, correctnessResult] =
+    const [licenseScoreResult, rampUpScoreResult, responsiveMaintainerScoreResult, busFactorResult, correctnessResult, codeReviewFractionResult] =
       await Promise.all([
         calculateWithLatency(() => calculateLicenseScore(owner, packageName, repoDir)),
         calculateWithLatency(() => calculateRampUpScore(owner, packageName, repoDir, totalLinesRamp)),
         calculateWithLatency(() => calculateResponsiveMaintainerScore(owner, packageName)),
         calculateWithLatency(() => calculateBusFactorScore(owner, packageName)),
-        calculateWithLatency(() => calculateCorrectness(repoDir, totalLinesCorrectness))
+        calculateWithLatency(() => calculateCorrectness(repoDir, totalLinesCorrectness)),
+        calculateWithLatency(() => calculateCodeReviewFractionMetric(owner, packageName)) 
       ]);
 
     const { score: licenseScore, latency: licenseLatency } = licenseScoreResult;
@@ -62,8 +64,9 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
     const { score: responsiveMaintainerScore, latency: responsiveMaintainerLatency } = responsiveMaintainerScoreResult;
     const { score: busFactor, latency: busFactorLatency } = busFactorResult;
     const { score: correctness, latency: correctnessLatency } = correctnessResult;
+    const {score: codeReviewFraction, latency: codeReviewFractionLatency} = codeReviewFractionResult;
     const netScore =
-      0.3 * licenseScore + 0.1 * rampUpScore + 0.15 * responsiveMaintainerScore + 0.15 * busFactor + 0.3 * correctness;
+      0.25 * licenseScore + 0.1 * rampUpScore + 0.15 * responsiveMaintainerScore + 0.15 * busFactor + 0.25 * correctness + 0.1 * codeReviewFraction;
 
     const netEnd = Date.now();
     const netLatency = (netEnd - netStart) / 1000;
@@ -82,7 +85,9 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
         ResponsiveMaintainer: parseFloat(responsiveMaintainerScore.toFixed(2)),
         ResponsiveMaintainer_Latency: parseFloat(responsiveMaintainerLatency.toFixed(3)),
         License: parseFloat(licenseScore.toFixed(2)),
-        License_Latency: parseFloat(licenseLatency.toFixed(3))
+        License_Latency: parseFloat(licenseLatency.toFixed(3)),
+        CodeReviewFraction: parseFloat(codeReviewFraction.toFixed(2)),
+        CodeReviewFraction_Latency: parseFloat(codeReviewFractionLatency.toFixed(3))
       })
     );
     return {
@@ -98,7 +103,9 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
       ResponsiveMaintainer: parseFloat(responsiveMaintainerScore.toFixed(2)),
       ResponsiveMaintainer_Latency: parseFloat(responsiveMaintainerLatency.toFixed(3)),
       License: parseFloat(licenseScore.toFixed(2)),
-      License_Latency: parseFloat(licenseLatency.toFixed(3))
+      License_Latency: parseFloat(licenseLatency.toFixed(3)),
+      CodeReviewFraction: parseFloat(codeReviewFraction.toFixed(2)),
+      CodeReviewFraction_Latency: parseFloat(codeReviewFractionLatency.toFixed(3))
     };
   }
 }

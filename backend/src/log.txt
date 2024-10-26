@@ -41,3 +41,50 @@
 23/10/2024 22:33:33 [debug]: Parts of the Ramp Up score: Main part: 0.7448008734493929, Constant: 614.8780294286356, Documentation Weight: 1, Target Time: 30
 23/10/2024 22:33:33 [debug]: Ramp Up score for jashkenas/underscore: 0.7448008734493929
 23/10/2024 22:33:33 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.78,"NetScore_Latency":7.743,"RampUp":0.74,"RampUp_Latency":5.895,"Correctness":0.85,"Correctness_Latency":1.894,"BusFactor":0.05,"BusFactor_Latency":2.34,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":2.249,"License":1,"License_Latency":2.111}
+24/10/2024 17:18:45 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+24/10/2024 17:18:45 [info]: Handling GitHub URL
+24/10/2024 17:18:45 [info]: repoInfo:
+24/10/2024 17:18:52 [info]: Repository cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\backend\src\repos\underscore
+24/10/2024 17:21:44 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+24/10/2024 17:21:44 [info]: Handling GitHub URL
+24/10/2024 17:21:44 [info]: repoInfo:
+24/10/2024 17:21:44 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\backend\src\repos\underscore
+24/10/2024 17:21:57 [debug]: restLicense: 
+24/10/2024 17:21:57 [info]: License found in GraphQL
+24/10/2024 17:21:57 [debug]: Bus factor score for jashkenas/underscore: 0.05
+24/10/2024 17:21:57 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789177793394237 with median response time: 0 days, closure rate: 0.9789177793394237
+24/10/2024 17:21:57 [debug]: Total days: 1267, Forks with activity: 6
+24/10/2024 17:21:57 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+24/10/2024 17:21:57 [debug]: Lines of code: 138805
+24/10/2024 17:21:57 [debug]: Parts of the Ramp Up score: Main part: 0.7448008734493929, Constant: 614.8780294286356, Documentation Weight: 1, Target Time: 30
+24/10/2024 17:21:57 [debug]: Ramp Up score for jashkenas/underscore: 0.7448008734493929
+24/10/2024 17:26:02 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+24/10/2024 17:26:02 [info]: Handling GitHub URL
+24/10/2024 17:26:02 [info]: repoInfo:
+24/10/2024 17:26:03 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\backend\src\repos\underscore
+24/10/2024 17:26:15 [debug]: restLicense: 
+24/10/2024 17:26:15 [info]: License found in GraphQL
+24/10/2024 17:26:15 [debug]: Bus factor score for jashkenas/underscore: 0.05
+24/10/2024 17:26:15 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789177793394237 with median response time: 0 days, closure rate: 0.9789177793394237
+24/10/2024 17:26:15 [debug]: Total days: 1267, Forks with activity: 6
+24/10/2024 17:26:15 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+24/10/2024 17:26:15 [debug]: Lines of code: 138805
+24/10/2024 17:26:15 [debug]: Parts of the Ramp Up score: Main part: 0.7448008734493929, Constant: 614.8780294286356, Documentation Weight: 1, Target Time: 30
+24/10/2024 17:26:15 [debug]: Ramp Up score for jashkenas/underscore: 0.7448008734493929
+25/10/2024 21:19:09 [info]: createPackage request via public ingest:https://github.com/jashkenas/underscore
+25/10/2024 21:19:09 [info]: Handling GitHub URL
+25/10/2024 21:19:09 [info]: repoInfo:
+25/10/2024 21:19:09 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\backend\src\repos\underscore
+25/10/2024 21:19:13 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\backend\src\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+25/10/2024 21:19:18 [debug]: restLicense: 
+25/10/2024 21:19:18 [info]: License found in GraphQL
+25/10/2024 21:19:18 [debug]: Bus factor score for jashkenas/underscore: 0.05
+25/10/2024 21:19:18 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789177793394237 with median response time: 0 days, closure rate: 0.9789177793394237
+25/10/2024 21:19:18 [debug]: Total days: 1267, Forks with activity: 6
+25/10/2024 21:19:18 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+25/10/2024 21:19:18 [debug]: Lines of code: 0
+25/10/2024 21:19:18 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+25/10/2024 21:19:18 [debug]: Ramp Up score for jashkenas/underscore: 0.3
