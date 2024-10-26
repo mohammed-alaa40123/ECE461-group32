@@ -6,6 +6,7 @@ import { Package, PackageMetadata, PackageData } from '../models/Package';
 import { User } from '../models/User';
 import { PackageHistoryEntry } from '../models/PackageHistoryEntry';
 import { PackageRating } from '../models/PackageRating';
+import { PackageCost } from '../models/PackageCost';
 dotenv.config();
 
 // Initialize PostgreSQL connection pool
@@ -162,7 +163,7 @@ export async function get_package_id_cost_query(id:string): Promise<PackageCost|
 
 export async function get_package_by_name(id:string): Promise<PackageHistoryEntry[]|null> {
 
-  const query = "SELECT * FROM package_history WHERE package_id = $1";
+  const query = "SELECT u.name AS username,u.is_admin, p.name AS package_name, p.version, p.id AS package_id, h.action, h.date FROM package_history AS h INNER JOIN  packages AS p ON h.package_id = p.id INNER JOIN  users AS u ON h.user_id = u.id;";
 
      try {
       const result = await pool.query(query, [id]);
