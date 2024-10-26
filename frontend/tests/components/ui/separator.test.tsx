@@ -17,7 +17,7 @@ describe("Separator Component", () => {
     render(<Separator orientation="vertical" />);
     const separators = screen.getAllByRole("separator");
     const verticalSeparator = separators.find((separator) =>
-      separator.getAttribute("data-orientation") === "vertical"
+      separator.getAttribute("aria-orientation") === "vertical"
     );
     expect(verticalSeparator).toBeInTheDocument();
     expect(verticalSeparator).toHaveClass("shrink-0 bg-gray-200 dark:bg-gray-800 h-full w-[1px]");
@@ -48,14 +48,14 @@ describe("LabeledSeparator Component", () => {
     render(<LabeledSeparator label="Label Text" orientation="vertical" />);
     const labels = screen.getAllByText(/label text/i);
     const verticalSeparator = labels.find((label) =>
-      label.nextElementSibling?.getAttribute("data-orientation") === "vertical"
+      label.nextElementSibling?.getAttribute("aria-orientation") === "vertical"
     );
     expect(verticalSeparator).toBeInTheDocument();
     const separators = screen.getAllByRole("separator");
     expect(separators.length).toBe(7);
     expect(verticalSeparator).toHaveClass("mx-4 text-white");
   });
-
+  
   it("renders a labeled separator with a custom class name", () => {
     render(<LabeledSeparator label="Label Text" className="custom-class" />);
     const labels = screen.getAllByText(/label text/i);

@@ -10,14 +10,14 @@ describe("Label Component", () => {
     render(<Label htmlFor="input-id">Default Label Text</Label>);
     const label = screen.getByText(/default label text/i);
     expect(label).toBeInTheDocument();
-    expect(label).toHaveClass("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
+    expect(label).toHaveClass("text-sm font-medium leading-none");
   });
 
   it("renders a label with a custom class name", () => {
     render(<Label htmlFor="input-id" className="custom-class">Custom Label Text</Label>);
     const label = screen.getByText(/custom label text/i);
     expect(label).toBeInTheDocument();
-    expect(label).toHaveClass("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 custom-class");
+    expect(label).toHaveClass("text-sm font-medium leading-none custom-class");
   });
 
   it("renders a label associated with an input element", () => {

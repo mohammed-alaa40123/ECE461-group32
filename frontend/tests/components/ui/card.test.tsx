@@ -17,14 +17,14 @@ describe("Card Component", () => {
     render(<CardHeader>Card Header</CardHeader>);
     const header = screen.getByText(/card header/i);
     expect(header).toBeInTheDocument();
-    expect(header).toHaveClass("flex flex-col space-y-1.5 p-6");
+    expect(header).toHaveClass("flex flex-col space-y-2 p-4");
   });
 
   it("renders a card title", () => {
     render(<CardTitle>Card Title</CardTitle>);
     const title = screen.getByText(/card title/i);
     expect(title).toBeInTheDocument();
-    expect(title).toHaveClass("font-semibold leading-none tracking-tight");
+    expect(title).toHaveClass("font-semibold text-lg tracking-tight");
   });
 
   it("renders a card description", () => {
@@ -38,13 +38,13 @@ describe("Card Component", () => {
     render(<CardContent>Card Content</CardContent>);
     const content = screen.getByText(/card content/i);
     expect(content).toBeInTheDocument();
-    expect(content).toHaveClass("p-6 pt-0");
+    expect(content).toHaveClass("p-4");
   });
 
   it("renders a card footer", () => {
     render(<CardFooter>Card Footer</CardFooter>);
     const footer = screen.getByText(/card footer/i);
     expect(footer).toBeInTheDocument();
-    expect(footer).toHaveClass("flex items-center p-6 pt-0");
+    expect(footer).toHaveClass("flex items-center p-4 pt-0");
   });
 });

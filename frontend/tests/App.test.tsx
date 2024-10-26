@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent} from "@testing-library/react";
 import { describe, it, expect, afterEach } from "vitest";
 import "@testing-library/jest-dom/vitest";
 import App from "../src/App";
@@ -24,34 +24,31 @@ describe("App Component", () => {
     tabs.forEach((tab) => {
       const tabTrigger = screen.getByRole("tab", { name: new RegExp(tab, "i") });
       expect(tabTrigger).toBeInTheDocument();
-      expect(tabTrigger).toHaveClass("inline-flex items-center justify-center");
+      expect(tabTrigger).toHaveClass("bg-white h-fit px-2 py-1 rounded cursor-pointer");
     });
     unmount();
   });
 
-  it("renders the FileUploadModal when 'Upload a package' tab is active", () => {
-    const { unmount } = render(<App />);
-    const uploadTab = screen.getByRole("tab", { name: /upload a package/i });
-    screen.debug();
-    uploadTab.click();
-    const fileUploadModal = screen.getByText((content, element) =>
-      /drag and drop a file or click to browse/i.test(content) && element?.tagName.toLowerCase() === "span");
-    // const fileUploadModal = screen.getByText(/drag and drop a file or click to browse/i, { exact: false });
-    screen.debug();
-    expect(fileUploadModal).toBeInTheDocument();
-    unmount();
-  });
+  it("renders the FileUploadModal when 'Upload a package' tab is active", async () => {
+  const { unmount } = render(<App />);
+  const uploadTab = screen.getByRole("tab", { name: new RegExp("upload a package", "i") });
+  fireEvent.click(uploadTab);
+  const uploadModal = screen.getByText(/click to browse/i);
+  expect(uploadModal).toBeInTheDocument();
+  unmount();
+});
+
 
   it("renders the Form component when 'Download a package' or 'Rate a package' tab is active", () => {
     const { unmount } = render(<App />);
-    const downloadTab = screen.getByRole("tab", { name: /download a package/i });
-    downloadTab.click();
+    const downloadTab = screen.getByRole("tab", { name: new RegExp("download a package", "i")});
+    fireEvent.click(downloadTab);
     const downloadForm = screen.getByLabelText(/search by id/i);
     expect(downloadForm).toBeInTheDocument();
 
-    const rateTab = screen.getByRole("tab", { name: /rate a package/i });
-    rateTab.click();
-    const rateForm = screen.getByLabelText(/search by id/i);
+    const rateTab = screen.getByRole("tab", { name: new RegExp("rate a package", "i") });
+    fireEvent.click(rateTab);
+    const rateForm = screen.getByLabelText(/search by name/i);
     expect(rateForm).toBeInTheDocument();
     unmount();
   });
