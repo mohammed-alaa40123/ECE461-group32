@@ -3,39 +3,32 @@
 * @see https://v0.dev/t/aDFucFbMyb8
 * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
 */
-import React from "react"
-import { Card, CardContent, CardFooter } from "./ui/card"
-import { Label } from "./ui/label"
-import { Input } from "./ui/input"
-import  { Button }  from "./ui/button"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
-export function FileUploadModal(): JSX.Element {
+export function FileUploadModal() {
   return (
     <Card>
       <CardContent className="p-6 space-y-4">
         <div className="border-2 border-dashed border-gray-200 rounded-lg flex flex-col gap-1 p-6 items-center">
           <FileIcon className="w-12 h-12" />
-          <span className="text-xl font-medium text-gray-500">Click to browse</span>
+          <span className="text-xl font-medium text-gray-500">Drag and drop a file or click to browse</span>
           <span className="text-xl text-gray-500">Only ZIP Files</span>
         </div>
         <div className="space-y-2 text-xl">
           <Label htmlFor="file" className="text-2xl font-medium">
             File
           </Label>
-          <Input
-            id="file"
-            type="file"
-            placeholder="File"
-            accept="zip/*"
-            className="text-xl file:text-xl"
-          />
+          <Input id="file" type="file" placeholder="File" accept="image/*" className="text-xl file:text-xl" />
         </div>
       </CardContent>
       <CardFooter>
-        <Button text="Upload" type="submit" className="h-12 rounded-lg px-10 text-xl bg-slate-900 text-white hover:bg-opacity-90 shadow-lg" />
+        <Button size="xl">Upload</Button>
       </CardFooter>
     </Card>
-  );
+  )
 }
 
 function FileIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -55,5 +48,5 @@ function FileIcon(props: React.SVGProps<SVGSVGElement>) {
       <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
       <path d="M14 2v4a2 2 0 0 0 2 2h4" />
     </svg>
-  );
+  )
 }

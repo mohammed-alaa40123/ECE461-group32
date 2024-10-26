@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
-import './App.css';
-import { FileUploadModal } from "./components/FileUploadModal";
-import Form from './components/Form';
-import { cn } from "./lib/utils";
+import './App.css'
+// import Logo from './components/Logo'
+// import NavBar from './components/NavBar'
+// import PackageActionButton from './components/PackageActionButton'
+// import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { FileUploadModal } from "@/components/component/FileUploadModal"
+import Form from './components/Form'
 
 export default function App(): JSX.Element {
-  const tabs: string[] = ["Upload a package", "Download a package", "Rate a package"];
-  const [activeTab, setActiveTab] = useState(tabs[0].toLowerCase()); // Use the first tab as default
-
+  const tabs: string[] = ["Upload a package", "Download a package", "Rate a package"]
   return (
-    <div className="min-h-screen bg-gray-900 py-7 px-60 flex flex-col items-center">
-      <h1 className="mx-auto text-3xl font-bold text-white" role="heading">
-        ECE 461 Project
-      </h1>
-      <main className="mt-9 flex flex-col items-center gap-10 flex-grow text-xl w-fit">
-        <div className="flex gap-10">
-          {tabs.map((tab) => <div role="tab" className={cn("bg-white h-fit px-2 py-1 rounded cursor-pointer", tab.toLowerCase() === activeTab ? "bg-opacity-100" : "bg-opacity-50")} onClick={() => setActiveTab(tab.toLowerCase())}>{tab}</div>)}
-        </div>
-        <div className="w-full">
-          {activeTab === "upload a package" && <FileUploadModal />}
-          {(activeTab === "download a package" || activeTab === "rate a package") && <Form />}
-        </div>
+    <div className="min-h-screen bg-gray-900 py-7 px-60 flex flex-col">
+      {/* <Logo /> */}
+      {/* <NavBar /> */}
+      <header className="flex justify-center items-center text-3xl font-bold text-white ">
+        <h1>ECE 461 Project</h1>
+      </header>
+      
+      <main className="my-9 flex justify-center gap-14 flex-grow text-xl">
+        <Tabs defaultValue="account">
+          <TabsList>
+            {tabs.map((tab) => <TabsTrigger value={tab.toLowerCase()}>{tab}</TabsTrigger>)}
+          </TabsList>
+          {tabs.map((tab) => <TabsContent value={tab.toLowerCase()}>
+              {tab === "Upload a package" && <FileUploadModal />}
+              {tab === "Download a package" && <Form />}
+              {tab === "Rate a package" && <Form />}
+          </TabsContent>)}
+          
+        </Tabs>
       </main>
     </div>
-  );
+  )
 }
