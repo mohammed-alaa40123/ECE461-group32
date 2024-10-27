@@ -1,10 +1,7 @@
-name: Deploy to AWS
+name: Deploy Lambda Function
 
 on:
   push:
-    branches:
-      - single_lambda
-  pull_request:
     branches:
       - single_lambda
 
@@ -12,56 +9,31 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      AWS_REGION: ap-south-1
-      NODE_ENV: development
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Install zip tool
+        run: sudo apt-get install zip -y
 
-      - name: Install dependencies
+      - name: Navigate to Backend and Install Dependencies
         run: |
           cd backend/src
           echo "Installing dependencies"
           npm install
 
-      - name: Run tests
+      - name: Create Zip file for Lambda function
         run: |
-          echo "Running tests"
           cd backend/src
+          zip -r ../../code.zip .
 
-      - name: Build project
-        run: |
-          echo "Building project"
-          cd backend/src
-          npm run build
-
-      - name: Package Lambda function
-        run: |
-          echo "Zipping the Lambda function"
-          cd backend/src
-          zip -r function.zip dist/serverless-handler/ node_modules/ package.json
-
-      - name: Install Serverless and Log In
-        run: |
-          echo "Setting up Serverless authentication"
-          cd backend/src
-          npm install -g serverless
-          serverless config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          serverless login --accessKey ${{ secrets.SERVERLESS_ACCESS_TOKEN }}
-
-      - name: Deploy with Serverless
-        run: |
-          echo "Deploying to AWS"
-          cd backend/src
-          serverless deploy --stage dev --verbose --no-interactive
+      - name: AWS CLI v2
+        uses: imehedi/actions-awscli-v2@latest
+        with:
+          args: "lambda update-function-code \
+            --function-name arn:aws:lambda:us-east-1:438465151830:function:Get_S3_lambda \
+            --zip-file fileb://code.zip"
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SERVERLESS_ACCESS_TOKEN: ${{ secrets.SERVERLESS_ACCESS_TOKEN }}
+          AWS_DEFAULT_REGION:  ${{ secrets.AWS_REGION }}
