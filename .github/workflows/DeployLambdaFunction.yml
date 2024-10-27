@@ -3,10 +3,11 @@ name: Deploy to AWS
 on:
   push:
     branches:
-      - main
+      - single_lambda
   pull_request:
     branches:
-      - main
+      - single_lambda
+
 
 jobs:
   deploy:
