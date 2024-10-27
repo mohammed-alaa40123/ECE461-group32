@@ -8,6 +8,7 @@ import { calculateCorrectness } from "./correctness";
 import { GithubRepoInfo, processURLs } from "../processURL";
 import { calculateBusFactorScore } from "./busFactor";
 import {calculateCodeReviewFractionMetric} from "./ReviewFraction";
+import {calculatePinningFraction} from "./dependencyPinning";
 import { getLogger } from "../logger";
 import { promisify } from "util";
 import { exec } from "child_process";
