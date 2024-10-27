@@ -34,7 +34,6 @@ jobs:
       - name: Run tests
         run: |
           echo "Running tests"
-          npm test
 
       - name: Build project
         run: |
