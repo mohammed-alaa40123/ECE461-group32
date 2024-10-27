@@ -8,6 +8,11 @@ module.exports = {
   entry: './index.ts',
   target: 'node', // Ensure it targets Node.js environment
   externals: [nodeExternals()], // To exclude node_modules from the bundle
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, ''),
+    libraryTarget: 'commonjs2',
+  },
   module: {
     rules: [
       {

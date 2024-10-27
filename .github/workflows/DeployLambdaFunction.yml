@@ -25,7 +25,7 @@ jobs:
       - name: Create Zip file for Lambda function
         run: |
           cd backend/src
-          zip -r ../../code.zip dist/main.js/ node_modules/ package.json
+          zip -r ../../code.zip dist/index.js/ node_modules/ package.json
 
       - name: AWS CLI v2
         uses: imehedi/actions-awscli-v2@latest
