@@ -614,7 +614,12 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
   try {
     user = authenticate(headers);
   } catch (err: any) {
-    return sendResponse(err.statusCode, { message: err.message });
+    return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
+  }
+
+  // Validate package ID
+  if (!id) {
+    return sendResponse(400, { message: "Missing field(s) in PackageID." });
   }
 
   try {
@@ -626,7 +631,25 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
     }
 
     const rating: PackageRating = res.rows[0];
-    return sendResponse(200, rating);
+    const responsePayload = {
+      BusFactor: rating.BusFactor,
+      BusFactorLatency: rating.BusFactorLatency,
+      Correctness: rating.Correctness,
+      CorrectnessLatency: rating.CorrectnessLatency,
+      RampUp: rating.RampUp,
+      RampUpLatency: rating.RampUpLatency,
+      ResponsiveMaintainer: rating.ResponsiveMaintainer,
+      ResponsiveMaintainerLatency: rating.ResponsiveMaintainerLatency,
+      LicenseScore: rating.LicenseScore,
+      LicenseScoreLatency: rating.LicenseScoreLatency,
+      GoodPinningPractice: rating.GoodPinningPractice,
+      GoodPinningPracticeLatency: rating.GoodPinningPracticeLatency,
+      PullRequest: rating.PullRequest,
+      PullRequestLatency: rating.PullRequestLatency,
+      NetScore: rating.NetScore,
+      NetScoreLatency: rating.NetScoreLatency
+    };
+    return sendResponse(200, responsePayload);
   } catch (error) {
     console.error('Get Package Rating Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
@@ -640,8 +663,73 @@ export const handleGetPackageCost = async (id: string, headers: { [key: string]:
   try {
     user = authenticate(headers);
   } catch (err: any) {
-    return sendResponse(err.statusCode, { message: err.message });
+    return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
   }
+
+
+  // const includeDependencies = queryStringParameters?.dependency === 'true';
+
+  // try {
+  //   // Initial query to check if the package exists and fetch basic cost data
+  //   const costQuery = `
+  //     SELECT id, name, version, size_mb 
+  //     FROM packages 
+  //     WHERE id = $1
+  //   `;
+  //   const costResult = await pool.query(costQuery, [id]);
+
+  //   if (costResult.rows.length === 0) {
+  //     return sendResponse(404, { message: 'Package does not exist.' });
+  //   }
+
+  //   const packageCosts: Record<string, { standaloneCost?: number; totalCost: number }> = {};
+  //   let totalCost = 0;
+
+  //   // Initialize the package cost with its standalone cost
+  //   const pkg = costResult.rows[0];
+  //   packageCosts[pkg.id] = {
+  //     standaloneCost: pkg.size_mb,
+  //     totalCost: pkg.size_mb,
+  //   };
+  //   totalCost += pkg.size_mb;
+
+  //   if (includeDependencies) {
+  //     const stack = [id];
+  //     const visited = new Set<string>();
+
+  //     // Iterate through dependencies using a stack
+  //     while (stack.length > 0) {
+  //       const currentId = stack.pop()!;
+  //       if (visited.has(currentId)) continue;
+  //       visited.add(currentId);
+
+  //       // Fetch dependencies from a hypothetical 'dependencies' table
+  //       const depQuery = 'SELECT dependency_id FROM dependencies WHERE package_id = $1';
+  //       const depResult = await pool.query(depQuery, [currentId]);
+
+  //       for (const dep of depResult.rows) {
+  //         const depPkgQuery = 'SELECT id, size_mb FROM packages WHERE id = $1';
+  //         const depPkgResult = await pool.query(depPkgQuery, [dep.dependency_id]);
+
+  //         if (depPkgResult.rows.length > 0) {
+  //           const depPkg = depPkgResult.rows[0];
+  //           if (!packageCosts[depPkg.id]) {
+  //             packageCosts[depPkg.id] = {
+  //               standaloneCost: depPkg.size_mb,
+  //               totalCost: totalCost + depPkg.size_mb,
+  //             };
+  //             totalCost += depPkg.size_mb;
+  //             stack.push(depPkg.id);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     // If no dependencies are included, total cost is just standalone
+  //     packageCosts[id].totalCost = packageCosts[id].standaloneCost || 0;
+  //   }
+
+
 
   const dependency = queryStringParameters && queryStringParameters.dependency === 'true';
 
@@ -709,7 +797,7 @@ export const handleGetPackageCost = async (id: string, headers: { [key: string]:
     return sendResponse(200, packageCosts);
   } catch (error) {
     console.error('Get Package Cost Error:', error);
-    return sendResponse(500, { message: 'Internal server error.' });
+    return sendResponse(500, { message: 'The package rating system choked on at least one of the metrics.' });
   }
 };
 
