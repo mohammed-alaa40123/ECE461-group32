@@ -37,6 +37,7 @@ jobs:
 
       - name: Build project
         run: |
+          cd backend/src
           echo "Building project"
           npm run build
 
