@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { Card, CardContent, CardFooter } from "./ui/card";
-import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
@@ -27,9 +26,9 @@ export function FileUploadModal({className, ...props}:FileUploadProps): JSX.Elem
           <span className="text-xl text-gray-500">Only ZIP Files</span>
         </div>
         <div className="space-y-2 text-xl">
-          <Label htmlFor="file" className="text-2xl font-medium">
+          <label htmlFor="file" className="text-2xl font-medium">
             File
-          </Label>
+          </label>
           <Input
             id="file"
             type="file"

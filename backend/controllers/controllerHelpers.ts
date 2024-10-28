@@ -31,6 +31,10 @@ export const pool = new Pool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     port: 5432,//Number(process.env.DB_PORT),
+    connectionTimeoutMillis: 10000, // 10 seconds
+    ssl: {
+      rejectUnauthorized: false,
+    }
   });
 
 export async function uploadToS3(bucketName: string, key: string, body: Buffer): Promise<void> {
@@ -84,7 +88,7 @@ export async function insertIntoDatabase(pkgeId: string, pkgName: string, pkgVer
     const date = new Date();
     const isoDate = date.toISOString();
     const historyQuery = `
-      INSERT INTO package_history (package_id, action, date, user_name)
+      INSERT INTO package_history (package_id, action, date, user_id)
       VALUES ($1, $2, $3, $4)
     `;
     const historyValues = [pkgeId, 'CREATE', isoDate, userName];

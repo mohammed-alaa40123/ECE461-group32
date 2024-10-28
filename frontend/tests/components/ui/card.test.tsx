@@ -45,6 +45,6 @@ describe("Card Component", () => {
     render(<CardFooter>Card Footer</CardFooter>);
     const footer = screen.getByText(/card footer/i);
     expect(footer).toBeInTheDocument();
-    expect(footer).toHaveClass("flex items-center p-4 pt-0");
+    expect(footer).toHaveClass("flex items-start justify-end p-4 pt-0");
   });
 });

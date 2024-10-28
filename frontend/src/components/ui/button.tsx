@@ -1,20 +1,21 @@
 import React from "react"
 
-type ButtonProps = {
-  text: string
-  type : "submit" | "button" | "reset"
-  className?: string
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  text: string;
+  type: "submit" | "button" | "reset";
+  className?: string;
 }
 
-function Button({text, type, className}: ButtonProps): JSX.Element {
-    return (
-      <button
-        className = {className}
-        type = {type}
-        >
-          {text}
-        </button>
-    )
+function Button({ text, type, className, ...props }: ButtonProps): JSX.Element {
+  return (
+    <button
+      className={className}
+      type={type}
+      {...props}
+    >
+      {text}
+    </button>
+  );
 }
 
-export { Button }
+export { Button };

@@ -1,0 +1,30 @@
+name: Frontend Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "frontend/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # specify your Node.js version here
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./frontend # update if the frontend path differs
+
+      - name: Run Unit Tests
+        run: npm test
+        working-directory: ./frontend
+
