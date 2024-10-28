@@ -180,7 +180,7 @@ async function fetchPackageJSON(repo: RepoInfo, branch: string): Promise<Package
  * @param pkg - The package.json content.
  * @returns The percentage of dependencies that are pinned.
  */
-function calculatePinningFraction(pkg: PackageJSON): number {
+export function calculatePinningFraction(pkg: PackageJSON): number {
   const allDeps = {
     ...pkg.dependencies,
     ...pkg.devDependencies,

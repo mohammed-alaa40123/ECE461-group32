@@ -12,17 +12,13 @@ const logger = getLogger();
  */
 export async function calculateCodeReviewFractionMetric(repoOwner: string, repoName: string): Promise<number> {
   try {
-    let hasNextPage = true;
-    let cursor: string | null = null;
     let totalCodeAdditions = 0;
     let reviewedCodeAdditions = 0;
 
     // Fetch all pull requests
-    while (hasNextPage) {
       const data: CodeReviewResponse = await graphqlClient.request(GET_VALUES_FOR_CODE_REVIEW_METRIC, {
         repoOwner,
         repoName,
-        after: cursor
       });
 
       const pullRequests = data.repository.pullRequests;
@@ -36,9 +32,7 @@ export async function calculateCodeReviewFractionMetric(repoOwner: string, repoN
       });
 
       // Pagination handling
-      cursor = pullRequests.pageInfo.endCursor;
-      hasNextPage = pullRequests.pageInfo.hasNextPage;
-    }
+      
 
     // Avoid division by zero
     if (totalCodeAdditions === 0) {

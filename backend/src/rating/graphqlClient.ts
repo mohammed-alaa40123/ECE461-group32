@@ -163,9 +163,9 @@ export const GET_VALUES_FOR_BUS_FACTOR = `
 `;
 
 export const GET_VALUES_FOR_CODE_REVIEW_METRIC = `
-  query GetPullRequests($repoOwner: String!, $repoName: String!, $after: String) {
+  query GetPullRequests($repoOwner: String!, $repoName: String!) {
     repository(owner: $repoOwner, name: $repoName) {
-      pullRequests(first: 100, after: $after) {
+      pullRequests(first: 100) {
         edges {
           node {
             additions  # Total lines of code added in the pull request
@@ -174,10 +174,7 @@ export const GET_VALUES_FOR_CODE_REVIEW_METRIC = `
             }
           }
         }
-        pageInfo {
-          endCursor  # Cursor for pagination
-          hasNextPage  # Boolean to check if more pages are available
-        }
+       
       }
     }
   }

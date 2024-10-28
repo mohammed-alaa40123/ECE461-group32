@@ -4,7 +4,7 @@ import pool, { getUserByName, createPackage } from '../services/dbService';
 async function createUser() {
   const name = 'testuser2';
   const password = 'testpassword2';
-  const isAdmin = false;
+  const isAdmin = false;  
 
   try {
     // Hash the password

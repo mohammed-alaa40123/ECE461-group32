@@ -1,4 +1,5 @@
 // src/handlers/handlers.ts
+import semver from 'semver';
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import pool, { getUserByName, createPackage } from '../services/dbService';
@@ -97,35 +98,73 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
 // Handler for /package - POST (Create Package)
 export const handleCreatePackage = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-  const fetch = (await import("node-fetch")).default;
-  let user: AuthenticatedUser = {
-    sub: 5445,
-    name: "admin",
-    isAdmin: true,
-    iat: 545,
-    exp: 45
-  };
-  // try {
-  //   user = authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
-  const packageData: Package = JSON.parse(body);
-  const { metadata, data } = packageData;
+  let user: AuthenticatedUser;
+  try {
+    user = authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
+ const packageData = JSON.parse(body);
+  const { Content, JSProgram, debloat } = packageData;
 
+  // Decode the base64-encoded content
+  const base64Buffer = Buffer.from(Content, 'base64');
+
+  // Extract package.json from the zip file
+  const zip = new AdmZip(base64Buffer);
+  const zipEntries = zip.getEntries();
+
+  let packageJSON: string | null = null;
+
+  // Search for package.json in the zip
+  zipEntries.forEach(entry => {
+    
+    if (entry.entryName == 'underscore-master/package.json') {
+      packageJSON = entry.getData().toString('utf8');
+    }
+  });
+
+  // Handle case where package.json is missing
+  if (!packageJSON) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: 'No package.json found in zip' }),
+    };
+  }
+
+  // Parse the package.json
+  const extractedPackageJson = JSON.parse(packageJSON);
+  
+  // Validate required fields
+  if (!extractedPackageJson.name || !extractedPackageJson.version || !extractedPackageJson.repository?.url) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: 'Invalid package.json: missing required fields' }),
+    };
+  }
+  let metadata={} as PackageMetadata;
+  let data={} as PackageData;
+  metadata.Name = extractedPackageJson.name;
+  metadata.Version = extractedPackageJson.version;
+  data.URL = extractedPackageJson.repository.url;
+  data.debloat=debloat;
+  data.Content=Content;
+  data.JSProgram=JSProgram
+  
   const pkgName: string = metadata.Name;
   const pkgVersion: string = metadata.Version;
   const pkgeId: string = generatePackageId(pkgName, pkgVersion);
-
+  
+  metadata.ID = generatePackageId(pkgName, pkgVersion);
   // Validate required fields
   if (!metadata || !metadata.Name || !metadata.Version || !metadata.ID) {
     return sendResponse(400, { message: 'Missing required package metadata fields.' });
   }
 
   // Validate PackageData union type
-  if ((data.Content && data.URL) || (!data.Content && !data.URL)) {
+ /* if ((data.Content && data.URL) || (!data.Content && !data.URL)) {
     return sendResponse(400, { message: 'Either Content or URL must be set, but not both.' });
-  }
+  }*/
 
   try {
 
@@ -149,7 +188,6 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       let extractedPackageJson;
       zipEntries.forEach((entry: IZipEntry) => {
         const entryPathParts = entry.entryName.split('/');
-        console.log(entryPathParts);
         if (entryPathParts.length === 2 && entryPathParts[1] === 'package.json') {
           packageJSON = entry.getData().toString('utf8');
         }
@@ -166,7 +204,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       }
 
       // Get the URL from the info in package.json
-      const repoUrl = extractedPackageJson?.repository?.url;
+      const repoUrl = extractedPackageJson.repository.url;
       const repoUrlFixed = convertGitUrlToHttpsFlexible(repoUrl)
       info = await metricCalcFromUrlUsingNetScore(repoUrlFixed);
       console.log("info", info);
@@ -265,6 +303,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };
+
 
 // Handler for /package/{id} - GET (Retrieve Package)
 export const handleRetrievePackage = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
@@ -405,9 +444,9 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
     const deletedPackage: Package = res.rows[0];
 
     // Delete from S3 if Content is present
-    if (deletedPackage.data.Content) {
-      await deletePackageContent(id);
-    }
+    // if (deletedPackage.data.Content) {
+    //   await deletePackageContent(id);
+    // }
 
     // Log the deletion in package_history
     const historyInsert = `
@@ -423,24 +462,27 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
   }
 };
 
-// Handler for /packages - GET (List Packages)
-export const handleListPackages = async (body: string, headers: { [key: string]: string | undefined }, queryStringParameters: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
+export const handleListPackages = async (
+  body: string,
+  headers: { [key: string]: string | undefined },
+  queryStringParameters: { [key: string]: string | undefined }
+): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-let user: AuthenticatedUser = {
-    sub: 5445,
-    name: "admin",
-    isAdmin: true,
-    iat: 545,
-    exp: 45
-  };
-  // try {
-  //   user = authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
+  let user: any; // Using 'any' for AuthenticatedUser
+  try {
+    user = authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode || 403, { message: err.message || 'Authentication failed.' });
+  }
 
-  const queries = JSON.parse(body); // Array of PackageQuery
-  const offset = queryStringParameters && queryStringParameters.offset ? parseInt(queryStringParameters.offset) : 0;
+  let queries: any[];
+  try {
+    queries = JSON.parse(body);
+  } catch (err: any) {
+    return sendResponse(400, { message: 'Invalid JSON format in request body.' });
+  }
+
+  const offset = queryStringParameters.offset ? parseInt(queryStringParameters.offset) : 0;
   const limit = 10; // Define your page size
 
   if (!Array.isArray(queries)) {
@@ -448,7 +490,8 @@ let user: AuthenticatedUser = {
   }
 
   try {
-    const results: Package[] = [];
+    const results: any[] = [];
+
     for (const query of queries) {
       const { Name, Version } = query;
 
@@ -459,20 +502,40 @@ let user: AuthenticatedUser = {
 
       // Build SQL query based on PackageQuery
       let sql = 'SELECT * FROM packages WHERE name ILIKE $1';
-      const values = [`%${Name}%`];
+      const values: any[] = [`%${Name}%`];
 
-      if (Version) {
-        sql += ' AND version = $2';
-        values.push(Version);
-      }
-
+      // Execute SQL query to fetch packages matching the name
       const packageResult = await pool.query(sql, values);
-      results.push(...packageResult.rows);
+
+      // Filter results based on the Version using semver
+      const filteredPackages = packageResult.rows.filter((pkg: any) => {
+        if (!Version) {
+          return true; // No version filter applied
+        }
+
+        // Handle exact version match
+        if (semver.valid(Version)) {
+          return semver.eq(pkg.version, Version);
+        }
+
+        // Handle version ranges (caret, tilde, bounded)
+        if (semver.validRange(Version)) {
+          return semver.satisfies(pkg.version, Version);
+        }
+
+        // Unsupported version format
+        return false;
+      });
+
+      results.push(...filteredPackages);
     }
 
+    // Remove duplicate packages if multiple queries could return the same package
+    const uniqueResults = Array.from(new Set(results.map(pkg => pkg.id))).map(id => results.find(pkg => pkg.id === id));
+
     // Pagination
-    const paginatedResults = results.slice(offset, offset + limit);
-    const nextOffset = offset + limit < results.length ? offset + limit : null;
+    const paginatedResults = uniqueResults.slice(offset, offset + limit);
+    const nextOffset = offset + limit < uniqueResults.length ? offset + limit : null;
 
     const responseHeaders: { [key: string]: string } = {};
     if (nextOffset !== null) {
@@ -486,12 +549,11 @@ let user: AuthenticatedUser = {
     };
   } catch (error: any) {
     console.error('List Packages Error:', error);
-    if (error.message.includes('too many')) { // Example condition
-      return sendResponse(413, { message: 'Too many packages returned.' });
-    }
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };
+
+
 
 // Handler for /reset - DELETE
 export const handleResetRegistry = async (headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
