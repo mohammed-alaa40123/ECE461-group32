@@ -12,3 +12,4 @@ db.ts
 insert_into_db.ts
 undefined
 backend/src/dist
+backend/src/index.js
