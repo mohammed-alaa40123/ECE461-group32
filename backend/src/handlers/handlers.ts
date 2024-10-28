@@ -516,31 +516,48 @@ export const handleListPackages = async (
       // Execute SQL query to fetch packages matching the name
       const packageResult = await pool.query(sql, values);
 
+      // Debugging: Log the fetched packages
+      console.log(`Fetched packages for Name "${Name}":`, packageResult.rows);
+
       // Filter results based on the Version using semver
       const filteredPackages = packageResult.rows.filter((pkg: any) => {
         if (!Version) {
           return true; // No version filter applied
         }
 
+        // Debugging: Log the package version and the filter version
+        console.log(`Filtering package version: ${pkg.version} with Version filter: ${Version}`);
+
         // Handle exact version match
         if (semver.valid(Version)) {
-          return semver.eq(pkg.version, Version);
+          const isEqual = semver.eq(pkg.version, Version);
+          console.log(`semver.eq(${pkg.version}, ${Version}) = ${isEqual}`);
+          return isEqual;
         }
 
         // Handle version ranges (caret, tilde, bounded)
         if (semver.validRange(Version)) {
-          return semver.satisfies(pkg.version, Version);
+          const isSatisfied = semver.satisfies(pkg.version, Version);
+          console.log(`semver.satisfies(${pkg.version}, ${Version}) = ${isSatisfied}`);
+          return isSatisfied;
         }
 
         // Unsupported version format
+        console.log(`Unsupported version format: ${Version}`);
         return false;
       });
+
+      // Debugging: Log the filtered packages
+      console.log(`Filtered packages for Name "${Name}" and Version "${Version}":`, filteredPackages);
 
       results.push(...filteredPackages);
     }
 
     // Remove duplicate packages if multiple queries could return the same package
     const uniqueResults = Array.from(new Set(results.map(pkg => pkg.id))).map(id => results.find(pkg => pkg.id === id));
+
+    // Debugging: Log the unique results
+    console.log('Unique Results after removing duplicates:', uniqueResults);
 
     // Pagination
     const paginatedResults = uniqueResults.slice(offset, offset + limit);
@@ -550,6 +567,9 @@ export const handleListPackages = async (
     if (nextOffset !== null) {
       responseHeaders['offset'] = nextOffset.toString();
     }
+
+    // Debugging: Log the paginated results
+    console.log('Paginated Results:', paginatedResults);
 
     return {
       statusCode: 200,
@@ -561,6 +581,7 @@ export const handleListPackages = async (
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };
+
 
 
 
