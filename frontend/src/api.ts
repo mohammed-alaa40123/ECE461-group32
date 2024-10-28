@@ -1,14 +1,17 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'localhost:3000/dev';
+const API_BASE_URL = 'localhost:4000/dev';
+const authToken = localStorage.getItem('authToken');
 
-export const authenticateUser = async (username: string, password: string) => {
+
+export const authenticateUser = async (username: string, password: string, isAdministrator: boolean) => {
   try {
     const response = await axios.put(
       `${API_BASE_URL}/authenticate`,
       {
         User: {
           name: username,
+          isAdmin: isAdministrator,
         },
         Secret: {
           password,
@@ -44,6 +47,7 @@ export const getPackages = async (queryParams?: object, offset?: string) => {
       {
         params: { offset },
         headers: {
+          'X-Authorization': authToken,
           'Content-Type': 'application/json',
         },
       }
@@ -91,6 +95,7 @@ export const updatePackageById = async (packageId: string, packageData: object) 
       packageData,
       {
         headers: {
+          'X-Authorization': authToken,
           'Content-Type': 'application/json',
         },
       }
