@@ -281,10 +281,14 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
 
     // Insert package into PostgreSQL
     const createdPackage = await createPackage(metadata, data);
-
+    let newquery="select name ,version from packages where name =$1 and version =$2;"
+    let result= await pool.query(newquery, [metadata.ID, metadata.Version]);
     // If Content is provided, upload to S3
     if (data.Content) {
+      if(result.rows.length==0)
       await uploadPackageContent(metadata.ID, data.Content);
+      else return sendResponse(409, { message: 'Package exists already.' });
+  
     }
 
     // Log the creation in package_history
@@ -405,8 +409,13 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     const updatedPkg = res.rows[0];
 
     // If Content is provided, upload to S3
+    let newquery="select name ,version from packages where name =$1 and version =$2;"
+    let result= await pool.query(newquery, [metadata.ID, metadata.Version]);
     if (data.Content) {
-      await uploadPackageContent(id, data.Content);
+      if(result.rows.length==0)
+        await uploadPackageContent(metadata.ID, data.Content);
+        else return sendResponse(409, { message: 'Package exists already.' });
+    
     }
 
     // Log the update in package_history
