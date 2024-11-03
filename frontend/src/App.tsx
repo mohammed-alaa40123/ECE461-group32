@@ -17,8 +17,8 @@ const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLogge
   const [activeTab, setActiveTab] = useState(tabs[0].toLowerCase());
 
   return (
-    <div className="min-h-screen bg-gray-900 py-7 px-60 flex flex-col items-center">
-      <h1 className="text-3xl font-bold text-white mb-6">ECE 461 Project</h1>
+    <div className="text-3xl min-h-screen bg-gray-900 py-7 px-60 flex flex-col items-center">
+      <h1 className="text-6xl font-bold text-white mb-6">ECE 461 Project</h1>
       {isLoggedIn ? (
         <>
           <Button
@@ -30,7 +30,7 @@ const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLogge
               navigate('/');
             }}
           />
-          <div className="text-3xl flex items-center justify-center gap-10 rounded">
+          <div className="flex items-center justify-center gap-10 rounded">
             {tabs.map((tab) => (
               <div
                 role="tab"

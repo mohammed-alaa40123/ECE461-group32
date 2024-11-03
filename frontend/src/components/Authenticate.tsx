@@ -13,7 +13,7 @@ export default function LoginPage(): JSX.Element {
     setErrorMessage('');
 
     try {
-        const token = await authenticateUser(username, password);
+        const token = await authenticateUser(username, password, false);
         localStorage.setItem('authToken', token);
         navigate('/dashboard');
     } catch (error) {
@@ -60,7 +60,7 @@ export default function LoginPage(): JSX.Element {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full flex justify-center py-2 px-4 border border-transparent font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300"
           >
             Login
           </button>
