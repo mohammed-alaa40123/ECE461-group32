@@ -25,8 +25,6 @@
 //       return;
 //     }
 
-      
-
 //     try {
 //       setLoading(true);
 //       const data = await authenticateUser(username, password, isAdministrator);
@@ -127,7 +125,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../api"; // Adjust path as needed
 import Loading from "../components/ui/loading";
-
 
 const Signup: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -244,4 +241,3 @@ const Signup: React.FC = () => {
 };
 
 export default Signup;
-
