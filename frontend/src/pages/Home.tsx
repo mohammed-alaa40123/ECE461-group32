@@ -55,10 +55,10 @@ const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLogge
           </div>
         </>
       ) : (
-        <>
+        <div className="flex gap-3">
           <Button text="Login" className="bg-blue-500 text-white p-3 rounded mr-4" onClick={() => navigate("/login")} />
           <Button text="Sign Up" className="bg-green-500 text-white p-3 rounded" onClick={() => navigate("/signup")} />
-        </>
+        </div>
       )}
     </div>
   );

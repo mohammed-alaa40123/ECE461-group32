@@ -100,14 +100,15 @@ const Signup: React.FC<SignupProps> = ({ onSignupSuccess }) => {
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2">
             <input
+              className="scale-[2] mr-4"
               type="checkbox"
               checked={isAdministrator}
               onChange={(e) => setIsAdministrator(e.target.checked)}
             />
-            {' '}Admin User
+            Admin User
           </label>
         </div>
-        {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
+        {error && <p className="text-red-500 italic mb-4">{error}</p>}
         <div className="flex items-center justify-between">
           <button
             type="submit"
