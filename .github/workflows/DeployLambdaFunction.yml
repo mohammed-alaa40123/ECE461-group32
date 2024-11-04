@@ -21,6 +21,7 @@ jobs:
         run: |
           echo "Installing production dependencies"
           npm install --only=prod
+          npm run build
 
       - name: Create Zip file for Lambda function with Dependencies
         working-directory: backend/src
