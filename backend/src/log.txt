@@ -977,3 +977,4 @@ operable program or batch file.
 04/11/2024 17:59:13 [debug]: Parts of the Ramp Up score: Main part: 0.6864291992992642, Constant: 430.4146206000449, Documentation Weight: 0.9, Target Time: 21
 04/11/2024 17:59:13 [debug]: Ramp Up score for lodash/lodash: 0.6177862793693377
 04/11/2024 17:59:13 [info]: {"URL":"https://github.com/lodash/lodash","NetScore":0.65,"NetScore_Latency":8.717,"RampUp":0.62,"RampUp_Latency":6.335,"Correctness":0.78,"Correctness_Latency":6.326,"BusFactor":0,"BusFactor_Latency":6.328,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":6.331,"License":1,"License_Latency":1.163,"CodeReviewFraction":0,"CodeReviewFraction_Latency":6.326}
+04/11/2024 18:04:20 [debug]: Bus factor score for i-voted-for-trump/is-even: 0
