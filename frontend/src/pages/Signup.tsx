@@ -144,6 +144,8 @@ const Signup: React.FC = () => {
       return;
     }
 
+      
+
     try {
       setLoading(true);
       const data = await registerUser(username, password, isAdministrator);
