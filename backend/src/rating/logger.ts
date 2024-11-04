@@ -43,7 +43,7 @@ const initializeLogger = () => {
     })
   );
 
-  const logDir = process.env.LOG_FILE || "logs/log.txt";
+  const logDir = process.env.LOG_FILE || "log.txt";
 
   // Create the logger instance and directly assign it to bareLogger
   bareLogger = winston.createLogger({

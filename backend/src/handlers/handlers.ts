@@ -2,16 +2,16 @@
 import semver from 'semver';
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import pool, { getUserByName, createPackage } from '../services/dbService';
+import pool, { getUserByName, insertIntoDB } from '../services/dbService';
 import { uploadPackageContent, getPackageContent, deletePackageContent } from '../services/s3Service';
 import { Package, PackageMetadata, PackageData } from '../models/Package';
 import { PackageHistoryEntry } from '../models/PackageHistoryEntry';
 import { PackageRating } from '../models/PackageRating';
 import { sendResponse } from '../utils/response';
 import { authenticate, AuthenticatedUser } from '../utils/auth';
-import {metricCalcFromUrlUsingNetScore, PackageInfo, generatePackageId} from '../handlerhelper';
-import {getLogger, logTestResults} from '../rating/logger';
-import AdmZip, {IZipEntry} from 'adm-zip';
+import { metricCalcFromUrlUsingNetScore, PackageInfo, generatePackageId } from '../handlerhelper';
+import { getLogger, logTestResults } from '../rating/logger';
+import AdmZip, { IZipEntry } from 'adm-zip';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { send } from 'process';
@@ -108,32 +108,32 @@ export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyR
 * @throws Error if the input URL format is unrecognized.
 */
 function convertGitUrlToHttpsFlexible(gitUrl: string): string {
- let httpsUrl: string | null = null;
+  let httpsUrl: string | null = null;
 
- // Regex patterns for different Git URL formats
- const patterns: RegExp[] = [
-   /^git:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/,
-   /^git@([^:]+):([^/]+)\/([^/]+)\.git$/,
-   /^ssh:\/\/git@([^/]+)\/([^/]+)\/([^/]+)\.git$/,
-   /^https:\/\/([^/]+)\/([^/]+)\/([^/]+)(\.git)?$/,
- ];
+  // Regex patterns for different Git URL formats
+  const patterns: RegExp[] = [
+    /^git:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/,
+    /^git@([^:]+):([^/]+)\/([^/]+)\.git$/,
+    /^ssh:\/\/git@([^/]+)\/([^/]+)\/([^/]+)\.git$/,
+    /^https:\/\/([^/]+)\/([^/]+)\/([^/]+)(\.git)?$/,
+  ];
 
- for (const pattern of patterns) {
-   const match = pattern.exec(gitUrl);
-   if (match) {
-     const host = match[1];
-     const user = match[2];
-     const repo = match[3];
-     httpsUrl = `https://${host}/${user}/${repo}`;
-     break;
-   }
- }
+  for (const pattern of patterns) {
+    const match = pattern.exec(gitUrl);
+    if (match) {
+      const host = match[1];
+      const user = match[2];
+      const repo = match[3];
+      httpsUrl = `https://${host}/${user}/${repo}`;
+      break;
+    }
+  }
 
- if (!httpsUrl) {
-   throw new Error(`Unrecognized Git URL format: ${gitUrl}`);
- }
+  if (!httpsUrl) {
+    throw new Error(`Unrecognized Git URL format: ${gitUrl}`);
+  }
 
- return httpsUrl;
+  return httpsUrl;
 }
 
 // Example usage:
@@ -151,6 +151,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
 
   const packageData = JSON.parse(body);
   const { Content, JSProgram, URL, debloat } = packageData;
+  console.log("packageData", packageData);
 
   // Ensure only one of Content or URL is provided
   if ((!Content && !URL) || (Content && URL)) {
@@ -160,6 +161,11 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
   let metadata: PackageMetadata = {} as PackageMetadata;
   let data: PackageData = {} as PackageData;
   let extractedPackageJson: any;
+  let contentBuffer: Buffer | null = null;
+  let createdPackage: Package;
+  // Generate a unique ID for the package
+  metadata.ID = generatePackageId();
+  data.debloat = debloat ? debloat : false;
 
   try {
     if (Content) {
@@ -182,13 +188,36 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       extractedPackageJson = JSON.parse(packageJSON);
       metadata.Name = extractedPackageJson.name;
       metadata.Version = extractedPackageJson.version;
+      metadata.Owner = extractedPackageJson.author;
       data.Content = Content;
+      contentBuffer = base64Buffer;
+      data.URL = extractedPackageJson.repository?.url
+      ? convertGitUrlToHttpsFlexible(extractedPackageJson.repository.url)
+      : `https://github.com/${extractedPackageJson.author || 'unknown-owner'}/${metadata.Name}`;
+
+      // Handle "debloat" if true
+      if (debloat) {
+        contentBuffer = debloatPackageContent(contentBuffer);
+      }
+
+      // Check if a package with this name and version already exists
+      const existingResult = await pool.query(
+        "SELECT id FROM packages WHERE name = $1 AND version = $2;",
+        [metadata.Name, metadata.Version]
+      );
+      if (existingResult.rows.length > 0) {
+        return sendResponse(409, { message: 'Package exists already.' });
+      }
+
+
+      createdPackage = await insertIntoDB(metadata, data);
+
 
     } else if (URL) {
       // Handle URL case
       const repoUrlFixed = convertGitUrlToHttpsFlexible(URL);
-      const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed);
-      
+      const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed, metadata.ID);
+
       if (!info || info.NET_SCORE < 0.5) {
         return sendResponse(424, { message: 'Package disqualified due to low rating' });
       }
@@ -196,50 +225,150 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       metadata.Name = info.NAME;
       metadata.Version = info.VERSION;
       data.URL = repoUrlFixed;
+      metadata.Owner = info.OWNER;
+
+      // Check if the package already exists based on Name and Version
+      const existingResult = await pool.query(
+        "SELECT id FROM packages WHERE name = $1 AND version = $2;",
+        [metadata.Name, metadata.Version]
+      );
+      if (existingResult.rows.length > 0) {
+        return sendResponse(409, { message: 'Package exists already.' });
+      }
+
+      // Download package content from GitHub
+      const response = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      });
+
+      if (!response.ok) {
+        return sendResponse(400, { message: 'Could not get GitHub URL for zip package download' });
+      }
+
+      const arrayBuffer = await response.arrayBuffer();
+      contentBuffer = Buffer.from(arrayBuffer);
+
+      if (debloat) {
+        contentBuffer = debloatPackageContent(contentBuffer);
+      }
+      createdPackage = await insertIntoDB(metadata, data);
+
+
+      await pool.query(
+        `INSERT INTO package_ratings 
+    (package_id, net_score, ramp_up, correctness, 
+     bus_factor, responsive_maintainer, license_score, 
+     pull_request, good_pinning_practice) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    `,
+        [
+          info.ID,
+          info.NET_SCORE,
+          info.RAMP_UP_SCORE,
+          info.CORRECTNESS_SCORE,
+          info.BUS_FACTOR_SCORE,
+          info.RESPONSIVE_MAINTAINER_SCORE,
+          info.LICENSE_SCORE,
+          info.PULL_REQUESTS_SCORE,
+          info.PINNED_DEPENDENCIES_SCORE
+        ]);
+
+
+    }
+    else { createdPackage = {} as Package; }
+
+    // Handle JSProgram execution or validation
+    if (JSProgram) {
+      const isProgramValid = await validateJsProgram(JSProgram);
+      if (!isProgramValid) {
+        return sendResponse(400, { message: 'Invalid JavaScript program' });
+      }
+      data.JSProgram = JSProgram;
     }
 
-    // Ensure required metadata fields are set
-    metadata.ID = generatePackageId(metadata.Name, metadata.Version);
+    // Insert package metadata into PostgreSQL
+    // const createdPackage = await insertIntoDB(metadata, data);
 
-    if (!metadata.Name || !metadata.Version || !metadata.ID) {
-      return sendResponse(400, { message: 'Missing required package metadata fields' });
+    let contentBase64 :string;
+    // Upload package content to S3 if contentBuffer has been assigned
+    if (contentBuffer) {
+      contentBase64 = contentBuffer.toString('base64');
+
+      await uploadPackageContent(metadata.ID, contentBuffer);
+    } else {
+      return sendResponse(500, { message: 'Package content buffer is empty, unable to upload.' });
     }
 
-    // Check if package already exists
-    const result = await pool.query("SELECT name, version FROM packages WHERE name = $1 AND version = $2;", [metadata.Name, metadata.Version]);
-    if (result.rows.length > 0) {
-      return sendResponse(409, { message: 'Package exists already.' });
-    }
-
-    // Insert package into PostgreSQL
-    const createdPackage = await createPackage(metadata, data);
-
-    // If Content is provided, upload to S3
-    const contentBuffer = data.Content ? Buffer.from(data.Content, 'base64') : await fetchRepoZipFromGitHub(URL);
-    await uploadPackageContent(metadata.ID, contentBuffer);
 
     // Log the creation in package_history
-    await pool.query(`
-      INSERT INTO package_history (package_id, user_id, action)
-      VALUES ($1, $2, $3)
-    `, [metadata.ID, user.sub, 'CREATE']);
+    await pool.query(
+      `INSERT INTO package_history (package_id, user_id, action)
+       VALUES ($1, $2, $3)`,
+      [metadata.ID, user.sub, 'CREATE']
+    );
 
-    return sendResponse(201, createdPackage);
 
+    return sendResponse(201, {
+      metadata: {
+        Name: metadata.Name,
+        Version: metadata.Version,
+        ID: metadata.ID,
+      },
+      data: {
+        Content: contentBase64 || null,
+        URL: data.URL || null,
+        JSProgram: data.JSProgram || null,
+      },
+    });
   } catch (error: any) {
     console.error('Create Package Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };
 
+
+// Helper function to "debloat" package content
+function debloatPackageContent(buffer: Buffer): Buffer {
+  // Implement debloating logic, e.g., removing unnecessary files from the zip
+  console.log('Debloating package content...');
+  const zip = new AdmZip(buffer);
+  zip.getEntries().forEach(entry => {
+    if (shouldRemoveEntry(entry)) {
+      zip.deleteFile(entry.entryName);
+    }
+  });
+  return zip.toBuffer();
+}
+
+// Helper function to validate the JSProgram
+async function validateJsProgram(jsProgram: string): Promise<boolean> {
+  try {
+    // Perform validation or testing logic here, e.g., running a sandboxed environment
+    return true; // Return true if valid, false otherwise
+  } catch (error) {
+    console.error('JS Program Validation Error:', error);
+    return false;
+  }
+}
+
+// Helper function to decide if a file entry should be removed during debloat
+function shouldRemoveEntry(entry: AdmZip.IZipEntry): boolean {
+  // Define logic for unnecessary files, e.g., remove certain file types or patterns
+  return entry.entryName.endsWith('.md') || entry.entryName.includes('tests/');
+}
+
 // Helper function to fetch repo ZIP from GitHub
-const fetchRepoZipFromGitHub = async (url: string): Promise<Buffer> => {
-  const response = await fetch(`https://api.github.com/repos/${url}/zipball/HEAD`, {
+const fetchRepoZipFromGitHub = async (OWNER: string, NAME: string): Promise<Buffer> => {
+  const response = await fetch(`https://api.github.com/repos/${OWNER}/${NAME}/zipball/HEAD`, {
     headers: {
       Authorization: process.env.GITHUB_TOKEN || "",
       Accept: 'application/vnd.github.v3+json',
     },
   });
+  console.log("response", response);
   if (!response.ok) throw new Error('Failed to download GitHub repo zip');
   return Buffer.from(await response.arrayBuffer());
 };
@@ -247,7 +376,7 @@ const fetchRepoZipFromGitHub = async (url: string): Promise<Buffer> => {
 // Handler for /package/{id} - GET (Retrieve Package)
 export const handleRetrievePackage = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-  console.log("id", id);  
+  console.log("id", id);
   let user: AuthenticatedUser;
   try {
     user = authenticate(headers);
@@ -262,7 +391,7 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
     if (res.rows.length === 0) {
       return sendResponse(404, { message: 'Package does not exist.' });
     }
-    
+
     const packageData: any = res.rows[0];
     console.log(res.rows[0]);
     // If Content is null and URL is null, retrieve from S3
@@ -326,7 +455,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     updateValues.push(data.debloat || false);
 
     if (data.JSProgram) {
-      updateFields.push(`js_program = $${idx++}`);
+      updateFields.push(`JSProgram = $${idx++}`);
       updateValues.push(data.JSProgram);
     }
 
@@ -344,15 +473,15 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     const updatedPkg = res.rows[0];
 
     // If Content is provided, upload to S3
-    let newquery="select name ,version from packages where name =$1 and version =$2;"
-    let result= await pool.query(newquery, [metadata.ID, metadata.Version]);
+    let newquery = "select name ,version from packages where name =$1 and version =$2;"
+    let result = await pool.query(newquery, [metadata.ID, metadata.Version]);
     if (data.Content) {
       const contentBuffer = Buffer.from(data.Content, 'base64');
 
-      if(result.rows.length==0)
+      if (result.rows.length == 0)
         await uploadPackageContent(metadata.ID, contentBuffer);
-        else return sendResponse(409, { message: 'Package exists already.' });
-    
+      else return sendResponse(409, { message: 'Package exists already.' });
+
     }
 
     // Log the update in package_history

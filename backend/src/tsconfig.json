@@ -2,7 +2,7 @@
     "compilerOptions": {
       "moduleResolution": "node",
       "target": "ES6",
-      "module": "ESNext",   //"commonjs",
+      "module": "CommonJS",   //"commonjs",
       "lib": ["ES2019"],
       "strict": true,
       "esModuleInterop": true,

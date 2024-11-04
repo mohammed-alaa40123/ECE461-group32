@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import pool, { getUserByName, createPackage } from '../services/dbService';
+import pool, { getUserByName, insertIntoDB } from '../services/dbService';
 
 async function createUser() {
   const name = 'testuser2';

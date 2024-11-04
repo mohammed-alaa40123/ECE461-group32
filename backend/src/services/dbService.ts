@@ -35,16 +35,17 @@ export const getUserByName = async (name: string): Promise<User | null> => {
   return result.rows[0];
 };
 
-export const createPackage = async (metadata: PackageMetadata, data: PackageData): Promise<Package> => {
+export const insertIntoDB = async (metadata: PackageMetadata, data: PackageData): Promise<Package> => {
   const insertText = `
-    INSERT INTO packages (id, name, version, content, url, debloat, js_program)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO packages (id, name,owner, version, content, url, debloat, js_program)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING *;
   `;
   const insertValues = [
     metadata.ID,
     metadata.Name,
     metadata.Version,
+    metadata.Owner,
     data.Content || null,
     data.URL || null,
     data.debloat || false,

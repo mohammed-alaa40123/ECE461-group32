@@ -9,6 +9,7 @@ export interface PackageMetadata {
   Name: PackageName;
   Version: string; // Example: "1.2.3"
   ID: PackageID;
+  Owner?: string;
 }
 
 export interface PackageData {
