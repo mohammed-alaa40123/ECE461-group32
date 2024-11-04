@@ -11,10 +11,10 @@ dotenv.config();
 
 // Initialize PostgreSQL connection pool
 const pool = new Pool({
-  host: process.env.RDS_HOST,
-  user: process.env.RDS_USER,
-  password: process.env.RDS_PASSWORD,
-  database: process.env.RDS_DATABASE,
+  host: process.env.RDS_HOST || 'localhost',
+  user: process.env.RDS_USER||'postgres',
+  password: process.env.RDS_PASSWORD||'password',
+  database: process.env.RDS_DATABASE||'postgres',
   port: parseInt(process.env.RDS_PORT || '5432'),
   max: 20, // Adjust based on expected concurrency
   idleTimeoutMillis: 30000,
