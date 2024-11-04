@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authenticateUser } from '../api'; // Adjust path as needed
+import Loading from '../components/ui/loading';
 
 type SignupProps = {
   onSignupSuccess: () => void;
@@ -13,6 +14,7 @@ const Signup: React.FC<SignupProps> = ({ onSignupSuccess }) => {
   const [isAdministrator, setIsAdministrator] = useState(false); // Assuming option to set admin status
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,8 +25,11 @@ const Signup: React.FC<SignupProps> = ({ onSignupSuccess }) => {
       return;
     }
 
+      
+
     try {
-      // Using authenticateUser as a placeholder for signup
+      setLoading(true);
+    // Using authenticateUser as a placeholder for signup
       const data = await authenticateUser(username, password, isAdministrator);
       if (data && data.token) {
         localStorage.setItem('authToken', data.token); // Save token
@@ -40,8 +45,14 @@ const Signup: React.FC<SignupProps> = ({ onSignupSuccess }) => {
     } else {
         setError('An unexpected error occurred'); // Fallback message if err is not of type Error
     }
-    }
+    } finally {
+    setLoading(false);
+  }
   };
+
+  if (loading) {
+    return <Loading />; // Show the spinner while loading is true
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 py-7 px-60 flex flex-col items-center text-3xl">

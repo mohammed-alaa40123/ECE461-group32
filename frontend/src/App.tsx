@@ -9,12 +9,55 @@ import Rate from "./components/Rate";
 import Cost from "./components/Cost";
 import Login from "./pages/Login";
 import Signup from './pages/Signup';
+import Loading from './components/ui/loading';
 import { Button } from './components/ui/button';
 
 const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
   const tabs: string[] = ["Upload a package", "Download a package", "Delete a package", "Update a package", "Package rate", "Package cost"];
-  const [activeTab, setActiveTab] = useState(tabs[0].toLowerCase());
+  const pages: string[] = ["Signup", "Login"];
+  const [activeTab, setActiveTab] = useState(tabs[0].toLowerCase()); // Use the first tab as default
+  const [showSignup, setShowSignup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [main, setMain] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+
+  useEffect(() => {
+    // Check if there's an auth token in localStorage to determine login state
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLoginSuccess = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setIsLoggedIn(true);
+      setLoading(false);
+    }, 1000); // Simulating async operation
+  };
+
+  const handleSignupSuccess = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setShowSignup(false);
+      setLoading(false);
+    }, 1000); // Simulating async operation
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (showSignup) {
+    return <Signup onSignupSuccess={() => handleSignupSuccess} />; // Return to login page after signup
+  }
+
+  if (isLoggedIn) {
+    return <Login onLoginSuccess={() => handleLoginSuccess} />; // Pass callback to handle successful login
+  }
 
   return (
     <div className="text-3xl min-h-screen bg-gray-900 py-7 px-60 flex flex-col items-center">

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authenticateUser } from '../api'; // Make sure the path matches your file structure
+import Loading from '../components/ui/loading';
 
 type LoginProps = {
   onLoginSuccess: () => void;
@@ -11,12 +12,14 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
     try {
+      setLoading(true);
       // Use the authenticateUser API function to log in the user
       const data = await authenticateUser(username, password, false); // Assuming false for `isAdministrator`
       if (data && data.token) {
@@ -32,8 +35,14 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
     } else {
         setError('An unexpected error occurred'); // Fallback message if err is not of type Error
     }
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <Loading />; // Show the spinner while loading is true
+  }
 
   return (
     <div className="text-3xl min-h-screen bg-gray-900 py-7 px-60 flex flex-col items-center">
