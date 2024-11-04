@@ -16,6 +16,7 @@ import {
   handleGetPackageRating,
   handleGetPackageCost,
   handleGetTracks,
+  handleRegisterUser,
 } from './handlers/handlers';
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -23,7 +24,9 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   // console.log(`Received event: ${JSON.stringify(event)}`)
   try {
     // Routing logic based on path and method
-    if (path === '/authenticate' && httpMethod === 'PUT') {
+    if (path === '/register' && httpMethod === 'POST') {
+      return await handleRegisterUser(body || '{}');
+    } else if (path === '/authenticate' && httpMethod === 'PUT') {
       return await handleAuthenticate(body || '{}');
     } else if (path === '/packages' && httpMethod === 'POST') {
       return await handleListPackages(body || '[]', headers, queryStringParameters || {});

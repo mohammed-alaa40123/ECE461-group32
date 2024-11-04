@@ -6,11 +6,13 @@ const s3 = new AWS.S3();
 
 // S3 Service Functions
 
-export const uploadPackageContent = async (packageId: string, content: string): Promise<void> => {
+
+
+export const uploadPackageContent = async (packageId: string, content: Buffer): Promise<void> => {
   const params = {
     Bucket: process.env.S3_BUCKET!,
     Key: `packages/${packageId}.zip`,
-    Body: Buffer.from(content, 'base64'),
+    Body: content,
   };
   await s3.putObject(params).promise();
 };

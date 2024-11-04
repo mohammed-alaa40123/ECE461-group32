@@ -20,6 +20,50 @@ import { send } from 'process';
 
 const logger = getLogger();
 
+
+// src/handlers/handlers.ts
+
+export const handleRegisterUser = async (body: string): Promise<APIGatewayProxyResult> => {
+  const { name, password, isAdmin = false } = JSON.parse(body);
+
+  if (!name || !password) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: 'Name and password are required.' }),
+      headers: { 'Content-Type': 'application/json' },
+    };
+  }
+
+  try {
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert the user into the database
+    const query = `
+      INSERT INTO users (name, password_hash, is_admin)
+      VALUES ($1, $2, $3)
+    `;
+    const values = [name, hashedPassword, isAdmin];
+    await pool.query(query, values);
+
+    return {
+      statusCode: 201,
+      body: JSON.stringify({ message: 'User registered successfully!' }),
+      headers: { 'Content-Type': 'application/json' },
+    };
+  } catch (error) {
+    console.error('Error registering user:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Internal server error.' }),
+      headers: { 'Content-Type': 'application/json' },
+    };
+  }
+};
+
+
+
+
 // Handler for /authenticate - PUT
 export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyResult> => {
   const { User, Secret } = JSON.parse(body);
@@ -96,218 +140,109 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
 
 
 // Handler for /package - POST (Create Package)
+
 export const handleCreatePackage = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
-  // Authenticate the request
   let user: AuthenticatedUser;
   try {
     user = authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
   }
- const packageData = JSON.parse(body);
-  const { Content, JSProgram, debloat } = packageData;
 
-  // Decode the base64-encoded content
-  const base64Buffer = Buffer.from(Content, 'base64');
+  const packageData = JSON.parse(body);
+  const { Content, JSProgram, URL, debloat } = packageData;
 
-  // Extract package.json from the zip file
-  const zip = new AdmZip(base64Buffer);
-  const zipEntries = zip.getEntries();
-
-  let packageJSON: string | null = null;
-
-  // Search for package.json in the zip
-  zipEntries.forEach(entry => {
-    
-    if (entry.entryName == 'underscore-master/package.json') {
-      packageJSON = entry.getData().toString('utf8');
-    }
-  });
-
-  // Handle case where package.json is missing
-  if (!packageJSON) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: 'No package.json found in zip' }),
-    };
-  }
-
-  // Parse the package.json
-  const extractedPackageJson = JSON.parse(packageJSON);
-  
-  // Validate required fields
-  if (!extractedPackageJson.name || !extractedPackageJson.version || !extractedPackageJson.repository?.url) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: 'Invalid package.json: missing required fields' }),
-    };
-  }
-  let metadata={} as PackageMetadata;
-  let data={} as PackageData;
-  metadata.Name = extractedPackageJson.name;
-  metadata.Version = extractedPackageJson.version;
-  data.URL = extractedPackageJson.repository.url;
-  data.debloat=debloat;
-  data.Content=Content;
-  data.JSProgram=JSProgram
-  
-  const pkgName: string = metadata.Name;
-  const pkgVersion: string = metadata.Version;
-  const pkgeId: string = generatePackageId(pkgName, pkgVersion);
-  
-  metadata.ID = generatePackageId(pkgName, pkgVersion);
-  // Validate required fields
-  if (!metadata || !metadata.Name || !metadata.Version || !metadata.ID) {
-    return sendResponse(400, { message: 'Missing required package metadata fields.' });
-  }
-
-  // Validate PackageData union type
- /* if ((data.Content && data.URL) || (!data.Content && !data.URL)) {
+  // Ensure only one of Content or URL is provided
+  if ((!Content && !URL) || (Content && URL)) {
     return sendResponse(400, { message: 'Either Content or URL must be set, but not both.' });
-  }*/
+  }
+
+  let metadata: PackageMetadata = {} as PackageMetadata;
+  let data: PackageData = {} as PackageData;
+  let extractedPackageJson: any;
 
   try {
-
-    let info: PackageInfo | null;
-
-    if(data.Content){
-      logger.info("createPackage request via zip upload");
-      const base64Data = data.Content;
-
-      if (!base64Data) {
-        logger.debug("Invalid base64-encoded data");
-        return sendResponse(400, { error: 'Invalid base64-encoded data' });
-      }
-
-      const base64Buffer = Buffer.from(atob(base64Data), 'binary');
-
-      // Extract package.json from zip file
+    if (Content) {
+      // Handle Content case
+      const base64Buffer = Buffer.from(Content, 'base64');
       const zip = new AdmZip(base64Buffer);
       const zipEntries = zip.getEntries();
+
       let packageJSON: string | null = null;
-      let extractedPackageJson;
-      zipEntries.forEach((entry: IZipEntry) => {
-        const entryPathParts = entry.entryName.split('/');
-        if (entryPathParts.length === 2 && entryPathParts[1] === 'package.json') {
+      zipEntries.forEach(entry => {
+        if (entry.entryName.endsWith('package.json')) {
           packageJSON = entry.getData().toString('utf8');
         }
       });
-      if (packageJSON == null) {
-        console.log('Invalid package creation request: No package.json found in zip');
-        return sendResponse(400, { error: 'Invalid package creation request: No package.json found in zip' });
-      } else {
-        extractedPackageJson = JSON.parse(packageJSON);
-        logger.console(`repo url: ${extractedPackageJson?.repository?.url}, name: ${extractedPackageJson.name}, version: ${extractedPackageJson.version}`);
-        if (!extractedPackageJson?.repository?.url || !extractedPackageJson.name || !extractedPackageJson.version) {
-          return sendResponse(400, { error: 'Invalid package creation request: package.json must contain repository url, package name, and version' });
-        }
+
+      if (!packageJSON) {
+        return sendResponse(400, { message: 'No package.json found in zip' });
       }
 
-      // Get the URL from the info in package.json
-      const repoUrl = extractedPackageJson.repository.url;
-      const repoUrlFixed = convertGitUrlToHttpsFlexible(repoUrl)
-      info = await metricCalcFromUrlUsingNetScore(repoUrlFixed);
-      console.log("info", info);
-      if (!info) {
-        console.error("No package info returned from URL:", repoUrlFixed);
-        return sendResponse(400, { error: 'Invalid package creation request: Could not get package info from URL' });
+      extractedPackageJson = JSON.parse(packageJSON);
+      metadata.Name = extractedPackageJson.name;
+      metadata.Version = extractedPackageJson.version;
+      data.Content = Content;
+
+    } else if (URL) {
+      // Handle URL case
+      const repoUrlFixed = convertGitUrlToHttpsFlexible(URL);
+      const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed);
+      
+      if (!info || info.NET_SCORE < 0.5) {
+        return sendResponse(424, { message: 'Package disqualified due to low rating' });
       }
 
-      info.ID = pkgeId;
-      info.NAME = extractedPackageJson.name;
-      info.VERSION = extractedPackageJson.version;
-      info.URL = repoUrlFixed;
-
-      if (info.NET_SCORE < 0.5) {
-        logger.console('Invalid package creation request: Package cannot be uploaded due to disqualifying rating.');
-        return sendResponse(424, { error: 'Invalid package creation request: Package cannot be uploaded due to disqualifying rating.' });
-      }
-
-      // Upload package content to S3
-      // await uploadToS3(process.env.AWS_S3_BUCKET_NAME || "", "packages/" + pkgeId + ".zip", base64Buffer);
-    }
-    else if(data.URL){
-
-    //logger.console(`createPackage request via public ingest`);
-    logger.console(`createPackage request via public ingest:${data.URL}`);
-
-    info = await metricCalcFromUrlUsingNetScore(data.URL);
-
-    if (!info) {
-      console.log("info", info);
-      console.error("No package info returned from URL:", data.URL);
-      return sendResponse(400, { error: 'Invalid package creation request: Could not get package info from URL' });
+      metadata.Name = info.NAME;
+      metadata.Version = info.VERSION;
+      data.URL = repoUrlFixed;
     }
 
-    info.ID = pkgeId;
+    // Ensure required metadata fields are set
+    metadata.ID = generatePackageId(metadata.Name, metadata.Version);
 
-    if (info.NET_SCORE < 0.5) {
-      logger.console('Invalid package creation request: Package cannot be uploaded due to disqualifying rating.');
-      return sendResponse(424, { error: 'Invalid package creation request: Package cannot be uploaded due to disqualifying rating.' });
+    if (!metadata.Name || !metadata.Version || !metadata.ID) {
+      return sendResponse(400, { message: 'Missing required package metadata fields' });
     }
 
-    // Download package content from GitHub using info
-    const response = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
-      headers: {
-        Authorization: process.env.GITHUB_TOKEN || "",
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
-
-    if (!response.ok) {
-      logger.console('Invalid package creation request: Could not get GitHub url for zip package download');
-      return sendResponse(400, { error: 'Invalid package creation request: Could not get GitHub url' });
+    // Check if package already exists
+    const result = await pool.query("SELECT name, version FROM packages WHERE name = $1 AND version = $2;", [metadata.Name, metadata.Version]);
+    if (result.rows.length > 0) {
+      return sendResponse(409, { message: 'Package exists already.' });
     }
-
-    const zipBuffer = Buffer.from(await response.arrayBuffer());
-
-    // Upload package content to S3
-    // await uploadToS3(process.env.AWS_S3_BUCKET_NAME || "", "packages/" + pkgeId + ".zip", zipBuffer);
-  } else {
-    logger.console('Invalid package creation request: Bad set of Content and URL');
-    return sendResponse(400, { error: 'Invalid package creation request: Bad set of Content and URL' });
-  }
-
-  // // Store package metadata in PostgreSQL
-  //   await insertIntoDatabase(pkgeId, pkgName, pkgVersion, info.URL, defaultUser.name);
-
-  //   // Respond with a success message
-  //   logger.console('Package created successfully');
-  //   res.status(200).json({ message: 'Package created successfully' });
-  // } catch (error) {
-  //   console.error('Error handling POST /package:', error);
-  //   res.status(500).json({ error: 'Internal Server Error' });
-  // }
 
     // Insert package into PostgreSQL
     const createdPackage = await createPackage(metadata, data);
-    let newquery="select name ,version from packages where name =$1 and version =$2;"
-    let result= await pool.query(newquery, [metadata.ID, metadata.Version]);
+
     // If Content is provided, upload to S3
-    if (data.Content) {
-      if(result.rows.length==0)
-      await uploadPackageContent(metadata.ID, data.Content);
-      else return sendResponse(409, { message: 'Package exists already.' });
-  
-    }
+    const contentBuffer = data.Content ? Buffer.from(data.Content, 'base64') : await fetchRepoZipFromGitHub(URL);
+    await uploadPackageContent(metadata.ID, contentBuffer);
 
     // Log the creation in package_history
-    const historyInsert = `
+    await pool.query(`
       INSERT INTO package_history (package_id, user_id, action)
       VALUES ($1, $2, $3)
-    `;
-    await pool.query(historyInsert, [metadata.ID, user.sub, 'CREATE']);
+    `, [metadata.ID, user.sub, 'CREATE']);
 
     return sendResponse(201, createdPackage);
+
   } catch (error: any) {
     console.error('Create Package Error:', error);
-    if (error.code === '23505') { // Unique violation
-      return sendResponse(409, { message: 'Package exists already.' });
-    }
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };
 
+// Helper function to fetch repo ZIP from GitHub
+const fetchRepoZipFromGitHub = async (url: string): Promise<Buffer> => {
+  const response = await fetch(`https://api.github.com/repos/${url}/zipball/HEAD`, {
+    headers: {
+      Authorization: process.env.GITHUB_TOKEN || "",
+      Accept: 'application/vnd.github.v3+json',
+    },
+  });
+  if (!response.ok) throw new Error('Failed to download GitHub repo zip');
+  return Buffer.from(await response.arrayBuffer());
+};
 
 // Handler for /package/{id} - GET (Retrieve Package)
 export const handleRetrievePackage = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
@@ -412,8 +347,10 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     let newquery="select name ,version from packages where name =$1 and version =$2;"
     let result= await pool.query(newquery, [metadata.ID, metadata.Version]);
     if (data.Content) {
+      const contentBuffer = Buffer.from(data.Content, 'base64');
+
       if(result.rows.length==0)
-        await uploadPackageContent(metadata.ID, data.Content);
+        await uploadPackageContent(metadata.ID, contentBuffer);
         else return sendResponse(409, { message: 'Package exists already.' });
     
     }
