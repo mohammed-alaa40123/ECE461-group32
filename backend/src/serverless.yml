@@ -11,11 +11,11 @@ provider:
   runtime: nodejs18.x
   region: us-east-1
   environment:
-    DB_HOST: ${env:RDS_HOST}
-    DB_PORT: ${env:RDS_PORT}
-    DB_NAME: ${env:RDS_DATABASE}
-    DB_USER: ${env:RDS_USER}
-    DB_PASSWORD: ${env:RDS_PASSWORD}
+    RDS_HOST: ${env:RDS_HOST}
+    RDS_PORT: ${env:RDS_PORT}
+    RDS_DATABASE: ${env:RDS_DATABASE}
+    RDS_USER: ${env:RDS_USER}
+    RDS_PASSWORD: ${env:RDS_PASSWORD}
     GITHUB_TOKEN: ${env:GITHUB_TOKEN}
 
  
