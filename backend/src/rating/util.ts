@@ -43,6 +43,61 @@ export async function cloneRepo(repoUrl: string, repoName: string): Promise<stri
     return null;
   }
 }
+// util.ts
+import axios from 'axios';
+import AdmZip from 'adm-zip';
+/**
+ * Download and extract a GitHub repository as a ZIP file
+ * @param repoUrl The URL of the repository to download
+ * @param repoName The name of the repository
+ * @returns The directory path where the repository is extracted or null if failed
+ */
+export async function cloneRepoAsZip(repoUrl: string, repoName: string): Promise<string | null> {
+  if (!isValidFilePath(repoName)) {
+    logger.info(`Invalid repository name: ${repoName}`);
+    return null;
+  }
+
+  const repoDir = path.join('/tmp', repoName);
+  const zipPath = path.join('/tmp', `${repoName}.zip`);
+
+  try {
+    logger.debug(`Downloading repository ZIP from ${repoUrl} to ${zipPath}`);
+
+    // Extract owner and repo name from URL
+    const regex = /https:\/\/github\.com\/([^/]+)\/([^/]+)(\.git)?/;
+    const match = repoUrl.match(regex);
+    if (!match) {
+      throw new Error('Invalid GitHub repository URL');
+    }
+    const owner = match[1];
+    const repo = match[2];
+
+    // GitHub API URL for downloading ZIP (defaulting to main branch)
+    const zipUrl = `https://api.github.com/repos/${owner}/${repo}/zipball/HEAD`;
+
+    // Download the ZIP file
+    const response = await axios.get(zipUrl, { responseType: 'arraybuffer' });
+    await fs.writeFile(zipPath, response.data);
+    logger.debug(`Successfully downloaded repository ZIP to ${zipPath}`);
+
+    // Extract the ZIP file
+    const zip = new AdmZip(zipPath);
+    zip.extractAllTo(repoDir, true);
+    logger.debug(`Successfully extracted repository to ${repoDir}`);
+
+    // Cleanup ZIP file
+    await fs.unlink(zipPath);
+    logger.debug(`Deleted ZIP file at ${zipPath}`);
+
+    return repoDir;
+  } catch (error: any) {
+    logger.debug(`Error downloading and extracting repository ZIP: ${error.message}`);
+    return null;
+  }
+}
+
+
 /**
  * Delete a cloned repository from the /tmp directory
  * @param repoName The name of the repository to delete
@@ -50,7 +105,7 @@ export async function cloneRepo(repoUrl: string, repoName: string): Promise<stri
  */
 export async function deleteRepo(repoName: string): Promise<void> {
   if (!isValidFilePath(repoName)) {
-    logger.info("Invalid file path for deletion");
+    logger.info(`Invalid repository name for deletion: ${repoName}`);
     return;
   }
 
@@ -61,10 +116,9 @@ export async function deleteRepo(repoName: string): Promise<void> {
     await fs.rm(repoDir, { recursive: true, force: true });
     logger.info(`Successfully deleted repository directory: ${repoDir}`);
   } catch (error: any) {
-    logger.debug(`Error deleting repository directory ${repoDir}:`, error);
+    logger.error(`Error deleting repository directory ${repoDir}: ${error.message}`);
   }
 }
-
 /**
  * Validate a file path by checking if it is an absolute path and does not contain ".."
  * @param filePath The path to the file to read

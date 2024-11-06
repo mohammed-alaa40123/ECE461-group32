@@ -12,6 +12,7 @@ import "dotenv/config";
 type CustomLogger = {
   info: winston.LeveledLogMethod;
   debug: winston.LeveledLogMethod;
+  error: winston.LeveledLogMethod;
   console: (message: string) => void;
 };
 
