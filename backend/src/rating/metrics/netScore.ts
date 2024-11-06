@@ -32,7 +32,7 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
 
   for (const { packageName, owner, url } of results) {
     const netStart = Date.now();
-    const repoDir = await cloneRepoAsZip(`https://github.com/${owner}/${packageName}.git`, packageName);
+    const repoDir = await cloneRepoAsZip(`https://github.com/${owner}/${packageName}`, packageName);
 
     let totalLinesCorrectness = 0;
     let totalLinesRamp = 0;
