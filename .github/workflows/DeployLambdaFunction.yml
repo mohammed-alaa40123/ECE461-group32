@@ -27,7 +27,7 @@ jobs:
         working-directory: backend/src
         run: |
           echo "Zipping Lambda function files and node_modules"
-          zip -r ../../code.zip index.js package.json node_modules
+          zip -r ../../code.zip index.js package.json node_modules .eslintrc.json
 
       - name: Update Lambda function code with AWS CLI v2
         uses: imehedi/actions-awscli-v2@latest
