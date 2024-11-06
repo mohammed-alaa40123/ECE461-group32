@@ -79,4 +79,3 @@ function calculateBusFactor90thPercentile(commitData: Map<string, number>): numb
   const score = Math.min(1, Math.max(Math.round(aboveThresholdContributors * 0.05 * 100) / 100, 0));
   return score;
 }
-calculateBusFactorScore('i-voted-for-trump', 'is-even');

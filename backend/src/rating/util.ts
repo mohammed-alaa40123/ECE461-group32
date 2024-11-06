@@ -21,21 +21,47 @@ export async function cloneRepo(repoUrl: string, repoName: string): Promise<stri
     logger.info("Invalid file path");
     return null;
   }
+
   const git: SimpleGit = simpleGit();
-  const repoDir = path.resolve(__dirname, "..", "repos", repoName);
+  const repoDir = path.join('/tmp', repoName);
+
   try {
-    // eslint-disable-next-line security/detect-non-literal-fs-filename -- filePath is validated
+    // Create the /tmp/repoName directory
     await fs.mkdir(repoDir, { recursive: true });
+    logger.debug(`Cloning repository from ${repoUrl} to ${repoDir}`);
+
+    // Clone the repository into /tmp/repoName
     await git.clone(repoUrl, repoDir);
     logger.info(`Repository cloned to ${repoDir}`);
     return repoDir;
-  } catch (error) {
-    if ((error as Error).message.includes("already exists")) {
+  } catch (error: any) {
+    if (error.message.includes("already exists")) {
       logger.info(`Repository already cloned to ${repoDir}`);
       return repoDir;
     }
-    logger.info("Error cloning repository:", error);
+    logger.debug("Error cloning repository:", error);
     return null;
+  }
+}
+/**
+ * Delete a cloned repository from the /tmp directory
+ * @param repoName The name of the repository to delete
+ * @returns Promise<void>
+ */
+export async function deleteRepo(repoName: string): Promise<void> {
+  if (!isValidFilePath(repoName)) {
+    logger.info("Invalid file path for deletion");
+    return;
+  }
+
+  const repoDir = path.join('/tmp', repoName);
+
+  try {
+    logger.debug(`Attempting to delete repository directory: ${repoDir}`);
+    await fs.rm(repoDir, { recursive: true, force: true });
+    logger.info(`Successfully deleted repository directory: ${repoDir}`);
+  } catch (error: any) {
+    logger.debug(`Error deleting repository directory ${repoDir}:`, error);
   }
 }
 

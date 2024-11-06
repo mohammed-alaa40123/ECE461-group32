@@ -12,7 +12,7 @@ import {calculatePinningFraction} from "./dependencyPinning";
 import { getLogger } from "../logger";
 import { promisify } from "util";
 import { exec } from "child_process";
-import { cloneRepo } from "../util";
+import { cloneRepo, deleteRepo } from "../util";
 
 const logger = getLogger();
 
@@ -91,6 +91,11 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
         CodeReviewFraction_Latency: parseFloat(codeReviewFractionLatency.toFixed(3))
       })
     );
+
+    if (repoDir) {
+      await deleteRepo(packageName);
+    }
+
     return {
       URL: url.trim(),
       NetScore: parseFloat(netScore.toFixed(2)),
