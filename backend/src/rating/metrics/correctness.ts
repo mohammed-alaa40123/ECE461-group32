@@ -3,7 +3,7 @@
  */
 import { ESLint } from "eslint";
 import { getLogger } from "../logger";
-
+import path from "path";
 const logger = getLogger();
 /**
  * Calculate the correctness score of a repository
@@ -27,9 +27,11 @@ export async function calculateCorrectness(repoDir: string | null, totalLines: n
  * @param totalLines The total number of lines of code in the repository
  * @returns The ESLint score of the repository
  */
+
 async function calculateESLintScore(repoDir: string, totalLines: number): Promise<number> {
   try {
-    const eslint = new ESLint({ ignore: false });
+    const eslintConfigPath = path.join('/opt', 'nodejs', '.eslintrc.json'); // '/opt' is the mount point for Lambda Layers
+    const eslint = new ESLint({ ignore: false, overrideConfigFile: eslintConfigPath   });
     const results = await eslint.lintFiles([`${repoDir}/**/*.{js,ts,tsx}`]);
 
     let totalErrors = 0;

@@ -61,7 +61,7 @@ export async function cloneRepoAsZip(repoUrl: string, repoName: string): Promise
     return null;
   }
 
-  const tmppath = './tmp'; // Use absolute path for /tmp
+  const tmppath = '/tmp'; // Use absolute path for /tmp
   const repoDir = path.join(tmppath, repoName);
   const zipPath = path.join(tmppath, `${repoName}.zip`);
   
@@ -156,7 +156,7 @@ export async function deleteRepo(repoName: string): Promise<void> {
     return;
   }
 
-  const repoDir = path.join('./tmp', repoName);
+  const repoDir = path.join('/tmp', repoName);
 
   try {
     logger.debug(`Attempting to delete repository directory: ${repoDir}`);
