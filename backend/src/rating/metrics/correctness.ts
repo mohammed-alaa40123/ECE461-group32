@@ -12,6 +12,7 @@ const logger = getLogger();
  * @returns The correctness score of the repository
  **/
 export async function calculateCorrectness(repoDir: string | null, totalLines: number): Promise<number> {
+  console.log("start calculateCorrectness");
   if (!repoDir) {
     logger.info("Could not calculate correctness score: No repository directory provided");
     return 0;
