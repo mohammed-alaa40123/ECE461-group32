@@ -39,14 +39,25 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
     if (repoDir) {
       try {
         const execAsync = promisify(exec);
-        const { stdout } = await execAsync(`npx cloc --json ${repoDir}`);
+        const clocCommand = 'npx cloc'; // Using npx to run cloc without needing a global install
+
+        // Set environment variables for npm
+        const env = {
+          ...process.env,
+          HOME: '/tmp',
+          NPM_CONFIG_CACHE: '/tmp/.npm',
+          XDG_CACHE_HOME: '/tmp/.cache'
+        };
+
+        const { stdout } = await execAsync(`${clocCommand} --json ${repoDir}`, { env });
         const clocData = JSON.parse(stdout);
         const jsLines = clocData.JavaScript?.code || 0;
         const tsLines = clocData.TypeScript?.code || 0;
         totalLinesCorrectness = jsLines + tsLines;
         totalLinesRamp = clocData.SUM?.code || 0;
-      } catch (error) {
-        logger.info(`Error calculating lines of code: ${error}`);
+        logger.debug(`Cloc data - JS Lines: ${jsLines}, TS Lines: ${tsLines}, Total Lines: ${totalLinesCorrectness}`);
+      } catch (error: any) {
+        logger.info(`Error calculating lines of code: ${error.message}`);
       }
     }
 

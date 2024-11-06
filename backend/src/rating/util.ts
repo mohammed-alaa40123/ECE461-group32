@@ -46,6 +46,7 @@ export async function cloneRepo(repoUrl: string, repoName: string): Promise<stri
 // util.ts
 import axios from 'axios';
 import AdmZip from 'adm-zip';
+
 /**
  * Download and extract a GitHub repository as a ZIP file
  * @param repoUrl The URL of the repository to download
@@ -53,13 +54,27 @@ import AdmZip from 'adm-zip';
  * @returns The directory path where the repository is extracted or null if failed
  */
 export async function cloneRepoAsZip(repoUrl: string, repoName: string): Promise<string | null> {
+  console.log("start downloadziptest");
+
   if (!isValidFilePath(repoName)) {
     logger.info(`Invalid repository name: ${repoName}`);
     return null;
   }
 
-  const repoDir = path.join('/tmp', repoName);
-  const zipPath = path.join('/tmp', `${repoName}.zip`);
+  const tmppath = './tmp'; // Use absolute path for /tmp
+  const repoDir = path.join(tmppath, repoName);
+  const zipPath = path.join(tmppath, `${repoName}.zip`);
+  
+  // Ensure /tmp exists
+  try {
+    await fs.mkdir(tmppath, { recursive: true });
+    logger.debug(`/tmp directory is ready at ${tmppath}`);
+  } catch (mkdirError: any) {
+    console.log(`Error creating /tmp directory: ${mkdirError.message}`);
+    return null;
+  }
+
+  console.log(zipPath);
 
   try {
     logger.debug(`Downloading repository ZIP from ${repoUrl} to ${zipPath}`);
@@ -76,23 +91,55 @@ export async function cloneRepoAsZip(repoUrl: string, repoName: string): Promise
     // GitHub API URL for downloading ZIP (defaulting to main branch)
     const zipUrl = `https://api.github.com/repos/${owner}/${repo}/zipball/HEAD`;
 
-    // Download the ZIP file
-    const response = await axios.get(zipUrl, { responseType: 'arraybuffer' });
+    // Download the ZIP file with authentication (to handle rate limiting)
+    const token = process.env.GITHUB_TOKEN; // Ensure this environment variable is set
+    const headers: any = {
+      'Accept': 'application/vnd.github.v3+json'
+    };
+    if (token) {
+      headers['Authorization'] = `token ${token}`;
+    }
+
+    const response = await axios.get(zipUrl, { responseType: 'arraybuffer', headers });
+    console.log(`HTTP Status: ${response.status}`); // Log status code
+
+    if (response.status !== 200) {
+      throw new Error(`Failed to download ZIP file: Status code ${response.status}`);
+    }
+
     await fs.writeFile(zipPath, response.data);
-    logger.debug(`Successfully downloaded repository ZIP to ${zipPath}`);
+    console.log(`Successfully downloaded repository ZIP to ${zipPath}`);
 
     // Extract the ZIP file
     const zip = new AdmZip(zipPath);
     zip.extractAllTo(repoDir, true);
-    logger.debug(`Successfully extracted repository to ${repoDir}`);
+    console.log(`Successfully extracted repository to ${repoDir}`);
+
+    // Find the first subdirectory in repoDir
+    const extractedItems = await fs.readdir(repoDir);
+    const extractedDirs: string[] = []; // Explicitly define as string[]
+    for (const item of extractedItems) {
+      const itemPath = path.join(repoDir, item);
+      const stat = await fs.stat(itemPath);
+      if (stat.isDirectory()) {
+        extractedDirs.push(itemPath);
+      }
+    }
+
+    if (extractedDirs.length === 0) {
+      throw new Error('No directory found after extracting ZIP');
+    }
+
+    const finalRepoDir = extractedDirs[0]; // Assuming only one top-level directory
+    logger.debug(`Final repository directory: ${finalRepoDir}`);
 
     // Cleanup ZIP file
     await fs.unlink(zipPath);
-    logger.debug(`Deleted ZIP file at ${zipPath}`);
+    console.log(`Deleted ZIP file at ${zipPath}`);
 
-    return repoDir;
+    return finalRepoDir;
   } catch (error: any) {
-    logger.debug(`Error downloading and extracting repository ZIP: ${error.message}`);
+    console.log(`Error downloading and extracting repository ZIP: ${error.message}`);
     return null;
   }
 }
@@ -109,7 +156,7 @@ export async function deleteRepo(repoName: string): Promise<void> {
     return;
   }
 
-  const repoDir = path.join('/tmp', repoName);
+  const repoDir = path.join('./tmp', repoName);
 
   try {
     logger.debug(`Attempting to delete repository directory: ${repoDir}`);
