@@ -35,14 +35,14 @@ module.exports = {
     extensions: ['.ts', '.js', '.html'],
   },
   plugins: [
-    // Define environment variables to expose to the client-side bundle
-    new webpack.DefinePlugin({
-      'process.env.RDS_HOST': JSON.stringify(process.env.RDS_HOST),
-      'process.env.RDS_USER': JSON.stringify(process.env.RDS_USER),
-      'process.env.RDS_PASSWORD': JSON.stringify(process.env.RDS_PASSWORD),
-      'process.env.RDS_DATABASE': JSON.stringify(process.env.RDS_DATABASE),
-      'process.env.RDS_PORT': JSON.stringify(process.env.RDS_PORT),
-      'process.env.GITHUB_TOKEN': JSON.stringify(process.env.GITHUB_TOKEN),
-    }),
+    // // Define environment variables to expose to the client-side bundle
+    // new webpack.DefinePlugin({
+    //   'process.env.RDS_HOST': JSON.stringify(process.env.RDS_HOST),
+    //   'process.env.RDS_USER': JSON.stringify(process.env.RDS_USER),
+    //   'process.env.RDS_PASSWORD': JSON.stringify(process.env.RDS_PASSWORD),
+    //   'process.env.RDS_DATABASE': JSON.stringify(process.env.RDS_DATABASE),
+    //   'process.env.RDS_PORT': JSON.stringify(process.env.RDS_PORT),
+    //   'process.env.GITHUB_TOKEN': JSON.stringify(process.env.GITHUB_TOKEN),
+    // }),
   ],
 };

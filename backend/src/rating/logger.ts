@@ -49,7 +49,7 @@ const initializeLogger = () => {
   bareLogger = winston.createLogger({
     level: logLevel,
     format: fileLogFormat,
-    transports: [new winston.transports.File({ filename: logDir })],
+    transports: [new winston.transports.Console()],
     silent: logLevel === "silent"
   }) as unknown as CustomLogger;
 
