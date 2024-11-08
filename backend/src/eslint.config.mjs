@@ -34,9 +34,7 @@ export default [
       "no-unreachable": "error"
     }
   },
-  {
-    ignores: ["repos"]
-  },
+
   {
     files: ["src/__tests__/**/*"],
     rules: {
