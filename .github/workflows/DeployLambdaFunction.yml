@@ -66,5 +66,5 @@ jobs:
           IMAGE_TAG=${GITHUB_SHA}
 
           aws lambda update-function-code \
-            --function-name Get_S3_lambda \
+            --function-name lambda_RDS_S3 \
             --image-uri $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
