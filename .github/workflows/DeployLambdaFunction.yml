@@ -18,18 +18,17 @@ jobs:
 
       # Step 1: Create Lambda Layer with Node Modules
       - name: Create Lambda Layer Directory and Install Dependencies
-        working-directory: backend/src
         run: |
           echo "Creating Lambda Layer directory and installing dependencies"
-          mkdir -p ../../lambda-layer/nodejs
-          cp package.json ../../lambda-layer/nodejs/
-          cd ../../lambda-layer/nodejs
+          mkdir -p backend/lambda-layer/nodejs
+          cp backend/src/package.json backend/lambda-layer/nodejs/
+          cd backend/lambda-layer/nodejs
           npm install --only=prod
 
       - name: Zip Lambda Layer
-        working-directory: backend/lambda-layer
         run: |
           echo "Zipping Lambda Layer"
+          cd backend/lambda-layer
           zip -r lambda-layer.zip nodejs
 
       # Step 2: Publish the Lambda Layer to AWS
@@ -39,7 +38,7 @@ jobs:
           args: "lambda publish-layer-version \
             --layer-name BackendDependenciesLayer \
             --description 'Lambda Layer with Node.js dependencies for Backend' \
-            --zip-file fileb://lambda-layer.zip \
+            --zip-file fileb://backend/lambda-layer/lambda-layer.zip \
             --compatible-runtimes nodejs14.x nodejs16.x \
             --query 'LayerVersionArn' --output text"
         env:
