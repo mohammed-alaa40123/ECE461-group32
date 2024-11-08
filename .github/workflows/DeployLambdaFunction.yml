@@ -41,7 +41,7 @@ jobs:
             --layer-name BackendDependenciesLayer1
             --description "Lambda Layer 1 with Core Dependencies"
             --zip-file fileb://backend/lambda-layer-1/lambda-layer-1.zip
-            --compatible-runtimes nodejs14.x nodejs16.x
+            --compatible-runtimes nodejs18.x
             --query LayerVersionArn
             --output text
         env:
@@ -73,7 +73,7 @@ jobs:
             --layer-name BackendDependenciesLayer2
             --description "Lambda Layer 2 with Utility Dependencies"
             --zip-file fileb://backend/lambda-layer-2/lambda-layer-2.zip
-            --compatible-runtimes nodejs14.x nodejs16.x
+            --compatible-runtimes nodejs18.x
             --query LayerVersionArn
             --output text
         env:
@@ -105,7 +105,7 @@ jobs:
             --layer-name BackendDependenciesLayer3
             --description "Lambda Layer 3 with Serverless and Build Dependencies"
             --zip-file fileb://backend/lambda-layer-3/lambda-layer-3.zip
-            --compatible-runtimes nodejs14.x nodejs16.x
+            --compatible-runtimes nodejs18.x
             --query LayerVersionArn
             --output text
         env:
