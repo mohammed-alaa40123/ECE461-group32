@@ -39,7 +39,7 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
     if (repoDir) {
       try {
         const execAsync = promisify(exec);
-        const slocCommand = 'npx sloc'; // Using npx to run sloc without needing a global install
+        const slocCommand = './node_modules/.bin/sloc'; // Using npx to run sloc without needing a global install
       
         // Set environment variables for npm
         const env = {
@@ -49,7 +49,7 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
           XDG_CACHE_HOME: '/tmp/.cache'
         };
       
-        const { stdout } = await execAsync(`${slocCommand} --format json ${repoDir}`, { env });
+        const { stdout } = await execAsync(`npm run sloc -- --format json ${repoDir}`, { env });
         const slocData = JSON.parse(stdout);
         const jsLines = slocData.JavaScript?.source || 0;
         const tsLines = slocData.TypeScript?.source || 0;

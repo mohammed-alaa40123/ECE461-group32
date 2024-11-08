@@ -8,7 +8,8 @@
         "start": "serverless offline --debug  --httpPort 4000",
         "create": "ts-node handlers/create_user.ts",
         "dep": "ts-node rating/metrics/dependencyPinning.ts",
-        "test": "echo \"No tests specified\" && exit 0"
+        "test": "echo \"No tests specified\" && exit 0",
+        "sloc": "sloc . --details --format cli-table"
     },
     "author": "Mohamed Ahmed",
     "license": "MIT",
