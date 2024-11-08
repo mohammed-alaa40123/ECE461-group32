@@ -59,7 +59,14 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: "us-east-1"
 
-      # Step 4: Create and Upload Lambda function code without dependencies
+      # Step 4: Build Backend Code and Create Lambda Function Package
+      - name: Build the Backend Code
+        working-directory: backend/src
+        run: |
+          echo "Building backend code"
+          npm run build
+
+      # Step 5: Remove Dependencies and Create Zip for Lambda Function Code
       - name: Remove Dependencies and Create Zip for Lambda Function Code
         working-directory: backend/src
         run: |
@@ -67,7 +74,7 @@ jobs:
           rm -rf node_modules
           zip -r ../../code.zip index.js package.json default.eslintrc.json
 
-      # Step 5: Update Lambda function code with AWS CLI v2
+      # Step 6: Update Lambda function code with AWS CLI v2
       - name: Update Lambda Function Code with AWS CLI v2
         uses: imehedi/actions-awscli-v2@latest
         with:
