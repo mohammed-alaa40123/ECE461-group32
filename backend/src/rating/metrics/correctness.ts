@@ -30,9 +30,9 @@ export async function calculateCorrectness(repoDir: string | null, totalLines: n
 
 async function calculateESLintScore(repoDir: string, totalLines: number): Promise<number> {
   try {
-    const eslintConfigPath = path.join('/opt', 'nodejs', '.eslintrc.json'); // '/opt' is the mount point for Lambda Layers
-    const eslint = new ESLint({ ignore: false, overrideConfigFile: eslintConfigPath   });
+    const eslint = new ESLint({ ignore: false });
     const results = await eslint.lintFiles([`${repoDir}/**/*.{js,ts,tsx}`]);
+
 
     let totalErrors = 0;
     let totalWarnings = 0;

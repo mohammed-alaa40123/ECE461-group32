@@ -12,7 +12,7 @@ import {calculatePinningFraction} from "./dependencyPinning";
 import { getLogger } from "../logger";
 import { promisify } from "util";
 import { exec } from "child_process";
-import { cloneRepoAsZip, deleteRepo } from "../util";
+import { cloneRepo } from "../util";
 
 const logger = getLogger();
 
@@ -32,7 +32,7 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
 
   for (const { packageName, owner, url } of results) {
     const netStart = Date.now();
-    const repoDir = await cloneRepoAsZip(`https://github.com/${owner}/${packageName}`, packageName);
+    const repoDir = await cloneRepo(`https://github.com/${owner}/${packageName}`, packageName);
 
     let totalLinesCorrectness = 0;
     let totalLinesRamp = 0;
@@ -94,9 +94,9 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
       })
     );
 
-    if (repoDir) {
-      await deleteRepo(packageName);
-    }
+    // if (repoDir) {
+    //   await deleteRepo(packageName);
+    // }
 
     return {
       URL: url.trim(),
