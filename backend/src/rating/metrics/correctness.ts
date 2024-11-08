@@ -31,9 +31,7 @@ export async function calculateCorrectness(repoDir: string | null, totalLines: n
 async function calculateESLintScore(repoDir: string, totalLines: number): Promise<number> {
   try {
     const eslint = new ESLint({ ignore: false, overrideConfigFile: path.resolve("eslint.config.mjs") });
-    repoDir = path.resolve(repoDir);
-    console.log("repoDir", repoDir);
-    const filesToLint = `tmp/loadash/**/*.{js,ts,tsx}`;
+    const filesToLint = `**/*.{js,ts,tsx}`;
     const results = await eslint.lintFiles([filesToLint]);
 
 
