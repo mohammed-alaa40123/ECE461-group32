@@ -1,4 +1,4 @@
-name: Deploy Lambda Function
+name: Deploy Lambda Function with Layer
 
 on:
   push:
@@ -16,22 +16,60 @@ jobs:
       - name: Install zip tool
         run: sudo apt-get install zip -y
 
-      - name: Navigate to Backend and Install Production Dependencies
+      # Step 1: Create Lambda Layer with Node Modules
+      - name: Create Lambda Layer Directory and Install Dependencies
         working-directory: backend/src
         run: |
-          echo "Installing production dependencies"
+          echo "Creating Lambda Layer directory and installing dependencies"
+          mkdir -p ../../lambda-layer/nodejs
+          cp package.json ../../lambda-layer/nodejs/
+          cd ../../lambda-layer/nodejs
           npm install --only=prod
-          npm run build
-          npm uninstall serverless serverless-http webpack webpack-cli webpack-node-externals aws-lambda
 
+      - name: Zip Lambda Layer
+        working-directory: backend/lambda-layer
+        run: |
+          echo "Zipping Lambda Layer"
+          zip -r lambda-layer.zip nodejs
 
-      - name: Create Zip file for Lambda function with Dependencies
+      # Step 2: Publish the Lambda Layer to AWS
+      - name: Publish Lambda Layer
+        uses: imehedi/actions-awscli-v2@latest
+        with:
+          args: "lambda publish-layer-version \
+            --layer-name BackendDependenciesLayer \
+            --description 'Lambda Layer with Node.js dependencies for Backend' \
+            --zip-file fileb://lambda-layer.zip \
+            --compatible-runtimes nodejs14.x nodejs16.x \
+            --query 'LayerVersionArn' --output text"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "us-east-1"
+        id: publish_layer
+
+      # Step 3: Update the Lambda function to use the new Layer
+      - name: Update Lambda Function to Use Layer
+        uses: imehedi/actions-awscli-v2@latest
+        with:
+          args: "lambda update-function-configuration \
+            --function-name arn:aws:lambda:us-east-1:438465151830:function:Get_S3_lambda \
+            --layers ${{ steps.publish_layer.outputs.LayerVersionArn }}"
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "us-east-1"
+
+      # Step 4: Create and Upload Lambda function code without dependencies
+      - name: Remove Dependencies and Create Zip for Lambda Function Code
         working-directory: backend/src
         run: |
-          echo "Zipping Lambda function files and node_modules"
-          zip -r ../../code.zip index.js package.json node_modules default.eslintrc.json
+          echo "Removing node_modules and creating zip for Lambda function"
+          rm -rf node_modules
+          zip -r ../../code.zip index.js package.json default.eslintrc.json
 
-      - name: Update Lambda function code with AWS CLI v2
+      # Step 5: Update Lambda function code with AWS CLI v2
+      - name: Update Lambda Function Code with AWS CLI v2
         uses: imehedi/actions-awscli-v2@latest
         with:
           args: "lambda update-function-code \
