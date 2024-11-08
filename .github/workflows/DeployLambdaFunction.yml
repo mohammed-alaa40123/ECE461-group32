@@ -1,4 +1,4 @@
-name: Deploy Lambda Function
+name: Deploy Lambda Function using Docker
 
 on:
   push:
@@ -10,34 +10,61 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install zip tool
-        run: sudo apt-get install zip -y
+      # Step 2: Set up Docker and AWS CLI
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: Navigate to Backend and Install Production Dependencies
-        working-directory: backend/src
-        run: |
-          echo "Installing production dependencies"
-          npm install 
-          npm run build
-          npm uninstall serverless serverless-http webpack webpack-cli webpack-node-externals aws-lambda
-
-
-      - name: Create Zip file for Lambda function with Dependencies
-        working-directory: backend/src
-        run: |
-          echo "Zipping Lambda function files and node_modules"
-          zip -r ../../code.zip index.js package.json node_modules default.eslintrc.json
-
-      - name: Update Lambda function code with AWS CLI v2
-        uses: imehedi/actions-awscli-v2@latest
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          args: "lambda update-function-code \
-            --function-name arn:aws:lambda:us-east-1:438465151830:function:Get_S3_lambda \
-            --zip-file fileb://code.zip"
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "us-east-1"
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      # Step 3: Log in to Amazon ECR
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      # Step 4: Build Docker image for Lambda with TypeScript build step
+      - name: Build Docker image
+        run: |
+          REPO_NAME=lambda-api-handler
+          IMAGE_TAG=${GITHUB_SHA}
+
+          echo "Building Docker image for Lambda"
+          docker build -t $REPO_NAME:$IMAGE_TAG backend/src
+
+      # Step 5: Tag and push the Docker image to ECR
+      - name: Tag and push Docker image to Amazon ECR
+        run: |
+          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+          REGION=us-east-1
+          REPO_NAME=lambda-api-handler
+          IMAGE_TAG=${GITHUB_SHA}
+
+          # Create ECR repository if it does not exist
+          aws ecr describe-repositories --repository-names $REPO_NAME || \
+            aws ecr create-repository --repository-name $REPO_NAME
+
+          # Tag Docker image
+          docker tag $REPO_NAME:$IMAGE_TAG $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
+
+          # Push Docker image to ECR
+          docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
+
+      # Step 6: Update AWS Lambda to use the new Docker image
+      - name: Update Lambda function with new Docker image
+        run: |
+          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+          REGION=us-east-1
+          REPO_NAME=lambda-api-handler
+          IMAGE_TAG=${GITHUB_SHA}
+
+          aws lambda update-function-code \
+            --function-name Get_S3_lambda \
+            --image-uri $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
