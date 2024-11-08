@@ -114,6 +114,40 @@ jobs:
           AWS_DEFAULT_REGION: "us-east-1"
         id: publish_layer_3
 
+
+
+      # Step 5:b: Create and Publish Lambda Layer 4 (Serverless and Build Dependencies)
+      - name: Create Lambda Layer 4 with Dependencies
+        run: |
+          echo "Creating Lambda Layer 4 directory and installing dependencies"
+          mkdir -p backend/lambda-layer-4/nodejs
+          cp backend/lambda-layer-4/package.json backend/lambda-layer-4/nodejs/
+          cd backend/lambda-layer-4/nodejs
+          npm install --only=prod
+
+      - name: Zip Lambda Layer 4
+        run: |
+          echo "Zipping Lambda Layer 4"
+          cd backend/lambda-layer-4
+          zip -r lambda-layer-4.zip nodejs
+
+      - name: Publish Lambda Layer 4
+        uses: imehedi/actions-awscli-v2@latest
+        with:
+          args: >
+            lambda publish-layer-version
+            --layer-name BackendDependenciesLayer4
+            --description "Lambda Layer 4 with Serverless and Build Dependencies"
+            --zip-file fileb://backend/lambda-layer-4/lambda-layer-4.zip
+            --compatible-runtimes nodejs18.x
+            --query LayerVersionArn
+            --output text
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "us-east-1"
+        id: publish_layer_4
+
       # Step 6: Update the Lambda Function with the Layers
       - name: Update Lambda Function to Use Multiple Layers
         uses: imehedi/actions-awscli-v2@latest
@@ -125,6 +159,7 @@ jobs:
               ${{ steps.publish_layer_1.outputs.LayerVersionArn }}
               ${{ steps.publish_layer_2.outputs.LayerVersionArn }}
               ${{ steps.publish_layer_3.outputs.LayerVersionArn }}
+              ${{ steps.publish_layer_4.outputs.LayerVersionArn }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
