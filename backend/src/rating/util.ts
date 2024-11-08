@@ -4,6 +4,7 @@
 import path from "path";
 import { fileURLToPath } from 'url';
 import fspromises from "fs/promises";
+import dotenv from "dotenv";
 import { getLogger } from "./logger";
 import { graphqlClient } from "./graphqlClient";
 import {dirname} from "path";
@@ -11,7 +12,7 @@ const logger = getLogger();
 import * as git from 'isomorphic-git';
 import fs from 'fs';
 import http from 'isomorphic-git/http/node';
-
+dotenv.config();
 /**
  * Clone a repository from a given URL
  * @param repoUrl The URL of the repository to clone
@@ -51,7 +52,7 @@ export async function cloneRepo(repoUrl: string, repoName: string): Promise<stri
     return null;
   }
 
-  const repoDir = path.join('./tmp', 'lodash');
+  const repoDir = path.join(process.env.tmpDir!, 'lodash');
 
   try {
     // Create the /tmp/lodash directory
@@ -166,7 +167,7 @@ export async function deleteRepo(repoName: string): Promise<void> {
     return;
   }
 
-  const repoDir = path.join('./tmp', repoName);
+  const repoDir = path.join(process.env.tmpDir!, repoName);
 
   try {
     logger.debug(`Attempting to delete repository directory: ${repoDir}`);

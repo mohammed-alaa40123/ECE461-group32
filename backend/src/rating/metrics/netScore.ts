@@ -12,7 +12,7 @@ import {calculatePinningFraction} from "./dependencyPinning";
 import { getLogger } from "../logger";
 import { promisify } from "util";
 import { exec } from "child_process";
-import { cloneRepo } from "../util";
+import { cloneRepo,deleteRepo } from "../util";
 
 const logger = getLogger();
 
