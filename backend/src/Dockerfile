@@ -16,7 +16,6 @@ RUN npm run build
 
 # Use the official AWS Lambda Node.js 18 runtime as a base image
 FROM public.ecr.aws/lambda/nodejs:18
-RUN mkdir -p /Temp
 
 # Set working directory for Lambda runtime
 WORKDIR /var/task
@@ -26,7 +25,7 @@ COPY --from=build /app/index.js ./
 COPY --from=build /app/package.json ./
 COPY --from=build /app/eslint.config.mjs ./
 COPY --from=build /app/default.eslintrc.json ./
-COPY --from=build /app/Temp ./Temp
+
 
 # Copy the necessary node_modules folder from the build stage
 COPY --from=build /app/node_modules ./node_modules
