@@ -16,6 +16,7 @@ RUN npm run build
 
 # Use the official AWS Lambda Node.js 18 runtime as a base image
 FROM public.ecr.aws/lambda/nodejs:18
+RUN mkdir -p /app/tmp
 
 # Set working directory for Lambda runtime
 WORKDIR /var/task
