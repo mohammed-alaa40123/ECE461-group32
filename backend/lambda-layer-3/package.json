@@ -1,0 +1,14 @@
+{
+    "name": "lambda-layer-3",
+    "version": "1.0.0",
+    "dependencies": {
+        "serverless": "^4.4.7",
+        "serverless-http": "^3.2.0",
+        "webpack": "^5.95.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-node-externals": "^3.0.0",
+        "ts-loader": "^9.5.1",
+        "eslint": "^9.14.0",
+        "@eslint/js": "^9.14.0"
+    }
+}

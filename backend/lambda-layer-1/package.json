@@ -1,0 +1,11 @@
+{
+    "name": "lambda-layer-1",
+    "version": "1.0.0",
+    "dependencies": {
+        "aws-lambda": "^1.0.7",
+        "aws-sdk": "^2.1691.0",
+        "jsonwebtoken": "^8.5.1",
+        "pg": "^8.13.0",
+        "bcrypt": "^5.0.1"
+    }
+}
