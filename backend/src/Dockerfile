@@ -25,7 +25,7 @@ COPY --from=build /app/index.js ./
 COPY --from=build /app/package.json ./
 COPY --from=build /app/eslint.config.mjs ./
 COPY --from=build /app/default.eslintrc.json ./
-
+COPY --from=build /app/tmp ./tmp
 
 # Copy the necessary node_modules folder from the build stage
 COPY --from=build /app/node_modules ./node_modules
