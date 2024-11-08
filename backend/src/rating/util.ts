@@ -58,7 +58,6 @@ export async function cloneRepoAsZip(repoUrl: string, repoName: string): Promise
     return null;
   }
 
-<<<<<<< HEAD
   const tmppath = '/tmp'; // Use absolute path for /tmp
   const repoDir = path.join(tmppath, repoName);
   const zipPath = path.join(tmppath, `${repoName}.zip`);
@@ -73,10 +72,6 @@ export async function cloneRepoAsZip(repoUrl: string, repoName: string): Promise
   }
 
   console.log(zipPath);
-=======
-  const repoDir = path.join('/tmp', repoName);
-  const zipPath = path.join('/tmp', `${repoName}.zip`);
->>>>>>> parent of 72e2343 (dot)
 
   try {
     logger.debug(`Downloading repository ZIP from ${repoUrl} to ${zipPath}`);

@@ -39,27 +39,7 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
     if (repoDir) {
       try {
         const execAsync = promisify(exec);
-<<<<<<< HEAD
-        const slocCommand = './node_modules/.bin/sloc'; // Using npx to run sloc without needing a global install
-      
-        // Set environment variables for npm
-        const env = {
-          ...process.env,
-          HOME: '/tmp',
-          NPM_CONFIG_CACHE: '/tmp/.npm',
-          XDG_CACHE_HOME: '/tmp/.cache'
-        };
-      
-        const { stdout } = await execAsync(`npm run sloc -- --format json ${repoDir}`, { env });
-        const slocData = JSON.parse(stdout);
-        const jsLines = slocData.JavaScript?.source || 0;
-        const tsLines = slocData.TypeScript?.source || 0;
-        totalLinesCorrectness = jsLines + tsLines;
-        totalLinesRamp = slocData.total?.source || 0;
-        logger.debug(`Sloc data - JS Lines: ${jsLines}, TS Lines: ${tsLines}, Total Lines: ${totalLinesCorrectness}`);
-      } catch (error: any) {
-        logger.info(`Error calculating lines of code: ${error.message}`);
-=======
+
         const { stdout } = await execAsync(`npx cloc --json ${repoDir}`);
         const clocData = JSON.parse(stdout);
         const jsLines = clocData.JavaScript?.code || 0;
@@ -68,7 +48,6 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
         totalLinesRamp = clocData.SUM?.code || 0;
       } catch (error) {
         logger.info(`Error calculating lines of code: ${error}`);
->>>>>>> parent of 72e2343 (dot)
       }
       
     }
