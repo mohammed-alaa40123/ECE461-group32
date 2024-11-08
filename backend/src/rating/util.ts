@@ -214,3 +214,62 @@ export const validateGithubToken = async (): Promise<boolean> => {
   }
   return false;
 };
+
+
+
+interface LineCountResult {
+  totalLinesCorrectness: number;
+  totalLinesRamp: number;
+}
+
+export async function calculateLinesOfCode(repoDir: string): Promise<LineCountResult> {
+  let totalLinesCorrectness = 0;
+  let totalLinesRamp = 0;
+
+  // Recursively get all files in the directory
+  async function getFiles(dir: string): Promise<string[]> {
+    const entries = await fs.promises.readdir(dir, { withFileTypes: true });
+    const files = await Promise.all(entries.map((entry) => {
+      const res = path.resolve(dir, entry.name);
+      return entry.isDirectory() ? getFiles(res) : Promise.resolve([res]);
+    }));
+    return Array.prototype.concat(...files);
+  }
+
+  try {
+    const allFiles = await getFiles(repoDir);
+
+    // Filter only JavaScript or TypeScript files
+    const filteredFiles = allFiles.filter(file => file.endsWith('.js') || file.endsWith('.ts'));
+
+    for (const file of filteredFiles) {
+      const lineCount = await countLines(file);
+      totalLinesCorrectness += lineCount;
+      totalLinesRamp += lineCount; // Assuming both correctness and ramp use the same count here
+    }
+  } catch (error) {
+    console.error(`Error calculating lines of code: ${(error as Error).message}`);
+  }
+
+  return { totalLinesCorrectness, totalLinesRamp };
+}
+
+function countLines(filePath: string): Promise<number> {
+  return new Promise((resolve, reject) => {
+    let lineCount = 0;
+
+    const stream = fs.createReadStream(filePath);
+    stream.on('data', (buffer: Buffer) => {
+      let idx = -1;
+      lineCount--; // Adjust because the loop runs one extra time for the final chunk
+      do {
+        idx = buffer.indexOf(10, idx + 1); // 10 is the ASCII code for line feed '\n'
+        lineCount++;
+      } while (idx !== -1);
+    }).on('end', () => {
+      resolve(lineCount);
+    }).on('error', (err) => {
+      reject(err);
+    });
+  });
+}

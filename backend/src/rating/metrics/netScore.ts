@@ -12,7 +12,7 @@ import {calculatePinningFraction} from "./dependencyPinning";
 import { getLogger } from "../logger";
 import { promisify } from "util";
 import { exec } from "child_process";
-import { cloneRepo,deleteRepo } from "../util";
+import { cloneRepo,deleteRepo,calculateLinesOfCode } from "../util";
 
 const logger = getLogger();
 
@@ -38,25 +38,12 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
     let totalLinesRamp = 0;
     if (repoDir) {
       try {
-        const execAsync = promisify(exec);
-        const clocCommand = './node_modules/.bin/sloc'; // Use locally installed cloc
-      
-        // Set environment variables for npm cache in /tmp
-        const env = {
-          ...process.env,
-          HOME: '/tmp',
-          NPM_CONFIG_CACHE: '/tmp/.npm',
-          XDG_CACHE_HOME: '/tmp/.cache'
-        };
-      
-        // Execute cloc command
-        const { stdout } = await execAsync(`${clocCommand} --json ${repoDir}`, { env });
-        const clocData = JSON.parse(stdout);
-        const jsLines = clocData.JavaScript?.code || 0;
-        const tsLines = clocData.TypeScript?.code || 0;
-        totalLinesCorrectness = jsLines + tsLines;
-        totalLinesRamp = clocData.SUM?.code || 0;
-        logger.debug(`Cloc data - JS Lines: ${jsLines}, TS Lines: ${tsLines}, Total Lines: ${totalLinesCorrectness}`);
+        const result = await calculateLinesOfCode(repoDir);
+        totalLinesCorrectness = result.totalLinesCorrectness;
+        totalLinesRamp = result.totalLinesRamp;
+        console.log('Total Lines Correctness:', result.totalLinesCorrectness);
+        console.log('Total Lines Ramp:', result.totalLinesRamp);
+
       } catch (error: any) {
         logger.info(`Error calculating lines of code: ${error.message}`);
       }
