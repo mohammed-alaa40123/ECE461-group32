@@ -20,7 +20,7 @@ jobs:
         working-directory: backend/src
         run: |
           echo "Installing production dependencies"
-          npm install --only=prod
+          npm install 
           npm run build
           npm uninstall serverless serverless-http webpack webpack-cli webpack-node-externals aws-lambda
 
