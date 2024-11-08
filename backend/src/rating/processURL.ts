@@ -14,7 +14,6 @@ const logger = getLogger();
  * @returns The owner and package name of the GitHub repository
  */
 export async function getGithubRepo(url: string): Promise<returnRepo | null> {
-  const { default: fetch } = await import("node-fetch");
   const trimmedUrl = url.trim();
 
   const npmRegex = /npmjs\.com\/package\/(?<packageName>[^/]+)/;
@@ -66,7 +65,6 @@ async function handleNpmUrl(url: string, npmRegex: RegExp, githubRegex: RegExp):
  * @returns The GitHub repository URL
  */
 async function getRepoUrlFromNpm(packageName: string, githubRegex: RegExp): Promise<RegExpMatchArray> {
-  const fetch = (await import("node-fetch")).default;
   const response = await fetch(`https://registry.npmjs.org/${packageName}`);
   const data = await response.json();
   if (typeof data !== 'object' || data === null || !('repository' in data) || typeof (data as any).repository.url !== 'string') {

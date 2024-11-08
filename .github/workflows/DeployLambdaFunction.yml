@@ -22,6 +22,8 @@ jobs:
           echo "Installing production dependencies"
           npm install --only=prod
           npm run build
+          npm uninstall serverless serverless-http webpack webpack-cli webpack-node-externals
+
 
       - name: Create Zip file for Lambda function with Dependencies
         working-directory: backend/src
