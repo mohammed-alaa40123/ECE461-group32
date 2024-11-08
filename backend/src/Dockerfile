@@ -11,17 +11,18 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build the TypeScript code
+# Build the TypeScript code (outputting directly to backend/src)
 RUN npm run build
 
 # Use the official AWS Lambda Node.js 18 runtime as a base image
 FROM public.ecr.aws/lambda/nodejs:18
 
-# Set working directory
+# Set working directory for Lambda runtime
 WORKDIR /var/task
 
-# Copy the built JavaScript files from the previous build stage
-COPY --from=build /app/dist ./
+# Copy the compiled JavaScript file(s) and other necessary files from the build stage
+COPY --from=build /app/index.js ./
+COPY --from=build /app/package.json ./
 
 # Copy the necessary node_modules folder from the build stage
 COPY --from=build /app/node_modules ./node_modules
