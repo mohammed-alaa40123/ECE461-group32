@@ -135,6 +135,7 @@ jobs:
         working-directory: backend/src
         run: |
           echo "Building backend code"
+          npm install
           npm run build
 
       - name: Create Zip for Lambda Function Code
