@@ -22,7 +22,8 @@ export async function cloneRepo(repoUrl: string, repoName: string): Promise<stri
     return null;
   }
   const git: SimpleGit = simpleGit();
-  
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
   const repoDir = path.resolve(__dirname, "..", "repos", repoName);
   try {
     // eslint-disable-next-line security/detect-non-literal-fs-filename -- filePath is validated

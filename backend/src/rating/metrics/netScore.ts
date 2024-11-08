@@ -39,6 +39,7 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
     if (repoDir) {
       try {
         const execAsync = promisify(exec);
+<<<<<<< HEAD
         const slocCommand = './node_modules/.bin/sloc'; // Using npx to run sloc without needing a global install
       
         // Set environment variables for npm
@@ -58,6 +59,16 @@ export async function calculateNetScore(linkPath?: string, repoInfo?: GithubRepo
         logger.debug(`Sloc data - JS Lines: ${jsLines}, TS Lines: ${tsLines}, Total Lines: ${totalLinesCorrectness}`);
       } catch (error: any) {
         logger.info(`Error calculating lines of code: ${error.message}`);
+=======
+        const { stdout } = await execAsync(`npx cloc --json ${repoDir}`);
+        const clocData = JSON.parse(stdout);
+        const jsLines = clocData.JavaScript?.code || 0;
+        const tsLines = clocData.TypeScript?.code || 0;
+        totalLinesCorrectness = jsLines + tsLines;
+        totalLinesRamp = clocData.SUM?.code || 0;
+      } catch (error) {
+        logger.info(`Error calculating lines of code: ${error}`);
+>>>>>>> parent of 72e2343 (dot)
       }
       
     }
