@@ -34,7 +34,7 @@ const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLogge
               navigate("/");
             }}
           />
-          <div className="flex items-center justify-center gap-10 rounded">
+          <div className="flex flex-wrap items-center justify-center gap-10 rounded">
             {tabs.map((tab) => (
               <div
                 role="tab"

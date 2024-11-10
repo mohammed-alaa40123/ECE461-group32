@@ -57,7 +57,7 @@ import React from "react";
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import { describe, it, expect, afterEach } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import App from "../src/App";
+import App from "../src/App.js";
 
 afterEach(() => {
   cleanup();

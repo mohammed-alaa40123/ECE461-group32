@@ -22,6 +22,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
       setLoading(true);
       // Use the authenticateUser API function to log in the user
       const data = await authenticateUser(username, password, false); // Assuming false for `isAdministrator`
+      // console.log(data);
+      // console.log(data.token);
       if (data && data.token) {
         localStorage.setItem('authToken', data.token); // Save the token for authenticated requests
         onLoginSuccess(); // Update parent state to reflect login status

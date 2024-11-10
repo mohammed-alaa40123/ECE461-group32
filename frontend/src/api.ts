@@ -1,11 +1,49 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'localhost:4000/dev';
+const API_BASE_URL = "http://localhost:4000/dev";
+if (!localStorage.getItem('authToken')) {
+  localStorage.setItem('authToken', '');
+}
 const authToken = localStorage.getItem('authToken');
 
+export const registerUser  = async (username: string, password: string, isAdministrator: boolean) => {
+  try {
+    console.log('Registering user...');
+    const response = await axios.post(
+      `http://localhost:4000/prod/register`,
+      {
+        User: {
+          name: username,
+          isAdmin: isAdministrator
+        },
+        Secret: {
+          password
+        }
+      },
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    if (response.status === 201 || response.status === 200) {
+      console.log('User registered successfully.');
+      return response.data;
+    } else if (response.status === 400) {
+      throw new Error('There is missing field(s) in the RegistrationRequest or it is formed improperly.');
+    } else if (response.status === 409) {
+      throw new Error('The user already exists.');
+    } else {
+      throw new Error(`An unknown error occurred. ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const authenticateUser = async (username: string, password: string, isAdministrator: boolean) => {
   try {
+    console.log('Authenticating user...');
     const response = await axios.put(
       `${API_BASE_URL}/authenticate`,
       {
@@ -23,7 +61,8 @@ export const authenticateUser = async (username: string, password: string, isAdm
         },
       }
     );
-    if (response.status === 200) {
+    if (response.status === 200 || response.status === 201) {
+      console.log('User authenticated successfully.');
       return response.data;
     } else if (response.status === 400) {
       throw new Error('There is missing field(s) in the AuthenticationRequest or it is formed improperly.');
@@ -62,7 +101,7 @@ export const getPackages = async (queryParams?: object, offset?: string) => {
     } else if (response.status === 413) {
       throw new Error('Too many packages returned.');
     } else {
-      throw new Error('An unknown error occurred.');
+      throw new Error(`An unknown error occurred. ${response.status}`);
     }
   } catch (error) {
     console.log(error);
@@ -81,7 +120,7 @@ export const getPackageById = async (packageId: string) => {
     } else if (response.status === 404) {
       throw new Error('Package does not exist.');
     } else {
-      throw new Error('An unknown error occurred.');
+      throw new Error(`An unknown error occurred. ${response.status}`);
     }
   } catch (error) {
     console.log(error);
@@ -101,16 +140,16 @@ export const updatePackageById = async (packageId: string, packageData: object) 
       }
     );
     if (response.status === 200) {
-      console.log('Version is updated.');
+      console.log("Version is updated.");
       return response.data;
     } else if (response.status === 400) {
-      throw new Error('There is missing field(s) in the PackageID or it is formed improperly, or is invalid.');
+      throw new Error("There is missing field(s) in the PackageID or it is formed improperly, or is invalid.");
     } else if (response.status === 403) {
-      throw new Error('Authentication failed due to invalid or missing AuthenticationToken.');
+      throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
     } else if (response.status === 404) {
-      throw new Error('Package does not exist.');
+      throw new Error("Package does not exist.");
     } else {
-      throw new Error('An unknown error occurred.');
+      throw new Error(`An unknown error occurred. ${response.status}`);
     }
   } catch (error) {
     console.log(error);
@@ -125,14 +164,14 @@ export const resetRegistry = async (authToken: string) => {
       },
     });
     if (response.status === 200) {
-      console.log('Registry is reset.');
+      console.log("Registry is reset.");
       return response.data;
     } else if (response.status === 401) {
-      throw new Error('You do not have permission to reset the registry.');
+      throw new Error("You do not have permission to reset the registry.");
     } else if (response.status === 403) {
-      throw new Error('Authentication failed due to invalid or missing AuthenticationToken.');
+      throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
     } else {
-      throw new Error('An unknown error occurred.');
+      throw new Error(`An unknown error occurred. ${response.status}`);
     }
   } catch (error) {
     console.log(error);
@@ -149,15 +188,15 @@ export const getPackageRate = async (packageId: string, authToken: string) => {
     if (response.status === 200) {
       return response.data;
     } else if (response.status === 400) {
-      throw new Error('There is missing field(s) in the PackageID');
+      throw new Error("There is missing field(s) in the PackageID");
     } else if (response.status === 403) {
-      throw new Error('	Authentication failed due to invalid or missing AuthenticationToken.');
+      throw new Error("	Authentication failed due to invalid or missing AuthenticationToken.");
     } else if (response.status === 404) {
-      throw new Error('Package does not exist.');
+      throw new Error("Package does not exist.");
     } else if (response.status === 500) {
-      throw new Error('The package rating system choked on at least one of the metrics.');
+      throw new Error("The package rating system choked on at least one of the metrics.");
     } else {
-      throw new Error('An unknown error occurred.');
+      throw new Error(`An unknown error occurred. ${response.status}`);
     }
   } catch (error) {
     console.log(error);
@@ -175,15 +214,15 @@ export const getPackageCost = async (packageId: string, dependency: boolean, aut
     if (response.status === 200) {
       return response.data;
     } else if (response.status === 400) {
-      throw new Error('There is missing field(s) in the PackageID');
+      throw new Error("There is missing field(s) in the PackageID");
     } else if (response.status === 403) {
-      throw new Error('Authentication failed due to invalid or missing AuthenticationToken.');
+      throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
     } else if (response.status === 404) {
-      throw new Error('Package does not exist.');
+      throw new Error("Package does not exist.");
     } else if (response.status === 500) {
-      throw new Error('The package rating system choked on at least one of the metrics.');
+      throw new Error("The package rating system choked on at least one of the metrics.");
     } else {
-      throw new Error('An unknown error occurred.');
+      throw new Error(`An unknown error occurred. ${response.status}`);
     }
   } catch (error) {
     console.log(error);
@@ -205,13 +244,13 @@ export const searchPackagesByRegEx = async (regex: string, authToken: string) =>
     if (response.status === 200) {
       return response.data;
     } else if (response.status === 400) {
-      throw new Error('There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid');
+      throw new Error("There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid");
     } else if (response.status === 403) {
-      throw new Error('Authentication failed due to invalid or missing AuthenticationToken.');
+      throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
     } else if (response.status === 404) {
-      throw new Error('No package found under this regex.');
+      throw new Error("No package found under this regex.");
     } else {
-      throw new Error('An unknown error occurred.');
+      throw new Error(`An unknown error occurred. ${response.status}`);
     }
   } catch (error) {
     console.log(error);
@@ -222,12 +261,48 @@ export const getTracks = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/tracks`);
     if (response.status === 200) {
-      console.log('Tracks retrieved successfully.');
+      console.log("Tracks retrieved successfully.");
       return response.data;
     } else if (response.status === 500) {
-      throw new Error('The system encountered an error while retrieving the student\'s track information.');
+      throw new Error("The system encountered an error while retrieving the student's track information.");
     } else {
-      throw new Error('An unknown error occurred.');
+        throw new Error(`An unknown error occurred. ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const uploadPackage = async (content: string, JSProgram: string, debloat: boolean, name: string) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/package`,
+      {
+        Content: content,
+        JSProgram: JSProgram,
+        Debloat: debloat,
+        Name: name,
+      },
+      {
+        headers: {
+          'X-Authorization': authToken,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 200) {
+      console.log('Success. Check the ID in the returned metadata for the official ID.');
+      return response.data;
+    } else if (response.status === 400) {
+      throw new Error('There is missing field(s) in the PackageUpload or it is formed improperly, or is invalid.');
+    } else if (response.status === 403) {
+      throw new Error('Authentication failed due to invalid or missing AuthenticationToken.');
+    } else if (response.status === 409) {
+      throw new Error('Package exists already.');
+    } else if (response.status === 424) {
+      throw new Error('Package is not uploaded due to the disqualified rating.');
+    } else {
+        throw new Error(`An unknown error occurred. ${response.status}`);
     }
   } catch (error) {
     console.log(error);
