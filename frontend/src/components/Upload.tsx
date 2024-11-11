@@ -1,19 +1,25 @@
 import React from "react";
 import { FileUploadModal } from "./FileUploadModal";
+import { /*getPackageById, uploadPackage,*/ getPackageByURL } from "../api";
 
 export default function Upload(): JSX.Element {
     const URLRegEx= /(https:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)?/i;
     const [url, setUrl] = React.useState("");
-    const [errorMessage, setErrorMessage] = React.useState("");
+    const [errorMessage, setErrorMessage] = React.useState(""); 
 
     const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUrl(e.target.value);
-        setErrorMessage(""); // Clear error message when user starts typing
+        setErrorMessage(""); 
     };
 
-    const handleUrlSubmit = () => {
-        if (URLRegEx.test(url)) {
+    const handleUrlSubmit = async () => {
+        if (URLRegEx.test(url)) { 
             console.log("Valid URL: ", url);
+            const parts = url.split("/");
+            const owner = parts[parts.length - 2];
+            const repo = parts[parts.length - 1];
+            const packageData = await getPackageByURL(owner, repo);
+            console.log("Package Data: ", packageData);
         } else {
             setErrorMessage("Invalid URL");
         }

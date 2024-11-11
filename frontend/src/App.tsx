@@ -22,15 +22,7 @@ function App(): JSX.Element {
     setTimeout(() => {
       setIsLoggedIn(true);
       setLoading(false);
-    }, 1000); // Simulating async operation
-  };
-
-  const handleSignupSuccess = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setIsLoggedIn(true);
-      setLoading(false);
-    }, 1000); // Simulating async operation
+    }, 1000);
   };
 
   if (loading) {
@@ -38,19 +30,16 @@ function App(): JSX.Element {
   }
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
-        <Route
-          path="/login"
-          element={!isLoggedIn ? <Login onLoginSuccess={handleLoginSuccess} /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/signup"
-          element={!isLoggedIn ? <Signup onSignupSuccess={handleSignupSuccess} /> : <Navigate to="/" />}
-        />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} onLogout={() => setIsLoggedIn(false)} />} />
+          <Route
+            path="/login"
+            element={!isLoggedIn ? <Login onLoginSuccess={handleLoginSuccess} /> : <Navigate to="/" />}
+          />
+          <Route path="/signup" element={!isLoggedIn ? <Signup /> : <Navigate to="/" />} />
+        </Routes>
+      </Router>
   );
 }
 
