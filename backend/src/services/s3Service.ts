@@ -18,6 +18,7 @@ export const uploadPackageContent = async (packageId: string, content: Buffer): 
 };
 
 export const getPackageContent = async (packageId: string): Promise<string> => {
+  console.log('getPackageContent', packageId);
   const params = {
     Bucket: process.env.S3_BUCKET!,
     Key: `packages/${packageId}.zip`,

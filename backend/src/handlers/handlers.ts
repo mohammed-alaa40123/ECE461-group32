@@ -362,9 +362,15 @@ function shouldRemoveEntry(entry: AdmZip.IZipEntry): boolean {
 
 
 // Handler for /package/{id} - GET (Retrieve Package)
+
 export const handleRetrievePackage = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
+  // Validate the PackageID
+  if (!id || typeof id !== 'string' || id.trim() === '') {
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
+  }
+
   // Authenticate the request
-  console.log("id", id);
+  console.log("getting packeage with ID", id);
   let user: AuthenticatedUser;
   try {
     user = authenticate(headers);
@@ -382,11 +388,12 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
 
     const packageData: any = res.rows[0];
     console.log(res.rows[0]);
+
     // If Content is null and URL is null, retrieve from S3
-    if (!packageData.id && !packageData.url) {
+    if (!packageData.content) {
       try {
         const content = await getPackageContent(id);
-        packageData.data.Content = content;
+        packageData.content = content;
       } catch (s3Error) {
         console.error('S3 Retrieval Error:', s3Error);
         return sendResponse(500, { message: 'Failed to retrieve package content.' });
@@ -400,13 +407,25 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
     `;
     await pool.query(historyInsert, [id, user.sub, 'DOWNLOAD']);
 
-    return sendResponse(200, packageData);
+    // Format the response
+    const response = {
+      metadata: {
+        Name: packageData.name,
+        Version: packageData.version,
+        ID: packageData.id,
+      },
+      data: {
+        Content: packageData.content,
+        JSProgram: packageData.js_program, // Assuming this field exists in your database
+      },
+    };
+
+    return sendResponse(200, response);
   } catch (error) {
     console.error('Retrieve Package Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };
-
 // Handler for /package/{id} - PUT (Update Package)
 export const handleUpdatePackage = async (id: string, body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
