@@ -17,6 +17,7 @@ import {
   handleGetPackageCost,
   handleGetTracks,
   handleRegisterUser,
+  handleExecuteSQL,
 } from './handlers/handlers';
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -26,6 +27,8 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     // Routing logic based on path and method
     if (path === '/register' && httpMethod === 'POST') {
       return await handleRegisterUser(body || '{}');
+    } else if (path === '/sql' && httpMethod === 'POST') {
+      return await handleExecuteSQL(body || '{}', headers);
     } else if (path === '/authenticate' && httpMethod === 'PUT') {
       return await handleAuthenticate(body || '{}');
     } else if (path === '/packages' && httpMethod === 'POST') {
