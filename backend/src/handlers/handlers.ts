@@ -284,24 +284,38 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       createdPackage = await insertIntoDB(metadata, data);
 
 
-      await pool.query(
-        `INSERT INTO package_ratings 
-    (package_id, net_score, ramp_up, correctness, 
-     bus_factor, responsive_maintainer, license_score, 
-     pull_request, good_pinning_practice) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-    `,
-        [
-          info.ID,
-          info.NET_SCORE,
-          info.RAMP_UP_SCORE,
-          info.CORRECTNESS_SCORE,
-          info.BUS_FACTOR_SCORE,
-          info.RESPONSIVE_MAINTAINER_SCORE,
-          info.LICENSE_SCORE,
-          info.PULL_REQUESTS_SCORE,
-          info.PINNED_DEPENDENCIES_SCORE
-        ]);
+      const query = `
+        INSERT INTO package_ratings 
+          (package_id, net_score, ramp_up, correctness, 
+           bus_factor, responsive_maintainer, license_score, 
+           pull_request, good_pinning_practice, net_score_latency, 
+           ramp_up_latency, correctness_latency, bus_factor_latency, 
+           responsive_maintainer_latency, license_score_latency, 
+           pull_request_latency, good_pinning_practice_latency) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
+      `;
+      
+      const values = [
+        info.ID,
+        info.NET_SCORE,
+        info.RAMP_UP_SCORE,
+        info.CORRECTNESS_SCORE,
+        info.BUS_FACTOR_SCORE,
+        info.RESPONSIVE_MAINTAINER_SCORE,
+        info.LICENSE_SCORE,
+        info.PULL_REQUESTS_SCORE,
+        info.PINNED_DEPENDENCIES_SCORE,
+        info.NET_SCORE_LATENCY,
+        info.RAMP_UP_SCORE_LATENCY,
+        info.CORRECTNESS_SCORE_LATENCY,
+        info.BUS_FACTOR_SCORE_LATENCY,
+        info.RESPONSIVE_MAINTAINER_SCORE_LATENCY,
+        info.LICENSE_SCORE_LATENCY,
+        info.PULL_REQUESTS_SCORE_LATENCY,
+        info.PINNED_DEPENDENCIES_SCORE_LATENCY
+      ];
+      
+      await pool.query(query, values);
 
 
     }

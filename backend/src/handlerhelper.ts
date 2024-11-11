@@ -84,6 +84,8 @@ export async function metricCalcFromUrlUsingNetScore(url: string,ID?:string): Pr
     p.id, 
     p.name, 
     p.owner, 
+    p.version,
+    p.url,
     pr.bus_factor, 
     pr.bus_factor_latency, 
     pr.correctness, 
