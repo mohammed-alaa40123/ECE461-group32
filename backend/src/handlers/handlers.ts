@@ -447,6 +447,35 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
   if(result.rows.length==0){
     return sendResponse(404, { message: 'Package does not exist.' });
   }
+  const existingResult = await pool.query(
+    "SELECT id FROM packages WHERE name = $1 AND version = $2;",
+    [metadata.Name, metadata.Version]
+  );
+  if (existingResult.rows.length > 0) {
+    return sendResponse(409, { message: 'Package exists already.' });
+  }
+  console.log("Results");
+  const [latestMajorStr, latestMinorStr, latestPatchStr] =updatedPackage.metadata.Version.split('.');
+const latestMajor = parseInt(latestMajorStr, 10);
+const latestMinor = parseInt(latestMinorStr, 10);
+const latestPatch = parseInt(latestPatchStr, 10);
+console.log(latestMajor," ",latestMinor," ",latestPatch);
+console.log("Coming");
+  for (let i = 0; i < result.rows.length; i++) {
+    let [mjstr,mnstr,pstr]=result.rows[i].version.split('.');
+    let mj=parseInt(mjstr, 10);
+    let mn=parseInt(mnstr, 10);
+    let pt=parseInt(pstr, 10);
+    if(mj==latestMajor && mn==latestMinor && pt>latestPatch){
+      return sendResponse(400, { message: 'Invalid Version.' });
+    }}
+    
+  const result1=await pool.query('select * from packages where id=$1',[updatedPackage.metadata.ID]);
+  if(result1.rows.length>0){
+    updatedPackage.metadata.ID=generatePackageId();
+    console.log("New ID");
+    console.log(updatedPackage.metadata.ID);
+  }
   let contentBuffer: Buffer | null = null;
   try {
     if (updatedPackage.data.Content) {
@@ -468,13 +497,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       }
 
       // Check if a package with this name and version already exists
-      const existingResult = await pool.query(
-        "SELECT id FROM packages WHERE name = $1 AND version = $2;",
-        [metadata.Name, metadata.Version]
-      );
-      if (existingResult.rows.length > 0) {
-        return sendResponse(409, { message: 'Package exists already.' });
-      }
+      
 
 
       await insertIntoDB(metadata, data);
@@ -489,9 +512,6 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
         return sendResponse(424, { message: 'Package disqualified due to low rating' });
       }
 
-      metadata.Name = info.NAME;
-      metadata.Version = info.VERSION;
-      data.URL = repoUrlFixed;
       metadata.Owner = info.OWNER;
 
       // Check if the package already exists based on Name and Version

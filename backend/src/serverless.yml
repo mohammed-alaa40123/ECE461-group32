@@ -57,7 +57,7 @@ functions:
           method: GET
       - http:
           path: package/{id}
-          method: PUT
+          method: POST
       - http:
           path: package/{id}
           method: DELETE
