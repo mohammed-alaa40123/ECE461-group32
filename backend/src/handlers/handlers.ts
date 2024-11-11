@@ -61,6 +61,33 @@ export const handleRegisterUser = async (body: string): Promise<APIGatewayProxyR
   }
 };
 
+export const handleExecuteSQL = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
+  // Authenticate the request
+  let user: AuthenticatedUser;
+  try {
+    user = authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
+
+  // Parse the request body
+  const { sql, params } = JSON.parse(body);
+
+  if (!sql || typeof sql !== 'string') {
+    return sendResponse(400, { message: 'SQL script is required and must be a string.' });
+  }
+
+  try {
+    // Execute the SQL script
+    const res = await pool.query(sql, params);
+
+    // Return the result
+    return sendResponse(200, { result: res.rows });
+  } catch (error) {
+    console.error('SQL Execution Error:', error);
+    return sendResponse(500, { message: 'Internal server error.' });
+  }
+};
 
 
 
