@@ -152,7 +152,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
   const packageData = JSON.parse(body);
   const { Content, JSProgram, URL, debloat } = packageData;
   console.log("packageData", packageData);
-
+  console.log("JSprog",JSProgram)
   // Ensure only one of Content or URL is provided
   if ((!Content && !URL) || (Content && URL)) {
     return sendResponse(400, { message: 'Either Content or URL must be set, but not both.' });
@@ -167,7 +167,6 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
   metadata.ID = generatePackageId();
   data.debloat = debloat ? debloat : false;
   data.JSProgram = JSProgram ? JSProgram : null;
-
   try {
     if (Content) {
       // Handle Content case
@@ -423,66 +422,146 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
 
   // Ensure the name, version, and ID match
   if (metadata.ID !== id) {
-    return sendResponse(400, { message: 'Metadata ID does not match the path ID.' });
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
   }
-
+  const result = await pool.query('select * from packages where name=$1',[updatedPackage.metadata.Name]);
+  if(result.rows.length==0){
+    return sendResponse(404, { message: 'Package does not exist.' });
+  }
+  let contentBuffer: Buffer | null = null;
   try {
-    // Update package data in PostgreSQL
-    const updateFields: string[] = [];
-    const updateValues: any[] = [];
-    let idx = 1;
+    if (updatedPackage.data.Content) {
+      // Handle Content case
+      const base64Buffer = Buffer.from(updatedPackage.data.Content, 'base64');
+      const zip = new AdmZip(base64Buffer);
+      const zipEntries = zip.getEntries();
 
-    if (data.Content) {
-      updateFields.push(`content = $${idx++}`);
-      updateValues.push(data.Content);
-    } else if (data.URL) {
-      updateFields.push(`url = $${idx++}`);
-      updateValues.push(data.URL);
+      
+
+      let metadata:PackageMetadata=updatedPackage.metadata;
+      let data:PackageData= updatedPackage.data;
+      contentBuffer = base64Buffer;
+      
+
+      // Handle "debloat" if true
+      if (data.debloat) {
+        contentBuffer = debloatPackageContent(contentBuffer);
+      }
+
+      // Check if a package with this name and version already exists
+      const existingResult = await pool.query(
+        "SELECT id FROM packages WHERE name = $1 AND version = $2;",
+        [metadata.Name, metadata.Version]
+      );
+      if (existingResult.rows.length > 0) {
+        return sendResponse(409, { message: 'Package exists already.' });
+      }
+
+
+      await insertIntoDB(metadata, data);
+
+
+    } else if (updatedPackage.data.URL) {
+      // Handle URL case
+      const repoUrlFixed = convertGitUrlToHttpsFlexible(updatedPackage.data.URL);
+      const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed, metadata.ID);
+
+      if (!info || info.NET_SCORE < 0.5) {
+        return sendResponse(424, { message: 'Package disqualified due to low rating' });
+      }
+
+      metadata.Name = info.NAME;
+      metadata.Version = info.VERSION;
+      data.URL = repoUrlFixed;
+      metadata.Owner = info.OWNER;
+
+      // Check if the package already exists based on Name and Version
+      const existingResult = await pool.query(
+        "SELECT id FROM packages WHERE name = $1 AND version = $2;",
+        [metadata.Name, metadata.Version]
+      );
+      if (existingResult.rows.length > 0) {
+        return sendResponse(409, { message: 'Package exists already.' });
+      }
+
+      // Download package content from GitHub
+      const response = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      });
+
+      if (!response.ok) {
+        return sendResponse(400, { message: 'Could not get GitHub URL for zip package download' });
+      }
+
+      const arrayBuffer = await response.arrayBuffer();
+      contentBuffer = Buffer.from(arrayBuffer);
+
+      if (updatedPackage.data.debloat) {
+        contentBuffer = debloatPackageContent(contentBuffer);
+      }
+     await insertIntoDB(metadata, data);
+
+
+      await pool.query(
+        `INSERT INTO package_ratings 
+    (package_id, net_score, ramp_up, correctness, 
+     bus_factor, responsive_maintainer, license_score, 
+     pull_request, good_pinning_practice) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    `,
+        [
+          info.ID,
+          info.NET_SCORE,
+          info.RAMP_UP_SCORE,
+          info.CORRECTNESS_SCORE,
+          info.BUS_FACTOR_SCORE,
+          info.RESPONSIVE_MAINTAINER_SCORE,
+          info.LICENSE_SCORE,
+          info.PULL_REQUESTS_SCORE,
+          info.PINNED_DEPENDENCIES_SCORE
+        ]);
+
+
+    }
+    
+
+    // Handle JSProgram execution or validation
+    if (updatedPackage.data.JSProgram) {
+      const isProgramValid = await validateJsProgram(updatedPackage.data.JSProgram);
+      if (!isProgramValid) {
+        return sendResponse(400, { message: 'Invalid JavaScript program' });
+      }
+      data.JSProgram = updatedPackage.data.JSProgram;
     }
 
-    updateFields.push(`debloat = $${idx++}`);
-    updateValues.push(data.debloat || false);
+    // Insert package metadata into PostgreSQL
+    // const createdPackage = await insertIntoDB(metadata, data);
 
-    if (data.JSProgram) {
-      updateFields.push(`JSProgram = $${idx++}`);
-      updateValues.push(data.JSProgram);
+    let contentBase64 :string;
+    // Upload package content to S3 if contentBuffer has been assigned
+    if (contentBuffer) {
+      contentBase64 = contentBuffer.toString('base64');
+
+      await uploadPackageContent(metadata.ID, contentBuffer);
+    } else {
+      return sendResponse(500, { message: 'Package content buffer is empty, unable to upload.' });
     }
 
-    updateFields.push(`updated_at = NOW()`);
 
-    const updateText = `UPDATE packages SET ${updateFields.join(', ')} WHERE id = $${idx} RETURNING *`;
-    updateValues.push(id);
+    // Log the creation in package_history
+    await pool.query(
+      `INSERT INTO package_history (package_id, user_id, action)
+       VALUES ($1, $2, $3)`,
+      [metadata.ID, user.sub, 'UPDATE']
+    );
 
-    const res = await pool.query(updateText, updateValues);
 
-    if (res.rows.length === 0) {
-      return sendResponse(404, { message: 'Package does not exist.' });
-    }
-
-    const updatedPkg = res.rows[0];
-
-    // If Content is provided, upload to S3
-    let newquery = "select name ,version from packages where name =$1 and version =$2;"
-    let result = await pool.query(newquery, [metadata.ID, metadata.Version]);
-    if (data.Content) {
-      const contentBuffer = Buffer.from(data.Content, 'base64');
-
-      if (result.rows.length == 0)
-        await uploadPackageContent(metadata.ID, contentBuffer);
-      else return sendResponse(409, { message: 'Package exists already.' });
-
-    }
-
-    // Log the update in package_history
-    const historyInsert = `
-      INSERT INTO package_history (package_id, user_id, action)
-      VALUES ($1, $2, $3)
-    `;
-    await pool.query(historyInsert, [id, user.sub, 'UPDATE']);
-
-    return sendResponse(200, updatedPkg);
-  } catch (error) {
-    console.error('Update Package Error:', error);
+    return sendResponse(200, {message:"Version is updated."});
+  } catch (error: any) {
+    console.error('Create Package Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };

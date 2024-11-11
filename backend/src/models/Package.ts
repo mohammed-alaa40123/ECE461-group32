@@ -13,6 +13,7 @@ export interface PackageMetadata {
 }
 
 export interface PackageData {
+  Name?:string
   Content?: string; // Base64 encoded string
   URL?: string;
   debloat?: boolean;

@@ -48,7 +48,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     } else if (path && path.startsWith('/package/') && httpMethod === 'GET') {
       const id = path.split('/')[2];
       return await handleRetrievePackage(id, headers);
-    } else if (path && path.startsWith('/package/') && httpMethod === 'PUT') {
+    } else if (path && path.startsWith('/package/') && httpMethod === 'POST') {
       const id = path.split('/')[2];
       return await handleUpdatePackage(id, body || '{}', headers);
     } else if (path && path.startsWith('/package/') && httpMethod === 'DELETE') {
