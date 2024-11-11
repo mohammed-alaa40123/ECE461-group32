@@ -37,16 +37,15 @@ export const getUserByName = async (name: string): Promise<User | null> => {
 
 export const insertIntoDB = async (metadata: PackageMetadata, data: PackageData): Promise<Package> => {
   const insertText = `
-    INSERT INTO packages (id, name,owner, version, content, url, debloat, js_program)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    INSERT INTO packages (id, name,owner, version, url, debloat, js_program)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING *;
   `;
   const insertValues = [
     metadata.ID,
     metadata.Name,
-    metadata.Version,
     metadata.Owner,
-    data.Content || null,
+    metadata.Version,
     data.URL || null,
     data.debloat || false,
     data.JSProgram || null,

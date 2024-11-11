@@ -191,7 +191,7 @@ export function calculatePinningFraction(pkg: PackageJSON): number {
 
   const pinned = Object.values(allDeps).filter(isPinned).length;
 
-  return (pinned / total) * 100;
+  return (pinned / total);
 }
 
 /**
@@ -199,11 +199,12 @@ export function calculatePinningFraction(pkg: PackageJSON): number {
  * 
  * @param repo - Information about the repository.
  */
-async function processRepository(repo: RepoInfo): Promise<void> {
+export async function DependencyPinningCalc(owner: string,  name: string): Promise<number> {
+  const repo: RepoInfo = { owner, name };
   const defaultBranch = await fetchDefaultBranch(repo);
   if (!defaultBranch) {
     console.log(`${repo.owner}/${repo.name}: Unable to determine the default branch.`);
-    return;
+    return 0;
   }
 
   const pkg = await fetchPackageJSON(repo, defaultBranch);
@@ -212,39 +213,41 @@ async function processRepository(repo: RepoInfo): Promise<void> {
     console.log(
       `${repo.owner}/${repo.name}: ${fraction.toFixed(2)}% of dependencies are pinned.`
     );
+    return fraction;
   } else {
     console.log(`${repo.owner}/${repo.name}: Unable to fetch package.json.`);
+    return 0;
   }
 }
 
 /**
  * Main function to process multiple repositories.
- */
-async function main() {
-  // Example repository list; modify this as needed
-  const repositories: RepoInfo[] = [
-    { owner: 'octocat', name: 'Hello-World' },
-    { owner: 'facebook', name: 'react' },
-    { owner: 'lodash', name: 'lodash' },
-    // Add more repositories here
-  ];
+//  */
+// async function main() {
+//   // Example repository list; modify this as needed
+//   const repositories: RepoInfo[] = [
+//     { owner: 'octocat', name: 'Hello-World' },
+//     { owner: 'facebook', name: 'react' },
+//     { owner: 'lodash', name: 'lodash' },
+//     // Add more repositories here
+//   ];
 
-  // Limit the number of concurrent requests to avoid hitting rate limits
-  const CONCURRENT_REQUESTS = 5;
-  let index = 0;
+//   // Limit the number of concurrent requests to avoid hitting rate limits
+//   const CONCURRENT_REQUESTS = 5;
+//   let index = 0;
 
-  async function runNext() {
-    if (index >= repositories.length) return;
-    const repo = repositories[index++];
-    await processRepository(repo);
-    await runNext();
-  }
+//   async function runNext() {
+//     if (index >= repositories.length) return;
+//     const repo = repositories[index++];
+//     await DependencyPinningCalc(repo.owner, repo.name);
+//     await runNext();
+//   }
 
-  const workers = Array.from({ length: CONCURRENT_REQUESTS }, runNext);
-  await Promise.all(workers);
-}
+//   const workers = Array.from({ length: CONCURRENT_REQUESTS }, runNext);
+//   await Promise.all(workers);
+// }
 
-main().catch((error) => {
-  console.error('An unexpected error occurred:', error);
-  process.exit(1);
-});
+// main().catch((error) => {
+//   console.error('An unexpected error occurred:', error);
+//   process.exit(1);
+// });

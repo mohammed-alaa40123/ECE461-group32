@@ -3,22 +3,69 @@ import {getLogger, logTestResults} from "./rating/logger";
 import { calculateNetScore } from "./rating/metrics/netScore";
 import crypto from "crypto";
 import  pool from "./services/dbService";
-export type PackageInfo = {
-	ID: string;
-	NAME: string;
-	OWNER: string;
-	VERSION: string;
-	URL: string;
-	NET_SCORE: number;
-	RAMP_UP_SCORE: number;
-	CORRECTNESS_SCORE: number;
-	BUS_FACTOR_SCORE: number;
-	RESPONSIVE_MAINTAINER_SCORE: number;
-	LICENSE_SCORE: number;
-	PULL_REQUESTS_SCORE: number;
-	PINNED_DEPENDENCIES_SCORE: number;
-};
+export interface PackageInfo {
+  ID: string;
+  NAME: string;
+  OWNER: string;
+  VERSION: string;
+  URL: string;
+  NET_SCORE: number;
+  RAMP_UP_SCORE: number;
+  CORRECTNESS_SCORE: number;
+  BUS_FACTOR_SCORE: number;
+  RESPONSIVE_MAINTAINER_SCORE: number;
+  LICENSE_SCORE: number;
+  PULL_REQUESTS_SCORE: number;
+  NET_SCORE_LATENCY: number;
+  PINNED_DEPENDENCIES_SCORE: number;
+  RAMP_UP_SCORE_LATENCY: number;
+  CORRECTNESS_SCORE_LATENCY: number;
+  BUS_FACTOR_SCORE_LATENCY: number;
+  RESPONSIVE_MAINTAINER_SCORE_LATENCY: number;
+  LICENSE_SCORE_LATENCY: number;
+  PULL_REQUESTS_SCORE_LATENCY: number;
+  PINNED_DEPENDENCIES_SCORE_LATENCY: number;
+}
 
+interface ConvertedPackageInfo {
+  BusFactor: number;
+  BusFactorLatency: number;
+  Correctness: number;
+  CorrectnessLatency: number;
+  RampUp: number;
+  RampUpLatency: number;
+  ResponsiveMaintainer: number;
+  ResponsiveMaintainerLatency: number;
+  LicenseScore: number;
+  LicenseScoreLatency: number;
+  GoodPinningPractice: number;
+  GoodPinningPracticeLatency: number;
+  PullRequest: number;
+  PullRequestLatency: number;
+  NetScore: number;
+  NetScoreLatency: number;
+}
+
+export function convertPackageInfo(newRating: PackageInfo): ConvertedPackageInfo {
+  return {
+    BusFactor: newRating.BUS_FACTOR_SCORE,
+    BusFactorLatency: newRating.BUS_FACTOR_SCORE_LATENCY,
+    Correctness: newRating.CORRECTNESS_SCORE,
+    CorrectnessLatency: newRating.CORRECTNESS_SCORE_LATENCY,
+    RampUp: newRating.RAMP_UP_SCORE,
+    RampUpLatency: newRating.RAMP_UP_SCORE_LATENCY,
+    ResponsiveMaintainer: newRating.RESPONSIVE_MAINTAINER_SCORE,
+    ResponsiveMaintainerLatency: newRating.RESPONSIVE_MAINTAINER_SCORE_LATENCY,
+    LicenseScore: newRating.LICENSE_SCORE,
+    LicenseScoreLatency: newRating.LICENSE_SCORE_LATENCY,
+    GoodPinningPractice: newRating.PINNED_DEPENDENCIES_SCORE,
+    GoodPinningPracticeLatency: newRating.PINNED_DEPENDENCIES_SCORE_LATENCY,
+    PullRequest: newRating.PULL_REQUESTS_SCORE,
+    PullRequestLatency: newRating.PULL_REQUESTS_SCORE_LATENCY,
+    NetScore: newRating.NET_SCORE,
+    NetScoreLatency: newRating.NET_SCORE_LATENCY
+  };
+}
 const logger = getLogger();
 
 export async function metricCalcFromUrlUsingNetScore(url: string,ID?:string): Promise<PackageInfo | null> {
@@ -80,6 +127,15 @@ WHERE
       LICENSE_SCORE: storedRating.license_score,
       PULL_REQUESTS_SCORE: storedRating.pull_requests_score,
       PINNED_DEPENDENCIES_SCORE: storedRating.pinned_dependencies_score,
+      NET_SCORE_LATENCY: storedRating.net_score_latency,
+      RAMP_UP_SCORE_LATENCY: storedRating.ramp_up_score_latency,
+      CORRECTNESS_SCORE_LATENCY: storedRating.correctness_score_latency,
+      BUS_FACTOR_SCORE_LATENCY: storedRating.bus_factor_score_latency,
+      RESPONSIVE_MAINTAINER_SCORE_LATENCY: storedRating.responsive_maintainer_score_latency,
+      LICENSE_SCORE_LATENCY: storedRating.license_score_latency,
+      PULL_REQUESTS_SCORE_LATENCY: storedRating.pull_requests_score_latency,
+      PINNED_DEPENDENCIES_SCORE_LATENCY: storedRating.pinned_dependencies_score_latency,
+  
     };
   }
 
@@ -97,8 +153,8 @@ WHERE
   const License = netScoreJSON.License;
 
   // Placeholder values for Pull Requests Score and Pinned Dependencies Score
-  const pullRequestsScore = 1; // Placeholder value
-  const pinnedDependenciesScore = 1; // Placeholder value
+  const pullRequestsScore = netScoreJSON.CodeReviewFraction; // Placeholder value
+  const pinnedDependenciesScore = netScoreJSON.DependencyPinning; // Placeholder value
 
   const newRating: PackageInfo = {
     ID: ID?ID:"", // Example: adjust as needed
@@ -113,7 +169,16 @@ WHERE
     RESPONSIVE_MAINTAINER_SCORE: ResponsiveMaintainer,
     LICENSE_SCORE: License,
     PULL_REQUESTS_SCORE: pullRequestsScore,
+    NET_SCORE_LATENCY: netScoreJSON.NetScore_Latency,
     PINNED_DEPENDENCIES_SCORE: pinnedDependenciesScore,
+    RAMP_UP_SCORE_LATENCY: netScoreJSON.RampUp_Latency,
+    CORRECTNESS_SCORE_LATENCY: netScoreJSON.Correctness_Latency,
+    BUS_FACTOR_SCORE_LATENCY: netScoreJSON.BusFactor_Latency,
+    RESPONSIVE_MAINTAINER_SCORE_LATENCY: netScoreJSON.ResponsiveMaintainer_Latency,
+    LICENSE_SCORE_LATENCY: netScoreJSON.License_Latency,
+    PULL_REQUESTS_SCORE_LATENCY: netScoreJSON.CodeReviewFraction_Latency,
+    PINNED_DEPENDENCIES_SCORE_LATENCY: netScoreJSON.DependencyPinning_Latency
+  
   };
 
   

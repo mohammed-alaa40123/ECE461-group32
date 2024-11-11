@@ -9,7 +9,7 @@ import { PackageHistoryEntry } from '../models/PackageHistoryEntry';
 import { PackageRating } from '../models/PackageRating';
 import { sendResponse } from '../utils/response';
 import { authenticate, AuthenticatedUser } from '../utils/auth';
-import { metricCalcFromUrlUsingNetScore, PackageInfo, generatePackageId } from '../handlerhelper';
+import { metricCalcFromUrlUsingNetScore,convertPackageInfo, PackageInfo, generatePackageId } from '../handlerhelper';
 import { getLogger, logTestResults } from '../rating/logger';
 import AdmZip, { IZipEntry } from 'adm-zip';
 import jwt from 'jsonwebtoken';
@@ -166,6 +166,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
   // Generate a unique ID for the package
   metadata.ID = generatePackageId();
   data.debloat = debloat ? debloat : false;
+  data.JSProgram = JSProgram ? JSProgram : null;
 
   try {
     if (Content) {
@@ -192,8 +193,8 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       data.Content = Content;
       contentBuffer = base64Buffer;
       data.URL = extractedPackageJson.repository?.url
-      ? convertGitUrlToHttpsFlexible(extractedPackageJson.repository.url)
-      : `https://github.com/${extractedPackageJson.author || 'unknown-owner'}/${metadata.Name}`;
+        ? convertGitUrlToHttpsFlexible(extractedPackageJson.repository.url)
+        : `https://github.com/${extractedPackageJson.author || 'unknown-owner'}/${metadata.Name}`;
 
       // Handle "debloat" if true
       if (debloat) {
@@ -292,7 +293,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
     // Insert package metadata into PostgreSQL
     // const createdPackage = await insertIntoDB(metadata, data);
 
-    let contentBase64 :string;
+    let contentBase64: string;
     // Upload package content to S3 if contentBuffer has been assigned
     if (contentBuffer) {
       contentBase64 = contentBuffer.toString('base64');
@@ -360,18 +361,6 @@ function shouldRemoveEntry(entry: AdmZip.IZipEntry): boolean {
   return entry.entryName.endsWith('.md') || entry.entryName.includes('tests/');
 }
 
-// Helper function to fetch repo ZIP from GitHub
-const fetchRepoZipFromGitHub = async (OWNER: string, NAME: string): Promise<Buffer> => {
-  const response = await fetch(`https://api.github.com/repos/${OWNER}/${NAME}/zipball/HEAD`, {
-    headers: {
-      Authorization: process.env.GITHUB_TOKEN || "",
-      Accept: 'application/vnd.github.v3+json',
-    },
-  });
-  console.log("response", response);
-  if (!response.ok) throw new Error('Failed to download GitHub repo zip');
-  return Buffer.from(await response.arrayBuffer());
-};
 
 // Handler for /package/{id} - GET (Retrieve Package)
 export const handleRetrievePackage = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
@@ -766,7 +755,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
 };
 
 // Handler for /package/{id}/rate - GET (Get Package Rating)
-export const handleGetPackageRating = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
+export const handleGetPackageRating = async (id: string, headers: { [key: string]: string | undefined }): Promise<any> => {
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
@@ -779,40 +768,120 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
   if (!id) {
     return sendResponse(400, { message: "Missing field(s) in PackageID." });
   }
-
+  
   try {
-    const ratingQuery = 'SELECT * FROM package_ratings WHERE package_id = $1';
+    const ratingQuery = 'SELECT url FROM packages WHERE id = $1';
     const res = await pool.query(ratingQuery, [id]);
-
+  
     if (res.rows.length === 0) {
       return sendResponse(500, { message: 'The package rating system choked on at least one of the metrics.' });
     }
-
-    const rating: PackageRating = res.rows[0];
-    const responsePayload = {
-      BusFactor: rating.BusFactor,
-      BusFactorLatency: rating.BusFactorLatency,
-      Correctness: rating.Correctness,
-      CorrectnessLatency: rating.CorrectnessLatency,
-      RampUp: rating.RampUp,
-      RampUpLatency: rating.RampUpLatency,
-      ResponsiveMaintainer: rating.ResponsiveMaintainer,
-      ResponsiveMaintainerLatency: rating.ResponsiveMaintainerLatency,
-      LicenseScore: rating.LicenseScore,
-      LicenseScoreLatency: rating.LicenseScoreLatency,
-      GoodPinningPractice: rating.GoodPinningPractice,
-      GoodPinningPracticeLatency: rating.GoodPinningPracticeLatency,
-      PullRequest: rating.PullRequest,
-      PullRequestLatency: rating.PullRequestLatency,
-      NetScore: rating.NetScore,
-      NetScoreLatency: rating.NetScoreLatency
-    };
-    return sendResponse(200, responsePayload);
+  
+    const packageUrl = res.rows[0].url;
+    const newRating = await metricCalcFromUrlUsingNetScore(packageUrl, id);
+  
+    if (!newRating) {
+      return sendResponse(500, { message: 'Failed to calculate metrics for the package.' });
+    }
+  
+    const checkExistingRatingQuery = 'SELECT 1 FROM package_ratings WHERE package_id = $1';
+    const existingRatingRes = await pool.query(checkExistingRatingQuery, [id]);
+  
+    if (existingRatingRes.rows.length > 0) {
+      // Update existing rating
+      const updateRatingQuery = `
+        UPDATE package_ratings
+        SET 
+          bus_factor = $2, 
+          bus_factor_latency = $3, 
+          correctness = $4, 
+          correctness_latency = $5, 
+          ramp_up = $6, 
+          ramp_up_latency = $7, 
+          responsive_maintainer = $8, 
+          responsive_maintainer_latency = $9, 
+          license_score = $10, 
+          license_score_latency = $11, 
+          good_pinning_practice = $12, 
+          good_pinning_practice_latency = $13, 
+          pull_request = $14, 
+          pull_request_latency = $15, 
+          net_score = $16, 
+          net_score_latency = $17
+        WHERE package_id = $1
+      `;
+      const updateRatingValues = [
+        newRating.ID,
+        newRating.BUS_FACTOR_SCORE,
+        newRating.BUS_FACTOR_SCORE_LATENCY,
+        newRating.CORRECTNESS_SCORE,
+        newRating.CORRECTNESS_SCORE_LATENCY,
+        newRating.RAMP_UP_SCORE,
+        newRating.RAMP_UP_SCORE_LATENCY,
+        newRating.RESPONSIVE_MAINTAINER_SCORE,
+        newRating.RESPONSIVE_MAINTAINER_SCORE_LATENCY,
+        newRating.LICENSE_SCORE,
+        newRating.LICENSE_SCORE_LATENCY,
+        newRating.PINNED_DEPENDENCIES_SCORE,
+        newRating.PINNED_DEPENDENCIES_SCORE_LATENCY,
+        newRating.PULL_REQUESTS_SCORE,
+        newRating.PULL_REQUESTS_SCORE_LATENCY,
+        newRating.NET_SCORE,
+        newRating.NET_SCORE_LATENCY
+      ];
+      await pool.query(updateRatingQuery, updateRatingValues);
+    } else {
+      // Insert new rating
+      const insertRatingQuery = `
+        INSERT INTO package_ratings (
+          package_id, 
+          bus_factor, 
+          bus_factor_latency, 
+          correctness, 
+          correctness_latency, 
+          ramp_up, 
+          ramp_up_latency, 
+          responsive_maintainer, 
+          responsive_maintainer_latency, 
+          license_score, 
+          license_score_latency, 
+          good_pinning_practice, 
+          good_pinning_practice_latency, 
+          pull_request, 
+          pull_request_latency, 
+          net_score, 
+          net_score_latency
+        ) VALUES (
+          $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17
+        )
+      `;
+      const insertRatingValues = [
+        newRating.ID,
+        newRating.BUS_FACTOR_SCORE,
+        newRating.BUS_FACTOR_SCORE_LATENCY,
+        newRating.CORRECTNESS_SCORE,
+        newRating.CORRECTNESS_SCORE_LATENCY,
+        newRating.RAMP_UP_SCORE,
+        newRating.RAMP_UP_SCORE_LATENCY,
+        newRating.RESPONSIVE_MAINTAINER_SCORE,
+        newRating.RESPONSIVE_MAINTAINER_SCORE_LATENCY,
+        newRating.LICENSE_SCORE,
+        newRating.LICENSE_SCORE_LATENCY,
+        newRating.PINNED_DEPENDENCIES_SCORE,
+        newRating.PINNED_DEPENDENCIES_SCORE_LATENCY,
+        newRating.PULL_REQUESTS_SCORE,
+        newRating.PULL_REQUESTS_SCORE_LATENCY,
+        newRating.NET_SCORE,
+        newRating.NET_SCORE_LATENCY
+      ];
+      await pool.query(insertRatingQuery, insertRatingValues);
+    }
+  
+    return sendResponse(200, convertPackageInfo(newRating) );
   } catch (error) {
-    console.error('Get Package Rating Error:', error);
-    return sendResponse(500, { message: 'Internal server error.' });
-  }
-};
+    console.error('Error calculating package rating:', error);
+    return sendResponse(500, { message: 'An error occurred while calculating the package rating.' });
+  }};
 
 // Handler for /package/{id}/cost - GET (Get Package Cost)
 export const handleGetPackageCost = async (id: string, headers: { [key: string]: string | undefined }, queryStringParameters: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
