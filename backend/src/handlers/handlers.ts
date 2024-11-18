@@ -27,12 +27,12 @@ const logger = getLogger();
 
 export const handleExecuteSQL = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers); // Await the result of authenticate
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers); // Await the result of authenticate
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
 
   // Parse the request body
   const { sql, params } = JSON.parse(body);
