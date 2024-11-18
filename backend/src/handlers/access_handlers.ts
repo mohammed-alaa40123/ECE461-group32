@@ -134,17 +134,17 @@ export const handleCreatePermission = async (body: string, headers: { [key: stri
 };
 
 export const handleRegisterUser = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
-  let user: AuthenticatedUser;
-  try {
-    user = await authenticate(headers);
-    console.log('User authenticated:', user);
-  } catch (err: any) {
-    return sendResponse(err.statusCode, { message: err.message });
-  }
+//   let user: AuthenticatedUser;
+//   try {
+//     user = await authenticate(headers);
+//     console.log('User authenticated:', user);
+//   } catch (err: any) {
+//     return sendResponse(err.statusCode, { message: err.message });
+//   }
 
-  if (!user.isAdmin) {
-    return sendResponse(403, { message: 'Admin privileges required to register users.' });
-  }
+//   if (!user.isAdmin) {
+//     return sendResponse(403, { message: 'Admin privileges required to register users.' });
+//   }
 
   const { name, password, isAdmin = false, groups = [], permissions = [] } = JSON.parse(body);
 
