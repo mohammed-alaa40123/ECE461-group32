@@ -141,6 +141,20 @@ WHERE
     };
   }
 
+  const packageJsonUrl = `https://raw.githubusercontent.com/${pkgOwner}/${pkgName}/main/package.json`;
+  const packageJsonResponse = await fetch(packageJsonUrl, {
+    headers: {
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github.v3+json',
+    },
+  });
+
+  if (!packageJsonResponse.ok) {
+    throw new Error('Failed to fetch package.json from GitHub');
+  }
+
+  const packageJson = await packageJsonResponse.json() as unknown as any;
+  const pkgVersion = packageJson.version;
   // If not rated, calculate Net Score
   const netScoreJSON = await calculateNetScore(undefined, repoInfo);
   if (!netScoreJSON) {
@@ -162,7 +176,7 @@ WHERE
     ID: ID?ID:"", // Example: adjust as needed
     NAME: pkgName,
     OWNER: pkgOwner,
-    VERSION: "1.0.0", // Example version
+    VERSION: pkgVersion, // Example version
     URL: pkgUrl,
     NET_SCORE: NetScore,
     RAMP_UP_SCORE: RampUp,
