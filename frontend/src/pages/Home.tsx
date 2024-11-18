@@ -9,6 +9,7 @@ import Cost from "../components/Cost";
 import { Button } from "../components/ui/button";
 import Tracks from "../components/Tracks";
 import GetPackage from "../components/GetPackage";
+import AddUser from "../components/AddUser";
 
 const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLogge
     "Package cost",
     "Reset the rigestiry",
     "Get a package",
+    "Add a user"
   ];
   const [activeTab, setActiveTab] = useState(tabs[0].toLowerCase()); // Use the first tab as default
 
@@ -56,23 +58,22 @@ const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLogge
               {activeTab === "package rate" && <Rate />}
               {activeTab === "package cost" && <Cost />}
               {activeTab === "get a package" && <GetPackage />}
+              {activeTab === "add a user" && <AddUser />}
             </div>
           </div>
         ) : (
           <main className="flex flex-col items-center">
-            <div className="flex gap-3">
               <Button
                 text="Login"
                 className="bg-blue-500 text-white p-3 rounded mr-4"
                 onClick={() => navigate("/login")}
               />
-              <Button
+              <Tracks />
+              {/* <Button
                 text="Sign Up"
                 className="bg-green-500 text-white p-3 rounded"
                 onClick={() => navigate("/signup")}
-              />
-            </div>
-            <Tracks />
+              /> */}
           </main>
         )}
     </div>
