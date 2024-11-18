@@ -643,9 +643,9 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
     const deletedPackage: Package = res.rows[0];
 
     // Delete from S3 if Content is present
-    // if (deletedPackage.data.Content) {
-    //   await deletePackageContent(id);
-    // }
+    if (deletedPackage) {
+      await deletePackageContent(id);
+    }
 
     // Log the deletion in package_history
     const historyInsert = `
@@ -667,9 +667,9 @@ export const handleListPackages = async (
   queryStringParameters: { [key: string]: string | undefined }
 ): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-  let user: any; // Using 'any' for AuthenticatedUser
+  let user: AuthenticatedUser; // Using 'any' for AuthenticatedUser
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode || 403, { message: err.message || 'Authentication failed.' });
   }
@@ -679,6 +679,7 @@ export const handleListPackages = async (
   let queries: any[];
   try {
     queries = JSON.parse(body);
+    console.log("Queries", queries);
   } catch (err: any) {
     return sendResponse(400, { message: 'Invalid JSON format in request body.' });
   }
