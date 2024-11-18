@@ -634,6 +634,12 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
 
   try {
     const deleteText = 'DELETE FROM packages WHERE id = $1 RETURNING *';
+    const historyInsert = `
+    INSERT INTO package_history (package_id, user_id, action)
+    VALUES ($1, $2, $3)
+  `;
+  await pool.query(historyInsert, [id, user.sub, 'DELETE']);
+
     const res = await pool.query(deleteText, [id]);
 
     if (res.rows.length === 0) {
@@ -648,12 +654,7 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
     }
 
     // Log the deletion in package_history
-    const historyInsert = `
-      INSERT INTO package_history (package_id, user_id, action)
-      VALUES ($1, $2, $3)
-    `;
-    await pool.query(historyInsert, [id, user.sub, 'DELETE']);
-
+  
     return sendResponse(200, { message: 'Package is deleted.' });
   } catch (error) {
     console.error('Delete Package Error:', error);
