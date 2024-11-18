@@ -141,7 +141,24 @@ WHERE
     };
   }
 
-  const packageJsonUrl = `https://raw.githubusercontent.com/${pkgOwner}/${pkgName}/main/package.json`;
+  // Fetch the repository details to get the default branch
+  const repoDetailsUrl = `https://api.github.com/repos/${pkgOwner}/${pkgName}`;
+  const repoDetailsResponse = await fetch(repoDetailsUrl, {
+    headers: {
+      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github.v3+json',
+    },
+  });
+
+  if (!repoDetailsResponse.ok) {
+    throw new Error('Failed to fetch repository details from GitHub');
+  }
+
+  const repoDetails = await repoDetailsResponse.json() as unknown as any;
+  const defaultBranch = repoDetails.default_branch;
+
+  // Fetch the package.json file from the default branch
+  const packageJsonUrl = `https://raw.githubusercontent.com/${pkgOwner}/${pkgName}/${defaultBranch}/package.json`;
   const packageJsonResponse = await fetch(packageJsonUrl, {
     headers: {
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
