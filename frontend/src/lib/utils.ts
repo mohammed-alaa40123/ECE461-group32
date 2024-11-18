@@ -11,7 +11,7 @@ export async function convertZipToBase64(file: File): Promise<string> {
     reader.readAsDataURL(file);
     reader.onload = () => {
       if (typeof reader.result === "string") {
-        const base64String = reader.result.split(",")[1]; // Remove the prefix
+        const base64String = reader.result.split(",")[1];
         resolve(base64String);
       } else {
         reject(new Error("Unable to convert file to base64"));
