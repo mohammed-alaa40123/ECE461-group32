@@ -6,9 +6,16 @@ if (!localStorage.getItem("authToken")) {
   localStorage.setItem("authToken", "");
 }
 const authToken = localStorage.getItem("authToken");
+// console.log(authToken);
 const githubToken = env.GITHUB_TOKEN;
 
-export const registerUser = async (username: string, password: string, isAdministrator: boolean) => {
+export const registerUser = async (
+  username: string,
+  password: string,
+  isAdministrator: boolean,
+  permissions: string[],
+  groups?: string[]
+) => {
   try {
     console.log("Registering user...");
     const response = await axios.post(
@@ -16,7 +23,9 @@ export const registerUser = async (username: string, password: string, isAdminis
       {
         name: username,
         password: password,
-        isAdmin: isAdministrator
+        isAdmin: isAdministrator,
+        permissions: permissions,
+        groups: groups ?? []
       },
       {
         headers: {
@@ -76,6 +85,109 @@ export const authenticateUser = async (username: string, password: string, isAdm
   }
 };
 
+export const getUsers = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/users`, {
+      headers: {
+        "X-Authorization": authToken
+      }
+    });
+    if (response.status === 200) {
+      console.log("Users retrieved successfully.");
+      return response.data;
+    } else if (response.status === 403) {
+      throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
+    } else {
+      throw new Error(`An unknown error occurred. ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getGroups = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/groups`, {
+      headers: {
+        "X-Authorization": authToken
+      }
+    });
+    if (response.status === 200) {
+      console.log("Groups retrieved successfully.");
+      return response.data;
+    } else if (response.status === 403) {
+      throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
+    } else {
+      throw new Error(`An unknown error occurred. ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// export const addPermission = async (permissionName: string) => {
+//   try {
+//     const response = await axios.post(
+//       `${API_BASE_URL}/permission`,
+//       {
+//         name: permissionName
+//       },
+//       {
+//         headers: {
+//           "X-Authorization": authToken,
+//           "Content-Type": "application/json"
+//         }
+//       }
+//     );
+//     if (response.status === 201) {
+//       console.log("Permission added successfully.");
+//       return response.data;
+//     } else if (response.status === 400) {
+//       throw new Error("There is missing field(s) in the PermissionRequest or it is formed improperly.");
+//     } else if (response.status === 403) {
+//       throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
+//     } else if (response.status === 409) {
+//       throw new Error("The permission already exists.");
+//     } else {
+//       throw new Error(`An unknown error occurred. ${response.status}`);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+export const addGroup = async (groupName: string, permissions: string[]) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/group`,
+      {
+        name: groupName,
+        permissions: permissions
+      },
+      {
+        headers: {
+          "X-Authorization": authToken,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    if (response.status === 201) {
+      console.log("Group added successfully.");
+      return response.data;
+    } else if (response.status === 400) {
+      throw new Error("There is missing field(s) in the GroupRequest or it is formed improperly.");
+    } else if (response.status === 403) {
+      throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
+    } else if (response.status === 409) {
+      throw new Error("The group already exists.");
+    } else {
+      throw new Error(`An unknown error occurred. ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getPackages = async (queryParams?: object, offset?: string) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/packages`, queryParams, {
@@ -104,8 +216,14 @@ export const getPackages = async (queryParams?: object, offset?: string) => {
 
 export const getPackageById = async (packageId: string) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/package/${packageId}`);
+    console.log("From API", packageId);
+    const response = await axios.get(`${API_BASE_URL}/package/${packageId}`, {
+      headers: {
+        "X-Authorization": authToken
+      }
+    });
     if (response.status === 200) {
+      console.log("Package retrieved successfully.");
       return response.data;
     } else if (response.status === 400) {
       throw new Error("There is missing field(s) in the PackageID or it is formed improperly, or is invalid.");
@@ -123,8 +241,9 @@ export const getPackageById = async (packageId: string) => {
 
 export const updatePackageById = async (packageId: string, packageData: object) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/package/${packageId}`, packageData, {
+    const response = await axios.put(`${API_BASE_URL}/package/${packageId}`, packageData, {
       headers: {
+        id: packageId,
         "X-Authorization": authToken,
         "Content-Type": "application/json"
       }
@@ -262,16 +381,13 @@ export const getTracks = async () => {
     console.log(error);
   }
 };
-
-export const uploadPackage = async (content: string, JSProgram: string, debloat: boolean, name: string) => {
+export const uploadPackageByURL = async (JSProgram: string, url: string) => {
   try {
     const response = await axios.post(
       `${API_BASE_URL}/package`,
       {
-        Content: content,
         JSProgram: JSProgram,
-        debloat: debloat,
-        Name: name
+        URL: url
       },
       {
         headers: {
@@ -280,7 +396,42 @@ export const uploadPackage = async (content: string, JSProgram: string, debloat:
         }
       }
     );
-    if (response.status === 200) {
+    if (response.status === 200 || response.status === 201) {
+      console.log("Success. Check the ID in the returned metadata for the official ID.");
+      return response.data;
+    } else if (response.status === 400) {
+      throw new Error("There is missing field(s) in the PackageUpload or it is formed improperly, or is invalid.");
+    } else if (response.status === 403) {
+      throw new Error("Authentication failed due to invalid or missing AuthenticationToken.");
+    } else if (response.status === 409) {
+      throw new Error("Package exists already.");
+    } else if (response.status === 424) {
+      throw new Error("Package is not uploaded due to the disqualified rating.");
+    } else {
+      throw new Error(`An unknown error occurred. ${response.status}`);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const uploadPackageByContent = async (content: string, JSProgram: string, debloat: boolean) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}/package`,
+      {
+        Content: content,
+        JSProgram: JSProgram,
+        debloat: debloat
+      },
+      {
+        headers: {
+          "X-Authorization": authToken,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+    if (response.status === 200 || response.status === 201) {
       console.log("Success. Check the ID in the returned metadata for the official ID.");
       return response.data;
     } else if (response.status === 400) {
@@ -323,8 +474,7 @@ export const getPackageByURL = async (owner: string, repo: string) => {
     } else {
       throw new Error(`An unknown error occurred. ${response.status}`);
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error);
   }
 };
