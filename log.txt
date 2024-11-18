@@ -1,0 +1,230 @@
+<<<<<<< HEAD
+=======
+15/10/2024 20:31:36 [info]: GitHub token is valid
+18/10/2024 15:09:37 [info]: Request received: {}
+18/10/2024 15:13:48 [info]: Request received: {"metadata":{"Name":"watch.js-main","Version":"1.0.0"},"data":"your-package-data"}
+18/10/2024 15:16:16 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+18/10/2024 15:16:16 [info]: createPackage request via public ingest: https://github.com/jashkenas/underscore
+18/10/2024 15:16:16 [info]: Handling GitHub URL
+18/10/2024 15:16:16 [info]: repoInfo:
+18/10/2024 15:16:20 [info]: Repository cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:16:24 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+18/10/2024 15:16:29 [debug]: restLicense: 
+18/10/2024 15:16:29 [info]: License found in GraphQL
+18/10/2024 15:16:29 [debug]: Bus factor score for jashkenas/underscore: 0.05
+18/10/2024 15:16:29 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+18/10/2024 15:16:36 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:16:36 [debug]: Total days: 1267, Forks with activity: 6
+18/10/2024 15:16:36 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+18/10/2024 15:16:36 [debug]: Lines of code: 0
+18/10/2024 15:16:36 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+18/10/2024 15:16:36 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+18/10/2024 15:16:36 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":19.85,"RampUp":0.3,"RampUp_Latency":11.799,"Correctness":0,"Correctness_Latency":11.775,"BusFactor":0.05,"BusFactor_Latency":4.821,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":4.837,"License":1,"License_Latency":4.841}
+18/10/2024 15:16:36 [info]: Invalid package creation request: Package cannot be uploaded due to disqualifying rating.
+18/10/2024 15:18:40 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+18/10/2024 15:18:40 [info]: createPackage request via public ingest: https://github.com/jashkenas/underscore
+18/10/2024 15:18:40 [info]: Handling GitHub URL
+18/10/2024 15:18:40 [info]: repoInfo:
+18/10/2024 15:18:40 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:18:44 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+18/10/2024 15:18:49 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:18:49 [debug]: restLicense: 
+18/10/2024 15:18:49 [info]: License found in GraphQL
+18/10/2024 15:18:49 [debug]: Bus factor score for jashkenas/underscore: 0.05
+18/10/2024 15:18:49 [debug]: Total days: 1267, Forks with activity: 6
+18/10/2024 15:18:49 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+18/10/2024 15:18:49 [debug]: Lines of code: 0
+18/10/2024 15:18:49 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+18/10/2024 15:18:49 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+18/10/2024 15:18:49 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+18/10/2024 15:18:49 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":8.719,"RampUp":0.3,"RampUp_Latency":5.367,"Correctness":0,"Correctness_Latency":5.352,"BusFactor":0.05,"BusFactor_Latency":5.36,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":5.368,"License":1,"License_Latency":5.37}
+18/10/2024 15:18:49 [info]: Invalid package creation request: Package cannot be uploaded due to disqualifying rating.
+18/10/2024 15:19:43 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+18/10/2024 15:19:43 [info]: createPackage request via public ingest: https://github.com/jashkenas/underscore
+18/10/2024 15:19:43 [info]: Handling GitHub URL
+18/10/2024 15:19:43 [info]: repoInfo:
+18/10/2024 15:19:43 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:19:47 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+18/10/2024 15:19:50 [debug]: restLicense: 
+18/10/2024 15:19:50 [info]: License found in GraphQL
+18/10/2024 15:19:50 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+18/10/2024 15:19:55 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:19:55 [debug]: Bus factor score for jashkenas/underscore: 0.05
+18/10/2024 15:19:55 [debug]: Total days: 1267, Forks with activity: 6
+18/10/2024 15:19:55 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+18/10/2024 15:19:55 [debug]: Lines of code: 0
+18/10/2024 15:19:55 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+18/10/2024 15:19:55 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+18/10/2024 15:19:55 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":11.593,"RampUp":0.3,"RampUp_Latency":8.254,"Correctness":0,"Correctness_Latency":8.238,"BusFactor":0.05,"BusFactor_Latency":8.241,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":3.391,"License":1,"License_Latency":3.385}
+18/10/2024 15:19:55 [info]: Invalid package creation request: Package cannot be uploaded due to disqualifying rating.
+18/10/2024 15:21:08 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+18/10/2024 15:21:08 [info]: createPackage request via public ingest: https://github.com/jashkenas/underscore
+18/10/2024 15:21:08 [info]: Handling GitHub URL
+18/10/2024 15:21:08 [info]: repoInfo:
+18/10/2024 15:21:08 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:21:10 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+18/10/2024 15:21:13 [debug]: restLicense: 
+18/10/2024 15:21:13 [info]: License found in GraphQL
+18/10/2024 15:21:17 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:21:17 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+18/10/2024 15:21:17 [debug]: Bus factor score for jashkenas/underscore: 0.05
+18/10/2024 15:21:17 [debug]: Total days: 1267, Forks with activity: 6
+18/10/2024 15:21:17 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+18/10/2024 15:21:17 [debug]: Lines of code: 0
+18/10/2024 15:21:17 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+18/10/2024 15:21:17 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+18/10/2024 15:21:17 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":9.808,"RampUp":0.3,"RampUp_Latency":7.019,"Correctness":0,"Correctness_Latency":6.995,"BusFactor":0.05,"BusFactor_Latency":7.013,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":7.012,"License":1,"License_Latency":2.845}
+18/10/2024 15:24:55 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+18/10/2024 15:24:55 [info]: createPackage request via public ingest: https://github.com/jashkenas/underscore
+18/10/2024 15:24:55 [info]: Handling GitHub URL
+18/10/2024 15:24:55 [info]: repoInfo:
+18/10/2024 15:24:55 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:24:58 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+18/10/2024 15:25:01 [debug]: restLicense: 
+18/10/2024 15:25:01 [info]: License found in GraphQL
+18/10/2024 15:25:06 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 15:25:06 [debug]: Bus factor score for jashkenas/underscore: 0.05
+18/10/2024 15:25:06 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+18/10/2024 15:25:06 [debug]: Total days: 1267, Forks with activity: 6
+18/10/2024 15:25:06 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+18/10/2024 15:25:06 [debug]: Lines of code: 0
+18/10/2024 15:25:06 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+18/10/2024 15:25:06 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+18/10/2024 15:25:06 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":10.79,"RampUp":0.3,"RampUp_Latency":7.882,"Correctness":0,"Correctness_Latency":7.639,"BusFactor":0.05,"BusFactor_Latency":7.652,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":7.656,"License":1,"License_Latency":3.249}
+18/10/2024 16:18:01 [info]: Request received: {"JSProgram":"if (process.argv.length === 7) {\nconsole.log('Success')\nprocess.exit(0)\n} else {\nconsole.log('Failed')\nprocess.exit(1)\n}\n","URL":"https://github.com/jashkenas/underscore"}
+18/10/2024 16:20:57 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0","Author":"John Doe"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+18/10/2024 16:20:57 [info]: createPackage request via public ingest: https://github.com/jashkenas/underscore
+18/10/2024 16:20:57 [info]: Handling GitHub URL
+18/10/2024 16:20:57 [info]: repoInfo:
+18/10/2024 16:20:57 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 16:21:01 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+18/10/2024 16:21:05 [debug]: restLicense: 
+18/10/2024 16:21:05 [info]: License found in GraphQL
+18/10/2024 16:21:05 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+18/10/2024 16:21:10 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 16:21:10 [debug]: Bus factor score for jashkenas/underscore: 0.05
+18/10/2024 16:21:11 [debug]: Total days: 1267, Forks with activity: 6
+18/10/2024 16:21:11 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+18/10/2024 16:21:11 [debug]: Lines of code: 0
+18/10/2024 16:21:11 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+18/10/2024 16:21:11 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+18/10/2024 16:21:11 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":13.433,"RampUp":0.3,"RampUp_Latency":9.872,"Correctness":0,"Correctness_Latency":9.166,"BusFactor":0.05,"BusFactor_Latency":9.202,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":4.093,"License":1,"License_Latency":4.111}
+18/10/2024 16:27:27 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0","Author":"John Doe"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+18/10/2024 16:27:27 [info]: createPackage request via public ingest: https://github.com/jashkenas/underscore
+18/10/2024 16:27:27 [info]: Handling GitHub URL
+18/10/2024 16:27:27 [info]: repoInfo:
+18/10/2024 16:27:27 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 16:27:30 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+18/10/2024 16:27:35 [debug]: restLicense: 
+18/10/2024 16:27:35 [info]: License found in GraphQL
+18/10/2024 16:27:35 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+18/10/2024 16:27:35 [debug]: Bus factor score for jashkenas/underscore: 0.05
+18/10/2024 16:27:40 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 16:27:40 [debug]: Total days: 1267, Forks with activity: 6
+18/10/2024 16:27:40 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+18/10/2024 16:27:40 [debug]: Lines of code: 0
+18/10/2024 16:27:40 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+18/10/2024 16:27:40 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+18/10/2024 16:27:40 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":12.964,"RampUp":0.3,"RampUp_Latency":9.544,"Correctness":0,"Correctness_Latency":9.522,"BusFactor":0.05,"BusFactor_Latency":4.414,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":4.399,"License":1,"License_Latency":4.399}
+18/10/2024 16:33:32 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0","Author":"John Doe"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+18/10/2024 16:33:32 [info]: createPackage request via public ingest
+18/10/2024 16:33:32 [info]: Handling GitHub URL
+18/10/2024 16:33:32 [info]: repoInfo:
+18/10/2024 16:33:33 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 16:33:36 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+18/10/2024 16:33:40 [debug]: restLicense: 
+18/10/2024 16:33:40 [info]: License found in GraphQL
+18/10/2024 16:33:40 [debug]: Bus factor score for jashkenas/underscore: 0.05
+18/10/2024 16:33:40 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+18/10/2024 16:33:45 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+18/10/2024 16:33:45 [debug]: Total days: 1267, Forks with activity: 6
+18/10/2024 16:33:45 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+18/10/2024 16:33:45 [debug]: Lines of code: 0
+18/10/2024 16:33:45 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+18/10/2024 16:33:45 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+18/10/2024 16:33:45 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":12.618,"RampUp":0.3,"RampUp_Latency":9.381,"Correctness":0,"Correctness_Latency":9.363,"BusFactor":0.05,"BusFactor_Latency":4.22,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":4.225,"License":1,"License_Latency":4.24}
+19/10/2024 10:04:01 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0","Author":"John Doe"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+19/10/2024 10:04:01 [info]: createPackage request via public ingest
+19/10/2024 10:04:01 [info]: Handling GitHub URL
+19/10/2024 10:04:01 [info]: repoInfo:
+19/10/2024 10:04:01 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+19/10/2024 10:04:05 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+19/10/2024 10:04:09 [debug]: restLicense: 
+19/10/2024 10:04:09 [info]: License found in GraphQL
+19/10/2024 10:04:09 [debug]: Bus factor score for jashkenas/underscore: 0.05
+19/10/2024 10:04:09 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+19/10/2024 10:04:15 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+19/10/2024 10:04:15 [debug]: Total days: 1267, Forks with activity: 6
+19/10/2024 10:04:15 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+19/10/2024 10:04:15 [debug]: Lines of code: 0
+19/10/2024 10:04:15 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+19/10/2024 10:04:15 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+19/10/2024 10:04:15 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":13.693,"RampUp":0.3,"RampUp_Latency":9.82,"Correctness":0,"Correctness_Latency":9.802,"BusFactor":0.05,"BusFactor_Latency":4.282,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":4.292,"License":1,"License_Latency":4.306}
+19/10/2024 10:20:24 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0","Author":"John Doe"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+19/10/2024 10:20:24 [info]: createPackage request via public ingest
+19/10/2024 10:20:24 [info]: Handling GitHub URL
+19/10/2024 10:20:24 [info]: repoInfo:
+19/10/2024 10:20:24 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+19/10/2024 10:20:28 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+19/10/2024 10:20:32 [debug]: restLicense: 
+19/10/2024 10:20:32 [info]: License found in GraphQL
+19/10/2024 10:20:32 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+19/10/2024 10:20:32 [debug]: Bus factor score for jashkenas/underscore: 0.05
+19/10/2024 10:20:39 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+19/10/2024 10:20:39 [debug]: Total days: 1267, Forks with activity: 6
+19/10/2024 10:20:39 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+19/10/2024 10:20:39 [debug]: Lines of code: 0
+19/10/2024 10:20:39 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+19/10/2024 10:20:39 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+19/10/2024 10:20:39 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":15.126,"RampUp":0.3,"RampUp_Latency":11.113,"Correctness":0,"Correctness_Latency":11.083,"BusFactor":0.05,"BusFactor_Latency":4.426,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":4.412,"License":1,"License_Latency":4.413}
+19/10/2024 10:35:11 [info]: Request received: {"metadata":{"Name":"underscore","Version":"1.0.0","Author":"John Doe"},"data":{"URL":"https://github.com/jashkenas/underscore"}}
+19/10/2024 10:35:11 [info]: createPackage request via public ingest
+19/10/2024 10:35:11 [info]: Handling GitHub URL
+19/10/2024 10:35:11 [info]: repoInfo:
+19/10/2024 10:35:11 [info]: Repository already cloned to C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+19/10/2024 10:35:15 [info]: Error calculating lines of code: Error: Command failed: npx cloc --json C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+'"perl"' is not recognized as an internal or external command,
+operable program or batch file.
+
+19/10/2024 10:35:23 [debug]: restLicense: 
+19/10/2024 10:35:23 [info]: License found in GraphQL
+19/10/2024 10:35:23 [debug]: Bus factor score for jashkenas/underscore: 0.05
+19/10/2024 10:35:23 [debug]: Responsive maintainer score for jashkenas/underscore: 0.9789029535864979 with median response time: 0 days, closure rate: 0.9789029535864979
+19/10/2024 10:35:32 [debug]: No lines of code found in C:\Users\calia\OneDrive\Documents\ECE461-group32\repos\underscore
+19/10/2024 10:35:32 [debug]: Total days: 1267, Forks with activity: 6
+19/10/2024 10:35:32 [debug]: Found README and CONTRIBUTING for repo jashkenas/underscore
+19/10/2024 10:35:32 [debug]: Lines of code: 0
+19/10/2024 10:35:32 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
+19/10/2024 10:35:32 [debug]: Ramp Up score for jashkenas/underscore: 0.3
+19/10/2024 10:35:32 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":20.807,"RampUp":0.3,"RampUp_Latency":16.411,"Correctness":0,"Correctness_Latency":16.395,"BusFactor":0.05,"BusFactor_Latency":8.073,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":8.083,"License":1,"License_Latency":8.094}
+>>>>>>> origin/frontend

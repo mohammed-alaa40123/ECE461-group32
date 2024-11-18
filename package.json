@@ -33,6 +33,7 @@
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.3",
     "cloc": "^2.2.0-cloc",
+    "cors": "^2.8.5",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "eslint": "^9.9.1",
