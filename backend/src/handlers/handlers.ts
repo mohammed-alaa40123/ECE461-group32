@@ -698,54 +698,98 @@ export const handleListPackages = async (
       const { Name, Version } = query;
 
       // Validate PackageQuery
-      if (!Name) {
-        return sendResponse(400, { message: 'PackageQuery must include Name.' });
+      if (!Name||!Version) {
+        return sendResponse(400, { message: 'There is missing field(s) in the PackageQuery or it is formed improperly, or is invalid.' });
       }
-
+      let sql="";
+      let values:any[]=[];
       // Build SQL query based on PackageQuery
-      let sql = 'SELECT * FROM packages WHERE name ILIKE $1';
-      const values: any[] = [`%${Name}%`];
+      if(Name!='*'){
+      sql = 'SELECT version,name,id FROM packages WHERE name ILIKE $1 ';
+      values = [`%${Name}%`];}
+      else sql='SELECT version,name,id FROM packages ';
 
       // Execute SQL query to fetch packages matching the name
-      const packageResult = await pool.query(sql, values);
+      
 
       // Debugging: Log the fetched packages
-      console.log(`Fetched packages for Name "${Name}":`, packageResult.rows);
+      
 
       // Filter results based on the Version using semver
-      const filteredPackages = packageResult.rows.filter((pkg: any) => {
-        if (!Version) {
-          return true; // No version filter applied
-        }
+      let [type, versionRange] = Version.split(' ');
+      let match=[];
+      let wanted='';
+      console.log("Before going in ");
+      switch(type){
+        case 'Exact':
+           match = versionRange.match(/\(([^)]+)\)/);
+           wanted = match[1];
+          if(Name!='*')
+          sql+='and version=$2';
+          
+          else sql +='where version=$1';
 
-        // Debugging: Log the package version and the filter version
-        console.log(`Filtering package version: ${pkg.version} with Version filter: ${Version}`);
+          values.push(wanted);
+          break;
+        case 'Bounded':
+           match = versionRange.match(/\(([^)]+)\)/);
+           wanted = match[1];
+          let [bound1,bound2]=wanted.split('-');
+          if(Name!='*')
+            sql+='and version>=$2 and version <= $3';
+            
+            else sql +='where version>=$1 and version <=$2';
+  
+            values.push(bound1);
+            values.push(bound2);
+          break;
+        case 'Tilde':
+           match = versionRange.match(/\(([^)]+)\)/);
+          let wantedb:string = match[1];
 
-        // Handle exact version match
-        if (semver.valid(Version)) {
-          const isEqual = semver.eq(pkg.version, Version);
-          console.log(`semver.eq(${pkg.version}, ${Version}) = ${isEqual}`);
-          return isEqual;
-        }
+          let [none,wanted2]=wantedb.split('~');
+          let [non1,wanted3,non2]=wanted2.split('.');
+          let boun1=wanted2;
+          let num=parseInt(wanted3);
+          let boun2=`${non1}.${num+1}.0`;
+          if(Name!='*')
+            sql+='and version>=$2 and version <= $3';
+            
+            else sql +='where version>=$1 and version <=$2';
+  
+            values.push(boun1);
+            values.push(boun2);
+          console.log(boun2);
+          break;
+        case 'Carat':
+          match = versionRange.match(/\(([^)]+)\)/);
+          let wantedeb:string = match[1];
 
-        // Handle version ranges (caret, tilde, bounded)
-        if (semver.validRange(Version)) {
-          const isSatisfied = semver.satisfies(pkg.version, Version);
-          console.log(`semver.satisfies(${pkg.version}, ${Version}) = ${isSatisfied}`);
-          return isSatisfied;
-        }
-
-        // Unsupported version format
-        console.log(`Unsupported version format: ${Version}`);
-        return false;
-      });
-
+          let [nonee,wantede2]=wantedeb.split('^');
+          let [wantede3,nonee1,nonee2]=wantede2.split('.');
+          let bou1=wantede2;
+          let nume=parseInt(wantede3);
+          let bou2=`${nume+1}.0.0`;
+          if(Name!='*')
+            sql+='and version>=$2 and version <= $3';
+            
+            else sql +='where version>=$1 and version <=$2';
+  
+            values.push(bou1);
+            values.push(bou2);
+          console.log(bou2);
+          break;
+      }
       // Debugging: Log the filtered packages
+      console.log("EXEC");
+      console.log(sql,values);
+      const filteredPackages = await pool.query(sql, values);
       console.log(`Filtered packages for Name "${Name}" and Version "${Version}":`, filteredPackages);
 
-      results.push(...filteredPackages);
+      results.push(...filteredPackages.rows);
     }
-
+    if(results.length>100)
+      return sendResponse(413,{message:'Too many packages returned.'});
     // Remove duplicate packages if multiple queries could return the same package
     const uniqueResults = Array.from(new Set(results.map(pkg => pkg.id))).map(id => results.find(pkg => pkg.id === id));
 
