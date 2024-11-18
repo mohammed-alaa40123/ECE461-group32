@@ -9,7 +9,7 @@ import { PackageHistoryEntry } from '../models/PackageHistoryEntry';
 import { PackageRating } from '../models/PackageRating';
 import { sendResponse } from '../utils/response';
 import { authenticate, AuthenticatedUser } from '../utils/auth';
-import { metricCalcFromUrlUsingNetScore,convertPackageInfo, PackageInfo, generatePackageId } from '../handlerhelper';
+import { metricCalcFromUrlUsingNetScore, convertPackageInfo, PackageInfo, generatePackageId } from '../handlerhelper';
 import { getLogger, logTestResults } from '../rating/logger';
 import AdmZip, { IZipEntry } from 'adm-zip';
 import jwt from 'jsonwebtoken';
@@ -22,50 +22,14 @@ const logger = getLogger();
 
 
 // src/handlers/handlers.ts
+// src/handlers/handlers.ts
 
-export const handleRegisterUser = async (body: string): Promise<APIGatewayProxyResult> => {
-  const { name, password, isAdmin = false } = JSON.parse(body);
-
-  if (!name || !password) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: 'Name and password are required.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
-  }
-
-  try {
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Insert the user into the database
-    const query = `
-      INSERT INTO users (name, password_hash, is_admin)
-      VALUES ($1, $2, $3)
-    `;
-    const values = [name, hashedPassword, isAdmin];
-    await pool.query(query, values);
-
-    return {
-      statusCode: 201,
-      body: JSON.stringify({ message: 'User registered successfully!' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
-  } catch (error) {
-    console.error('Error registering user:', error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: 'Internal server error.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
-  }
-};
 
 export const handleExecuteSQL = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers); // Await the result of authenticate
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
   }
@@ -88,7 +52,6 @@ export const handleExecuteSQL = async (body: string, headers: { [key: string]: s
     return sendResponse(500, { message: 'Internal server error.' });
   }
 };
-
 
 
 // Handler for /authenticate - PUT
@@ -117,7 +80,7 @@ export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyR
     const token = jwt.sign(
       { sub: user.id, name: user.name, isAdmin: user.isAdmin },
       process.env.JWT_SECRET!,
-      { expiresIn: process.env.JWT_EXPIRES_IN || '1h' }
+      { expiresIn: process.env.JWT_EXPIRES_IN || '10h' }
     );
 
     return sendResponse(200, { token: `bearer ${token}` });
@@ -171,15 +134,18 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
 export const handleCreatePackage = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('upload')) {
+    return sendResponse(403, { message: 'You do not have permission to upload packages.' });
   }
 
   const packageData = JSON.parse(body);
   const { Content, JSProgram, URL, debloat } = packageData;
   console.log("packageData", packageData);
-  console.log("JSprog",JSProgram)
+  console.log("JSprog", JSProgram)
   // Ensure only one of Content or URL is provided
   if ((!Content && !URL) || (Content && URL)) {
     return sendResponse(400, { message: 'Either Content or URL must be set, but not both.' });
@@ -294,7 +260,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
            pull_request_latency, good_pinning_practice_latency) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
       `;
-      
+
       const values = [
         info.ID,
         info.NET_SCORE,
@@ -314,7 +280,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
         info.PULL_REQUESTS_SCORE_LATENCY,
         info.PINNED_DEPENDENCIES_SCORE_LATENCY
       ];
-      
+
       await pool.query(query, values);
 
 
@@ -414,11 +380,14 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
   console.log("getting packeage with ID", id);
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
   }
 
+  if (!user.permissions.includes('download')) {
+    return sendResponse(403, { message: 'You do not have permission to download packages.' });
+  }
   try {
     const queryText = 'SELECT * FROM packages WHERE id = $1';
     const res = await pool.query(queryText, [id]);
@@ -472,9 +441,12 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('upload')) {
+    return sendResponse(403, { message: 'You do not have permission to update packages.' });
   }
 
   const updatedPackage: Package = JSON.parse(body);
@@ -484,8 +456,8 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
   if (metadata.ID !== id) {
     return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
   }
-  const result = await pool.query('select * from packages where name=$1',[updatedPackage.metadata.Name]);
-  if(result.rows.length==0){
+  const result = await pool.query('select * from packages where name=$1', [updatedPackage.metadata.Name]);
+  if (result.rows.length == 0) {
     return sendResponse(404, { message: 'Package does not exist.' });
   }
   const existingResult = await pool.query(
@@ -496,24 +468,25 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     return sendResponse(409, { message: 'Package exists already.' });
   }
   console.log("Results");
-  const [latestMajorStr, latestMinorStr, latestPatchStr] =updatedPackage.metadata.Version.split('.');
-const latestMajor = parseInt(latestMajorStr, 10);
-const latestMinor = parseInt(latestMinorStr, 10);
-const latestPatch = parseInt(latestPatchStr, 10);
-console.log(latestMajor," ",latestMinor," ",latestPatch);
-console.log("Coming");
+  const [latestMajorStr, latestMinorStr, latestPatchStr] = updatedPackage.metadata.Version.split('.');
+  const latestMajor = parseInt(latestMajorStr, 10);
+  const latestMinor = parseInt(latestMinorStr, 10);
+  const latestPatch = parseInt(latestPatchStr, 10);
+  console.log(latestMajor, " ", latestMinor, " ", latestPatch);
+  console.log("Coming");
   for (let i = 0; i < result.rows.length; i++) {
-    let [mjstr,mnstr,pstr]=result.rows[i].version.split('.');
-    let mj=parseInt(mjstr, 10);
-    let mn=parseInt(mnstr, 10);
-    let pt=parseInt(pstr, 10);
-    if(mj==latestMajor && mn==latestMinor && pt>latestPatch){
+    let [mjstr, mnstr, pstr] = result.rows[i].version.split('.');
+    let mj = parseInt(mjstr, 10);
+    let mn = parseInt(mnstr, 10);
+    let pt = parseInt(pstr, 10);
+    if (mj == latestMajor && mn == latestMinor && pt > latestPatch) {
       return sendResponse(400, { message: 'Invalid Version.' });
-    }}
-    
-  const result1=await pool.query('select * from packages where id=$1',[updatedPackage.metadata.ID]);
-  if(result1.rows.length>0){
-    updatedPackage.metadata.ID=generatePackageId();
+    }
+  }
+
+  const result1 = await pool.query('select * from packages where id=$1', [updatedPackage.metadata.ID]);
+  if (result1.rows.length > 0) {
+    updatedPackage.metadata.ID = generatePackageId();
     console.log("New ID");
     console.log(updatedPackage.metadata.ID);
   }
@@ -525,12 +498,12 @@ console.log("Coming");
       const zip = new AdmZip(base64Buffer);
       const zipEntries = zip.getEntries();
 
-      
 
-      let metadata:PackageMetadata=updatedPackage.metadata;
-      let data:PackageData= updatedPackage.data;
+
+      let metadata: PackageMetadata = updatedPackage.metadata;
+      let data: PackageData = updatedPackage.data;
       contentBuffer = base64Buffer;
-      
+
 
       // Handle "debloat" if true
       if (data.debloat) {
@@ -538,7 +511,7 @@ console.log("Coming");
       }
 
       // Check if a package with this name and version already exists
-      
+
 
 
       await insertIntoDB(metadata, data);
@@ -582,7 +555,7 @@ console.log("Coming");
       if (updatedPackage.data.debloat) {
         contentBuffer = debloatPackageContent(contentBuffer);
       }
-     await insertIntoDB(metadata, data);
+      await insertIntoDB(metadata, data);
 
 
       await pool.query(
@@ -606,7 +579,7 @@ console.log("Coming");
 
 
     }
-    
+
 
     // Handle JSProgram execution or validation
     if (updatedPackage.data.JSProgram) {
@@ -620,7 +593,7 @@ console.log("Coming");
     // Insert package metadata into PostgreSQL
     // const createdPackage = await insertIntoDB(metadata, data);
 
-    let contentBase64 :string;
+    let contentBase64: string;
     // Upload package content to S3 if contentBuffer has been assigned
     if (contentBuffer) {
       contentBase64 = contentBuffer.toString('base64');
@@ -639,7 +612,7 @@ console.log("Coming");
     );
 
 
-    return sendResponse(200, {message:"Version is updated."});
+    return sendResponse(200, { message: "Version is updated." });
   } catch (error: any) {
     console.error('Create Package Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
@@ -651,9 +624,12 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('upload')) {
+    return sendResponse(403, { message: 'You do not have permission to upload/delete packages.' });
   }
 
   try {
@@ -697,7 +673,9 @@ export const handleListPackages = async (
   } catch (err: any) {
     return sendResponse(err.statusCode || 403, { message: err.message || 'Authentication failed.' });
   }
-
+  if (!user.permissions.includes('search')) {
+    return sendResponse(403, { message: 'You do not have permission to search packages.' });
+  }
   let queries: any[];
   try {
     queries = JSON.parse(body);
@@ -804,7 +782,7 @@ export const handleResetRegistry = async (headers: { [key: string]: string | und
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
     if (!user.isAdmin) {
       return sendResponse(403, { message: 'Admin privileges required.' });
     }
@@ -813,13 +791,29 @@ export const handleResetRegistry = async (headers: { [key: string]: string | und
   }
 
   try {
-    // Reset the registry to default state
+    // Start a transaction
+    await pool.query('BEGIN');
+
+    // Truncate all tables except the users table
     await pool.query('TRUNCATE TABLE packages CASCADE;');
     await pool.query('TRUNCATE TABLE package_history CASCADE;');
-    // Insert default data as needed
+    await pool.query('TRUNCATE TABLE package_ratings CASCADE;');
+    await pool.query('TRUNCATE TABLE dependencies CASCADE;');
+    await pool.query('TRUNCATE TABLE tracks CASCADE;');
+    await pool.query('TRUNCATE TABLE user_tracks CASCADE;');
+    await pool.query('TRUNCATE TABLE cost CASCADE;');
+    await pool.query('TRUNCATE TABLE userAuth CASCADE;');
 
-    return sendResponse(200, { message: 'Registry is reset.' });
+    // Delete all users except the admin user with the specified name
+    await pool.query('DELETE FROM users WHERE name != $1', ['ece30861defaultadminuser']);
+
+    // Commit the transaction
+    await pool.query('COMMIT');
+
+    return sendResponse(200, { message: 'Registry is reset, only the default admin user is retained.' });
   } catch (error: any) {
+    // Rollback the transaction in case of an error
+    await pool.query('ROLLBACK');
     console.error('Reset Registry Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
   }
@@ -830,9 +824,12 @@ export const handleGetPackageHistoryByName = async (name: string, headers: { [ke
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('search')) {
+    return sendResponse(403, { message: 'You do not have permission to search packages.' });
   }
 
   try {
@@ -877,11 +874,13 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
   }
-
+  if (!user.permissions.includes('search')) {
+    return sendResponse(403, { message: 'You do not have permission to search packages.' });
+  }
   const { RegEx } = JSON.parse(body);
 
   if (!RegEx) {
@@ -918,7 +917,7 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
   }
@@ -927,25 +926,25 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
   if (!id) {
     return sendResponse(400, { message: "Missing field(s) in PackageID." });
   }
-  
+
   try {
     const ratingQuery = 'SELECT url FROM packages WHERE id = $1';
     const res = await pool.query(ratingQuery, [id]);
-  
+
     if (res.rows.length === 0) {
       return sendResponse(500, { message: 'The package rating system choked on at least one of the metrics.' });
     }
-  
+
     const packageUrl = res.rows[0].url;
     const newRating = await metricCalcFromUrlUsingNetScore(packageUrl, id);
-  
+
     if (!newRating) {
       return sendResponse(500, { message: 'Failed to calculate metrics for the package.' });
     }
-  
+
     const checkExistingRatingQuery = 'SELECT 1 FROM package_ratings WHERE package_id = $1';
     const existingRatingRes = await pool.query(checkExistingRatingQuery, [id]);
-  
+
     if (existingRatingRes.rows.length > 0) {
       // Update existing rating
       const updateRatingQuery = `
@@ -1035,19 +1034,20 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
       ];
       await pool.query(insertRatingQuery, insertRatingValues);
     }
-  
-    return sendResponse(200, convertPackageInfo(newRating) );
+
+    return sendResponse(200, convertPackageInfo(newRating));
   } catch (error) {
     console.error('Error calculating package rating:', error);
     return sendResponse(500, { message: 'An error occurred while calculating the package rating.' });
-  }};
+  }
+};
 
 // Handler for /package/{id}/cost - GET (Get Package Cost)
 export const handleGetPackageCost = async (id: string, headers: { [key: string]: string | undefined }, queryStringParameters: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
   }
@@ -1192,7 +1192,7 @@ export const handleGetTracks = async (headers: { [key: string]: string | undefin
   // Authenticate the request
   let user: AuthenticatedUser;
   try {
-    user = authenticate(headers);
+    user = await authenticate(headers);
   } catch (err: any) {
     return sendResponse(err.statusCode, { message: err.message });
   }

@@ -2,7 +2,9 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
 require('dotenv').config(); // Load environment variables from .env file
-
+const excludeTests = (modulePath) => {
+  return /node_modules/.test(modulePath) || /rating[\\/]__tests__/.test(modulePath);
+};
 module.exports = {
   mode: 'production', // or 'development'
   entry: './index.ts',
@@ -18,21 +20,23 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: excludeTests,
       },
       {
         test: /\.html$/,
         use: 'html-loader',
+        exclude: excludeTests,
       },
       {
-        loader: 'babel-loader',
-        test: /\.js$|jsx/,
-        exclude: /node_modules/,
+        test: /\.js$|\.jsx$/,
+        use: 'babel-loader',
+        exclude: excludeTests,
       },
     ],
   },
   resolve: {
     extensions: ['.ts', '.js', '.html'],
+    
   },
   plugins: [
     // // Define environment variables to expose to the client-side bundle

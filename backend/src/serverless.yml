@@ -5,7 +5,6 @@ frameworkVersion: '4'
 plugins:
   - serverless-offline
 
-
 provider:
   name: aws
   runtime: nodejs18.x
@@ -17,8 +16,6 @@ provider:
     RDS_USER: ${env:RDS_USER}
     RDS_PASSWORD: ${env:RDS_PASSWORD}
     GITHUB_TOKEN: ${env:GITHUB_TOKEN}
-
- 
 
 functions:
   api:
@@ -67,3 +64,27 @@ functions:
       - http:
           path: sql
           method: POST
+      - http:
+          path: groups
+          method: POST
+      - http:
+          path: permissions
+          method: POST
+      - http:
+          path: users/{userId}/edit
+          method: PUT
+      - http:
+          path: users/groups-permissions
+          method: GET
+      - http:
+          path: users/{userId}
+          method: DELETE
+      - http:
+          path: groups/{groupId}
+          method: DELETE
+      - http:
+          path: permissions/{permissionId}
+          method: DELETE
+      - http:
+          path: users/{userId}/groups-permissions
+          method: GET

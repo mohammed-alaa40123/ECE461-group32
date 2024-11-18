@@ -16,9 +16,21 @@ import {
   handleGetPackageRating,
   handleGetPackageCost,
   handleGetTracks,
-  handleRegisterUser,
   handleExecuteSQL,
 } from './handlers/handlers';
+
+import {
+  handleRegisterUser,
+  handleCreateGroup,
+  handleCreatePermission,
+  handleDeleteUser,
+  handleDeleteGroup,
+  handleDeletePermission,
+  handleEditUserGroupsAndPermissions,
+  handleRetrieveUserGroupsAndPermissions,
+  handleRetrieveUserGroupsAndPermissionsForUser
+} from './handlers/access_handlers';
+
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   const { httpMethod, path, pathParameters, queryStringParameters, headers, body } = event;
@@ -26,7 +38,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   try {
     // Routing logic based on path and method
     if (path === '/register' && httpMethod === 'POST') {
-      return await handleRegisterUser(body || '{}');
+      return await handleRegisterUser(body || '{}', headers);
     } else if (path === '/sql' && httpMethod === 'POST') {
       return await handleExecuteSQL(body || '{}', headers);
     } else if (path === '/authenticate' && httpMethod === 'PUT') {
@@ -59,33 +71,41 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return await handleDeletePackage(id, headers);
     } else if (path === '/tracks' && httpMethod === 'GET') {
       return await handleGetTracks(headers);
-    }
-
-    // If no route matched
-    return {
-      statusCode: 404,
-      body: JSON.stringify({ message: 'Endpoint not found.' }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-  } catch (error: any) {
-    console.error('Lambda Handler Error:', error);
-    if (error.statusCode && error.message) {
+    } else if (path === '/groups' && httpMethod === 'POST') {
+      return await handleCreateGroup(body || '{}', headers);
+    } else if (path === '/permissions' && httpMethod === 'POST') {
+      return await handleCreatePermission(body || '{}', headers);
+    } else if (path && path.startsWith('/users/') && path.endsWith('/edit') && httpMethod === 'PUT') {
+      const userId = path.split('/')[2];
+      const userIDINT = parseInt(userId);
+      return await handleEditUserGroupsAndPermissions(body || '{}', headers,userIDINT);
+    } else if (path === '/users/groups-permissions' && httpMethod === 'GET') {
+      return await handleRetrieveUserGroupsAndPermissions(headers);
+    } else if (path && path.startsWith('/users/') && path.endsWith('/groups-permissions') && httpMethod === 'GET') {
+      const userId = path.split('/')[2];
+      return await handleRetrieveUserGroupsAndPermissionsForUser(userId, headers);
+    } else if (path && path.startsWith('/users/') && httpMethod === 'DELETE') {
+      const userId = path.split('/')[2];
+      return await handleDeleteUser(userId, headers);
+    } else if (path && path.startsWith('/groups/') && httpMethod === 'DELETE') {
+      const groupId = path.split('/')[2];
+      return await handleDeleteGroup(groupId, headers);
+    } else if (path && path.startsWith('/permissions/') && httpMethod === 'DELETE') {
+      const permissionId = path.split('/')[2];
+      return await handleDeletePermission(permissionId, headers);
+    } else {
       return {
-        statusCode: error.statusCode,
-        body: JSON.stringify({ message: error.message }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        statusCode: 404,
+        body: JSON.stringify({ message: 'Not Found' }),
+        headers: { 'Content-Type': 'application/json' },
       };
     }
+  } catch (error) {
+    console.error('Error handling request:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ message: 'Internal server error.' }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     };
   }
 };
