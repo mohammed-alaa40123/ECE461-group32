@@ -633,25 +633,25 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
   }
 
   try {
-    const deleteText = 'DELETE FROM packages WHERE id = $1 RETURNING *';
+    // const deleteText = 'DELETE FROM packages WHERE id = $1 RETURNING *';
     const historyInsert = `
     INSERT INTO package_history (package_id, user_id, action)
     VALUES ($1, $2, $3)
   `;
   await pool.query(historyInsert, [id, user.sub, 'DELETE']);
 
-    const res = await pool.query(deleteText, [id]);
+    // const res = await pool.query(deleteText, [id]);
 
-    if (res.rows.length === 0) {
-      return sendResponse(404, { message: 'Package does not exist.' });
-    }
+    // if (res.rows.length === 0) {
+    //   return sendResponse(404, { message: 'Package does not exist.' });
+    // }
 
-    const deletedPackage: Package = res.rows[0];
+    // const deletedPackage: Package = res.rows[0];
 
-    // Delete from S3 if Content is present
-    if (deletedPackage) {
+    // // Delete from S3 if Content is present
+    // if (deletedPackage) {
       await deletePackageContent(id);
-    }
+    // }
 
     // Log the deletion in package_history
   
