@@ -18,6 +18,7 @@ export interface PackageData {
   URL?: string;
   debloat?: boolean;
   JSProgram?: string;
+  readme?:string;
 }
 
 export interface User {
