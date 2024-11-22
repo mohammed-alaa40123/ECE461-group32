@@ -937,7 +937,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
     // Use PostgreSQL regex matching on name and README (assuming README is a field)
     const searchQuery = `
       SELECT * FROM packages
-      WHERE name ~* $1 OR readme ~* $1
+      WHERE name ~* $1 
     `;
     const res = await pool.query(searchQuery, [RegEx]);
 
