@@ -52,7 +52,7 @@ export async function cloneRepo(repoUrl: string, repoName: string): Promise<stri
     return null;
   }
 
-  const repoDir = path.join(process.env.tmpDir!, 'lodash');
+  const repoDir = path.join(process.env.tmpDir!, repoName);
 
   try {
     // Create the /tmp/lodash directory

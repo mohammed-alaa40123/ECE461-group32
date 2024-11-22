@@ -14,6 +14,7 @@ import { getLogger, logTestResults } from '../rating/logger';
 import AdmZip, { IZipEntry } from 'adm-zip';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { fetchNpmPackageSize, fetchRepoDetails, getDefaultBranch } from '../handlerhelper';
 import { send } from 'process';
 
 
@@ -21,7 +22,6 @@ import { send } from 'process';
 const logger = getLogger();
 
 
-// src/handlers/handlers.ts
 // src/handlers/handlers.ts
 
 
@@ -126,7 +126,34 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
   return httpsUrl;
 }
 
-// Example usage:
+// // Example usage:
+// async function fetchRepoDetails(packageName: string): Promise<{ url: string, owner: string, name: string, defaultBranch: string } | null> {
+//   try {
+//     const repoDetailsUrl = `https://api.github.com/repos/${packageName}`;
+//     const repoDetailsResponse = await fetch(repoDetailsUrl, {
+//       headers: {
+//         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+//         Accept: 'application/vnd.github.v3+json',
+//       },
+//     });
+
+//     if (!repoDetailsResponse.ok) {
+//       console.error(`Failed to fetch repository details for ${packageName}`);
+//       return null;
+//     }
+
+//     const repoDetails = await repoDetailsResponse.json() as unknown as any;
+//     return {
+//       url: repoDetails.html_url,
+//       owner: repoDetails.owner.login,
+//       name: repoDetails.name,
+//       defaultBranch: repoDetails.default_branch,
+//     };
+//   } catch (error) {
+//     console.error(`Error fetching repository details for ${packageName}:`, error);
+//     return null;
+//   }
+// }
 
 
 // Handler for /package - POST (Create Package)
@@ -638,7 +665,7 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
     INSERT INTO package_history (package_id, user_id, action)
     VALUES ($1, $2, $3)
   `;
-  await pool.query(historyInsert, [id, user.sub, 'DELETE']);
+    await pool.query(historyInsert, [id, user.sub, 'DELETE']);
 
     // const res = await pool.query(deleteText, [id]);
 
@@ -650,11 +677,11 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
 
     // // Delete from S3 if Content is present
     // if (deletedPackage) {
-      await deletePackageContent(id);
+    await deletePackageContent(id);
     // }
 
     // Log the deletion in package_history
-  
+
     return sendResponse(200, { message: 'Package is deleted.' });
   } catch (error) {
     console.error('Delete Package Error:', error);
@@ -699,98 +726,99 @@ export const handleListPackages = async (
       const { Name, Version } = query;
 
       // Validate PackageQuery
-      if (!Name||!Version) {
+      if (!Name || !Version) {
         return sendResponse(400, { message: 'There is missing field(s) in the PackageQuery or it is formed improperly, or is invalid.' });
       }
-      let sql="";
-      let values:any[]=[];
+      let sql = "";
+      let values: any[] = [];
       // Build SQL query based on PackageQuery
-      if(Name!='*'){
-      sql = 'SELECT version,name,id FROM packages WHERE name ILIKE $1 ';
-      values = [`%${Name}%`];}
-      else sql='SELECT version,name,id FROM packages ';
+      if (Name != '*') {
+        sql = 'SELECT version,name,id FROM packages WHERE name ILIKE $1 ';
+        values = [`%${Name}%`];
+      }
+      else sql = 'SELECT version,name,id FROM packages ';
 
       // Execute SQL query to fetch packages matching the name
-      
+
 
       // Debugging: Log the fetched packages
-      
+
 
       // Filter results based on the Version using semver
       let [type, versionRange] = Version.split(' ');
-      let match=[];
-      let wanted='';
+      let match = [];
+      let wanted = '';
       console.log("Before going in ");
-      switch(type){
+      switch (type) {
         case 'Exact':
-           match = versionRange.match(/\(([^)]+)\)/);
-           wanted = match[1];
-          if(Name!='*')
-          sql+='and version=$2';
-          
-          else sql +='where version=$1';
+          match = versionRange.match(/\(([^)]+)\)/);
+          wanted = match[1];
+          if (Name != '*')
+            sql += 'and version=$2';
+
+          else sql += 'where version=$1';
 
           values.push(wanted);
           break;
         case 'Bounded':
-           match = versionRange.match(/\(([^)]+)\)/);
-           wanted = match[1];
-          let [bound1,bound2]=wanted.split('-');
-          if(Name!='*')
-            sql+='and version>=$2 and version <= $3';
-            
-            else sql +='where version>=$1 and version <=$2';
-  
-            values.push(bound1);
-            values.push(bound2);
+          match = versionRange.match(/\(([^)]+)\)/);
+          wanted = match[1];
+          let [bound1, bound2] = wanted.split('-');
+          if (Name != '*')
+            sql += 'and version>=$2 and version <= $3';
+
+          else sql += 'where version>=$1 and version <=$2';
+
+          values.push(bound1);
+          values.push(bound2);
           break;
         case 'Tilde':
-           match = versionRange.match(/\(([^)]+)\)/);
-          let wantedb:string = match[1];
+          match = versionRange.match(/\(([^)]+)\)/);
+          let wantedb: string = match[1];
 
-          let [none,wanted2]=wantedb.split('~');
-          let [non1,wanted3,non2]=wanted2.split('.');
-          let boun1=wanted2;
-          let num=parseInt(wanted3);
-          let boun2=`${non1}.${num+1}.0`;
-          if(Name!='*')
-            sql+='and version>=$2 and version <= $3';
-            
-            else sql +='where version>=$1 and version <=$2';
-  
-            values.push(boun1);
-            values.push(boun2);
+          let [none, wanted2] = wantedb.split('~');
+          let [non1, wanted3, non2] = wanted2.split('.');
+          let boun1 = wanted2;
+          let num = parseInt(wanted3);
+          let boun2 = `${non1}.${num + 1}.0`;
+          if (Name != '*')
+            sql += 'and version>=$2 and version <= $3';
+
+          else sql += 'where version>=$1 and version <=$2';
+
+          values.push(boun1);
+          values.push(boun2);
           console.log(boun2);
           break;
         case 'Carat':
           match = versionRange.match(/\(([^)]+)\)/);
-          let wantedeb:string = match[1];
+          let wantedeb: string = match[1];
 
-          let [nonee,wantede2]=wantedeb.split('^');
-          let [wantede3,nonee1,nonee2]=wantede2.split('.');
-          let bou1=wantede2;
-          let nume=parseInt(wantede3);
-          let bou2=`${nume+1}.0.0`;
-          if(Name!='*')
-            sql+='and version>=$2 and version <= $3';
-            
-            else sql +='where version>=$1 and version <=$2';
-  
-            values.push(bou1);
-            values.push(bou2);
+          let [nonee, wantede2] = wantedeb.split('^');
+          let [wantede3, nonee1, nonee2] = wantede2.split('.');
+          let bou1 = wantede2;
+          let nume = parseInt(wantede3);
+          let bou2 = `${nume + 1}.0.0`;
+          if (Name != '*')
+            sql += 'and version>=$2 and version <= $3';
+
+          else sql += 'where version>=$1 and version <=$2';
+
+          values.push(bou1);
+          values.push(bou2);
           console.log(bou2);
           break;
       }
       // Debugging: Log the filtered packages
       console.log("EXEC");
-      console.log(sql,values);
+      console.log(sql, values);
       const filteredPackages = await pool.query(sql, values);
       console.log(`Filtered packages for Name "${Name}" and Version "${Version}":`, filteredPackages);
 
       results.push(...filteredPackages.rows);
     }
-    if(results.length>100)
-      return sendResponse(413,{message:'Too many packages returned.'});
+    if (results.length > 100)
+      return sendResponse(413, { message: 'Too many packages returned.' });
     // Remove duplicate packages if multiple queries could return the same package
     const uniqueResults = Array.from(new Set(results.map(pkg => pkg.id))).map(id => results.find(pkg => pkg.id === id));
 
@@ -1088,7 +1116,109 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
   }
 };
 
+
 // Handler for /package/{id}/cost - GET (Get Package Cost)
+// export const handleGetPackageCost = async (id: string, headers: { [key: string]: string | undefined }, queryStringParameters: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
+//   // Authenticate the request
+//   let user: AuthenticatedUser;
+//   try {
+//     user = await authenticate(headers);
+//   } catch (err: any) {
+//     return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
+//   }
+
+//   const includeDependencies = queryStringParameters && queryStringParameters.dependency === 'true';
+
+//   try {
+//     // Fetch package details
+//     const packageQuery = `
+//       SELECT p.id, p.name, p.version, p.url, p.owner
+//       FROM packages p
+//       WHERE p.id = $1
+//     `;
+//     const packageResult = await pool.query(packageQuery, [id]);
+
+//     if (packageResult.rows.length === 0) {
+//       return sendResponse(404, { message: 'Package does not exist.' });
+//     }
+
+//     const pkg = packageResult.rows[0];
+//     const packageCosts: { [key: string]: { standaloneCost?: number; totalCost: number } } = {};
+//     const visited = new Set<string>();
+
+//     const calculateCosts = async (packageId: string, packageUrl: string, pkgOwner: string, pkgName: string, defaultBranch: string): Promise<any> => {
+//       if (visited.has(packageId)) {
+//         return 0; // Avoid circular dependencies
+//       }
+//       visited.add(packageId);
+
+//       let standaloneCost = 0;
+//       try {
+//         // Fetch package.json from the URL
+//         standaloneCost = await fetchPackageSize(pkgOwner, pkgName, defaultBranch);
+//       } catch (error) {
+//         return sendResponse(500, { message: error }); return 0; // Return 0 cost if package.json is not found
+//       }
+
+//       packageCosts[packageId] = {
+//         totalCost: standaloneCost, // Will be updated if dependencies are included
+//       };
+
+//       let totalCost = standaloneCost;
+
+//       if (includeDependencies) {
+//         let dependencies = [];
+//         try {
+//           dependencies = await fetchPackageDependencies(pkgOwner, pkgName) as unknown as any;
+//         } catch (error) {
+//           console.error(`Failed to fetch dependencies for ${pkgOwner}/${pkgName}:`, error);
+//           return totalCost; // Return the standalone cost if dependencies cannot be fetched
+//         }
+
+//         packageCosts[packageId] = {
+//           standaloneCost,
+//           totalCost: standaloneCost, // Will be updated if dependencies are included
+//         };
+
+//         for (const dependency of dependencies) {
+//           console.log("Dependency", dependency);
+//           let depCost = 0;
+//           try {
+//             // Fetch repository details for the dependency
+//             const depRepoDetails = await fetchRepoDetails(dependency);
+//             if (depRepoDetails) {
+//               depCost = await calculateCosts(dependency, depRepoDetails.url, depRepoDetails.owner, depRepoDetails.name, depRepoDetails.defaultBranch);
+//             } else {
+//               // Fallback to fetching size from npm
+//               depCost = await fetchNpmPackageSize(dependency);
+//             }
+//           } catch (error) {
+//             console.error(`Failed to calculate costs for dependency ${dependency}:`, error);
+//           }
+//           totalCost += depCost;
+//         }
+//       }
+
+//       packageCosts[packageId].totalCost = totalCost;
+//       return totalCost;
+//     };
+
+//     const defaultBranch = await getDefaultBranch(pkg.owner, pkg.name);
+//     await calculateCosts(pkg.id, pkg.url, pkg.owner, pkg.name, defaultBranch);
+
+//     return sendResponse(200, packageCosts);
+//   } catch (error) {
+//     console.error('Get Package Cost Error:', error);
+//     return sendResponse(500, { message: 'The package rating system choked on at least one of the metrics.' });
+//   }
+// };
+
+
+
+
+
+
+
 export const handleGetPackageCost = async (id: string, headers: { [key: string]: string | undefined }, queryStringParameters: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
   let user: AuthenticatedUser;
@@ -1098,133 +1228,84 @@ export const handleGetPackageCost = async (id: string, headers: { [key: string]:
     return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
   }
 
-
-  // const includeDependencies = queryStringParameters?.dependency === 'true';
-
-  // try {
-  //   // Initial query to check if the package exists and fetch basic cost data
-  //   const costQuery = `
-  //     SELECT id, name, version, size_mb 
-  //     FROM packages 
-  //     WHERE id = $1
-  //   `;
-  //   const costResult = await pool.query(costQuery, [id]);
-
-  //   if (costResult.rows.length === 0) {
-  //     return sendResponse(404, { message: 'Package does not exist.' });
-  //   }
-
-  //   const packageCosts: Record<string, { standaloneCost?: number; totalCost: number }> = {};
-  //   let totalCost = 0;
-
-  //   // Initialize the package cost with its standalone cost
-  //   const pkg = costResult.rows[0];
-  //   packageCosts[pkg.id] = {
-  //     standaloneCost: pkg.size_mb,
-  //     totalCost: pkg.size_mb,
-  //   };
-  //   totalCost += pkg.size_mb;
-
-  //   if (includeDependencies) {
-  //     const stack = [id];
-  //     const visited = new Set<string>();
-
-  //     // Iterate through dependencies using a stack
-  //     while (stack.length > 0) {
-  //       const currentId = stack.pop()!;
-  //       if (visited.has(currentId)) continue;
-  //       visited.add(currentId);
-
-  //       // Fetch dependencies from a hypothetical 'dependencies' table
-  //       const depQuery = 'SELECT dependency_id FROM dependencies WHERE package_id = $1';
-  //       const depResult = await pool.query(depQuery, [currentId]);
-
-  //       for (const dep of depResult.rows) {
-  //         const depPkgQuery = 'SELECT id, size_mb FROM packages WHERE id = $1';
-  //         const depPkgResult = await pool.query(depPkgQuery, [dep.dependency_id]);
-
-  //         if (depPkgResult.rows.length > 0) {
-  //           const depPkg = depPkgResult.rows[0];
-  //           if (!packageCosts[depPkg.id]) {
-  //             packageCosts[depPkg.id] = {
-  //               standaloneCost: depPkg.size_mb,
-  //               totalCost: totalCost + depPkg.size_mb,
-  //             };
-  //             totalCost += depPkg.size_mb;
-  //             stack.push(depPkg.id);
-  //           }
-  //         }
-  //       }
-  //     }
-  //   } else {
-  //     // If no dependencies are included, total cost is just standalone
-  //     packageCosts[id].totalCost = packageCosts[id].standaloneCost || 0;
-  //   }
-
-
-
-  const dependency = queryStringParameters && queryStringParameters.dependency === 'true';
+  const includeDependencies = queryStringParameters && queryStringParameters.dependency === 'true';
 
   try {
-    // Fetch package and its dependencies
-    const costQuery = `
-      SELECT p.id, p.name, p.version, p.size_mb
+    // Fetch package details
+    const packageQuery = `
+      SELECT p.id, p.name, p.version, p.url, p.owner
       FROM packages p
       WHERE p.id = $1
     `;
-    const costResult = await pool.query(costQuery, [id]);
+    const packageResult = await pool.query(packageQuery, [id]);
 
-    if (costResult.rows.length === 0) {
+    if (packageResult.rows.length === 0) {
       return sendResponse(404, { message: 'Package does not exist.' });
     }
 
+    const pkg = packageResult.rows[0];
     const packageCosts: { [key: string]: { standaloneCost?: number; totalCost: number } } = {};
-    let totalCost = 0;
+    const calculateCosts = async (pkg: any): Promise<number> => {
+      const packageId = pkg.id ? pkg.id : 0;
+      const pkgOwner = pkg.owner;
+      const pkgName = pkg.name;
+      // Fetch the repository details to get the default branch
+      const repoDetailsUrl = `https://api.github.com/repos/${pkgOwner}/${pkgName}`;
+      const repoDetailsResponse = await fetch(repoDetailsUrl, {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      });
 
-    const stack = [id];
-    const visited = new Set<string>();
+      if (!repoDetailsResponse.ok) {
+        throw new Error('Failed to fetch repository details from GitHub');
+      }
 
-    while (stack.length > 0) {
-      const currentId = stack.pop()!;
-      if (visited.has(currentId)) continue;
-      visited.add(currentId);
+      const repoDetails = await repoDetailsResponse.json() as unknown as any;
+      const defaultBranch = repoDetails.default_branch;
 
-      const pkgQuery = 'SELECT * FROM packages WHERE id = $1';
-      const pkgResult = await pool.query(pkgQuery, [currentId]);
+      // Fetch the package.json file from the default branch
+      const packageJsonUrl = `https://raw.githubusercontent.com/${pkgOwner}/${pkgName}/${defaultBranch}/package.json`;
+      const packageJsonResponse = await fetch(packageJsonUrl, {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      });
 
-      if (pkgResult.rows.length === 0) continue;
+      if (!packageJsonResponse.ok) {
+        throw new Error('Failed to fetch package.json from GitHub');
+      }
+      const dependencies = await fetchPackageDependencies(packageJsonResponse);
 
-      const pkg = pkgResult.rows[0];
-      packageCosts[pkg.id] = {
-        standaloneCost: pkg.size_mb,
-        totalCost: pkg.size_mb, // Will be updated if dependencies are included
+      // Calculate the standalone cost (size of the package)
+      const standaloneCost = await fetchPackageSize(pkg.owner, pkg.name, defaultBranch);
+      packageCosts[packageId] = {
+        standaloneCost,
+        totalCost: standaloneCost, // Will be updated if dependencies are included
       };
-      totalCost += pkg.size_mb;
 
-      if (dependency) {
-        // Fetch dependencies from a hypothetical 'dependencies' table
-        const depQuery = 'SELECT dependency_id FROM dependencies WHERE package_id = $1';
-        const depResult = await pool.query(depQuery, [currentId]);
-        depResult.rows.forEach(dep => {
-          if (!visited.has(dep.dependency_id)) {
-            stack.push(dep.dependency_id);
-            totalCost += dep.size_mb; // Assuming size_mb is available
+      let totalCost = standaloneCost;
+
+      if (includeDependencies) {
+        for (const dependency of dependencies) {
+          console.log("Dependency", dependency);
+          // Fetch repository details for the dependency
+          const depRepoDetails = await fetchRepoDetails(dependency);
+          console.log("Dep Repo Details", depRepoDetails);
+          if (depRepoDetails) {
+            const depCost = await calculateCosts(depRepoDetails);
+            totalCost += depCost;
           }
-        });
+        }
       }
-    }
 
-    if (dependency) {
-      // Sum up total costs including dependencies
-      let cumulativeCost = 0;
-      for (const pkgId in packageCosts) {
-        cumulativeCost += packageCosts[pkgId].standaloneCost || 0;
-        packageCosts[pkgId].totalCost = cumulativeCost;
-      }
-    } else {
-      // Total cost is standalone
-      packageCosts[id].totalCost = packageCosts[id].standaloneCost || 0;
-    }
+      packageCosts[packageId].totalCost = totalCost;
+      return totalCost;
+    };
+
+    await calculateCosts(pkg);
 
     return sendResponse(200, packageCosts);
   } catch (error) {
@@ -1233,6 +1314,41 @@ export const handleGetPackageCost = async (id: string, headers: { [key: string]:
   }
 };
 
+// Helper function to fetch package.json and get dependencies
+async function fetchPackageDependencies(packageJsonResponse: any): Promise<string[]> {
+  try {
+    const packageJson = await packageJsonResponse.json() as { dependencies: { [key: string]: string } };
+    console.log("Package JSON", packageJson.dependencies);
+    return Object.keys(packageJson.dependencies || {});
+  } catch (error) {
+    console.error('Error fetching package dependencies:', error);
+    throw error;
+  }
+}
+// Helper function to fetch package size
+async function fetchPackageSize(pkgOwner: string, pkgName: string, defaultBranch: string): Promise<number> {
+  try {
+    const zipUrl = `https://codeload.github.com/${pkgOwner}/${pkgName}/zip/refs/heads/${defaultBranch}`;
+    const response = await fetch(zipUrl, {
+      headers: {
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Accept: 'application/vnd.github.v3+json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch package size from GitHub');
+    }
+
+    const arrayBuffer = await response.arrayBuffer();
+    console.log("Array Buffer", arrayBuffer);
+    const sizeInMB = arrayBuffer.byteLength / (1024 * 1024); // Convert bytes to MB
+    return sizeInMB;
+  } catch (error) {
+    console.error('Error fetching package size:', error);
+    throw error;
+  }
+}
 // Handler for /tracks - GET (Get Planned Tracks)
 export const handleGetTracks = async (headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
