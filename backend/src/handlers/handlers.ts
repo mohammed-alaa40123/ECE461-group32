@@ -195,10 +195,14 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       const zipEntries = zip.getEntries();
 
       let packageJSON: string | null = null;
+      
       zipEntries.forEach(entry => {
+        const LCname=entry.entryName.toLowerCase();
         if (entry.entryName.endsWith('package.json')) {
           packageJSON = entry.getData().toString('utf8');
         }
+        if(LCname.endsWith('readme.txt')||LCname.endsWith('readme.md') )
+          data.readme=entry.getData().toString('utf8');
       });
 
       if (!packageJSON) {
@@ -267,7 +271,14 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       if (!response.ok) {
         return sendResponse(400, { message: 'Could not get GitHub URL for zip package download' });
       }
-
+      const readmef=await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      });
+      const readmecontent=await readmef.arrayBuffer();
+      data.readme=readmecontent.toString();
       const arrayBuffer = await response.arrayBuffer();
       contentBuffer = Buffer.from(arrayBuffer);
 
@@ -530,7 +541,12 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       let metadata: PackageMetadata = updatedPackage.metadata;
       let data: PackageData = updatedPackage.data;
       contentBuffer = base64Buffer;
-
+      zipEntries.forEach(entry => {
+        const LCname=entry.entryName.toLowerCase();
+        LCname.endsWith('readme.md')
+        if(LCname.endsWith('readme.txt')|| LCname.endsWith('readme.md'))
+          data.readme=entry.getData().toString('utf8');
+      });
 
       // Handle "debloat" if true
       if (data.debloat) {
@@ -575,7 +591,14 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       if (!response.ok) {
         return sendResponse(400, { message: 'Could not get GitHub URL for zip package download' });
       }
-
+      const readmef=await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json',
+        },
+      });
+      const readmecontent=await readmef.arrayBuffer();
+      data.readme=readmecontent.toString();
       const arrayBuffer = await response.arrayBuffer();
       contentBuffer = Buffer.from(arrayBuffer);
 
@@ -965,7 +988,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
     // Use PostgreSQL regex matching on name and README (assuming README is a field)
     const searchQuery = `
       SELECT * FROM packages
-      WHERE name ~* $1 
+      WHERE name ~* $1 or readme  ~* $1
     `;
     const res = await pool.query(searchQuery, [RegEx]);
 

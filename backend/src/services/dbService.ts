@@ -37,8 +37,8 @@ export const getUserByName = async (name: string): Promise<User | null> => {
 
 export const insertIntoDB = async (metadata: PackageMetadata, data: PackageData): Promise<Package> => {
   const insertText = `
-    INSERT INTO packages (id, name,owner, version, url, debloat, js_program)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO packages (id, name,owner, version, url, debloat, js_program,readme)
+    VALUES ($1, $2, $3, $4, $5, $6, $7,$8)
     RETURNING *;
   `;
   const insertValues = [
@@ -49,6 +49,7 @@ export const insertIntoDB = async (metadata: PackageMetadata, data: PackageData)
     data.URL || null,
     data.debloat || false,
     data.JSProgram || null,
+    data.readme || null
   ];
   const res = await pool.query(insertText, insertValues);
   return res.rows[0];
