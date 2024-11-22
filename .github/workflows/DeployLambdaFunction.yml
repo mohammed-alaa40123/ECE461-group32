@@ -3,7 +3,7 @@ name: Deploy Lambda Function using Docker
 on:
   push:
     branches:
-      - Access_track
+      - main
 
 jobs:
   deploy:
