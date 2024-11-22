@@ -302,7 +302,7 @@ export async function fetchPackageDependencies(pkgOwner: string, pkgName: string
 }
 
 // Helper function to fetch repository details
-export async function fetchRepoDetails(packageName: string): Promise<{ url: string, owner: string, name: string, defaultBranch: string } | null> {
+export async function fetchRepoDetails(packageName: string): Promise<{ url: string, owner: string, name: string, defaultBranch: string,version:string } | null> {
   try {
     // Fetch package metadata from the npm registry
     const npmUrl = `https://registry.npmjs.org/${packageName}`;
@@ -354,6 +354,7 @@ export async function fetchRepoDetails(packageName: string): Promise<{ url: stri
       url: repoDetails.html_url,
       owner: repoDetails.owner.login,
       name: repoDetails.name,
+      version: latestVersion,
       defaultBranch: repoDetails.default_branch,
     };
   } catch (error) {

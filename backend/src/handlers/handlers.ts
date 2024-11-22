@@ -1228,27 +1228,42 @@ export const handleGetPackageCost = async (id: string, headers: { [key: string]:
     return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
   }
 
-  const includeDependencies = queryStringParameters && queryStringParameters.dependency === 'true';
-
-  try {
-    // Fetch package details
-    const packageQuery = `
+  // Fetch package details
+  const packageQuery = `
       SELECT p.id, p.name, p.version, p.url, p.owner
       FROM packages p
       WHERE p.id = $1
     `;
-    const packageResult = await pool.query(packageQuery, [id]);
+  const packageResult = await pool.query(packageQuery, [id]);
 
-    if (packageResult.rows.length === 0) {
-      return sendResponse(404, { message: 'Package does not exist.' });
-    }
+  if (packageResult.rows.length === 0) {
+    return sendResponse(404, { message: 'Package does not exist.' });
+  }
 
-    const pkg = packageResult.rows[0];
+  const pkg = packageResult.rows[0];
+  const packageName = pkg.name;
+
+
+  const includeDependencies = queryStringParameters && queryStringParameters.dependency === 'true';
+
+  try {
     const packageCosts: { [key: string]: { standaloneCost?: number; totalCost: number } } = {};
-    const calculateCosts = async (pkg: any): Promise<number> => {
-      const packageId = pkg.id ? pkg.id : 0;
-      const pkgOwner = pkg.owner;
-      const pkgName = pkg.name;
+    const calculateCosts = async (packageName: string, packageVersion: string, parentPackageName: string | null = null, parentPackageVersion: string | null = null, pkgOwner: string): Promise<number> => {
+      // Check if the package costs are already calculated and stored in the database
+      const existingCostsQuery = `SELECT standalone_cost, total_cost, dependencies FROM dependencies WHERE package_name = $1 AND package_version = $2`;
+      const existingCostsResult = await pool.query(existingCostsQuery, [packageName, packageVersion]);
+
+      if (existingCostsResult.rows.length > 0) {
+        const existingCosts = existingCostsResult.rows[0];
+        packageCosts[`${packageName}@${packageVersion}`] = {
+          standaloneCost: existingCosts.standalone_cost,
+          totalCost: existingCosts.total_cost,
+        };
+        return existingCosts.total_cost;
+      }
+
+      const pkgName = packageName;
+
       // Fetch the repository details to get the default branch
       const repoDetailsUrl = `https://api.github.com/repos/${pkgOwner}/${pkgName}`;
       const repoDetailsResponse = await fetch(repoDetailsUrl, {
@@ -1259,10 +1274,10 @@ export const handleGetPackageCost = async (id: string, headers: { [key: string]:
       });
 
       if (!repoDetailsResponse.ok) {
-        throw new Error('Failed to fetch repository details from GitHub');
+        throw new Error(`Failed to fetch repository details from GitHub for /${pkgOwner}/${pkgName}`);
       }
 
-      const repoDetails = await repoDetailsResponse.json() as unknown as any;
+      const repoDetails = await repoDetailsResponse.json() as any;
       const defaultBranch = repoDetails.default_branch;
 
       // Fetch the package.json file from the default branch
@@ -1277,35 +1292,74 @@ export const handleGetPackageCost = async (id: string, headers: { [key: string]:
       if (!packageJsonResponse.ok) {
         throw new Error('Failed to fetch package.json from GitHub');
       }
-      const dependencies = await fetchPackageDependencies(packageJsonResponse);
 
-      // Calculate the standalone cost (size of the package)
-      const standaloneCost = await fetchPackageSize(pkg.owner, pkg.name, defaultBranch);
-      packageCosts[packageId] = {
-        standaloneCost,
-        totalCost: standaloneCost, // Will be updated if dependencies are included
-      };
+      const packageJson = await packageJsonResponse.json() as any;
+      const dependencies = packageJson.dependencies ? Object.keys(packageJson.dependencies) : [];
+      console.log(`Dependencies for ${pkgOwner}/${pkgName} is`, dependencies);
+      
+  // Calculate the standalone cost (size of the package)
+  const standaloneCost = await fetchPackageSize(pkgOwner, pkgName, defaultBranch);
+  packageCosts[`${packageName}@${packageVersion}`] = {
+    standaloneCost,
+    totalCost: standaloneCost, // Will be updated if dependencies are included
+  };
 
-      let totalCost = standaloneCost;
+  let totalCost = standaloneCost;
 
-      if (includeDependencies) {
-        for (const dependency of dependencies) {
-          console.log("Dependency", dependency);
-          // Fetch repository details for the dependency
-          const depRepoDetails = await fetchRepoDetails(dependency);
-          console.log("Dep Repo Details", depRepoDetails);
-          if (depRepoDetails) {
-            const depCost = await calculateCosts(depRepoDetails);
-            totalCost += depCost;
-          }
-        }
+  // Store the package itself in the database before processing dependencies
+  const insertPackageQuery = `
+    INSERT INTO dependencies (package_name, package_version, standalone_cost, total_cost, dependencies, parent_package_name, parent_package_version)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    ON CONFLICT (package_name, package_version) DO UPDATE
+    SET standalone_cost = EXCLUDED.standalone_cost,
+        total_cost = EXCLUDED.total_cost,
+        dependencies = EXCLUDED.dependencies,
+        parent_package_name = EXCLUDED.parent_package_name,
+        parent_package_version = EXCLUDED.parent_package_version
+  `;
+  await pool.query(insertPackageQuery, [packageName, packageVersion, standaloneCost, totalCost, JSON.stringify({}), parentPackageName, parentPackageVersion]);
+
+  if (includeDependencies) {
+    const dependencyCosts: { [key: string]: number } = {};
+    for (const dependency of dependencies) {
+      console.log("Dependency", dependency);
+      // Fetch repository details for the dependency
+      const depRepoDetails = await fetchRepoDetails(dependency);
+      console.log("Dep Repo Details", depRepoDetails);
+      if (depRepoDetails) {
+        const depCost = await calculateCosts(depRepoDetails.name, depRepoDetails.version, packageName, packageVersion,depRepoDetails.owner);
+        totalCost += depCost;
+        dependencyCosts[dependency] = depCost;
+
+        // Insert the dependency into the database
+        const insertDependencyQuery = `
+          INSERT INTO dependencies (package_name, package_version, standalone_cost, total_cost, dependencies, parent_package_name, parent_package_version)
+          VALUES ($1, $2, $3, $4, $5, $6, $7)
+          ON CONFLICT (package_name, package_version) DO UPDATE
+          SET standalone_cost = EXCLUDED.standalone_cost,
+              total_cost = EXCLUDED.total_cost,
+              dependencies = EXCLUDED.dependencies,
+              parent_package_name = EXCLUDED.parent_package_name,
+              parent_package_version = EXCLUDED.parent_package_version
+        `;
+        await pool.query(insertDependencyQuery, [dependency, depRepoDetails.version, depCost, depCost, JSON.stringify({}), packageName, packageVersion]);
       }
+    }
 
-      packageCosts[packageId].totalCost = totalCost;
-      return totalCost;
-    };
+    // Update the package with the total cost including dependencies
+    const updatePackageQuery = `
+      UPDATE dependencies
+      SET total_cost = $1,
+          dependencies = $2
+      WHERE package_name = $3 AND package_version = $4
+    `;
+    await pool.query(updatePackageQuery, [totalCost, JSON.stringify(dependencyCosts), packageName, packageVersion]);
+  }
 
-    await calculateCosts(pkg);
+  packageCosts[`${packageName}@${packageVersion}`].totalCost = totalCost;
+  return totalCost;
+};
+    await calculateCosts(packageName, pkg.version, null, null, pkg.owner);
 
     return sendResponse(200, packageCosts);
   } catch (error) {
@@ -1314,17 +1368,6 @@ export const handleGetPackageCost = async (id: string, headers: { [key: string]:
   }
 };
 
-// Helper function to fetch package.json and get dependencies
-async function fetchPackageDependencies(packageJsonResponse: any): Promise<string[]> {
-  try {
-    const packageJson = await packageJsonResponse.json() as { dependencies: { [key: string]: string } };
-    console.log("Package JSON", packageJson.dependencies);
-    return Object.keys(packageJson.dependencies || {});
-  } catch (error) {
-    console.error('Error fetching package dependencies:', error);
-    throw error;
-  }
-}
 // Helper function to fetch package size
 async function fetchPackageSize(pkgOwner: string, pkgName: string, defaultBranch: string): Promise<number> {
   try {
