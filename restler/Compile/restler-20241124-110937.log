@@ -1,0 +1,12 @@
+Restler Information: 0 : Starting task Compile...
+    DateTime=2024-11-24T16:09:38.1126067Z
+Restler Information: 0 : Launching 'dotnet "C:\Users\calia\Downloads\restler-fuzzer\restler_bin\restler\../compiler/Restler.CompilerExe.dll" "C:\Users\calia\Downloads\restler-fuzzer\restler_bin\restler\Compile\config.json"'
+    DateTime=2024-11-24T16:09:39.7594651Z
+Restler Information: 0 : Process execution terminated in 00:00:01.9069961 with exit code 0x0: 'dotnet "C:\Users\calia\Downloads\restler-fuzzer\restler_bin\restler\../compiler/Restler.CompilerExe.dll" "C:\Users\calia\Downloads\restler-fuzzer\restler_bin\restler\Compile\config.json"'
+    DateTime=2024-11-24T16:09:41.6719221Z
+Restler Information: 0 : (8140) dotnet "C:\Users\calia\Downloads\restler-fuzzer\restler_bin\restler\../compiler/Restler.CompilerExe.dll" "C:\Users\calia\Downloads\restler-fuzzer\restler_bin\restler\Compile\config.json" exited with code: 0
+    DateTime=2024-11-24T16:09:41.6796928Z
+Restler Information: 0 : Task Compile succeeded.
+    DateTime=2024-11-24T16:09:41.7177771Z
+Restler Information: 0 : Collecting logs...
+    DateTime=2024-11-24T16:09:41.8208522Z
