@@ -1,11 +1,19 @@
-import { graphqlClient, GET_VALUES_FOR_CODE_REVIEW_METRIC } from "../graphqlClient";
-import { CodeReviewResponse } from "../types";
+import { graphqlClient, GET_VALUES_FOR_CODE_REVIEW_METRIC, GET_VALUES_FOR_CODE_REVIEW_METRIC_MERGED} from "../graphqlClient";
+import { CodeReviewResponse, CodeReviewResponseNew } from "../types";
 import { getLogger } from "../logger";
 
 const logger = getLogger();
 
 async function fetchPullRequests(repoOwner: string, repoName: string, cursor: string | null = null): Promise<CodeReviewResponse> {
   return await graphqlClient.request(GET_VALUES_FOR_CODE_REVIEW_METRIC, {
+    repoOwner,
+    repoName,
+    after: cursor, // Pagination cursor
+  });
+}
+
+async function fetchMergedPullRequests(repoOwner: string, repoName: string, cursor: string | null = null): Promise<CodeReviewResponseNew> {
+  return await graphqlClient.request(GET_VALUES_FOR_CODE_REVIEW_METRIC_MERGED, {
     repoOwner,
     repoName,
     after: cursor, // Pagination cursor
@@ -27,9 +35,16 @@ export async function calculateCodeReviewFractionMetric(repoOwner: string, repoN
 
     // Fetch pull requests with pagination
     while (hasNextPage) {
-      const data: CodeReviewResponse = await fetchPullRequests(repoOwner, repoName, cursor);
+      const data: CodeReviewResponseNew = await fetchMergedPullRequests(repoOwner, repoName, cursor);
+
+      if (!data || !data.repository || !data.repository.pullRequests) {
+        console.error('Invalid response structure:', data);
+        throw new Error('Invalid response structure');
+      }
 
       const pullRequests = data.repository.pullRequests;
+      // console.log('pull request: ', pullRequests.edges[0].node.additions)
+
       pullRequests.edges.forEach(({ node }) => {
         totalCodeAdditions += node.additions;
         if (node.reviews.totalCount > 0) {
@@ -38,8 +53,14 @@ export async function calculateCodeReviewFractionMetric(repoOwner: string, repoN
       });
 
       // Check for more pages
-      hasNextPage = pullRequests.pageInfo.hasNextPage;
-      cursor = pullRequests.pageInfo.endCursor;
+      if(pullRequests.pageInfo != null) {
+        hasNextPage = pullRequests.pageInfo.hasNextPage;
+        cursor = pullRequests.pageInfo.endCursor;
+      }
+      else {
+        hasNextPage = false;
+      }
+      
 
       // Optional: Implement a delay to avoid rate limit
       await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second between requests
