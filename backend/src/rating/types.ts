@@ -130,3 +130,28 @@ export type CodeReviewResponse = {
   };
 };
 
+export interface CodeReviewResponseNew {
+  repository: {
+    pullRequests: {
+      edges: Array<{
+        node: {
+          additions: number;
+          reviews: {
+            totalCount: number;
+            nodes: Array<{
+              state: string;
+              author: {
+                login: string;
+              };
+            }>;
+          };
+        };
+      }>;
+      pageInfo: {
+        hasNextPage: boolean;
+        endCursor: string | null;
+      };
+    };
+  };
+}
+
