@@ -20,7 +20,7 @@ provider:
 functions:
   api:
     handler: index.handler
-    timeout: 200
+    timeout: 1000
     events:
       - http:
           path: authenticate

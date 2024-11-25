@@ -19,7 +19,10 @@ import { send } from 'process';
 
 const logger = getLogger();
 
-export const handleCreateGroup = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
+export const handleCreateGroup = async (
+  body: string,
+  headers: { [key: string]: string | undefined }
+): Promise<APIGatewayProxyResult> => {
   let user: AuthenticatedUser;
   try {
     user = await authenticate(headers);
@@ -31,26 +34,36 @@ export const handleCreateGroup = async (body: string, headers: { [key: string]: 
     return sendResponse(403, { message: 'Admin privileges required to create groups.' });
   }
 
-  const { name } = JSON.parse(body);
+  const { name, permissions = [] } = JSON.parse(body);
 
   if (!name) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: 'Group name is required.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(400, { message: 'Group name is required.' });
   }
 
   try {
+    // Start a transaction
+    await pool.query('BEGIN');
+
     // Insert the group into the database
     const groupQuery = `
       INSERT INTO groups (name)
       VALUES ($1)
       RETURNING id
     `;
-    const groupValues = [name];
-    const groupResult = await pool.query(groupQuery, groupValues);
+    const groupResult = await pool.query(groupQuery, [name]);
     const groupId = groupResult.rows[0].id;
+
+    // Assign permissions to the group
+    for (const permissionName of permissions) {
+      const permissionQuery = `
+        INSERT INTO group_permissions (group_id, permission_id)
+        SELECT $1, id FROM permissions WHERE name = $2
+      `;
+      await pool.query(permissionQuery, [groupId, permissionName]);
+    }
+
+    // Commit the transaction
+    await pool.query('COMMIT');
 
     return {
       statusCode: 201,
@@ -58,24 +71,17 @@ export const handleCreateGroup = async (body: string, headers: { [key: string]: 
       headers: { 'Content-Type': 'application/json' },
     };
   } catch (error: any) {
+    // Roll back the transaction in case of an error
+    await pool.query('ROLLBACK');
     console.error('Error creating group:', error);
 
-    if (error.code === '23505') { // Unique violation error code
-      return {
-        statusCode: 409,
-        body: JSON.stringify({ message: 'Group already exists.' }),
-        headers: { 'Content-Type': 'application/json' },
-      };
+    if (error.code === '23505') {
+      return sendResponse(409, { message: 'Group already exists.' });
     }
 
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: 'Internal server error.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(500, { message: 'Internal server error.' });
   }
 };
-
 export const handleCreatePermission = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   let user: AuthenticatedUser;
   try {
@@ -133,7 +139,10 @@ export const handleCreatePermission = async (body: string, headers: { [key: stri
   }
 };
 
-export const handleRegisterUser = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
+export const handleRegisterUser = async (
+  body: string,
+  headers: { [key: string]: string | undefined }
+): Promise<APIGatewayProxyResult> => {
   let user: AuthenticatedUser;
   try {
     user = await authenticate(headers);
@@ -149,11 +158,7 @@ export const handleRegisterUser = async (body: string, headers: { [key: string]:
   const { name, password, isAdmin = false, groups = [], permissions = [] } = JSON.parse(body);
 
   if (!name || !password) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: 'Name and password are required.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(400, { message: 'Name and password are required.' });
   }
 
   try {
@@ -174,8 +179,9 @@ export const handleRegisterUser = async (body: string, headers: { [key: string]:
     if (isAdmin) {
       const allPermissionsQuery = 'SELECT id FROM permissions';
       const allPermissionsResult = await pool.query(allPermissionsQuery);
-      const allPermissions = allPermissionsResult.rows.map(row => row.id);
+      const allPermissions = allPermissionsResult.rows.map((row) => row.id);
 
+      // Assign all permissions to the user
       for (const permissionId of allPermissions) {
         const permissionQuery = `
           INSERT INTO user_permissions (user_id, permission_id)
@@ -191,51 +197,69 @@ export const handleRegisterUser = async (body: string, headers: { [key: string]:
       `;
       await pool.query(adminGroupQuery, [userId]);
     } else {
-      // Insert user groups
+      // Insert user groups and assign group permissions
       for (const groupName of groups) {
-        const groupQuery = `
-          INSERT INTO user_groups (user_id, group_id)
-          SELECT $1, id FROM groups WHERE name = $2
-        `;
-        await pool.query(groupQuery, [userId, groupName]);
+        const groupResult = await pool.query('SELECT id FROM groups WHERE name = $1', [groupName]);
+        if (groupResult.rows.length > 0) {
+          const groupId = groupResult.rows[0].id;
+
+          // Insert into user_groups
+          const groupQuery = `
+            INSERT INTO user_groups (user_id, group_id)
+            VALUES ($1, $2)
+          `;
+          await pool.query(groupQuery, [userId, groupId]);
+
+          // Fetch permissions associated with the group
+          const groupPermissionsResult = await pool.query(
+            'SELECT permission_id FROM group_permissions WHERE group_id = $1',
+            [groupId]
+          );
+          const groupPermissionIds = groupPermissionsResult.rows.map((row) => row.permission_id);
+
+          // Assign group permissions to the user
+          for (const permissionId of groupPermissionIds) {
+            const userPermissionQuery = `
+              INSERT INTO user_permissions (user_id, permission_id)
+              VALUES ($1, $2)
+              ON CONFLICT DO NOTHING
+            `;
+            await pool.query(userPermissionQuery, [userId, permissionId]);
+          }
+        } else {
+          console.warn(`Group "${groupName}" does not exist.`);
+        }
       }
 
       // Insert user permissions
       for (const permissionName of permissions) {
-        const permissionQuery = `
-          INSERT INTO user_permissions (user_id, permission_id)
-          SELECT $1, id FROM permissions WHERE name = $2
-        `;
-        await pool.query(permissionQuery, [userId, permissionName]);
+        const permissionResult = await pool.query('SELECT id FROM permissions WHERE name = $1', [permissionName]);
+        if (permissionResult.rows.length > 0) {
+          const permissionId = permissionResult.rows[0].id;
+
+          const permissionQuery = `
+            INSERT INTO user_permissions (user_id, permission_id)
+            VALUES ($1, $2)
+            ON CONFLICT DO NOTHING
+          `;
+          await pool.query(permissionQuery, [userId, permissionId]);
+        } else {
+          console.warn(`Permission "${permissionName}" does not exist.`);
+        }
       }
     }
 
-    return {
-      statusCode: 201,
-      body: JSON.stringify({ message: 'User registered successfully!' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(201, { message: 'User registered successfully!' });
   } catch (error: any) {
     console.error('Error registering user:', error);
 
-    if (error.code === '23505') { // Unique violation error code
-      return {
-        statusCode: 409,
-        body: JSON.stringify({ message: 'User already exists.' }),
-        headers: { 'Content-Type': 'application/json' },
-      };
+    if (error.code === '23505') {
+      return sendResponse(409, { message: 'User already exists.' });
     }
 
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: 'Internal server error.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(500, { message: 'Internal server error.' });
   }
-};
-  
-  // src/handlers/handlers.ts
-  
+};    
   export const handleDeleteUser = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
     let user: AuthenticatedUser;
     try {
@@ -318,7 +342,11 @@ export const handleRegisterUser = async (body: string, headers: { [key: string]:
   };
   
   
-export const handleEditUserGroupsAndPermissions = async (body: string, headers: { [key: string]: string | undefined },userId:Number): Promise<APIGatewayProxyResult> => {
+export const handleEditUserGroupsAndPermissions = async (
+  body: string,
+  headers: { [key: string]: string | undefined },
+  userId: number
+): Promise<APIGatewayProxyResult> => {
   let user: AuthenticatedUser;
   try {
     user = await authenticate(headers);
@@ -327,17 +355,15 @@ export const handleEditUserGroupsAndPermissions = async (body: string, headers: 
   }
 
   if (!user.isAdmin) {
-    return sendResponse(403, { message: 'Admin privileges required to edit user groups and permissions.' });
+    return sendResponse(403, {
+      message: 'Admin privileges required to edit user groups and permissions.',
+    });
   }
 
   const { groups = [], permissions = [] } = JSON.parse(body);
 
   if (!userId) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: 'User ID is required.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(400, { message: 'User ID is required.' });
   }
 
   try {
@@ -348,34 +374,46 @@ export const handleEditUserGroupsAndPermissions = async (body: string, headers: 
     await pool.query('DELETE FROM user_groups WHERE user_id = $1', [userId]);
     await pool.query('DELETE FROM user_permissions WHERE user_id = $1', [userId]);
 
-    // Insert new groups
+    // Assign new groups
     for (const groupName of groups) {
-      const groupQuery = `
-        INSERT INTO user_groups (user_id, group_id)
-        SELECT $1, id FROM groups WHERE name = $2
-      `;
-      await pool.query(groupQuery, [userId, groupName]);
+      const groupResult = await pool.query('SELECT id FROM groups WHERE name = $1', [groupName]);
+      if (groupResult.rows.length > 0) {
+        const groupId = groupResult.rows[0].id;
+        await pool.query('INSERT INTO user_groups (user_id, group_id) VALUES ($1, $2)', [userId, groupId]);
+
+        // Optionally assign the group's permissions to the user
+        const permissionsResult = await pool.query(
+          'SELECT permission_id FROM group_permissions WHERE group_id = $1',
+          [groupId]
+        );
+        const permissionIds = permissionsResult.rows.map((row) => row.permission_id);
+
+        for (const permissionId of permissionIds) {
+          await pool.query(
+            'INSERT INTO user_permissions (user_id, permission_id) VALUES ($1, $2) ON CONFLICT DO NOTHING',
+            [userId, permissionId]
+          );
+        }
+      }
     }
 
-    // Insert new permissions
+    // Assign new permissions
     for (const permissionName of permissions) {
-      const permissionQuery = `
+      await pool.query(
+        `
         INSERT INTO user_permissions (user_id, permission_id)
         SELECT $1, id FROM permissions WHERE name = $2
-      `;
-      await pool.query(permissionQuery, [userId, permissionName]);
+        `,
+        [userId, permissionName]
+      );
     }
 
     // Commit the transaction
     await pool.query('COMMIT');
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'User groups and permissions updated successfully.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(200, { message: 'User groups and permissions updated successfully.' });
   } catch (error: any) {
-    // Rollback the transaction in case of an error
+    // Roll back the transaction in case of an error
     await pool.query('ROLLBACK');
     console.error('Error updating user groups and permissions:', error);
     return sendResponse(500, { message: 'Internal server error.' });

@@ -1,4 +1,4 @@
-import { graphqlClient, GET_VALUES_FOR_CODE_REVIEW_METRIC, GET_VALUES_FOR_CODE_REVIEW_METRIC_MERGED} from "../graphqlClient";
+import { graphqlClient, GET_VALUES_FOR_CODE_REVIEW_METRIC} from "../graphqlClient";
 import { CodeReviewResponse, CodeReviewResponseNew } from "../types";
 import { getLogger } from "../logger";
 
@@ -13,7 +13,7 @@ async function fetchPullRequests(repoOwner: string, repoName: string, cursor: st
 }
 
 async function fetchMergedPullRequests(repoOwner: string, repoName: string, cursor: string | null = null): Promise<CodeReviewResponseNew> {
-  return await graphqlClient.request(GET_VALUES_FOR_CODE_REVIEW_METRIC_MERGED, {
+  return await graphqlClient.request(GET_VALUES_FOR_CODE_REVIEW_METRIC, {
     repoOwner,
     repoName,
     after: cursor, // Pagination cursor
