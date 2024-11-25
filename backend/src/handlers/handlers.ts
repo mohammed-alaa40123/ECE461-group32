@@ -1182,7 +1182,7 @@ export const handleGetPackageCost = async (
 
   const includeDependencies = queryStringParameters && queryStringParameters.dependency === 'true';
   const MAX_DEPTH = 5;
-  const packageCostsCache: { [key: string]: number } = {};
+  const packageCostsCache: { [key: string]: { standaloneCost: number, totalCost: number } } = {};
   let packageCosts = {};
   try {
     const calculateCosts = async (
@@ -1192,13 +1192,23 @@ export const handleGetPackageCost = async (
       parentPackageVersion: string | null = null,
       pkgOwner: string,
       currentDepth: number = 0
-    ): Promise<number> => {
+    ): Promise<{ standaloneCost: number, totalCost: number }> => {
       if (currentDepth > MAX_DEPTH) {
-        return 0;
+        return { standaloneCost: 0, totalCost: 0 };
       }
-
-      const packageKey = `${packageName}@${packageVersion}`;
-
+      const packageQuery = `
+      SELECT p.id, p.name, p.version, p.url, p.owner
+      FROM packages p
+      WHERE p.name = $1 and  p.owner = $2 and  p.version = $3
+    `;
+      const packageResult = await pool.query(packageQuery, [packageName, pkgOwner, packageVersion]);
+      let packageKey = "";
+      if (packageResult.rows.length === 0) {
+        packageKey = generatePackageId();
+      }
+      else {
+        packageKey = `${packageResult.rows[0].id}`;
+      }
       if (packageCostsCache[packageKey] !== undefined) {
         return packageCostsCache[packageKey];
       }
@@ -1240,7 +1250,7 @@ export const handleGetPackageCost = async (
       const standaloneCost = await fetchPackageSize(pkgOwner, packageName, defaultBranch);
       let totalCost = standaloneCost;
 
-      packageCostsCache[packageKey] = totalCost;
+      packageCostsCache[packageKey] = { standaloneCost, totalCost };
 
       // Store the package in the database
       const insertPackageQuery = `
@@ -1277,7 +1287,7 @@ export const handleGetPackageCost = async (
                 depRepoDetails.owner,
                 currentDepth + 1
               );
-              totalCost += depCost;
+              totalCost += depCost.standaloneCost;
 
               // Insert the dependency into the database
               const insertDependencyQuery = `
@@ -1293,8 +1303,8 @@ export const handleGetPackageCost = async (
               await pool.query(insertDependencyQuery, [
                 dependency,
                 depRepoDetails.version,
-                depCost,
-                depCost,
+                depCost.standaloneCost,
+                depCost.totalCost,
                 JSON.stringify({}),
                 packageName,
                 packageVersion
@@ -1321,15 +1331,15 @@ export const handleGetPackageCost = async (
           packageVersion
         ]);
 
-        packageCostsCache[packageKey] = totalCost;
+        packageCostsCache[packageKey] = { standaloneCost, totalCost };
       }
 
-      return totalCost;
+      return { standaloneCost, totalCost };
     };
 
     // Helper function to map dependencies
-    const packagesToDependencies = (dependencies: string[]): { [key: string]: number } => {
-      const depMap: { [key: string]: number } = {};
+    const packagesToDependencies = (dependencies: string[]): { [key: string]: { standaloneCost: number, totalCost: number } } => {
+      const depMap: { [key: string]: { standaloneCost: number, totalCost: number } } = {};
       dependencies.forEach(dep => {
         depMap[dep] = packageCostsCache[`${dep}`] || 0;
       });
@@ -1339,13 +1349,17 @@ export const handleGetPackageCost = async (
     await calculateCosts(packageName, packageVersion, null, null, packageOwner!);
 
     if (includeDependencies) {
-      packageCosts[`${packageName}@${packageVersion}`] = {
-        standaloneCost: packageCostsCache[`${packageName}@${packageVersion}`],
-        totalCost: packageCostsCache[`${packageName}@${packageVersion}`]
-      };
+      const sortedPackages = Object.entries(packageCostsCache)
+        .sort((a, b) => b[1].totalCost - a[1].totalCost);
+      for (const [pkgId, costs] of Object.entries(sortedPackages)) {
+        packageCosts[costs[0]] = {
+          standaloneCost: costs[1].standaloneCost,
+          totalCost: costs[1].totalCost
+        };
+      }
     } else {
-      packageCosts[`${packageId}`] = {
-        totalCost: packageCostsCache[`${packageName}@${packageVersion}`]
+      packageCosts[packageId] = {
+        totalCost: packageCostsCache[`${packageId}`].totalCost,
       };
     }
 

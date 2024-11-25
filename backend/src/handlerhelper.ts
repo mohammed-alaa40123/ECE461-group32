@@ -245,7 +245,7 @@ WHERE
 
 
   export const generatePackageId = (): string => {
-    console.log(`Generating id`);
+    // console.log(`Generating id`);
     
     // Generate a random 63-bit integer to ensure it fits within the positive range of BIGINT
     const randomBytes = crypto.randomBytes(8); // 8 bytes = 64 bits
@@ -255,7 +255,7 @@ WHERE
     const maxBigInt = BigInt('9223372');
     id = id % maxBigInt;
     
-    console.log(`Generated package id ${id.toString()} successfully`);
+    // console.log(`Generated package id ${id.toString()} successfully`);
     return id.toString();
 };
 
@@ -302,7 +302,7 @@ export async function fetchPackageDependencies(pkgOwner: string, pkgName: string
 }
 
 // Helper function to fetch repository details
-export async function fetchRepoDetails(packageName: string): Promise<{ url: string, owner: string, name: string, defaultBranch: string,version:string } | null> {
+export async function fetchRepoDetails(packageName: string): Promise<{packageId:string, url: string, owner: string, name: string, defaultBranch: string,version:string } | null> {
   try {
     // Fetch package metadata from the npm registry
     const npmUrl = `https://registry.npmjs.org/${packageName}`;
@@ -351,6 +351,7 @@ export async function fetchRepoDetails(packageName: string): Promise<{ url: stri
 
     const repoDetails = await repoDetailsResponse.json() as unknown as any;
     return {
+      packageId: generatePackageId(),
       url: repoDetails.html_url,
       owner: repoDetails.owner.login,
       name: repoDetails.name,
