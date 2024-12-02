@@ -464,22 +464,12 @@ export const handleRetrieveUserGroupsAndPermissionsForUser = async (userId: stri
   const userIdINT= parseInt(userId);
   try {
     // Fetch groups for the user
-    const userGroupsQuery = `
-      SELECT g.id, g.name
-      FROM user_groups ug
-      JOIN groups g ON ug.group_id = g.id
-      WHERE ug.user_id = $1
-    `;
+    const userGroupsQuery = `SELECT g.id, g.name FROM user_groups ug JOIN groups g ON ug.group_id = g.id WHERE ug.user_id = $1`;
     const userGroupsResult = await pool.query(userGroupsQuery, [userIdINT]);
     const userGroups = userGroupsResult.rows;
 
     // Fetch permissions for the user
-    const userPermissionsQuery = `
-      SELECT p.id, p.name
-      FROM user_permissions up
-      JOIN permissions p ON up.permission_id = p.id
-      WHERE up.user_id = $1
-    `;
+    const userPermissionsQuery = `SELECT p.id, p.name FROM user_permissions up JOIN permissions p ON up.permission_id = p.id WHERE up.user_id = $1`;
     const userPermissionsResult = await pool.query(userPermissionsQuery, [userIdINT]);
     const userPermissions = userPermissionsResult.rows;
 
