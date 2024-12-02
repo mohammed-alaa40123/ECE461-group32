@@ -21,7 +21,7 @@ vi.mock("fs/promises", async (importOriginal) => {
   };
 });
 
-const logFilePath = path.join("src", "__tests__", "logs", "test.log");
+const logFilePath = path.join("backend/src/rating", "__tests__", "logs", "test.log");
 
 beforeAll(() => {
   const mockDate = new Date(2021, 1, 1);

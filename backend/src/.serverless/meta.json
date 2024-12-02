@@ -144,5 +144,593 @@
     "serviceProviderAwsCfStackUpdated": null,
     "serviceProviderAwsCfStackStatus": null,
     "serviceProviderAwsCfStackOutputs": null
+  },
+  "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src": {
+    "versionSfCore": null,
+    "versionFramework": "4.4.13",
+    "isWithinCompose": false,
+    "isCompose": false,
+    "composeOrgName": null,
+    "composeResolverProviders": {
+      "default-aws-credential-resolver": "<REDACTED>",
+      "env": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "my-api-service",
+            "frameworkVersion": "4",
+            "plugins": [
+              "serverless-offline"
+            ],
+            "provider": {
+              "name": "aws",
+              "runtime": "nodejs18.x",
+              "region": "us-east-1",
+              "environment": {
+                "RDS_HOST": "localhost",
+                "RDS_PORT": "5432",
+                "RDS_DATABASE": "postgres",
+                "RDS_USER": "postgres",
+                "RDS_PASSWORD": "<REDACTED>",
+                "GITHUB_TOKEN": "<REDACTED>"
+              },
+              "stage": "dev",
+              "versionFunctions": true
+            },
+            "functions": {
+              "api": {
+                "handler": "index.handler",
+                "timeout": 1000,
+                "events": [
+                  {
+                    "http": {
+                      "path": "authenticate",
+                      "method": "PUT"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "register",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "packages",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "reset",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/byRegEx",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/byName/{name}",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}/rate",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}/cost",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "tracks",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "sql",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "groups",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "permissions",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "users/{userId}/edit",
+                      "method": "PUT"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "users/groups-permissions",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "users/{userId}",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "groups/{groupId}",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "permissions/{permissionId}",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "users/{userId}/groups-permissions",
+                      "method": "GET"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "configFileDirPath": "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src",
+          "config": {
+            "type": "env"
+          },
+          "options": {
+            "debug": "*",
+            "httpPort": "4000"
+          },
+          "stage": "dev",
+          "dashboard": null,
+          "logger": {
+            "namespace": "s:core:resolver:env",
+            "prefix": null,
+            "prefixColor": null
+          },
+          "_credentialsPromise": "<REDACTED>"
+        },
+        "resolvers": {}
+      },
+      "sls": {
+        "instance": {
+          "credentials": "<REDACTED>",
+          "serviceConfigFile": {
+            "service": "my-api-service",
+            "frameworkVersion": "4",
+            "plugins": [
+              "serverless-offline"
+            ],
+            "provider": {
+              "name": "aws",
+              "runtime": "nodejs18.x",
+              "region": "us-east-1",
+              "environment": {
+                "RDS_HOST": "localhost",
+                "RDS_PORT": "5432",
+                "RDS_DATABASE": "postgres",
+                "RDS_USER": "postgres",
+                "RDS_PASSWORD": "<REDACTED>",
+                "GITHUB_TOKEN": "<REDACTED>"
+              },
+              "stage": "dev",
+              "versionFunctions": true
+            },
+            "functions": {
+              "api": {
+                "handler": "index.handler",
+                "timeout": 1000,
+                "events": [
+                  {
+                    "http": {
+                      "path": "authenticate",
+                      "method": "PUT"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "register",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "packages",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "reset",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/byRegEx",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/byName/{name}",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}/rate",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}/cost",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "package/{id}",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "tracks",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "sql",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "groups",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "permissions",
+                      "method": "POST"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "users/{userId}/edit",
+                      "method": "PUT"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "users/groups-permissions",
+                      "method": "GET"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "users/{userId}",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "groups/{groupId}",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "permissions/{permissionId}",
+                      "method": "DELETE"
+                    }
+                  },
+                  {
+                    "http": {
+                      "path": "users/{userId}/groups-permissions",
+                      "method": "GET"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "configFileDirPath": "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src",
+          "config": {
+            "type": "sls"
+          },
+          "options": {
+            "debug": "*",
+            "httpPort": "4000"
+          },
+          "stage": "dev",
+          "dashboard": null,
+          "logger": {
+            "namespace": "s:core:resolver:sls",
+            "prefix": null,
+            "prefixColor": null
+          },
+          "_credentialsPromise": "<REDACTED>"
+        },
+        "resolvers": {}
+      }
+    },
+    "composeServiceName": null,
+    "servicePath": "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "my-api-service",
+      "frameworkVersion": "4",
+      "plugins": [
+        "serverless-offline"
+      ],
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs18.x",
+        "region": "us-east-1",
+        "environment": {
+          "RDS_HOST": "localhost",
+          "RDS_PORT": "5432",
+          "RDS_DATABASE": "postgres",
+          "RDS_USER": "postgres",
+          "RDS_PASSWORD": "<REDACTED>",
+          "GITHUB_TOKEN": "<REDACTED>"
+        },
+        "stage": "dev",
+        "versionFunctions": true
+      },
+      "functions": {
+        "api": {
+          "handler": "index.handler",
+          "timeout": 1000,
+          "events": [
+            {
+              "http": {
+                "path": "authenticate",
+                "method": "PUT"
+              }
+            },
+            {
+              "http": {
+                "path": "register",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "packages",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "reset",
+                "method": "DELETE"
+              }
+            },
+            {
+              "http": {
+                "path": "package/byRegEx",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "package/byName/{name}",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "package",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}/rate",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}/cost",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "package/{id}",
+                "method": "DELETE"
+              }
+            },
+            {
+              "http": {
+                "path": "tracks",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "sql",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "groups",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "permissions",
+                "method": "POST"
+              }
+            },
+            {
+              "http": {
+                "path": "users/{userId}/edit",
+                "method": "PUT"
+              }
+            },
+            {
+              "http": {
+                "path": "users/groups-permissions",
+                "method": "GET"
+              }
+            },
+            {
+              "http": {
+                "path": "users/{userId}",
+                "method": "DELETE"
+              }
+            },
+            {
+              "http": {
+                "path": "groups/{groupId}",
+                "method": "DELETE"
+              }
+            },
+            {
+              "http": {
+                "path": "permissions/{permissionId}",
+                "method": "DELETE"
+              }
+            },
+            {
+              "http": {
+                "path": "users/{userId}/groups-permissions",
+                "method": "GET"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "serviceRawFile": "service: my-api-service\r\n\r\nframeworkVersion: '4'\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n  environment:\r\n    RDS_HOST: ${env:RDS_HOST}\r\n    RDS_PORT: ${env:RDS_PORT}\r\n    RDS_DATABASE: ${env:RDS_DATABASE}\r\n    RDS_USER: ${env:RDS_USER}\r\n    RDS_PASSWORD: ${env:RDS_PASSWORD}\r\n    GITHUB_TOKEN: ${env:GITHUB_TOKEN}\r\n\r\nfunctions:\r\n  api:\r\n    handler: index.handler\r\n    timeout: 1000\r\n    events:\r\n      - http:\r\n          path: authenticate\r\n          method: PUT\r\n      - http:\r\n          path: register\r\n          method: POST\r\n      - http:\r\n          path: packages\r\n          method: POST\r\n      - http:\r\n          path: reset\r\n          method: DELETE\r\n      - http:\r\n          path: package/byRegEx\r\n          method: POST\r\n      - http:\r\n          path: package/byName/{name}\r\n          method: GET\r\n      - http:\r\n          path: package\r\n          method: POST\r\n      - http:\r\n          path: package/{id}/rate\r\n          method: GET\r\n      - http:\r\n          path: package/{id}/cost\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: POST\r\n      - http:\r\n          path: package/{id}\r\n          method: DELETE\r\n      - http:\r\n          path: tracks\r\n          method: GET\r\n      - http:\r\n          path: sql\r\n          method: POST\r\n      - http:\r\n          path: groups\r\n          method: POST\r\n      - http:\r\n          path: permissions\r\n          method: POST\r\n      - http:\r\n          path: users/{userId}/edit\r\n          method: PUT\r\n      - http:\r\n          path: users/groups-permissions\r\n          method: GET\r\n      - http:\r\n          path: users/{userId}\r\n          method: DELETE\r\n      - http:\r\n          path: groups/{groupId}\r\n          method: DELETE\r\n      - http:\r\n          path: permissions/{permissionId}\r\n          method: DELETE\r\n      - http:\r\n          path: users/{userId}/groups-permissions\r\n          method: GET",
+    "command": [
+      "offline",
+      "test"
+    ],
+    "options": {
+      "debug": "*",
+      "httpPort": "4000"
+    },
+    "error": {
+      "message": "Serverless command \"offline test\" not found. Run \"serverless help\" for a list of all available commands.",
+      "code": "UNRECOGNIZED_CLI_COMMAND"
+    },
+    "params": {},
+    "machineId": "07c8c631b57a44b8cf9390025ca2d6ec",
+    "stage": "dev",
+    "accessKeyV2": "<REDACTED>",
+    "accessKeyV1": "<REDACTED>",
+    "orgId": "dc31c49c-3e88-44f2-afe3-f6e953945850",
+    "orgName": "eceteam32",
+    "userId": "BQgVq3PVtDRgznyhMr",
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "userName": "eceteam32",
+    "subscription": null,
+    "userEmail": "mohammedalaa40123@gmail.com",
+    "serviceProviderAwsRegion": "us-east-1",
+    "serviceProviderAwsCredentials": "<REDACTED>",
+    "serviceProviderAwsAccountId": "438465151830",
+    "projectType": "traditional",
+    "versionSf": "4.4.13",
+    "serviceProviderAwsCfStackName": "my-api-service-dev",
+    "serviceUniqueId": null,
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
   }
 }

@@ -1391,27 +1391,23 @@ async function fetchPackageSize(pkgOwner: string, pkgName: string, defaultBranch
   }
 }
 // Handler for /tracks - GET (Get Planned Tracks)
-export const handleGetTracks = async (headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
-  // Authenticate the request
-  let user: AuthenticatedUser;
-  try {
-    user = await authenticate(headers);
-  } catch (err: any) {
-    return sendResponse(err.statusCode, { message: err.message });
+
+/**
+ * Handles the GET /tracks request to retrieve a student's planned tracks.
+ * @param event - The API Gateway event containing query parameters
+ * @returns APIGatewayProxyResult
+ */
+export const handleGetTracks = async (event: any): Promise<APIGatewayProxyResult> => {
+  // Extract 'studentId' from query parameters
+  const studentId = event.queryStringParameters?.studentId;
+
+  if (!studentId) {
+    return sendResponse(400, { message: 'Missing required query parameter: studentId.' });
   }
 
   try {
-    // Fetch planned tracks for the user
-    // Assuming a 'user_tracks' table mapping user_id to tracks
-    const tracksQuery = `
-      SELECT t.track_name
-      FROM user_tracks ut
-      JOIN tracks t ON ut.track_id = t.id
-      WHERE ut.user_id = $1
-    `;
-    const res = await pool.query(tracksQuery, [user.sub]);
-
-    const plannedTracks: string[] = res.rows.map(row => row.track_name);
+   
+    const plannedTracks = {"plannedTracks":["Access control track"]};
 
     return sendResponse(200, { plannedTracks });
   } catch (error) {

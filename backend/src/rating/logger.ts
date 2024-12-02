@@ -93,13 +93,13 @@ export const reinitializeLogger = () => {
  */
 export const logTestResults = async () => {
   const logger = getLogger();
-  // const __dirname = path.dirname(__filename);
+  const __dirname = path.dirname(__filename);
   const asyncExec = promisify(exec);
   // avoid running index.test.ts in E2E tests to prevent infinite loop
   const command =
     process.env.NODE_ENV === "test"
-      ? "npx vitest run --coverage --coverage.reportsDirectory=logCoverage --reporter=json --outputFile=logCoverage/test-results.json --exclude src/__tests__/index.test.ts"
-      : "npx vitest run --coverage --coverage.reportsDirectory=logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json";
+      ? "npx vitest run --coverage --coverage.reportsDirectory=./backend/src/logCoverage --reporter=json --outputFile=logCoverage/test-results.json --exclude src/__tests__/index.test.ts"
+      : "npx vitest run --coverage --coverage.reportsDirectory=./backend/src/logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json";
   try {
     try {
       const { stdout, stderr } = await asyncExec(command);
@@ -112,8 +112,6 @@ export const logTestResults = async () => {
     // eslint-disable-next-line security/detect-non-literal-fs-filename -- file path is controlled
     const file = await readFile(
       path.resolve(
-        // __dirname,
-        // "..",
         process.env.NODE_ENV === "test" ? "logCoverage" : "logCoverage1",
         "test-results.json"
       ),

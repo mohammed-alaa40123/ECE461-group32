@@ -27,7 +27,7 @@ describe("E2E Test", () => {
   const testDir = path.resolve(__dirname, "test-files");
 
   it('should run "./run test" and output results', { timeout: 50000 }, async () => {
-    const { stdout } = await execAsync("./backend/src/run test", { env: { ...process.env, NODE_ENV: "test" } });
+    const { stdout } = await execAsync("backend/src/run test", { env: { ...process.env, NODE_ENV: "test" } });
 
     expect(stdout).toContain("Total:");
     expect(stdout).toContain("Passed:");

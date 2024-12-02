@@ -270,3 +270,308 @@ ERROR: Coverage for functions (70.27%) does not meet global threshold (100%)
 ERROR: Coverage for statements (57.98%) does not meet global threshold (90%)
 
 01/12/2024 23:01:12 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\coverage-summary.json'
+01/12/2024 23:04:21 [info]: Handling GitHub URL
+01/12/2024 23:14:40 [info]: Handling GitHub URL
+01/12/2024 23:14:58 [info]: Handling GitHub URL
+01/12/2024 23:15:52 [info]: Handling GitHub URL
+01/12/2024 23:16:42 [info]: Handling GitHub URL
+01/12/2024 23:19:51 [info]: Handling GitHub URL
+01/12/2024 23:22:05 [info]: Handling GitHub URL
+01/12/2024 23:22:20 [info]: Running tests
+01/12/2024 23:22:24 [info]: Handling GitHub URL
+01/12/2024 23:22:28 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:12476) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11584) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:13332) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4688) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.99%) does not meet global threshold (90%)
+ERROR: Coverage for functions (52.72%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.99%) does not meet global threshold (90%)
+
+01/12/2024 23:22:28 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\test-results.json'
+01/12/2024 23:24:45 [info]: Running tests
+01/12/2024 23:24:49 [info]: Handling GitHub URL
+01/12/2024 23:24:53 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:5184) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5536) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22984) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22088) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.62%) does not meet global threshold (90%)
+ERROR: Coverage for functions (51.78%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.62%) does not meet global threshold (90%)
+
+01/12/2024 23:24:53 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\logCoverage1\test-results.json'
+01/12/2024 23:25:10 [info]: Running tests
+01/12/2024 23:25:15 [info]: Handling GitHub URL
+01/12/2024 23:25:19 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:4748) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18520) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15852) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21908) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.62%) does not meet global threshold (90%)
+ERROR: Coverage for functions (51.78%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.62%) does not meet global threshold (90%)
+
+01/12/2024 23:25:19 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\coverage-summary.json'
+01/12/2024 23:25:51 [info]: Running tests
+01/12/2024 23:25:55 [info]: Handling GitHub URL
+01/12/2024 23:25:59 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:23404) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:18680) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17480) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21520) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.62%) does not meet global threshold (90%)
+ERROR: Coverage for functions (51.78%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.62%) does not meet global threshold (90%)
+
+01/12/2024 23:25:59 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\coverage-summary.json'
+01/12/2024 23:26:26 [info]: Running tests
+01/12/2024 23:26:30 [info]: Handling GitHub URL
+01/12/2024 23:26:34 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:1820) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14416) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11216) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17404) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.62%) does not meet global threshold (90%)
+ERROR: Coverage for functions (51.78%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.62%) does not meet global threshold (90%)
+
+01/12/2024 23:26:34 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\logCoverage1\test-results.json'
+01/12/2024 23:26:45 [info]: Running tests
+01/12/2024 23:26:50 [info]: Handling GitHub URL
+01/12/2024 23:26:54 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:17632) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:11220) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21184) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22460) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.62%) does not meet global threshold (90%)
+ERROR: Coverage for functions (51.78%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.62%) does not meet global threshold (90%)
+
+01/12/2024 23:26:54 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\coverage-summary.json'
+01/12/2024 23:27:28 [info]: Running tests
+01/12/2024 23:27:33 [info]: Handling GitHub URL
+01/12/2024 23:27:37 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./backend/src/logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:856) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19356) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17536) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:20088) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.62%) does not meet global threshold (90%)
+ERROR: Coverage for functions (51.78%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.62%) does not meet global threshold (90%)
+
+01/12/2024 23:27:37 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\coverage-summary.json'
+01/12/2024 23:28:25 [info]: Running tests
+01/12/2024 23:28:29 [info]: Handling GitHub URL
+01/12/2024 23:28:34 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./backend/src/logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:20808) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:21532) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17108) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:8756) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.62%) does not meet global threshold (90%)
+ERROR: Coverage for functions (51.78%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.62%) does not meet global threshold (90%)
+
+01/12/2024 23:28:34 [info]: Total: 157
+01/12/2024 23:28:34 [info]: Passed: 137
+01/12/2024 23:28:34 [info]: Coverage: 69%
+01/12/2024 23:28:34 [info]: 137/157 test cases passed. 69% line coverage achieved.
+01/12/2024 23:28:52 [info]: Handling GitHub URL
+01/12/2024 23:29:39 [info]: Handling GitHub URL
+01/12/2024 23:59:51 [info]: Running tests
+02/12/2024 00:00:08 [info]: Handling GitHub URL
+02/12/2024 00:00:21 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./backend/src/logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+(node:9160) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:19824) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15620) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:22124) NOTE: The AWS SDK for JavaScript (v2) is in maintenance mode.
+ SDK releases are limited to address critical bug fixes and security issues only.
+
+Please migrate your code to use AWS SDK for JavaScript (v3).
+For more information, check the blog post at https://a.co/cUPnyil
+(Use `node --trace-warnings ...` to show where the warning was created)
+ERROR: Coverage for lines (69.62%) does not meet global threshold (90%)
+ERROR: Coverage for functions (51.78%) does not meet global threshold (100%)
+ERROR: Coverage for statements (69.62%) does not meet global threshold (90%)
+
+02/12/2024 00:00:21 [info]: Total: 157
+02/12/2024 00:00:21 [info]: Passed: 136
+02/12/2024 00:00:21 [info]: Coverage: 69%
+02/12/2024 00:00:21 [info]: 136/157 test cases passed. 69% line coverage achieved.
+02/12/2024 00:00:40 [info]: Handling GitHub URL
+02/12/2024 00:06:01 [info]: Handling GitHub URL
