@@ -86,3 +86,5 @@ export type EnumerateOffset = string; // Example: "1"
 export interface PackageRegEx {
   RegEx: string;
 }
+
+

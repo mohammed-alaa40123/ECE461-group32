@@ -3,7 +3,11 @@ const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
 require('dotenv').config(); // Load environment variables from .env file
 const excludeTests = (modulePath) => {
-  return /node_modules/.test(modulePath) || /rating[\\/]__tests__/.test(modulePath);
+  return (
+    /node_modules/.test(modulePath) ||
+    /rating[\\/]__tests__/.test(modulePath) ||
+    /handlers[\\/]__tests__/.test(modulePath) 
+  );
 };
 module.exports = {
   mode: 'production', // or 'development'

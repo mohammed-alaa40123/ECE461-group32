@@ -92,7 +92,7 @@ describe('Handlers', () => {
     it('should delete a package successfully', async () => {
       mockedAuthenticate.mockResolvedValue({ sub: 1, permissions: ['upload'] });
       mockedPoolQuery.mockResolvedValueOnce({}); // For historyInsert
-      mockedDeletePackageContent.mockResolvedValueOnce();
+      mockedDeletePackageContent.mockResolvedValueOnce(1);
 
       const response = await handleDeletePackage('package-id', {});
 
