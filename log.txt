@@ -228,3 +228,45 @@ operable program or batch file.
 19/10/2024 10:35:32 [debug]: Ramp Up score for jashkenas/underscore: 0.3
 19/10/2024 10:35:32 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":20.807,"RampUp":0.3,"RampUp_Latency":16.411,"Correctness":0,"Correctness_Latency":16.395,"BusFactor":0.05,"BusFactor_Latency":8.073,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":8.083,"License":1,"License_Latency":8.094}
 >>>>>>> origin/frontend
+01/12/2024 22:54:30 [info]: Running tests
+01/12/2024 22:54:38 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+ERROR: Coverage for lines (58.01%) does not meet global threshold (90%)
+ERROR: Coverage for functions (70.27%) does not meet global threshold (100%)
+ERROR: Coverage for statements (58.01%) does not meet global threshold (90%)
+
+01/12/2024 22:54:38 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\test-results.json'
+01/12/2024 22:58:04 [info]: Running tests
+01/12/2024 22:58:11 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+ERROR: Coverage for lines (57.99%) does not meet global threshold (90%)
+ERROR: Coverage for functions (70.27%) does not meet global threshold (100%)
+ERROR: Coverage for statements (57.99%) does not meet global threshold (90%)
+
+01/12/2024 22:58:11 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\test-results.json'
+01/12/2024 22:59:11 [info]: Running tests
+01/12/2024 22:59:19 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+ERROR: Coverage for lines (58.01%) does not meet global threshold (90%)
+ERROR: Coverage for functions (70.27%) does not meet global threshold (100%)
+ERROR: Coverage for statements (58.01%) does not meet global threshold (90%)
+
+01/12/2024 22:59:19 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\test-results.json'
+01/12/2024 22:59:40 [info]: Running tests
+01/12/2024 22:59:47 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=./logCoverage1 --reporter=json --outputFile=../../logCoverage1/test-results.json
+ERROR: Coverage for lines (58.01%) does not meet global threshold (90%)
+ERROR: Coverage for functions (70.27%) does not meet global threshold (100%)
+ERROR: Coverage for statements (58.01%) does not meet global threshold (90%)
+
+01/12/2024 22:59:47 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\test-results.json'
+01/12/2024 23:00:16 [info]: Running tests
+01/12/2024 23:00:23 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+ERROR: Coverage for lines (58.01%) does not meet global threshold (90%)
+ERROR: Coverage for functions (70.27%) does not meet global threshold (100%)
+ERROR: Coverage for statements (58.01%) does not meet global threshold (90%)
+
+01/12/2024 23:00:23 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\test-results.json'
+01/12/2024 23:01:05 [info]: Running tests
+01/12/2024 23:01:12 [debug]: Command failed: npx vitest run --coverage --coverage.reportsDirectory=logCoverage1 --reporter=json --outputFile=logCoverage1/test-results.json
+ERROR: Coverage for lines (57.98%) does not meet global threshold (90%)
+ERROR: Coverage for functions (70.27%) does not meet global threshold (100%)
+ERROR: Coverage for statements (57.98%) does not meet global threshold (90%)
+
+01/12/2024 23:01:12 [debug]: ENOENT: no such file or directory, open 'D:\Purdue\s1\46100\local\ECE461-group32\backend\src\logCoverage1\coverage-summary.json'

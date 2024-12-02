@@ -1,21 +1,17 @@
 // src/handlers/handlers.ts
-import semver from 'semver';
-
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { APIGatewayProxyResult } from 'aws-lambda';
 import pool, { getUserByName, insertIntoDB } from '../services/dbService';
 import { uploadPackageContent, getPackageContent, deletePackageContent } from '../services/s3Service';
-import { Package, PackageMetadata, PackageData, PackageCost } from '../models/Package';
+import { Package, PackageMetadata, PackageData } from '../models/Package';
 import { PackageHistoryEntry } from '../models/PackageHistoryEntry';
-import { PackageRating } from '../models/PackageRating';
 import { sendResponse } from '../utils/response';
 import { authenticate, AuthenticatedUser } from '../utils/auth';
-import { metricCalcFromUrlUsingNetScore, convertPackageInfo, PackageInfo, generatePackageId } from '../handlerhelper';
-import { getLogger, logTestResults } from '../rating/logger';
-import AdmZip, { IZipEntry } from 'adm-zip';
+import { metricCalcFromUrlUsingNetScore, convertPackageInfo, generatePackageId } from '../handlerhelper';
+import { getLogger } from '../rating/logger';
+import AdmZip from 'adm-zip';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { fetchNpmPackageSize, fetchRepoDetails, getDefaultBranch } from '../handlerhelper';
-import { send } from 'process';
+import { fetchRepoDetails } from '../handlerhelper';
 
 
 

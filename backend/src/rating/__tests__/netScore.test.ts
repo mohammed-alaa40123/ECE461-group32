@@ -10,7 +10,7 @@ import { calculateCorrectness } from "../metrics/correctness.js";
 import { calculateBusFactorScore } from "../metrics/busFactor.js";
 import { processURLs } from "../processURL.js";
 import { getLogger } from "../logger.js";
-import { beforeEach } from 'jest';
+import { beforeEach } from 'vitest';
 import { cloneRepo } from "../util.js";
 
 vi.mock("../logger.ts", () => {

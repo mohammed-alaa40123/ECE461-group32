@@ -66,7 +66,7 @@ describe("Logger Tests", () => {
     expect(infoSpy).not.toHaveBeenCalled();
 
     const logContents = await fs.readFile(logFilePath, "utf-8");
-    expect(logContents).toBe(`01/02/2021 00:00:00 [debug]: ${logMessage}\n`);
+    expect(logContents).toBe(`01/02/2021 00:00:00 [debug]: ${logMessage}\r\n`);
   });
 
   it("Should log an info message when logger.info is called", async () => {
@@ -76,7 +76,7 @@ describe("Logger Tests", () => {
     logger.info(logMessage);
 
     const logContents = await fs.readFile(logFilePath, "utf-8");
-    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: ${logMessage}\n`);
+    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: ${logMessage}\r\n`);
     expect(infoSpy).toHaveBeenCalledWith(logMessage);
     expect(debugSpy).not.toHaveBeenCalled();
   });
@@ -91,7 +91,7 @@ describe("Logger Tests", () => {
     logger.info("This is an info message");
 
     const logContents = await fs.readFile(logFilePath, "utf-8");
-    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: This is an info message\n`);
+    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: This is an info message\r\n`);
   });
 
   it("should not log a debug or info message when log level is 0", async () => {
@@ -217,7 +217,7 @@ describe("Logger Tests", () => {
     expect(consoleLogSpy).toHaveBeenCalledWith("This is a console message");
 
     const logContents = await fs.readFile(logFilePath, "utf-8");
-    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: This is a console message\n`);
+    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: This is a console message\r\n`);
   });
 
   it("should print to console and log to file when verbosity is 2", async () => {
@@ -231,7 +231,7 @@ describe("Logger Tests", () => {
     expect(consoleLogSpy).toHaveBeenCalledWith("This is a console message");
 
     const logContents = await fs.readFile(logFilePath, "utf-8");
-    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: This is a console message\n`);
+    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: This is a console message\r\n`);
   });
 
   it("should not log to console with info", async () => {
@@ -245,7 +245,7 @@ describe("Logger Tests", () => {
     expect(consoleLogSpy).not.toHaveBeenCalled();
 
     const logContents = await fs.readFile(logFilePath, "utf-8");
-    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: This is an info message\n`);
+    expect(logContents).toBe(`01/02/2021 00:00:00 [info]: This is an info message\r\n`);
   });
 
   it("should not log to console with debug", async () => {
@@ -259,6 +259,6 @@ describe("Logger Tests", () => {
     expect(consoleLogSpy).not.toHaveBeenCalled();
 
     const logContents = await fs.readFile(logFilePath, "utf-8");
-    expect(logContents).toBe(`01/02/2021 00:00:00 [debug]: This is a debug message\n`);
+    expect(logContents).toBe(`01/02/2021 00:00:00 [debug]: This is a debug message\r\n`);
   });
 });
