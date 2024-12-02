@@ -26,7 +26,6 @@
     "@types/eslint__js": "^8.42.3",
     "@typescript-eslint/eslint-plugin": "^8.3.0",
     "@typescript-eslint/parser": "^8.3.0",
-    "@vitest/coverage-v8": "^2.0.5",
     "adm-zip": "^0.5.16",
     "aws": "^0.0.3-2",
     "aws-lambda": "^1.0.7",
@@ -49,7 +48,6 @@
     "simple-git": "^3.27.0",
     "tsx": "^4.19.0",
     "typescript-eslint": "^8.3.0",
-    "vitest": "^2.0.5",
     "winston": "^3.14.2"
   },
   "devDependencies": {
@@ -68,12 +66,14 @@
     "@types/node": "^22.7.5",
     "@types/pg": "^8.11.10",
     "@types/uuid": "^10.0.0",
+    "@vitest/coverage-v8": "^2.1.6",
     "babel-loader": "^9.2.1",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.0",
     "serverless-deployment-bucket": "^1.6.0",
     "serverless-offline": "^14.3.2",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.6"
   }
 }

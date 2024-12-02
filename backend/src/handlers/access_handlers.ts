@@ -1,17 +1,10 @@
 import semver from 'semver';
 
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { APIGatewayProxyResult } from 'aws-lambda';
 import pool, { getUserByName, insertIntoDB } from '../services/dbService';
-import { uploadPackageContent, getPackageContent, deletePackageContent } from '../services/s3Service';
-import { Package, PackageMetadata, PackageData } from '../models/Package';
-import { PackageHistoryEntry } from '../models/PackageHistoryEntry';
-import { PackageRating } from '../models/PackageRating';
 import { sendResponse } from '../utils/response';
 import { authenticate, AuthenticatedUser } from '../utils/auth';
-import { metricCalcFromUrlUsingNetScore,convertPackageInfo, PackageInfo, generatePackageId } from '../handlerhelper';
-import { getLogger, logTestResults } from '../rating/logger';
-import AdmZip, { IZipEntry } from 'adm-zip';
-import jwt from 'jsonwebtoken';
+import { getLogger } from '../rating/logger';
 import bcrypt from 'bcrypt';
 import { send } from 'process';
 
@@ -23,6 +16,8 @@ export const handleCreateGroup = async (
   body: string,
   headers: { [key: string]: string | undefined }
 ): Promise<APIGatewayProxyResult> => {
+  console.log('body', body);
+  console.log('headers', headers);
   let user: AuthenticatedUser;
   try {
     user = await authenticate(headers);
@@ -65,11 +60,11 @@ export const handleCreateGroup = async (
     // Commit the transaction
     await pool.query('COMMIT');
 
-    return {
-      statusCode: 201,
-      body: JSON.stringify({ message: 'Group created successfully!', groupId }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(201, { message: 'Group created successfully!', groupId });
+    //   statusCode: 201,
+    //   body: JSON.stringify({ message: 'Group created successfully!', groupId }),
+    //   headers: { 'Content-Type': 'application/json' },
+    // };
   } catch (error: any) {
     // Roll back the transaction in case of an error
     await pool.query('ROLLBACK');
@@ -124,18 +119,18 @@ export const handleCreatePermission = async (body: string, headers: { [key: stri
     console.error('Error creating permission:', error);
 
     if (error.code === '23505') { // Unique violation error code
-      return {
-        statusCode: 409,
-        body: JSON.stringify({ message: 'Permission already exists.' }),
-        headers: { 'Content-Type': 'application/json' },
-      };
+      return sendResponse(409, { message: 'Permission already exists.' });
+      //   statusCode: 409,
+      //   body: JSON.stringify({ message: 'Permission already exists.' }),
+      //   headers: { 'Content-Type': 'application/json' },
+      // };
     }
 
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: 'Internal server error.' }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(500, { message: 'Internal server error.' });
+    //   statusCode: 500,
+    //   body: JSON.stringify({ message: 'Internal server error.' }),
+    //   headers: { 'Content-Type': 'application/json' },
+    // };
   }
 };
 

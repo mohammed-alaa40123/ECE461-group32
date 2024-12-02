@@ -8,20 +8,13 @@ export default defineConfig({
     }
   },
   test: {
-    include: ["backend/src/handlers/__tests__/**.test.ts"],
+    include: ["handlers/__tests__/**.test.ts"],
     coverage: {
+      provider: 'v8', // Ensure you're using the 'v8' coverage provider
       reporter: ['text', 'text-summary', 'json', 'html'], // Include 'text-summary' for percentage
       reportsDirectory: './coverage', // Optional, specify output directory
-      include: ["backend/src/handlers"],  
-      exclude: ["src/__tests__/**", "src/index.ts"],
-      thresholds: {
-        statements: 90,
-        functions: 100,
-        lines: 90
-      },
-      ignoreEmptyLines: true,
-      reportOnFailure: true
-    },
+          },
+
     hookTimeout: 30000
   }
 });

@@ -10,9 +10,10 @@
       "rootDir": "./",
       "noImplicitAny": false ,
       "forceConsistentCasingInFileNames": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "types": ["vitest/globals"]
     },
-    "include": ["src/**/*.ts","./**/*.ts"], 
+    "include": ["src/**/*.ts","./**/*.ts","./**/*.tsx","handlers/__tests__/*.ts"], 
     "exclude": ["node_modules","rating/__tests__"],
   }
   
