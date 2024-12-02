@@ -1398,16 +1398,8 @@ async function fetchPackageSize(pkgOwner: string, pkgName: string, defaultBranch
  * @returns APIGatewayProxyResult
  */
 export const handleGetTracks = async (event: any): Promise<APIGatewayProxyResult> => {
-  // Extract 'studentId' from query parameters
-  const studentId = event.queryStringParameters?.studentId;
-
-  if (!studentId) {
-    return sendResponse(400, { message: 'Missing required query parameter: studentId.' });
-  }
-
   try {
-   
-    const plannedTracks = {"plannedTracks":["Access control track"]};
+    const plannedTracks = ["Access control track"];
 
     return sendResponse(200, { plannedTracks });
   } catch (error) {
