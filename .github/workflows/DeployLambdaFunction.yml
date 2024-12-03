@@ -5,46 +5,33 @@ on:
       - Access_track
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      # 1. Checkout the repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
+      # 2. Set up Node.js environment
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '22'  # Specify your Node.js version
 
+      # 3. Install dependencies and build the project
       - name: Install Dependencies and Build
         run: |
           cd frontend
           npm install
           npm run build
 
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'frontend/dist/.'
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: 'https://mohammed-alaa40123.github.io/ECE461-group32/'
-    steps:
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
+      # 4. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-
+          publish_dir: ./frontend/dist  # Adjust if your build output directory is different
   # deploy:
   #   runs-on: ubuntu-latest
 
