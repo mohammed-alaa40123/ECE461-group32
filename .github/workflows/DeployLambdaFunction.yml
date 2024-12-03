@@ -1,32 +1,34 @@
 name: Deploy Lambda Function using Docker
 
+
 on:
   push:
     branches:
       - Access_track
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install Dependencies
-        run: |
-              cd frontend
-              npm install
-              npm run build
-              git config --global user.email "mohammedalaa40123.com"
-              git config --global user.name "Mohammed Alaa"
 
-              npm run deploy
-      - name: Upload artifact
+      - name: Install Dependencies and Build
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'frontend/dist/.'
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -39,11 +41,11 @@ jobs:
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: Deploy
+
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-  
 
   # deploy:
   #   runs-on: ubuntu-latest
