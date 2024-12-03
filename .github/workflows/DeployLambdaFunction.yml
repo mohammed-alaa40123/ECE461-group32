@@ -34,7 +34,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
 
         with:
-          publish_dir: ./ECE461-group32/frontend/dist  # Adjust if your build output directory is different
+          publish_dir: ./frontend/dist  # Adjust if your build output directory is different
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # publish_dir: ./frontend/dist  # Adjust if your build output directory is different
   # deploy:
