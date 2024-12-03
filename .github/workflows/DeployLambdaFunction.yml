@@ -27,7 +27,7 @@ jobs:
           cd ECE461-group32/frontend
           npm install
           npm run build
-          ls
+          ls dist
 
       # 4. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
