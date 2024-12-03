@@ -5,92 +5,98 @@ on:
     branches:
       - Access_track
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 16
-
-      - name: Install dependencies
-        run: npm install
-        working-directory: frontend
-
-      - name: Build frontend
-        run: npm run build
-        working-directory: frontend
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+          node-version: '22'
+      - name: Install Dependencies
+        run: |
+              cd frontend
+              npm install
+              npm run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: frontend/dist
-
-
+          path: 'dist/.'
   deploy:
+    needs: build
     runs-on: ubuntu-latest
-
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: 'https://github.com/mohammed-alaa40123/ECE461-group32'
     steps:
-      # Step 1: Check out the repository
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy
+        uses: actions/deploy-pages@v4
 
-      # Step 2: Set up Docker and AWS CLI
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+  # deploy:
+  #   runs-on: ubuntu-latest
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+  #   steps:
+  #     # Step 1: Check out the repository
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
 
-      # Step 3: Log in to Amazon ECR
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+  #     # Step 2: Set up Docker and AWS CLI
+  #     - name: Set up Docker Buildx
+  #       uses: docker/setup-buildx-action@v1
 
-      # Step 4: Build Docker image for Lambda with TypeScript build step
-      - name: Build Docker image
-        run: |
-          REPO_NAME=lambda-api-handler
-          IMAGE_TAG=${GITHUB_SHA}
+  #     - name: Configure AWS credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: us-east-1
 
-          echo "Building Docker image for Lambda"
-          docker build -t $REPO_NAME:$IMAGE_TAG backend/src
+  #     # Step 3: Log in to Amazon ECR
+  #     - name: Login to Amazon ECR
+  #       id: login-ecr
+  #       uses: aws-actions/amazon-ecr-login@v1
 
-      # Step 5: Tag and push the Docker image to ECR
-      - name: Tag and push Docker image to Amazon ECR
-        run: |
-          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-          REGION=us-east-1
-          REPO_NAME=lambda-api-handler
-          IMAGE_TAG=${GITHUB_SHA}
+  #     # Step 4: Build Docker image for Lambda with TypeScript build step
+  #     - name: Build Docker image
+  #       run: |
+  #         REPO_NAME=lambda-api-handler
+  #         IMAGE_TAG=${GITHUB_SHA}
 
-          # Create ECR repository if it does not exist
-          aws ecr describe-repositories --repository-names $REPO_NAME || \
-            aws ecr create-repository --repository-name $REPO_NAME
+  #         echo "Building Docker image for Lambda"
+  #         docker build -t $REPO_NAME:$IMAGE_TAG backend/src
 
-          # Tag Docker image
-          docker tag $REPO_NAME:$IMAGE_TAG $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
+  #     # Step 5: Tag and push the Docker image to ECR
+  #     - name: Tag and push Docker image to Amazon ECR
+  #       run: |
+  #         ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+  #         REGION=us-east-1
+  #         REPO_NAME=lambda-api-handler
+  #         IMAGE_TAG=${GITHUB_SHA}
 
-          # Push Docker image to ECR
-          docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
+  #         # Create ECR repository if it does not exist
+  #         aws ecr describe-repositories --repository-names $REPO_NAME || \
+  #           aws ecr create-repository --repository-name $REPO_NAME
 
-      # Step 6: Update AWS Lambda to use the new Docker image
-      - name: Update Lambda function with new Docker image
-        run: |
-          ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-          REGION=us-east-1
-          REPO_NAME=lambda-api-handler
-          IMAGE_TAG=${GITHUB_SHA}
+  #         # Tag Docker image
+  #         docker tag $REPO_NAME:$IMAGE_TAG $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
 
-          aws lambda update-function-code \
-            --function-name lambda_RDS_S3 \
-            --image-uri $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
+  #         # Push Docker image to ECR
+  #         docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
+
+  #     # Step 6: Update AWS Lambda to use the new Docker image
+  #     - name: Update Lambda function with new Docker image
+  #       run: |
+  #         ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+  #         REGION=us-east-1
+  #         REPO_NAME=lambda-api-handler
+  #         IMAGE_TAG=${GITHUB_SHA}
+
+  #         aws lambda update-function-code \
+  #           --function-name lambda_RDS_S3 \
+  #           --image-uri $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
