@@ -6,7 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-function Button({ text, type, className, ...props }: ButtonProps): JSX.Element {
+function Button({ text, type = "button", className, ...props }: ButtonProps): JSX.Element {
   return (
     <button className={className} type={type} {...props}>
       {text}

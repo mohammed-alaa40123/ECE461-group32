@@ -30,10 +30,10 @@ export default function Upload(): JSX.Element {
     }
   };
 
-  const handleFileUpload = async (base64Content: string) => {
+  const handleFileUpload: (base64Content: string) => Promise<JSON> = async (base64Content: string) => {
     try {
       const response = await uploadPackageByContent(base64Content, "", false);
-      console.log("Upload Response:", response);
+      return response;
     } catch (error) {
       console.error("Error uploading file", error);
       setErrorMessage("Error uploading package");
