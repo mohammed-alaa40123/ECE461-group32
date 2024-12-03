@@ -28,7 +28,11 @@ jobs:
           npm install
           npm run build
           ls dist
-
+      - name: Show the build output
+        run: |
+          ls ECE461-group32/frontend/dist
+          echo "Build successful!"
+          ls - la
       # 4. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
