@@ -744,10 +744,10 @@ export const handleListPackages = async (
     for (const query of queries) {
       const { Name, Version } = query;
 
-      // Validate PackageQuery
-      if (!Name || !Version) {
-        return sendResponse(400, { message: 'There is missing field(s) in the PackageQuery or it is formed improperly, or is invalid.' });
-      }
+      // // Validate PackageQuery
+      // if (!Name || !Version) {
+      //   return sendResponse(400, { message: 'There is missing field(s) in the PackageQuery or it is formed improperly, or is invalid.' });
+      // }
       let sql = "";
       let values: any[] = [];
       // Build SQL query based on PackageQuery
