@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - githubpages  # Trigger on pushes to the main branch
+      - frontend
 
 jobs:
   build-and-deploy:
