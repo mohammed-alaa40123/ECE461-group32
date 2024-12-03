@@ -836,7 +836,7 @@ export const handleListPackages = async (
         results.push(...filteredPackages.rows);
       }
       else {
-        const allPackages = await pool.query(sql);
+        const allPackages = await pool.query(sql, values);
         results.push(...allPackages.rows);
       }
     }
