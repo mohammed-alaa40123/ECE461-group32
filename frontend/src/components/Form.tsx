@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from './ui/button'; // Assuming Button is a named export
 import ToggleSwitch from './ui/toggle'; // Assuming ToggleButton is a named export
 

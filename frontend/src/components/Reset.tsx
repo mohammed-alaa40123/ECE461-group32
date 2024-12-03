@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { resetRegistry } from "../api";
 
 export default function Reset(): JSX.Element {
