@@ -28,7 +28,7 @@ export default function Tracks({className, ...props}:TracksProps): JSX.Element {
     };
     
     return (
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-5">
         <Button
           onClick={handleGetTracks}
           text="Get Tracks"

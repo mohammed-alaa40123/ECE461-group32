@@ -20,3 +20,18 @@ export async function convertZipToBase64(file: File): Promise<string> {
     reader.onerror = (error) => reject(error);
   });
 }
+
+export function downloadFile(base64String: string, fileName: string): {url: string, fileName: string} {
+  // Convert Base64 to a Blob
+  const byteString = atob(base64String);
+  const byteArray = new Uint8Array(byteString.length);
+
+  for (let i = 0; i < byteString.length; i++) {
+    byteArray[i] = byteString.charCodeAt(i);
+  }
+
+  const blob = new Blob([byteArray], { type: "application/zip" });
+  const url = URL.createObjectURL(blob);
+
+  return {url, fileName};
+}

@@ -13,7 +13,9 @@ function App(): JSX.Element {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
+      setLoading(true);
       setIsLoggedIn(true);
+      setLoading(false);
     }
   }, []);
 

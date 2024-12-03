@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Upload from "../components/Upload";
 import Reset from "../components/Reset";
-import Download from "../components/Download";
+import GetPackages from "../components/GetPackages";
 import Update from "../components/Update";
 import Rate from "../components/Rate";
 import Cost from "../components/Cost";
@@ -10,18 +10,22 @@ import { Button } from "../components/ui/button";
 import Tracks from "../components/Tracks";
 import GetPackage from "../components/GetPackage";
 import AddUser from "../components/AddUser";
+import AddGroup from "../components/AddGroup";
+import DeleteGroup from "../components/DeleteGroup";
 
 const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
   const tabs: string[] = [
     "Upload a package",
-    "Download a package",
+    "Get packages by query",
     "Update a package",
     "Package rate",
     "Package cost",
     "Reset the rigestiry",
     "Get a package",
-    "Add a user"
+    "Add a user",
+    "Add a group",
+    "Delete a group",
   ];
   const [activeTab, setActiveTab] = useState(tabs[0].toLowerCase()); // Use the first tab as default
 
@@ -50,15 +54,17 @@ const Home: React.FC<{ isLoggedIn: boolean; onLogout: () => void }> = ({ isLogge
                 </div>
               ))}
             </div>
-            <div className="mt-10">
+            <div className="mt-10 mx-auto">
               {activeTab === "upload a package" && <Upload />}
-              {activeTab === "download a package" && <Download />}
+              {activeTab === "get packages by query" && <GetPackages />}
               {activeTab === "reset the rigestiry" && <Reset />}
               {activeTab === "update a package" && <Update />}
               {activeTab === "package rate" && <Rate />}
               {activeTab === "package cost" && <Cost />}
               {activeTab === "get a package" && <GetPackage />}
               {activeTab === "add a user" && <AddUser />}
+              {activeTab === "add a group" && <AddGroup />}
+              {activeTab === "delete a group" && <DeleteGroup />}
             </div>
           </div>
         ) : (

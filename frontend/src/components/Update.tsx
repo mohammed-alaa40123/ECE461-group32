@@ -23,6 +23,7 @@ export default function Update(): JSX.Element {
     }
 
     try {
+      console.log(packageId, "\n");
       const response = await updatePackageById(packageId, JSON.parse(updateData));
 
       if (response.status === 200) {

@@ -177,7 +177,7 @@ import { cn, convertZipToBase64 } from "../lib/utils";
 
 interface FileUploadProps {
   className?: string;
-  onFileUpload: (base64Content: string) => void;
+  onFileUpload: (base64Content: string) => Promise<JSON>;
 }
 
 export function FileUploadModal({ className, onFileUpload, ...props }: FileUploadProps): JSX.Element {
@@ -202,13 +202,17 @@ export function FileUploadModal({ className, onFileUpload, ...props }: FileUploa
       try {
         setLoading(true);
         const base64Content = await convertZipToBase64(file);
-        onFileUpload(base64Content);
+        const response = await onFileUpload(base64Content);
+        if (response) {
+          setFeedbackMessage(["Uploaded Successfully", true]);
+        } else {
+          setFeedbackMessage(["Failed to upload the package.", false]);
+        }
       } catch (err) {
-        setFeedbackMessage(["Failed to upload the package.", false]);
-        console.error(err);
+        console.error("Unexpected error:", err);
+        setFeedbackMessage(["An unexpected error occurred.", false]);
       } finally {
         setLoading(false);
-        setFeedbackMessage(["Uploaded Successfully", true]);
       }
     } else {
       setFeedbackMessage(["No file selected.", false]);

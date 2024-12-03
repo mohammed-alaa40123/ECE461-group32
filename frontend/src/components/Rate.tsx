@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getPackageRate } from "../api";
 
 export default function Rate(): JSX.Element {
     const [packageId, setPackageId] = useState("");
@@ -19,13 +20,9 @@ export default function Rate(): JSX.Element {
 
         try {
             // Replace with the actual API endpoint to get the package rate
-            const response = await fetch(`/api/packages/${packageId}/rate`, {
-                method: "GET",
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setRate(data.rate);
+            const response = await getPackageRate(packageId);
+            if (response) {
+                setRate(response.rate);
                 setResponseMessage("Package rate retrieved successfully.");
             } else {
                 setResponseMessage("Failed to get the package rate. Please try again.");

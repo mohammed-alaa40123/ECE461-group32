@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getPackageCost } from "../api";
 
 export default function Cost(): JSX.Element {
     const [packageId, setPackageId] = useState("");
@@ -19,13 +20,9 @@ export default function Cost(): JSX.Element {
 
         try {
             // Replace with the actual API endpoint to get the package cost
-            const response = await fetch(`/api/packages/${packageId}/cost`, {
-                method: "GET",
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setCost(data.cost);
+            const response = await getPackageCost(packageId);
+            if (response) {
+                setCost(response.cost);
                 setResponseMessage("Package cost retrieved successfully.");
             } else {
                 setResponseMessage("Failed to get the package cost. Please try again.");

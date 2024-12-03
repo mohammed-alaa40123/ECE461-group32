@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { getPackageById, searchPackagesByRegEx } from "../api";
-import { Button } from "./ui/button";
+// import { Button } from "./ui/button";
+import {downloadFile} from "../lib/utils";
+
 
 const GetPackage: React.FC = () => {
   const [packageId, setPackageId] = useState("");
@@ -10,6 +12,10 @@ const GetPackage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [searchType, setSearchType] = useState<"regex" | "id" | null>(null);
   const [inType, setInType] = useState(false);
+  const [content, setContent] = useState<string | null>(null);
+    const [name, setName] = useState<string | null>(null);
+
+
   const handleGetPackageById = async () => {
     if (!packageId) {
       setError("Package ID cannot be empty");
@@ -21,11 +27,10 @@ const GetPackage: React.FC = () => {
       console.log(packageId);
       const data = await getPackageById(packageId);
       if (data) {
-        setResult(JSON.stringify(data, null, 2));
-        console.log(data);
-        console.log(result);
-      }
-      else {
+        setResult(JSON.stringify(data));
+        setContent(data.data.Content);
+        setName(data.metadata.Name);
+      } else {
         throw new Error("No data found");
       }
     } catch (err) {
@@ -44,8 +49,12 @@ const GetPackage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await searchPackagesByRegEx(regex, localStorage.getItem("authToken") ?? "");
-      setResult(JSON.stringify(data, null, 2));
+      const data = await searchPackagesByRegEx(regex);
+      if (data) {
+        setResult(JSON.stringify(data, null, 2));
+      } else {
+        throw new Error("No data found");
+      }
     } catch (err) {
       console.error(err);
       setError("Failed to search packages by regex");
@@ -59,22 +68,25 @@ const GetPackage: React.FC = () => {
       <div className="flex flex-col gap-5">
         {!inType && (
           <div className="flex gap-10 justify-center">
-            <Button
-              text="Search by ID"
+            <button
+              // role="Search by ID"
               onClick={() => {
                 setSearchType("id");
                 setInType(true);
               }}
-              className="bg-blue-500 text-white p-3 rounded"
-            />
-            <Button
-              text="Search by Regex"
+              className="bg-blue-500 text-white p-3 rounded">
+              Search by ID
+            </button>
+            <button
+              // role="Search by Regex"
+              // data-testid="search-by-regex-button"
               onClick={() => {
                 setSearchType("regex");
                 setInType(true);
               }}
-              className="bg-blue-500 text-white p-3 rounded"
-            />
+              className="bg-blue-500 text-white p-3 rounded">
+              Search by Regex
+            </button>
           </div>
         )}
         {inType && (
@@ -87,6 +99,8 @@ const GetPackage: React.FC = () => {
                 setRegex("");
                 setError(null);
                 setResult(null);
+                setName(null);
+                setContent(null);
               }}
               className="bg-gray-800 mb-10 hover:opacity-90 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">
               Back
@@ -97,22 +111,23 @@ const GetPackage: React.FC = () => {
                   Package ID
                 </label>
                 <input
-                  id="id"
+                  id="packageId"
                   type="text"
                   value={packageId}
                   onChange={(e) => setPackageId(e.target.value)}
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <button
+                  // role = "Search"
                   onClick={handleGetPackageById}
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">
-                  Get Package by ID
+                  Search
                 </button>
               </div>
             ) : (
               <div className="mb-4">
                 <label className="block font-bold mb-2" htmlFor="regex">
-                  Search by Regex
+                  Package Regex
                 </label>
                 <input
                   id="regex"
@@ -122,9 +137,10 @@ const GetPackage: React.FC = () => {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 <button
+                  // role = "Search"
                   onClick={handleSearchByRegex}
                   className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">
-                  Search by Regex
+                  Search
                 </button>
               </div>
             )}
@@ -132,7 +148,16 @@ const GetPackage: React.FC = () => {
         )}
         {loading && <p className="text-gray-700 italic">Loading...</p>}
         {error && <p className="text-red-500 italic">{error}</p>}
-        {result && <pre className="text-white p-4 mt-4 rounded">{result}</pre>}
+        {result && !content &&<code className=""><pre className="mx-auto text-white p-4 mt-4 rounded max-w-96 break-words whitespace-normal">{result}</pre></code>}
+        {content && (
+                <a
+                    href={downloadFile(content, `${name?.replace(" ", "_")}.zip`).url}
+                    download={`${name?.replace(" ", "_")}.zip`}
+                    className="mt-4 px-6 py-3 bg-green-500 text-white rounded-lg"
+                >
+                    Click here to download
+                </a>
+            )}
       </div>
     </div>
   );
