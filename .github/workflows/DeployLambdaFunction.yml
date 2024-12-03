@@ -24,7 +24,7 @@ jobs:
       # 3. Install dependencies and build the project
       - name: Install Dependencies and Build
         run: |
-          cd frontend
+          cd ECE461-group32/frontend
           npm install
           npm run build
           ls
@@ -34,7 +34,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
 
         with:
-          path: frontend/dist  # Adjust if your build output directory is different
+          path: ECE461-group32/frontend/dist  # Adjust if your build output directory is different
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # publish_dir: ./frontend/dist  # Adjust if your build output directory is different
   # deploy:
