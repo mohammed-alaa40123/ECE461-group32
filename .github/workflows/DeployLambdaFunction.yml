@@ -41,6 +41,9 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Deploy
         uses: actions/deploy-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  
 
   # deploy:
   #   runs-on: ubuntu-latest

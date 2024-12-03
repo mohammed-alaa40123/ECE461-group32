@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mohammed-alaa40123.github.io/ECE461-group32/",
+  "homepage": "http://172.21.236.201:3000",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
