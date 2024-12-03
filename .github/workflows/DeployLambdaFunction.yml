@@ -19,6 +19,7 @@ jobs:
               cd frontend
               npm install
               npm run build
+              npm run deploy
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
