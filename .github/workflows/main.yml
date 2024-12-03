@@ -3,7 +3,7 @@ name: Deploy Frontend to GitHub Pages
 on:
   push:
     branches:
-      - githubpages  # Trigger on pushes to the main branch
+      - githubpages   # Trigger on pushes to the main branch
 
 jobs:
   build-and-deploy:
