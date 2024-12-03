@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -b webapp "
+    "deploy": "gh-pages -d dist -b webapp2 "
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
