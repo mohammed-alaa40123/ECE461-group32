@@ -1,6 +1,4 @@
 name: Deploy Lambda Function using Docker
-
-
 on:
   push:
     branches:
