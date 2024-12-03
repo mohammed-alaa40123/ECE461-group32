@@ -12,7 +12,6 @@
     "test": "vitest",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist -b Access_track"
-
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
@@ -27,6 +26,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
+    "gh-pages": "^6.2.0",
     "lucide-react": "^0.452.0",
     "process": "^0.11.10",
     "react": "^18.3.1",
