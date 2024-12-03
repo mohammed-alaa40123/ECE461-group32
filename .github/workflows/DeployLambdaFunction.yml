@@ -32,7 +32,7 @@ jobs:
         run: |
           ls ECE461-group32/frontend/dist
           echo "Build successful!"
-          ls -la
+          ls -tr ECE461-group32
       # 4. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
