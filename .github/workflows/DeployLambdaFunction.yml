@@ -12,6 +12,8 @@ jobs:
       # 1. Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          path: "ECE461-group32" # Check out the code on the branch that triggered the workflow
 
       # 2. Set up Node.js environment
       - name: Setup Node.js
@@ -25,6 +27,7 @@ jobs:
           cd frontend
           npm install
           npm run build
+          ls
 
       # 4. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
