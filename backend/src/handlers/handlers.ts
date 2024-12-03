@@ -79,7 +79,7 @@ export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyR
       { expiresIn: process.env.JWT_EXPIRES_IN || '10h' }
     );
 
-    return sendResponse(200,  `bearer ${token}` );
+    return sendResponse(200, `bearer ${token}`);
   } catch (error) {
     console.error('Authentication Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
@@ -96,12 +96,12 @@ export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyR
 function convertGitUrlToHttpsFlexible(gitUrl: string): string {
   let httpsUrl: string | null = null;
 
-  // Regex patterns for different Git URL formats
+  // Regex patterns for different Git URL formats, including optional 'git+' prefix for HTTPS
   const patterns: RegExp[] = [
     /^git:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/,
     /^git@([^:]+):([^/]+)\/([^/]+)\.git$/,
     /^ssh:\/\/git@([^/]+)\/([^/]+)\/([^/]+)\.git$/,
-    /^https:\/\/([^/]+)\/([^/]+)\/([^/]+)(\.git)?$/,
+    /^(?:git\+)?https:\/\/([^/]+)\/([^/]+)\/([^/]+)(?:\.git)?$/,
   ];
 
   for (const pattern of patterns) {
@@ -116,12 +116,11 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
   }
 
   if (!httpsUrl) {
-    throw new Error(`Unrecognized Git URL format: ${gitUrl}`);
+    throw new Error(`Unrecognized Git URL format: ${gitUrl}. Please ensure the URL is valid and follows one of the supported formats.`);
   }
 
   return httpsUrl;
 }
-
 // // Example usage:
 // async function fetchRepoDetails(packageName: string): Promise<{ url: string, owner: string, name: string, defaultBranch: string } | null> {
 //   try {
@@ -763,78 +762,83 @@ export const handleListPackages = async (
       // Debugging: Log the fetched packages
 
 
-      // Filter results based on the Version using semver
-      let [type, versionRange] = Version.split(' ');
-      let match = [];
-      let wanted = '';
-      console.log("Before going in ");
-      switch (type) {
-        case 'Exact':
-          match = versionRange.match(/\(([^)]+)\)/);
-          wanted = match[1];
-          if (Name != '*')
-            sql += 'and version=$2';
+      if (Version) {        // Filter results based on the Version using semver
+        let [type, versionRange] = Version.split(' ');
+        let match = [];
+        let wanted = '';
+        console.log("Before going in ");
+        switch (type) {
+          case 'Exact':
+            match = versionRange.match(/\(([^)]+)\)/);
+            wanted = match[1];
+            if (Name != '*')
+              sql += 'and version=$2';
 
-          else sql += 'where version=$1';
+            else sql += 'where version=$1';
 
-          values.push(wanted);
-          break;
-        case 'Bounded':
-          match = versionRange.match(/\(([^)]+)\)/);
-          wanted = match[1];
-          let [bound1, bound2] = wanted.split('-');
-          if (Name != '*')
-            sql += 'and version>=$2 and version <= $3';
+            values.push(wanted);
+            break;
+          case 'Bounded':
+            match = versionRange.match(/\(([^)]+)\)/);
+            wanted = match[1];
+            let [bound1, bound2] = wanted.split('-');
+            if (Name != '*')
+              sql += 'and version>=$2 and version <= $3';
 
-          else sql += 'where version>=$1 and version <=$2';
+            else sql += 'where version>=$1 and version <=$2';
 
-          values.push(bound1);
-          values.push(bound2);
-          break;
-        case 'Tilde':
-          match = versionRange.match(/\(([^)]+)\)/);
-          let wantedb: string = match[1];
+            values.push(bound1);
+            values.push(bound2);
+            break;
+          case 'Tilde':
+            match = versionRange.match(/\(([^)]+)\)/);
+            let wantedb: string = match[1];
 
-          let [none, wanted2] = wantedb.split('~');
-          let [non1, wanted3, non2] = wanted2.split('.');
-          let boun1 = wanted2;
-          let num = parseInt(wanted3);
-          let boun2 = `${non1}.${num + 1}.0`;
-          if (Name != '*')
-            sql += 'and version>=$2 and version <= $3';
+            let [none, wanted2] = wantedb.split('~');
+            let [non1, wanted3, non2] = wanted2.split('.');
+            let boun1 = wanted2;
+            let num = parseInt(wanted3);
+            let boun2 = `${non1}.${num + 1}.0`;
+            if (Name != '*')
+              sql += 'and version>=$2 and version <= $3';
 
-          else sql += 'where version>=$1 and version <=$2';
+            else sql += 'where version>=$1 and version <=$2';
 
-          values.push(boun1);
-          values.push(boun2);
-          console.log(boun2);
-          break;
-        case 'Carat':
-          match = versionRange.match(/\(([^)]+)\)/);
-          let wantedeb: string = match[1];
+            values.push(boun1);
+            values.push(boun2);
+            console.log(boun2);
+            break;
+          case 'Carat':
+            match = versionRange.match(/\(([^)]+)\)/);
+            let wantedeb: string = match[1];
 
-          let [nonee, wantede2] = wantedeb.split('^');
-          let [wantede3, nonee1, nonee2] = wantede2.split('.');
-          let bou1 = wantede2;
-          let nume = parseInt(wantede3);
-          let bou2 = `${nume + 1}.0.0`;
-          if (Name != '*')
-            sql += 'and version>=$2 and version <= $3';
+            let [nonee, wantede2] = wantedeb.split('^');
+            let [wantede3, nonee1, nonee2] = wantede2.split('.');
+            let bou1 = wantede2;
+            let nume = parseInt(wantede3);
+            let bou2 = `${nume + 1}.0.0`;
+            if (Name != '*')
+              sql += 'and version>=$2 and version <= $3';
 
-          else sql += 'where version>=$1 and version <=$2';
+            else sql += 'where version>=$1 and version <=$2';
 
-          values.push(bou1);
-          values.push(bou2);
-          console.log(bou2);
-          break;
+            values.push(bou1);
+            values.push(bou2);
+            console.log(bou2);
+            break;
+        }
+        // Debugging: Log the filtered packages
+        console.log("EXEC");
+        console.log(sql, values);
+        const filteredPackages = await pool.query(sql, values);
+        console.log(`Filtered packages for Name "${Name}" and Version "${Version}":`, filteredPackages);
+
+        results.push(...filteredPackages.rows);
       }
-      // Debugging: Log the filtered packages
-      console.log("EXEC");
-      console.log(sql, values);
-      const filteredPackages = await pool.query(sql, values);
-      console.log(`Filtered packages for Name "${Name}" and Version "${Version}":`, filteredPackages);
-
-      results.push(...filteredPackages.rows);
+      else {
+        const allPackages = await pool.query(sql);
+        results.push(...allPackages.rows);
+      }
     }
     if (results.length > 100)
       return sendResponse(413, { message: 'Too many packages returned.' });
