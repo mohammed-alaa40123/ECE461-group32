@@ -31,7 +31,7 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: 'https://github.com/mohammed-alaa40123/ECE461-group32'
+      url: 'https://mohammed-alaa40123.github.io/ECE461-group32/'
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v5
