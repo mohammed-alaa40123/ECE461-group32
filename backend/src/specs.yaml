@@ -1,0 +1,1000 @@
+openapi: 3.0.0
+info:
+  title: My API Service
+  version: 1.0.0
+paths:
+  /authenticate:
+    put:
+      summary: Authenticate user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthenticateRequest'
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticateResponse'
+        '400':
+          description: Missing fields in AuthenticationRequest
+        '401':
+          description: Invalid user or password
+        '500':
+          description: Internal server error
+  /register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterUserResponse'
+        '400':
+          description: Name and password are required
+        '403':
+          description: Admin privileges required to register users
+        '409':
+          description: User already exists
+        '500':
+          description: Internal server error
+  /packages:
+    post:
+      summary: List packages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPackagesRequest'
+      responses:
+        '200':
+          description: List of packages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPackagesResponse'
+        '400':
+          description: Invalid JSON format in request body
+        '403':
+          description: You do not have permission to search packages
+        '500':
+          description: Internal server error
+  /reset:
+    delete:
+      summary: Reset the registry
+      responses:
+        '200':
+          description: Registry reset successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetRegistryResponse'
+        '403':
+          description: Admin privileges required
+        '500':
+          description: Internal server error
+  /package/byRegEx:
+    post:
+      summary: Search packages by RegEx
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchPackagesByRegExRequest'
+      responses:
+        '200':
+          description: List of packages matching the RegEx
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchPackagesByRegExResponse'
+        '400':
+          description: Missing RegEx field in PackageRegEx
+        '403':
+          description: You do not have permission to search packages
+        '404':
+          description: No package found under this regex
+        '500':
+          description: Internal server error
+  /package/byName/{name}:
+    get:
+      summary: Get package history by name
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Package history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPackageHistoryByNameResponse'
+        '403':
+          description: You do not have permission to search packages
+        '404':
+          description: No such package
+        '500':
+          description: Internal server error
+  /package:
+    post:
+      summary: Create a new package
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePackageRequest'
+      responses:
+        '201':
+          description: Package created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePackageResponse'
+        '400':
+          description: Either Content or URL must be set, but not both
+        '403':
+          description: You do not have permission to upload packages
+        '409':
+          description: Package exists already
+        '424':
+          description: Package disqualified due to low rating
+        '500':
+          description: Internal server error
+  /package/{id}/rate:
+    get:
+      summary: Get package rating
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Package rating
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPackageRatingResponse'
+        '400':
+          description: Missing field(s) in PackageID
+        '403':
+          description: Authentication failed due to invalid or missing AuthenticationToken
+        '500':
+          description: Failed to calculate metrics for the package
+  /package/{id}/cost:
+    get:
+      summary: Get package cost
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Package cost
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPackageCostResponse'
+        '403':
+          description: Authentication failed due to invalid or missing AuthenticationToken
+        '404':
+          description: Package does not exist
+        '500':
+          description: Internal server error
+  /package/{id}:
+    get:
+      summary: Retrieve a package
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Package details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievePackageResponse'
+        '400':
+          description: There is missing field(s) in the PackageID or it is formed improperly, or is invalid
+        '403':
+          description: You do not have permission to download packages
+        '404':
+          description: Package does not exist
+        '500':
+          description: Internal server error
+    post:
+      summary: Update a package
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePackageRequest'
+      responses:
+        '200':
+          description: Package updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePackageResponse'
+        '400':
+          description: There is missing field(s) in the PackageID or it is formed improperly, or is invalid
+        '403':
+          description: You do not have permission to update packages
+        '409':
+          description: Package exists already
+        '424':
+          description: Package disqualified due to low rating
+        '500':
+          description: Internal server error
+    delete:
+      summary: Delete a package
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Package deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePackageResponse'
+        '403':
+          description: You do not have permission to upload/delete packages
+        '404':
+          description: Package does not exist
+        '500':
+          description: Internal server error
+  /tracks:
+    get:
+      summary: Get planned tracks
+      responses:
+        '200':
+          description: List of planned tracks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTracksResponse'
+        '403':
+          description: Authentication failed due to invalid or missing AuthenticationToken
+        '500':
+          description: Internal server error
+  /sql:
+    post:
+      summary: Execute SQL script
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteSQLRequest'
+      responses:
+        '200':
+          description: SQL script executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteSQLResponse'
+        '400':
+          description: SQL script is required and must be a string
+        '403':
+          description: Authentication failed due to invalid or missing AuthenticationToken
+        '500':
+          description: Internal server error
+  /groups:
+    post:
+      summary: Create a new group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequest'
+      responses:
+        '201':
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGroupResponse'
+        '400':
+          description: Group name is required
+        '403':
+          description: Admin privileges required to create groups
+        '409':
+          description: Group already exists
+        '500':
+          description: Internal server error
+  /permissions:
+    post:
+      summary: Create a new permission
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePermissionRequest'
+      responses:
+        '201':
+          description: Permission created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePermissionResponse'
+        '400':
+          description: Permission name is required
+        '403':
+          description: Admin privileges required to create permissions
+        '409':
+          description: Permission already exists
+        '500':
+          description: Internal server error
+  /users/{userId}/edit:
+    put:
+      summary: Edit user groups and permissions
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditUserGroupsAndPermissionsRequest'
+      responses:
+        '200':
+          description: User groups and permissions updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditUserGroupsAndPermissionsResponse'
+        '400':
+          description: User ID is required
+        '403':
+          description: Admin privileges required to edit user groups and permissions
+        '500':
+          description: Internal server error
+  /users/groups-permissions:
+    get:
+      summary: Retrieve all user groups and permissions
+      responses:
+        '200':
+          description: List of all user groups and permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveUserGroupsAndPermissionsResponse'
+        '403':
+          description: Admin privileges required to retrieve user groups and permissions
+        '500':
+          description: Internal server error
+  /users/{userId}/groups-permissions:
+    get:
+      summary: Retrieve groups and permissions for a specific user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User groups and permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveUserGroupsAndPermissionsForUserResponse'
+        '400':
+          description: Invalid user ID
+        '403':
+          description: Admin privileges required to retrieve user groups and permissions
+        '500':
+          description: Internal server error
+  /users/{userId}:
+    delete:
+      summary: Delete a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteUserResponse'
+        '403':
+          description: Admin privileges required to delete users
+        '404':
+          description: User does not exist
+        '500':
+          description: Internal server error
+  /groups/{groupId}:
+    delete:
+      summary: Delete a group
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Group deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteGroupResponse'
+        '403':
+          description: Admin privileges required to delete groups
+        '404':
+          description: Group does not exist
+        '500':
+          description: Internal server error
+  /permissions/{permissionId}:
+    delete:
+      summary: Delete a permission
+      parameters:
+        - name: permissionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Permission deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePermissionResponse'
+        '403':
+          description: Admin privileges required to delete permissions
+        '404':
+          description: Permission does not exist
+        '500':
+          description: Internal server error
+
+components:
+  schemas:
+    AuthenticateRequest:
+      type: object
+      properties:
+        User:
+          $ref: '#/components/schemas/User'
+        Secret:
+          type: object
+          properties:
+            password:
+              type: string
+    AuthenticateResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    RegisterUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        isAdmin:
+          type: boolean
+        groups:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    RegisterUserResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    ListPackagesRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageQuery'
+    ListPackagesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Package'
+    ResetRegistryResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    SearchPackagesByRegExRequest:
+      type: object
+      properties:
+        RegEx:
+          type: string
+    SearchPackagesByRegExResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Package'
+    GetPackageHistoryByNameResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageHistoryEntry'
+    CreatePackageRequest:
+      type: object
+      properties:
+        Content:
+          type: string
+        JSProgram:
+          type: string
+        URL:
+          type: string
+        debloat:
+          type: boolean
+    CreatePackageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    GetPackageRatingResponse:
+      type: object
+      properties:
+        rating:
+          $ref: '#/components/schemas/PackageRating'
+    GetPackageCostResponse:
+      type: object
+      properties:
+        cost:
+          type: number
+    RetrievePackageResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PackageMetadata'
+        data:
+          $ref: '#/components/schemas/PackageData'
+    UpdatePackageRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PackageMetadata'
+        data:
+          $ref: '#/components/schemas/PackageData'
+    UpdatePackageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    DeletePackageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    GetTracksResponse:
+      type: array
+      items:
+        type: string
+    ExecuteSQLRequest:
+      type: object
+      properties:
+        sql:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
+    ExecuteSQLResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            type: object
+    CreateGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+    CreateGroupResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        groupId:
+          type: integer
+    CreatePermissionRequest:
+      type: object
+      properties:
+        name:
+          type: string
+    CreatePermissionResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        permissionId:
+          type: integer
+    EditUserGroupsAndPermissionsRequest:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    EditUserGroupsAndPermissionsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    RetrieveUserGroupsAndPermissionsResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    RetrieveUserGroupsAndPermissionsForUserResponse:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        userPermissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    DeleteUserResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    DeleteGroupResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    DeletePermissionResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        isAdmin:
+          type: boolean
+    PackageQuery:
+      type: object
+      properties:
+        Name:
+          type: string
+        Version:
+          type: string
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        owner:
+          type: string
+        content:
+          type: string
+        url:
+          type: string
+        debloat:
+          type: boolean
+        js_program:
+          type: string
+        is_sensitive:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updatedopenapi: 3.0.0
+
+  schemas:
+    AuthenticateRequest:
+      type: object
+      properties:
+        User:
+          $ref: '#/components/schemas/User'
+        Secret:
+          type: object
+          properties:
+            password:
+              type: string
+    AuthenticateResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    RegisterUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        password:
+          type: string
+        isAdmin:
+          type: boolean
+        groups:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    RegisterUserResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    ListPackagesRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageQuery'
+    ListPackagesResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Package'
+    ResetRegistryResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    SearchPackagesByRegExRequest:
+      type: object
+      properties:
+        RegEx:
+          type: string
+    SearchPackagesByRegExResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/Package'
+    GetPackageHistoryByNameResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageHistoryEntry'
+    CreatePackageRequest:
+      type: object
+      properties:
+        Content:
+          type: string
+        JSProgram:
+          type: string
+        URL:
+          type: string
+        debloat:
+          type: boolean
+    CreatePackageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    GetPackageRatingResponse:
+      type: object
+      properties:
+        rating:
+          $ref: '#/components/schemas/PackageRating'
+    GetPackageCostResponse:
+      type: object
+      properties:
+        cost:
+          type: number
+    RetrievePackageResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PackageMetadata'
+        data:
+          $ref: '#/components/schemas/PackageData'
+    UpdatePackageRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/PackageMetadata'
+        data:
+          $ref: '#/components/schemas/PackageData'
+    UpdatePackageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    DeletePackageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    GetTracksResponse:
+      type: array
+      items:
+        type: string
+    ExecuteSQLRequest:
+      type: object
+      properties:
+        sql:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
+    ExecuteSQLResponse:
+      type: object
+      properties:
+        result:
+          type: array
+          items:
+            type: object
+    CreateGroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+    CreateGroupResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        groupId:
+          type: integer
+    CreatePermissionRequest:
+      type: object
+      properties:
+        name:
+          type: string
+    CreatePermissionResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        permissionId:
+          type: integer
+    EditUserGroupsAndPermissionsRequest:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    EditUserGroupsAndPermissionsResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    RetrieveUserGroupsAndPermissionsResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    RetrieveUserGroupsAndPermissionsForUserResponse:
+      type: object
+      properties:
+        userGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Group'
+        userPermissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+    DeleteUserResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    DeleteGroupResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    DeletePermissionResponse:
+      type: object
+      properties:
+        message:
+          type: string
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        isAdmin:
+          type: boolean
+    PackageQuery:
+      type: object
+      properties:
+        Name:
+          type: string
+        Version:
+          type: string
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        owner:
+          type: string
+        content:
+          type: string
+        url:
+          type: string
+        debloat:
+          type: boolean
+        js_program:
+          type: string
+        is_sensitive:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated

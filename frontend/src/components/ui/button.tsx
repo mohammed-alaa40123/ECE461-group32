@@ -1,18 +1,14 @@
-import React from "react"
+import React from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  type: "submit" | "button" | "reset";
+  type?: "submit" | "button" | "reset";
   className?: string;
 }
 
-function Button({ text, type, className, ...props }: ButtonProps): JSX.Element {
+function Button({ text, type = "button", className, ...props }: ButtonProps): JSX.Element {
   return (
-    <button
-      className={className}
-      type={type}
-      {...props}
-    >
+    <button className={className} type={type} {...props}>
       {text}
     </button>
   );

@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 15/10/2024 20:31:36 [info]: GitHub token is valid
 18/10/2024 15:09:37 [info]: Request received: {}
 18/10/2024 15:13:48 [info]: Request received: {"metadata":{"Name":"watch.js-main","Version":"1.0.0"},"data":"your-package-data"}
@@ -225,3 +227,4 @@ operable program or batch file.
 19/10/2024 10:35:32 [debug]: Parts of the Ramp Up score: Main part: 0.3, Constant: 143.47154020001497, Documentation Weight: 1, Target Time: 7
 19/10/2024 10:35:32 [debug]: Ramp Up score for jashkenas/underscore: 0.3
 19/10/2024 10:35:32 [info]: {"URL":"https://github.com/jashkenas/underscore","NetScore":0.48,"NetScore_Latency":20.807,"RampUp":0.3,"RampUp_Latency":16.411,"Correctness":0,"Correctness_Latency":16.395,"BusFactor":0.05,"BusFactor_Latency":8.073,"ResponsiveMaintainer":0.98,"ResponsiveMaintainer_Latency":8.083,"License":1,"License_Latency":8.094}
+>>>>>>> origin/frontend
