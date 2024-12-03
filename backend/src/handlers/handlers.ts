@@ -79,7 +79,7 @@ export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyR
       { expiresIn: process.env.JWT_EXPIRES_IN || '10h' }
     );
 
-    return sendResponse(200, { token: `bearer ${token}` });
+    return sendResponse(200,  `bearer ${token}` );
   } catch (error) {
     console.error('Authentication Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
