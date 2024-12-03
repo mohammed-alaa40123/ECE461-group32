@@ -20,7 +20,7 @@ jobs:
               npm install
               npm run build
               git config --global user.email "mohammedalaa40123.com"
-              git config --global user.name "mohammed-alaa40123"
+              git config --global user.name "Mohammed Alaa"
 
               npm run deploy
       - name: Upload artifact
