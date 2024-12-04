@@ -201,7 +201,7 @@ WHERE
   if (!netScoreJSON) {
     return null;
   }
-
+  console.log("Net Score JSON", netScoreJSON);
   const NetScore = netScoreJSON.NetScore;
   const RampUp = netScoreJSON.RampUp;
   const Correctness = netScoreJSON.Correctness;
