@@ -981,7 +981,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
   const { RegEx } = JSON.parse(body);
 
   if (!RegEx) {
-    return sendResponse(400, { message: 'Missing RegEx field in PackageRegEx.' });
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
   }
 
   try {
@@ -1005,7 +1005,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
     return sendResponse(200, packages);
   } catch (error) {
     console.error('Search Packages Error:', error);
-    return sendResponse(500, { message: 'Internal server error.' });
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
   }
 };
 
