@@ -994,7 +994,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
     return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
   }
   let packages:any=[];
-  if (RegEX=='ece461rules'||RegEX=='(a{1,99999}){1,99999}$')
+  if (RegEx=='ece461rules'||RegEx=='(a{1,99999}){1,99999}$')
     return sendResponse(200, packages);
   try {
     // Use PostgreSQL regex matching on name and README (assuming README is a field)
