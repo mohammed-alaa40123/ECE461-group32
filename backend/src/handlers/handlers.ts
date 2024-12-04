@@ -751,10 +751,10 @@ export const handleListPackages = async (
       let values: any[] = [];
       // Build SQL query based on PackageQuery
       if (Name != '*') {
-        sql = 'SELECT version,name,id FROM packages WHERE name ILIKE $1 ';
+        sql = 'SELECT Version,Name,ID FROM packages WHERE Name ILIKE $1 ';
         values = [`%${Name}%`];
       }
-      else sql = 'SELECT version,name,id FROM packages ';
+      else sql = 'SELECT Version,Name,ID FROM packages ';
 
       // Execute SQL query to fetch packages matching the name
 
@@ -849,23 +849,33 @@ export const handleListPackages = async (
     console.log('Unique Results after removing duplicates:', uniqueResults);
 
     // Pagination
+        // After pagination in handlers.ts
+    
+    // Pagination
     const paginatedResults = uniqueResults.slice(offset, offset + limit);
+    
+    // Transform each package object to have capitalized keys
+    const transformedResults = paginatedResults.map(pkg => ({
+      Version: pkg.version,
+      Name: pkg.name,
+      ID: pkg.id
+    }));
+    
     const nextOffset = offset + limit < uniqueResults.length ? offset + limit : null;
-
+    
     const responseHeaders: { [key: string]: string } = {};
     if (nextOffset !== null) {
       responseHeaders['offset'] = nextOffset.toString();
     }
-
-    // Debugging: Log the paginated results
-    console.log('Paginated Results:', paginatedResults);
-
+    
+    // Debugging: Log the transformed and paginated results
+    console.log('Transformed and Paginated Results:', transformedResults);
+    
     return {
       statusCode: 200,
       headers: responseHeaders,
-      body: JSON.stringify(paginatedResults),
-    };
-  } catch (error: any) {
+      body: JSON.stringify(transformedResults),
+    };  } catch (error: any) {
     console.error('List Packages Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
   }
