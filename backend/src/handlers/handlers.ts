@@ -1041,14 +1041,14 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
     const res = await pool.query(ratingQuery, [id]);
 
     if (res.rows.length === 0) {
-      return sendResponse(500, { message: 'The package rating system choked on at least one of the metrics.' });
+      return sendResponse(404, { message: 'Package does not exist.' });
     }
 
     const packageUrl = res.rows[0].url;
     const newRating = await metricCalcFromUrlUsingNetScore(packageUrl, id);
 
     if (!newRating) {
-      return sendResponse(500, { message: 'Failed to calculate metrics for the package.' });
+      return sendResponse(500, { message: 'The package rating system choked on at least one of the metrics.' });
     }
 
     const checkExistingRatingQuery = 'SELECT 1 FROM package_ratings WHERE package_id = $1';
@@ -1147,7 +1147,7 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
     return sendResponse(200, convertPackageInfo(newRating));
   } catch (error) {
     console.error('Error calculating package rating:', error);
-    return sendResponse(500, { message: 'An error occurred while calculating the package rating.' });
+    return sendResponse(500, { message: 'The package rating system choked on at least one of the metrics.' });
   }
 };
 function extractPackageOwnerFromUrl(url: string): string | null {
