@@ -1032,12 +1032,12 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
 // Handler for /package/{id}/rate - GET (Get Package Rating)
 export const handleGetPackageRating = async (id: string, headers: { [key: string]: string | undefined }): Promise<any> => {
   // Authenticate the request
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
+  }
 
   // Validate package ID
   if (!id) {
