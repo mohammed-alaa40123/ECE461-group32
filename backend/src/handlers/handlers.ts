@@ -727,14 +727,14 @@ export const handleListPackages = async (
     queries = JSON.parse(body);
     console.log("Queries", queries);
   } catch (err: any) {
-    return sendResponse(400, { message: 'Invalid JSON format in request body.' });
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageQuery or it is formed improperly, or is invalid.' });
   }
 
   const offset = queryStringParameters.offset ? parseInt(queryStringParameters.offset) : 0;
   const limit = 10; // Define your page size
 
   if (!Array.isArray(queries)) {
-    return sendResponse(400, { message: 'Request body must be an array of PackageQuery.' });
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageQuery or it is formed improperly, or is invalid.' });
   }
 
   try {
