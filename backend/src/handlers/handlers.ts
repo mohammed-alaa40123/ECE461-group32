@@ -96,11 +96,12 @@ export const handleAuthenticate = async (body: string): Promise<APIGatewayProxyR
 function convertGitUrlToHttpsFlexible(gitUrl: string): string {
   let httpsUrl: string | null = null;
 
-  // Regex patterns for different Git URL formats, including optional 'git+' prefix for HTTPS
+  // Refined regex patterns for different Git URL formats
   const patterns: RegExp[] = [
     /^git:\/\/([^/]+)\/([^/]+)\/([^/]+)\.git$/,
     /^git@([^:]+):([^/]+)\/([^/]+)\.git$/,
     /^ssh:\/\/git@([^/]+)\/([^/]+)\/([^/]+)\.git$/,
+    /^(?:https?:\/\/)(?:[^@]+@)?([^/]+)\/([^/]+)\/([^/]+)(?:\.git)?$/,
     /^(?:git\+)?https:\/\/([^/]+)\/([^/]+)\/([^/]+)(?:\.git)?$/,
   ];
 
@@ -108,19 +109,26 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
     const match = pattern.exec(gitUrl);
     if (match) {
       const host = match[1];
-      const user = match[2];
-      const repo = match[3];
+      const user = encodeURIComponent(match[2]); // Encode special characters in user
+      const repo = encodeURIComponent(match[3]).replace(/\.git$/, "");; // Encode special characters in repo
       httpsUrl = `https://${host}/${user}/${repo}`;
       break;
     }
   }
 
   if (!httpsUrl) {
-    throw new Error(`Unrecognized Git URL format: ${gitUrl}. Please ensure the URL is valid and follows one of the supported formats.`);
+    throw new Error(
+      `Unrecognized Git URL format: ${gitUrl}. Please ensure the URL is valid and follows one of the supported formats.`
+    );
   }
 
   return httpsUrl;
 }
+
+// // Example usage:
+// const url = convertGitUrlToHttpsFlexible("https://taylorhakes@github.com/taylorhakes/fecha.git");
+// console.log(url); // Output: "https://github.com/taylorhakes/fecha"
+
 // // Example usage:
 // async function fetchRepoDetails(packageName: string): Promise<{ url: string, owner: string, name: string, defaultBranch: string } | null> {
 //   try {
@@ -1045,7 +1053,8 @@ export const handleGetPackageRating = async (id: string, headers: { [key: string
     }
 
     const packageUrl = res.rows[0].url;
-    const newRating = await metricCalcFromUrlUsingNetScore(packageUrl, id);
+    console.log("Package URL", packageUrl);
+    const newRating = await metricCalcFromUrlUsingNetScore(convertGitUrlToHttpsFlexible(packageUrl), id);
 
     if (!newRating) {
       return sendResponse(500, { message: 'The package rating system choked on at least one of the metrics.' });
