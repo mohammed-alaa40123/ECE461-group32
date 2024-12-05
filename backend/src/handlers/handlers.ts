@@ -990,14 +990,15 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
   // try {
   //   user = await authenticate(headers);
   // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
+  //   retu            -rn sendResponse(err.statusCode, { message: err.message });
   // }
   // if (!user.permissions.includes('search')) {
   //   return sendResponse(403, { message: 'You do not have permission to search packages.' });
   // }
   const { RegEx } = JSON.parse(body);
-
-  if (!RegEx) {
+  const pattern = new RegExp(regex);
+        
+  if (!RegEx||pattern.test("")) {
     return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
   }
   let packages:any=[];
