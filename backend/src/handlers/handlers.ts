@@ -506,7 +506,9 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     "SELECT id FROM packages WHERE name = $1 AND version = $2;",
     [metadata.Name, metadata.Version]
   );
-  
+  const tempres=await pool.query('select * from packages where id=$1',[updatedPackage.metadata.ID]);
+  if(tempres.rows.length>0)
+    updatedPackage.metadata.ID=generatePackageId();
   console.log("Results");
   const [latestMajorStr, latestMinorStr, latestPatchStr] = updatedPackage.metadata.Version.split('.');
   const latestMajor = parseInt(latestMajorStr, 10);
