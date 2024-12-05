@@ -26,6 +26,9 @@ functions:
           path: authenticate
           method: PUT
       - http:
+          path: authenticate2
+          method: PUT
+      - http:
           path: register
           method: POST
       - http:
