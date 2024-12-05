@@ -163,15 +163,15 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
 // Handler for /package - POST (Create Package)
 
 export const handleCreatePackage = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
-  // if (!user.permissions.includes('upload')) {
-  //   return sendResponse(403, { message: 'You do not have permission to upload packages.' });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('upload')) {
+    return sendResponse(403, { message: 'You do not have permission to upload packages.' });
+  }
 
   const packageData = JSON.parse(body);
   const { Content, JSProgram, URL, debloat } = packageData;
