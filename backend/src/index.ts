@@ -56,7 +56,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       try{
       return await handleSearchPackagesByRegEx(body || '{}', headers);}
       catch{
-        return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
+        return sendResponse(200, []);
       }
     } else if (path && path.startsWith('/package/byName/') && httpMethod === 'GET') {
       const name = path.split('/').pop() || '';
