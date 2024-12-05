@@ -1,7 +1,7 @@
 // src/index.ts
 import dotenv from 'dotenv';
 dotenv.config();
-
+import { sendResponse } from './utils/response';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import {
   handleAuthenticate,
@@ -53,7 +53,11 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     } else if (path === '/reset' && httpMethod === 'DELETE') {
       return await handleResetRegistry(headers);
     } else if (path === '/package/byRegEx' && httpMethod === 'POST') {
-      return await handleSearchPackagesByRegEx(body || '{}', headers);
+      try{
+      return await handleSearchPackagesByRegEx(body || '{}', headers);}
+      catch{
+        return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
+      }
     } else if (path && path.startsWith('/package/byName/') && httpMethod === 'GET') {
       const name = path.split('/').pop() || '';
       return await handleGetPackageHistoryByName(name, headers);
