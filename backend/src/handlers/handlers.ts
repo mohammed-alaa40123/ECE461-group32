@@ -998,7 +998,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
   const { RegEx } = JSON.parse(body);
   const pattern = new RegExp(RegEx);
         
-  if (!RegEx||pattern.test("")) {
+  if (!RegEx) {
     return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
   }
   let packages:any=[];
@@ -1011,7 +1011,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
     `;
     const res = await pool.query(searchQuery, [RegEx]);
 
-    if (res.rows.length === 0) {
+    if (res.rows.length === 0||pattern.test("")) {
       return sendResponse(404, { message: 'No package found under this regex.' });
     }
 
