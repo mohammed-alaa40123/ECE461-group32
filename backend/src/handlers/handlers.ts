@@ -995,14 +995,18 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
   // if (!user.permissions.includes('search')) {
   //   return sendResponse(403, { message: 'You do not have permission to search packages.' });
   // }
+  
   const { RegEx } = JSON.parse(body);
   const pattern = new RegExp(RegEx);
         
-  if (!RegEx) {
+  if (RegEx==null) {
+    
     return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
   }
   let packages:any=[];
-
+  if (pattern.test("")) {
+    return sendResponse(404, { message: 'No package found under this regex.' });
+  }
   try {
     // Use PostgreSQL regex matching on name and README (assuming README is a field)
     const searchQuery = `
@@ -1011,7 +1015,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
     `;
     const res = await pool.query(searchQuery, [RegEx]);
 
-    if (res.rows.length === 0||pattern.test("")) {
+    if (res.rows.length === 0) {
       return sendResponse(404, { message: 'No package found under this regex.' });
     }
 
