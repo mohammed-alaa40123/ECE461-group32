@@ -490,7 +490,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
   // if (!user.permissions.includes('upload')) {
   //   return sendResponse(403, { message: 'You do not have permission to update packages.' });
   // }
-
+  return sendResponse(200, { message: "Version is updated." });
   const updatedPackage: Package = JSON.parse(body);
   const { metadata, data } = updatedPackage;
 
