@@ -506,9 +506,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     "SELECT id FROM packages WHERE name = $1 AND version = $2;",
     [metadata.Name, metadata.Version]
   );
-  if (existingResult.rows.length > 0) {
-    return sendResponse(409, { message: 'Package exists already.' });
-  }
+  
   console.log("Results");
   const [latestMajorStr, latestMinorStr, latestPatchStr] = updatedPackage.metadata.Version.split('.');
   const latestMajor = parseInt(latestMajorStr, 10);
@@ -580,9 +578,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
         "SELECT id FROM packages WHERE name = $1 AND version = $2;",
         [metadata.Name, metadata.Version]
       );
-      if (existingResult.rows.length > 0) {
-        return sendResponse(409, { message: 'Package exists already.' });
-      }
+      
 
       // Download package content from GitHub
       const response = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
