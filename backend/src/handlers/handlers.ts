@@ -12,6 +12,7 @@ import AdmZip from 'adm-zip';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { fetchRepoDetails } from '../handlerhelper';
+import { send } from 'process';
 
 
 
@@ -879,11 +880,8 @@ export const handleListPackages = async (
     // Debugging: Log the transformed and paginated results
     console.log('Transformed and Paginated Results:', transformedResults);
     
-    return {
-      statusCode: 200,
-      headers: responseHeaders,
-      body: JSON.stringify(transformedResults),
-    };  } catch (error: any) {
+    return sendResponse(200, transformedResults);
+   } catch (error: any) {
     console.error('List Packages Error:', error);
     return sendResponse(500, { message: 'Internal server error.' });
   }
