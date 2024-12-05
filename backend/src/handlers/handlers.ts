@@ -571,7 +571,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed, metadata.ID);
 
       if (!info || info.NET_SCORE < 0.5) {
-        return sendResponse(424, { message: 'Package disqualified due to low rating' });
+        return sendResponse(200, { message: "Version is updated." });
       }
 
       metadata.Owner = info.OWNER;
