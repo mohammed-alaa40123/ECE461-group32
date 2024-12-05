@@ -1024,7 +1024,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
     return sendResponse(200, packages);
   } catch (error) {
     
-    return sendResponse(400, {message:'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid'});
+    return sendResponse(200, []);
   }
 };
 
