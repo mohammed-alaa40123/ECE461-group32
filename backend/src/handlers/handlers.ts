@@ -496,18 +496,18 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
 
   // Ensure the name, version, and ID match
   if (metadata.ID !== id) {
-    return sendResponse(200, { message: "Version is updated." });
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
   }
   const result = await pool.query('select * from packages where name=$1', [updatedPackage.metadata.Name]);
   if (result.rows.length == 0) {
-    return sendResponse(200, { message: "Version is updated." });
+    return sendResponse(404, { message: 'Package does not exist.' });
   }
   const existingResult = await pool.query(
     "SELECT id FROM packages WHERE name = $1 AND version = $2;",
     [metadata.Name, metadata.Version]
   );
   if (existingResult.rows.length > 0) {
-    return sendResponse(200, { message: "Version is updated." });
+    return sendResponse(409, { message: 'Package exists already.' });
   }
   
   console.log("Results");
@@ -523,7 +523,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     let mn = parseInt(mnstr, 10);
     let pt = parseInt(pstr, 10);
     if (mj == latestMajor && mn == latestMinor && pt > latestPatch) {
-      return sendResponse(200, { message: "Version is updated." });
+      return sendResponse(400, { message: 'Invalid Version.' });
     }
   }
 
@@ -571,7 +571,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed, metadata.ID);
 
       if (!info || info.NET_SCORE < 0.5) {
-        return sendResponse(200, { message: "Version is updated." });
+        return sendResponse(424, { message: 'Package disqualified due to low rating' });
       }
 
       metadata.Owner = info.OWNER;
@@ -582,7 +582,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
         [metadata.Name, metadata.Version]
       );
       if (existingResult.rows.length > 0) {
-        return sendResponse(200, { message: "Version is updated." });
+        return sendResponse(409, { message: 'Package exists already.' });
       }
 
       // Download package content from GitHub
@@ -594,7 +594,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       });
 
       if (!response.ok) {
-        return sendResponse(200, { message: "Version is updated." });
+        return sendResponse(400, { message: 'Could not get GitHub URL for zip package download' });
       }
       const readmef = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
         headers: {
@@ -640,7 +640,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     if (updatedPackage.data.JSProgram) {
       const isProgramValid = await validateJsProgram(updatedPackage.data.JSProgram);
       if (!isProgramValid) {
-        return sendResponse(200, { message: "Version is updated." });
+        return sendResponse(400, { message: 'Invalid JavaScript program' });
       }
       data.JSProgram = updatedPackage.data.JSProgram;
     }
@@ -655,7 +655,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
 
       await uploadPackageContent(metadata.ID, contentBuffer);
     } else {
-      return sendResponse(200, { message: "Version is updated." });
+      return sendResponse(500, { message: 'Package content buffer is empty, unable to upload.' });
     }
 
 
@@ -670,7 +670,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     return sendResponse(200, { message: "Version is updated." });
   } catch (error: any) {
     console.error('Create Package Error:', error);
-    return sendResponse(200, { message: "Version is updated." });
+    return sendResponse(500, { message: 'Internal server error.' });
   }
 };
 
