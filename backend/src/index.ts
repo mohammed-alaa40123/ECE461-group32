@@ -43,6 +43,8 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return await handleExecuteSQL(body || '{}', headers);
     } else if (path === '/authenticate' && httpMethod === 'PUT') {
       return await handleAuthenticate(body || '{}');
+    } else if (path === '/authenticate2' && httpMethod === 'PUT') {
+      return await handleAuthenticate(body || '{}');
     }
     else if (path === '/tracks' && httpMethod === 'GET') {
       return await handleGetTracks(body || '{}');
