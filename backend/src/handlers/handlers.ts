@@ -996,7 +996,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
   //   return sendResponse(403, { message: 'You do not have permission to search packages.' });
   // }
   const { RegEx } = JSON.parse(body);
-  const pattern = new RegExp(regex);
+  const pattern = new RegExp(RegEx);
         
   if (!RegEx||pattern.test("")) {
     return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
