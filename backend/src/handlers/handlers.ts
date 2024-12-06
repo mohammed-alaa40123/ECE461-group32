@@ -246,14 +246,14 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       const repoUrlFixed = convertGitUrlToHttpsFlexible(URL);
       const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed, metadata.ID);
 
-      if (!info || info.NET_SCORE < 0.5) {
-        return sendResponse(424, { message: 'Package disqualified due to low rating' });
-      }
+      // if (!info || info.NET_SCORE < 0.5) {
+      //   return sendResponse(424, { message: 'Package disqualified due to low rating' });
+      // }
 
-      metadata.Name = info.NAME;
-      metadata.Version = info.VERSION;
+      metadata.Name = info!.NAME;
+      metadata.Version = info!.VERSION;
       data.URL = repoUrlFixed;
-      metadata.Owner = info.OWNER;
+      metadata.Owner = info!.OWNER;
 
       // Check if the package already exists based on Name and Version
       const existingResult = await pool.query(
@@ -265,7 +265,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       }
 
       // Download package content from GitHub
-      const response = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+      const response = await fetch(`https://api.github.com/repos/${info!.OWNER}/${info!.NAME}/zipball/HEAD`, {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           Accept: 'application/vnd.github.v3+json',
@@ -275,7 +275,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       if (!response.ok) {
         return sendResponse(400, { message: 'Could not get GitHub URL for zip package download' });
       }
-      const readmef = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+      const readmef = await fetch(`https://api.github.com/repos/${info!.OWNER}/${info!.NAME}/zipball/HEAD`, {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           Accept: 'application/vnd.github.v3+json',
@@ -304,23 +304,23 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       `;
 
       const values = [
-        info.ID,
-        info.NET_SCORE,
-        info.RAMP_UP_SCORE,
-        info.CORRECTNESS_SCORE,
-        info.BUS_FACTOR_SCORE,
-        info.RESPONSIVE_MAINTAINER_SCORE,
-        info.LICENSE_SCORE,
-        info.PULL_REQUESTS_SCORE,
-        info.PINNED_DEPENDENCIES_SCORE,
-        info.NET_SCORE_LATENCY,
-        info.RAMP_UP_SCORE_LATENCY,
-        info.CORRECTNESS_SCORE_LATENCY,
-        info.BUS_FACTOR_SCORE_LATENCY,
-        info.RESPONSIVE_MAINTAINER_SCORE_LATENCY,
-        info.LICENSE_SCORE_LATENCY,
-        info.PULL_REQUESTS_SCORE_LATENCY,
-        info.PINNED_DEPENDENCIES_SCORE_LATENCY
+        info!.ID,
+        info!.NET_SCORE,
+        info!.RAMP_UP_SCORE,
+        info!.CORRECTNESS_SCORE,
+        info!.BUS_FACTOR_SCORE,
+        info!.RESPONSIVE_MAINTAINER_SCORE,
+        info!.LICENSE_SCORE,
+        info!.PULL_REQUESTS_SCORE,
+        info!.PINNED_DEPENDENCIES_SCORE,
+        info!.NET_SCORE_LATENCY,
+        info!.RAMP_UP_SCORE_LATENCY,
+        info!.CORRECTNESS_SCORE_LATENCY,
+        info!.BUS_FACTOR_SCORE_LATENCY,
+        info!.RESPONSIVE_MAINTAINER_SCORE_LATENCY,
+        info!.LICENSE_SCORE_LATENCY,
+        info!.PULL_REQUESTS_SCORE_LATENCY,
+        info!.PINNED_DEPENDENCIES_SCORE_LATENCY
       ];
 
       await pool.query(query, values);
@@ -498,7 +498,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
   if (metadata.ID != id) {
     return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
   }
-  const result = await pool.query('select * from packages where name=$1', [updatedPackage.metadata.Name]);
+  const result = await pool.query('select * from packages where id=$1', [updatedPackage.metadata.ID]);
   if (result.rows.length == 0) {
     return sendResponse(404, { message: 'Package does not exist.' });
   }
@@ -529,12 +529,13 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     }
   }
 
-  const result1 = await pool.query('select * from packages where id=$1', [updatedPackage.metadata.ID]);
-  if (result1.rows.length > 0) {
-    updatedPackage.metadata.ID = generatePackageId();
+  // const result1 = await pool.query('select * from packages where id=$1', [updatedPackage.metadata.ID]);
+  // if (result1.rows.length > 0) {
+    let newID=generatePackageId();
+    updatedPackage.metadata.ID = newID;
     console.log("New ID");
     console.log(updatedPackage.metadata.ID);
-  }
+  // }
   let contentBuffer: Buffer | null = null;
   try {
     if (updatedPackage.data.Content) {
@@ -568,14 +569,17 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
 
 
     } else if (updatedPackage.data.URL) {
+      let metadata: PackageMetadata = updatedPackage.metadata;
+      let data: PackageData = updatedPackage.data;
+
       // Handle URL case
       const repoUrlFixed = convertGitUrlToHttpsFlexible(updatedPackage.data.URL);
       const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed, metadata.ID);
-      if (!info || info.NET_SCORE < 0.5) {
-        return sendResponse(424, { message: 'Package disqualified due to low rating' });
-      }
+      // if (!info || info.NET_SCORE < 0.5) {
+      //   return sendResponse(424, { message: 'Package disqualified due to low rating' });
+      // }
 
-      metadata.Owner = info.OWNER;
+      metadata.Owner = info!.OWNER;
 
       // Check if the package already exists based on Name and Version
       const existingResult = await pool.query(
@@ -587,7 +591,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       }
 
       // Download package content from GitHub
-      const response = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+      const response = await fetch(`https://api.github.com/repos/${info!.OWNER}/${info!.NAME}/zipball/HEAD`, {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           Accept: 'application/vnd.github.v3+json',
@@ -597,7 +601,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       if (!response.ok) {
         return sendResponse(400, { message: 'Could not get GitHub URL for zip package download' });
       }
-      const readmef = await fetch(`https://api.github.com/repos/${info.OWNER}/${info.NAME}/zipball/HEAD`, {
+      const readmef = await fetch(`https://api.github.com/repos/${info!.OWNER}/${info!.NAME}/zipball/HEAD`, {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
           Accept: 'application/vnd.github.v3+json',
@@ -622,15 +626,15 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     `,
         [
-          info.ID,
-          info.NET_SCORE,
-          info.RAMP_UP_SCORE,
-          info.CORRECTNESS_SCORE,
-          info.BUS_FACTOR_SCORE,
-          info.RESPONSIVE_MAINTAINER_SCORE,
-          info.LICENSE_SCORE,
-          info.PULL_REQUESTS_SCORE,
-          info.PINNED_DEPENDENCIES_SCORE
+          newID,
+          info!.NET_SCORE,
+          info!.RAMP_UP_SCORE,
+          info!.CORRECTNESS_SCORE,
+          info!.BUS_FACTOR_SCORE,
+          info!.RESPONSIVE_MAINTAINER_SCORE,
+          info!.LICENSE_SCORE,
+          info!.PULL_REQUESTS_SCORE,
+          info!.PINNED_DEPENDENCIES_SCORE
         ]);
 
 
