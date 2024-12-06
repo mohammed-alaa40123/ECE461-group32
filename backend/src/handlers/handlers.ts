@@ -453,11 +453,11 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
     }
 
     // Log the retrieval in package_history
-    //  const historyInsert = `
-    //   INSERT INTO package_history (package_id, user_id, action)
-    //   VALUES ($1, $2, $3)
-    // `;
-    // await pool.query(historyInsert, [id, user.sub, 'DOWNLOAD']);
+     const historyInsert = `
+      INSERT INTO package_history (package_id, user_id, action)
+      VALUES ($1, $2, $3)
+    `;
+    await pool.query(historyInsert, [id, user.sub, 'DOWNLOAD']);
 
     // Format the response
     const response = {
@@ -491,13 +491,24 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     return sendResponse(403, { message: 'You do not have permission to update packages.' });
   }
 
-  const updatedPackage: Package = JSON.parse(body);
+  let updatedPackage: Package;
+  try {
+      updatedPackage = JSON.parse(body);
+  } catch (parseError: any) {
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
+  }
+  
+  // Validate that 'metadata' and 'data' are present
+  if (!updatedPackage.metadata || !updatedPackage.data) {
+    return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
+  }
   const { metadata, data } = updatedPackage;
 
   // Ensure the name, version, and ID match
   if (metadata.ID != id) {
     return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
   }
+
   const result = await pool.query('select * from packages where id=$1', [updatedPackage.metadata.ID]);
   if (result.rows.length == 0) {
     return sendResponse(404, { message: 'Package does not exist.' });
@@ -698,15 +709,15 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
     INSERT INTO package_history (package_id, user_id, action)
     VALUES ($1, $2, $3)
   `;
-    // await pool.query(historyInsert, [id, user.sub, 'DELETE']);
+    await pool.query(historyInsert, [id, user.sub, 'DELETE']);
 
-    // const res = await pool.query(deleteText, [id]);
+    const res = await pool.query(deleteText, [id]);
 
-    // if (res.rows.length === 0) {
-    //   return sendResponse(404, { message: 'Package does not exist.' });
-    // }
+    if (res.rows.length === 0) {
+      return sendResponse(404, { message: 'Package does not exist.' });
+    }
 
-    // const deletedPackage: Package = res.rows[0];
+    const deletedPackage: Package = res.rows[0];
 
     // // Delete from S3 if Content is present
     // if (deletedPackage) {
