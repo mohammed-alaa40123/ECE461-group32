@@ -163,15 +163,15 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
 // Handler for /package - POST (Create Package)
 
 export const handleCreatePackage = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
-  // if (!user.permissions.includes('upload')) {
-  //   return sendResponse(403, { message: 'You do not have permission to upload packages.' });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('upload')) {
+    return sendResponse(403, { message: 'You do not have permission to upload packages.' });
+  }
 
   const packageData = JSON.parse(body);
   const { Content, JSProgram, URL, debloat } = packageData;
@@ -420,16 +420,16 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
 
   // Authenticate the request
   console.log("getting packeage with ID", id);
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
 
-  // if (!user.permissions.includes('download')) {
-  //   return sendResponse(403, { message: 'You do not have permission to download packages.' });
-  // }
+  if (!user.permissions.includes('download')) {
+    return sendResponse(403, { message: 'You do not have permission to download packages.' });
+  }
   try {
     const queryText = 'SELECT * FROM packages WHERE id = $1';
     const res = await pool.query(queryText, [id]);
@@ -453,7 +453,7 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
     }
 
     // Log the retrieval in package_history
-    // const historyInsert = `
+    //  const historyInsert = `
     //   INSERT INTO package_history (package_id, user_id, action)
     //   VALUES ($1, $2, $3)
     // `;
@@ -677,19 +677,19 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
 
 // Handler for /package/{id} - DELETE (Delete Package)
 export const handleDeletePackage = async (id: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
-  // Authenticate the request
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
-  // if (!user.permissions.includes('upload')) {
-  //   return sendResponse(403, { message: 'You do not have permission to upload/delete packages.' });
-  // }
+  //Authenticate the request
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('upload')) {
+    return sendResponse(403, { message: 'You do not have permission to upload/delete packages.' });
+  }
 
   try {
-    // const deleteText = 'DELETE FROM packages WHERE id = $1 RETURNING *';
+     const deleteText = 'DELETE FROM packages WHERE id = $1 RETURNING *';
     const historyInsert = `
     INSERT INTO package_history (package_id, user_id, action)
     VALUES ($1, $2, $3)
@@ -724,15 +724,15 @@ export const handleListPackages = async (
   queryStringParameters: { [key: string]: string | undefined }
 ): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-  // let user: AuthenticatedUser; // Using 'any' for AuthenticatedUser
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode || 403, { message: err.message || 'Authentication failed.' });
-  // }
-  // if (!user.permissions.includes('search')) {
-  //   return sendResponse(403, { message: 'You do not have permission to search packages.' });
-  // }
+  let user: AuthenticatedUser; // Using 'any' for AuthenticatedUser
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode || 403, { message: err.message || 'Authentication failed.' });
+  }
+  if (!user.permissions.includes('search')) {
+    return sendResponse(403, { message: 'You do not have permission to search packages.' });
+  }
   let queries: any[];
   try {
     queries = JSON.parse(body);
@@ -937,15 +937,15 @@ export const handleResetRegistry = async (headers: { [key: string]: string | und
 // Handler for /package/byName/{name} - GET (Package History by Name)
 export const handleGetPackageHistoryByName = async (name: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
-  // if (!user.permissions.includes('search')) {
-  //   return sendResponse(403, { message: 'You do not have permission to search packages.' });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('search')) {
+    return sendResponse(403, { message: 'You do not have permission to search packages.' });
+  }
 
   try {
     const historyQuery = `
@@ -987,23 +987,27 @@ export const handleGetPackageHistoryByName = async (name: string, headers: { [ke
 // Handler for /package/byRegEx - POST (Search Packages by RegEx)
 export const handleSearchPackagesByRegEx = async (body: string, headers: { [key: string]: string | undefined }): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
-  // if (!user.permissions.includes('search')) {
-  //   return sendResponse(403, { message: 'You do not have permission to search packages.' });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
+  if (!user.permissions.includes('search')) {
+    return sendResponse(403, { message: 'You do not have permission to search packages.' });
+  }
+  
   const { RegEx } = JSON.parse(body);
-
-  if (!RegEx) {
+  const pattern = new RegExp(RegEx);
+        
+  if (RegEx==null) {
+    
     return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
   }
   let packages:any=[];
-  if (RegEx=='ece461rules'||RegEx=='(a{1,99999}){1,99999}$')
-    return sendResponse(200, packages);
+  if (pattern.test("")) {
+    return sendResponse(404, { message: 'No package found under this regex.' });
+  }
   try {
     // Use PostgreSQL regex matching on name and README (assuming README is a field)
     const searchQuery = `
@@ -1024,8 +1028,8 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
 
     return sendResponse(200, packages);
   } catch (error) {
-    console.error('Search Packages Error:', error);
-    return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
+    
+    return sendResponse(400,{message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid'});
   }
 };
 
@@ -1175,12 +1179,12 @@ export const handleGetPackageCost = async (
   queryStringParameters: { [key: string]: string | undefined }
 ): Promise<APIGatewayProxyResult> => {
   // Authenticate the request
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  // } catch (err: any) {
-  //   return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+  } catch (err: any) {
+    return sendResponse(403, { message: "Authentication failed due to invalid or missing AuthenticationToken" });
+  }
 
   // Fetch package details
   const packageQuery = `
