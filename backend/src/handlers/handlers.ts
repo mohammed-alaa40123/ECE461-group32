@@ -495,7 +495,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
   const { metadata, data } = updatedPackage;
 
   // Ensure the name, version, and ID match
-  if (metadata.ID !== id) {
+  if (metadata.ID != id) {
     return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
   }
   const result = await pool.query('select * from packages where name=$1', [updatedPackage.metadata.Name]);

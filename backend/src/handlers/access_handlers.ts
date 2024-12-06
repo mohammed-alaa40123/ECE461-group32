@@ -1,3 +1,4 @@
+
 import semver from 'semver';
 
 import { APIGatewayProxyResult } from 'aws-lambda';
@@ -438,11 +439,7 @@ export const handleRetrieveUserGroupsAndPermissions = async (headers: { [key: st
     const permissionsResult = await pool.query(permissionsQuery);
     const permissions = permissionsResult.rows;
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ groups, permissions }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return  sendResponse(200, { groups, permissions });
   } catch (error: any) {
     console.error('Error retrieving user groups and permissions:', error);
     return sendResponse(500, { message: 'Internal server error.' });
@@ -473,13 +470,9 @@ export const handleRetrieveUserGroupsAndPermissionsForUser = async (userId: stri
     const userPermissionsResult = await pool.query(userPermissionsQuery, [userIdINT]);
     const userPermissions = userPermissionsResult.rows;
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ userGroups, userPermissions }),
-      headers: { 'Content-Type': 'application/json' },
-    };
+    return sendResponse(200, { groups: userGroups, permissions: userPermissions });
   } catch (error: any) {
     console.error('Error retrieving user groups and permissions:', error);
-    return sendResponse(500, { message: 'Internal server error.' });
-  }
+    return sendResponse(500, { message: 'Internal server error.' });
+  }
 };
