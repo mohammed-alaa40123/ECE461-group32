@@ -509,6 +509,9 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
   if (existingResult.rows.length > 0) {
     return sendResponse(409, { message: 'Package exists already.' });
   }
+  updatedPackage.metadata.Owner = result.rows[0].owner;
+
+
   console.log("Results");
   const [latestMajorStr, latestMinorStr, latestPatchStr] = updatedPackage.metadata.Version.split('.');
   const latestMajor = parseInt(latestMajorStr, 10);
@@ -568,7 +571,6 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
       // Handle URL case
       const repoUrlFixed = convertGitUrlToHttpsFlexible(updatedPackage.data.URL);
       const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed, metadata.ID);
-
       if (!info || info.NET_SCORE < 0.5) {
         return sendResponse(424, { message: 'Package disqualified due to low rating' });
       }
