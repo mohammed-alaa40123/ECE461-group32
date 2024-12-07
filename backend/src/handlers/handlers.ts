@@ -174,7 +174,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
   }
 
   const packageData = JSON.parse(body);
-  const { Content, JSProgram, URL, debloat } = packageData;
+  const { Content, JSProgram, URL, debloat, Name } = packageData;
   console.log("packageData", packageData);
   console.log("JSprog", JSProgram)
   // Ensure only one of Content or URL is provided
@@ -214,7 +214,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       }
 
       extractedPackageJson = JSON.parse(packageJSON);
-      metadata.Name = extractedPackageJson.name;
+      metadata.Name = Name ? Name: extractedPackageJson.name;
       metadata.Version = extractedPackageJson.version;
       metadata.Owner = extractedPackageJson.author;
       data.Content = Content;
@@ -250,7 +250,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       //   return sendResponse(424, { message: 'Package disqualified due to low rating' });
       // }
 
-      metadata.Name = info!.NAME;
+      metadata.Name = Name ? Name:info!.NAME;
       metadata.Version = info!.VERSION;
       data.URL = repoUrlFixed;
       metadata.Owner = info!.OWNER;
