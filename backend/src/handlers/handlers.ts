@@ -1013,39 +1013,74 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
   }
   
   const { RegEx } = JSON.parse(body);
-  const pattern = new RegExp(RegEx);
-        
-  if (RegEx==null) {
-    
-    return sendResponse(400, { message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid' });
-  }
-  let packages:any=[];
-  if (pattern.test("")) {
-    return sendResponse(404, { message: 'No package found under this regex.' });
-  }
-  try {
-    // Use PostgreSQL regex matching on name and README (assuming README is a field)
-    const searchQuery = `
-      SELECT * FROM packages
-      WHERE name ~* $1 or readme  ~* $1
-    `;
-    const res = await pool.query(searchQuery, [RegEx]);
 
-    if (res.rows.length === 0) {
-      return sendResponse(404, { message: 'No package found under this regex.' });
+// Check if RegEx is missing or empty
+if (!RegEx || typeof RegEx !== 'string' || RegEx.trim() === '') {
+  return sendResponse(
+    400, 
+    { 
+      message: 'There is a missing field in the PackageRegEx or it is formed improperly, or is invalid.' 
     }
+  );
+}
 
-     packages = res.rows.map(pkg => ({
-      Version: pkg.version,
-      Name: pkg.name,
-      ID: pkg.id,
-    }));
+let pattern;
+try {
+  // Attempt to create a new RegExp object from the provided regex string
+  pattern = new RegExp(RegEx);
+} catch (e) {
+  // If regex construction fails, it's invalid
+  return sendResponse(
+    400, 
+    { 
+      message: 'There is a missing field in the PackageRegEx or it is formed improperly, or is invalid.' 
+    }
+  );
+}
 
-    return sendResponse(200, packages);
-  } catch (error) {
-    
-    return sendResponse(400,{message: 'There is missing field(s) in the PackageRegEx or it is formed improperly, or is invalid'});
+// Check if the regex matches an empty string
+if (pattern.test('')) {
+  return sendResponse(
+    404, 
+    { message: 'No package found under this regex (it matches empty strings).' }
+  );
+}
+
+// If we reach here, we have a valid pattern that doesn't match empty strings
+let packages:any = [];
+
+try {
+  const searchQuery = `
+    SELECT * FROM packages
+    WHERE name ~* $1 OR readme ~* $1
+  `;
+  const res = await pool.query(searchQuery, [RegEx]);
+
+  if (res.rows.length === 0) {
+    return sendResponse(
+      404, 
+      { message: 'No package found under this regex.' }
+    );
   }
+
+   packages = res.rows.map(pkg => ({
+    Version: pkg.version,
+    Name: pkg.name,
+    ID: pkg.id,
+  }));
+
+  return sendResponse(200, packages);
+
+} catch (error) {
+  // If there's an error in the query or other logic, we assume it's related
+  // to invalid input or something internal. To be safe, return 400.
+  return sendResponse(
+    400, 
+    { 
+      message: 'There is a missing field in the PackageRegEx or it is formed improperly, or is invalid.' 
+    }
+  );
+}
 };
 
 // Handler for /package/{id}/rate - GET (Get Package Rating)
