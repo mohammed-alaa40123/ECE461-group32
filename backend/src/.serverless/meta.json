@@ -145,9 +145,15 @@
     "serviceProviderAwsCfStackStatus": null,
     "serviceProviderAwsCfStackOutputs": null
   },
+<<<<<<< HEAD
   "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src": {
     "versionSfCore": null,
     "versionFramework": "4.4.13",
+=======
+  "D:\\Purdue\\ECE 46100\\Project\\Phase 2\\ECE461-group32\\backend\\src": {
+    "versionSfCore": null,
+    "versionFramework": "4.4.10",
+>>>>>>> main
     "isWithinCompose": false,
     "isCompose": false,
     "composeOrgName": null,
@@ -180,7 +186,11 @@
             "functions": {
               "api": {
                 "handler": "index.handler",
+<<<<<<< HEAD
                 "timeout": 1000,
+=======
+                "timeout": 30,
+>>>>>>> main
                 "events": [
                   {
                     "http": {
@@ -318,7 +328,11 @@
               }
             }
           },
+<<<<<<< HEAD
           "configFileDirPath": "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src",
+=======
+          "configFileDirPath": "D:\\Purdue\\ECE 46100\\Project\\Phase 2\\ECE461-group32\\backend\\src",
+>>>>>>> main
           "config": {
             "type": "env"
           },
@@ -364,7 +378,11 @@
             "functions": {
               "api": {
                 "handler": "index.handler",
+<<<<<<< HEAD
                 "timeout": 1000,
+=======
+                "timeout": 30,
+>>>>>>> main
                 "events": [
                   {
                     "http": {
@@ -502,7 +520,11 @@
               }
             }
           },
+<<<<<<< HEAD
           "configFileDirPath": "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src",
+=======
+          "configFileDirPath": "D:\\Purdue\\ECE 46100\\Project\\Phase 2\\ECE461-group32\\backend\\src",
+>>>>>>> main
           "config": {
             "type": "sls"
           },
@@ -523,7 +545,11 @@
       }
     },
     "composeServiceName": null,
+<<<<<<< HEAD
     "servicePath": "D:\\Purdue\\s1\\46100\\local\\ECE461-group32\\backend\\src",
+=======
+    "servicePath": "D:\\Purdue\\ECE 46100\\Project\\Phase 2\\ECE461-group32\\backend\\src",
+>>>>>>> main
     "serviceConfigFileName": "serverless.yml",
     "service": {
       "service": "my-api-service",
@@ -549,7 +575,11 @@
       "functions": {
         "api": {
           "handler": "index.handler",
+<<<<<<< HEAD
           "timeout": 1000,
+=======
+          "timeout": 30,
+>>>>>>> main
           "events": [
             {
               "http": {
@@ -687,21 +717,36 @@
         }
       }
     },
+<<<<<<< HEAD
     "serviceRawFile": "service: my-api-service\r\n\r\nframeworkVersion: '4'\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n  environment:\r\n    RDS_HOST: ${env:RDS_HOST}\r\n    RDS_PORT: ${env:RDS_PORT}\r\n    RDS_DATABASE: ${env:RDS_DATABASE}\r\n    RDS_USER: ${env:RDS_USER}\r\n    RDS_PASSWORD: ${env:RDS_PASSWORD}\r\n    GITHUB_TOKEN: ${env:GITHUB_TOKEN}\r\n\r\nfunctions:\r\n  api:\r\n    handler: index.handler\r\n    timeout: 1000\r\n    events:\r\n      - http:\r\n          path: authenticate\r\n          method: PUT\r\n      - http:\r\n          path: register\r\n          method: POST\r\n      - http:\r\n          path: packages\r\n          method: POST\r\n      - http:\r\n          path: reset\r\n          method: DELETE\r\n      - http:\r\n          path: package/byRegEx\r\n          method: POST\r\n      - http:\r\n          path: package/byName/{name}\r\n          method: GET\r\n      - http:\r\n          path: package\r\n          method: POST\r\n      - http:\r\n          path: package/{id}/rate\r\n          method: GET\r\n      - http:\r\n          path: package/{id}/cost\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: POST\r\n      - http:\r\n          path: package/{id}\r\n          method: DELETE\r\n      - http:\r\n          path: tracks\r\n          method: GET\r\n      - http:\r\n          path: sql\r\n          method: POST\r\n      - http:\r\n          path: groups\r\n          method: POST\r\n      - http:\r\n          path: permissions\r\n          method: POST\r\n      - http:\r\n          path: users/{userId}/edit\r\n          method: PUT\r\n      - http:\r\n          path: users/groups-permissions\r\n          method: GET\r\n      - http:\r\n          path: users/{userId}\r\n          method: DELETE\r\n      - http:\r\n          path: groups/{groupId}\r\n          method: DELETE\r\n      - http:\r\n          path: permissions/{permissionId}\r\n          method: DELETE\r\n      - http:\r\n          path: users/{userId}/groups-permissions\r\n          method: GET",
     "command": [
       "offline",
       "test"
+=======
+    "serviceRawFile": "service: my-api-service\r\n\r\nframeworkVersion: '4'\r\n\r\nplugins:\r\n  - serverless-offline\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  region: us-east-1\r\n  environment:\r\n    RDS_HOST: ${env:RDS_HOST}\r\n    RDS_PORT: ${env:RDS_PORT}\r\n    RDS_DATABASE: ${env:RDS_DATABASE}\r\n    RDS_USER: ${env:RDS_USER}\r\n    RDS_PASSWORD: ${env:RDS_PASSWORD}\r\n    GITHUB_TOKEN: ${env:GITHUB_TOKEN}\r\n\r\nfunctions:\r\n  api:\r\n    handler: index.handler\r\n    timeout: 30\r\n    events:\r\n      - http:\r\n          path: authenticate\r\n          method: PUT\r\n      - http:\r\n          path: register\r\n          method: POST\r\n      - http:\r\n          path: packages\r\n          method: POST\r\n      - http:\r\n          path: reset\r\n          method: DELETE\r\n      - http:\r\n          path: package/byRegEx\r\n          method: POST\r\n      - http:\r\n          path: package/byName/{name}\r\n          method: GET\r\n      - http:\r\n          path: package\r\n          method: POST\r\n      - http:\r\n          path: package/{id}/rate\r\n          method: GET\r\n      - http:\r\n          path: package/{id}/cost\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: GET\r\n      - http:\r\n          path: package/{id}\r\n          method: POST\r\n      - http:\r\n          path: package/{id}\r\n          method: DELETE\r\n      - http:\r\n          path: tracks\r\n          method: GET\r\n      - http:\r\n          path: sql\r\n          method: POST\r\n      - http:\r\n          path: groups\r\n          method: POST\r\n      - http:\r\n          path: permissions\r\n          method: POST\r\n      - http:\r\n          path: users/{userId}/edit\r\n          method: PUT\r\n      - http:\r\n          path: users/groups-permissions\r\n          method: GET\r\n      - http:\r\n          path: users/{userId}\r\n          method: DELETE\r\n      - http:\r\n          path: groups/{groupId}\r\n          method: DELETE\r\n      - http:\r\n          path: permissions/{permissionId}\r\n          method: DELETE\r\n      - http:\r\n          path: users/{userId}/groups-permissions\r\n          method: GET",
+    "command": [
+      "offline"
+>>>>>>> main
     ],
     "options": {
       "debug": "*",
       "httpPort": "4000"
     },
     "error": {
+<<<<<<< HEAD
       "message": "Serverless command \"offline test\" not found. Run \"serverless help\" for a list of all available commands.",
       "code": "UNRECOGNIZED_CLI_COMMAND"
     },
     "params": {},
     "machineId": "07c8c631b57a44b8cf9390025ca2d6ec",
+=======
+      "message": "Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.",
+      "stack": "ServerlessError2: Serverless plugin \"serverless-offline\" not found. Make sure it's installed and listed in the \"plugins\" section of your serverless config file. Use the --debug flag to learn more.\n    at PluginManager.resolveServicePlugins (C:\\Users\\amare\\.serverless\\releases\\4.4.10\\serverless\\lib\\classes\\plugin-manager.js:350:15)\n    at PluginManager.loadAllPlugins (C:\\Users\\amare\\.serverless\\releases\\4.4.10\\serverless\\lib\\classes\\plugin-manager.js:267:7)\n    at Serverless.init (C:\\Users\\amare\\.serverless\\releases\\4.4.10\\serverless\\lib\\serverless.js:171:5)\n    at runFramework (C:\\Users\\amare\\.serverless\\releases\\4.4.10\\sf-core\\src\\lib\\runners\\framework.js:195:5)\n    at route (C:\\Users\\amare\\.serverless\\releases\\4.4.10\\sf-core\\src\\lib\\router.js:224:10)\n    at Object.run2 (C:\\Users\\amare\\.serverless\\releases\\4.4.10\\sf-core\\src\\index.js:45:3)\n    at run3 (C:\\Users\\amare\\.serverless\\releases\\4.4.10\\sf-core\\bin\\sf-core.js:33:3)",
+      "code": "PLUGIN_NOT_FOUND"
+    },
+    "params": {},
+    "machineId": "4e4d786046128cbfc84ceb87b1292d88",
+>>>>>>> main
     "stage": "dev",
     "accessKeyV2": "<REDACTED>",
     "accessKeyV1": "<REDACTED>",
@@ -724,6 +769,7 @@
     "serviceProviderAwsCredentials": "<REDACTED>",
     "serviceProviderAwsAccountId": "438465151830",
     "projectType": "traditional",
+<<<<<<< HEAD
     "versionSf": "4.4.13",
     "serviceProviderAwsCfStackName": "my-api-service-dev",
     "serviceUniqueId": null,
@@ -731,6 +777,14 @@
     "serviceProviderAwsCfStackCreated": null,
     "serviceProviderAwsCfStackUpdated": null,
     "serviceProviderAwsCfStackStatus": null,
+=======
+    "versionSf": "4.4.10",
+    "serviceUniqueId": "arn:aws:cloudformation:us-east-1:438465151830:stack/CodePipelineStarterTemplate-PushToECR-bNBAMFxf/16c09450-91c1-11ef-9b5a-0affd772fb61",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:us-east-1:438465151830:stack/CodePipelineStarterTemplate-PushToECR-bNBAMFxf/16c09450-91c1-11ef-9b5a-0affd772fb61",
+    "serviceProviderAwsCfStackCreated": "2024-10-24T04:33:16.882Z",
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": "CREATE_COMPLETE",
+>>>>>>> main
     "serviceProviderAwsCfStackOutputs": null
   }
 }
