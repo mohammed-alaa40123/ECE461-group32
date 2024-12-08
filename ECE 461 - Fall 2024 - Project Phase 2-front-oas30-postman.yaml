@@ -1,0 +1,1545 @@
+openapi: "3.0.1"
+info:
+  title: "ECE 461 - Fall 2024 - Project Phase 2"
+  description: "API for ECE 461/Fall 2024/Project Phase 2: A Trustworthy Module Registry\"\
+    \n\nAll endpoints have BASELINE or NON-BASELINE listed. Please read through all\
+    \ descriptions before raising questions. \n\nA package ID is unique identifier\
+    \ for Package and Version. (Key idea -> id is unique for all pacakges).\n\nEg.\
+    \ \n\n    PacakgeName: Alpha, PackageVersion: 1.1.1 -> PackageID: 988645763\n\
+    \   \n    PacakgeName: Alpha, PackageVersion: 1.3.2 -> PackageID: 357898765"
+  version: "2.4.1"
+servers:
+- url: "https://zy5br6rkxd.execute-api.us-east-1.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "front"
+paths:
+  /authenticate:
+    put:
+      operationId: "CreateAuthToken"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthenticationRequest"
+        required: true
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationToken"
+        "400":
+          description: "400 response"
+          content: {}
+        "401":
+          description: "401 response"
+          content: {}
+        "501":
+          description: "501 response"
+          content: {}
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /groups:
+    post:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /users:
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /permissions:
+    post:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /users/groups-permissions:
+    get:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /authenticate2:
+    put:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationToken"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /reset:
+    delete:
+      operationId: "RegistryReset"
+      parameters:
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "401":
+          description: "401 response"
+          content: {}
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /users/{userId}/edit:
+    put:
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /package:
+    post:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+        "201":
+          description: "201 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Package"
+        "400":
+          description: "400 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content: {}
+        "403":
+          description: "403 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content: {}
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /permissions/{permissionId}:
+    delete:
+      parameters:
+      - name: "permissionId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      parameters:
+      - name: "permissionId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /users/{userId}/groups-permissions:
+    get:
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /packages:
+    post:
+      operationId: "PackagesList"
+      parameters:
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "offset"
+        in: "query"
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArrayOfPackageQuery"
+        required: true
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            offset:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfPackageMetadata"
+        "400":
+          description: "400 response"
+          content: {}
+        "413":
+          description: "413 response"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /package/byRegEx:
+    post:
+      operationId: "PackageByRegExGet"
+      parameters:
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PackageRegEx"
+        required: true
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfPackageMetadata"
+        "400":
+          description: "400 response"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /:
+    post:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /groups/{groupId}:
+    delete:
+      parameters:
+      - name: "groupId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      parameters:
+      - name: "groupId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /package/{id}:
+    get:
+      operationId: "PackageRetrieve"
+      parameters:
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Package"
+        "400":
+          description: "400 response"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    put:
+      operationId: "PackageUpdate"
+      parameters:
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Package"
+        required: true
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content: {}
+        "400":
+          description: "400 response"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    post:
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    delete:
+      operationId: "PackageDelete"
+      parameters:
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content: {}
+        "400":
+          description: "400 response"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    options:
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /package/byName/{name}:
+    get:
+      operationId: "PackageByNameGet"
+      parameters:
+      - name: "name"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArrayOfPackageHistoryEntry"
+        "400":
+          description: "400 response"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    options:
+      parameters:
+      - name: "name"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /Get_S3_lambda:
+    x-amazon-apigateway-any-method:
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+      security:
+      - api_key: []
+  /package/{id}/rate:
+    get:
+      operationId: "PackageRate"
+      parameters:
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PackageRating"
+        "400":
+          description: "400 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    options:
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /users/{userId}:
+    delete:
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      parameters:
+      - name: "userId"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /tracks:
+    get:
+      responses:
+        "500":
+          description: "500 response"
+          content: {}
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MODEL199ce7"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /lambda_RDS_S3:
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    x-amazon-apigateway-any-method:
+      responses:
+        "200":
+          description: "200 response"
+          content: {}
+  /package/{id}/cost:
+    get:
+      parameters:
+      - name: "X-Authorization"
+        in: "header"
+        required: true
+        schema:
+          type: "string"
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      - name: "dependency"
+        in: "query"
+        schema:
+          type: "string"
+      responses:
+        "404":
+          description: "404 response"
+          content: {}
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PackageCost"
+        "400":
+          description: "400 response"
+          content: {}
+        "500":
+          description: "500 response"
+          content: {}
+        "403":
+          description: "403 response"
+          content: {}
+    options:
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+  /register:
+    post:
+      parameters:
+      - name: "password"
+        in: "query"
+        required: true
+        schema:
+          type: "string"
+      - name: "isAdmin"
+        in: "query"
+        required: true
+        schema:
+          type: "string"
+      - name: "name"
+        in: "query"
+        required: true
+        schema:
+          type: "string"
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+    options:
+      responses:
+        "200":
+          description: "200 response"
+          headers:
+            Access-Control-Expose-Headers:
+              schema:
+                type: "string"
+            Access-Control-Allow-Origin:
+              schema:
+                type: "string"
+            Access-Control-Allow-Methods:
+              schema:
+                type: "string"
+            Access-Control-Allow-Credentials:
+              schema:
+                type: "string"
+            Access-Control-Max-Age:
+              schema:
+                type: "string"
+            Access-Control-Allow-Headers:
+              schema:
+                type: "string"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+components:
+  schemas:
+    PackageHistoryEntry:
+      required:
+      - "Action"
+      - "Date"
+      - "PackageMetadata"
+      - "User"
+      type: "object"
+      properties:
+        User:
+          $ref: "#/components/schemas/User"
+        Date:
+          type: "string"
+          description: "Date of activity using ISO-8601 Datetime standard in UTC format."
+          format: "date-time"
+        PackageMetadata:
+          $ref: "#/components/schemas/PackageMetadata"
+        Action:
+          type: "string"
+          enum:
+          - "CREATE"
+          - "UPDATE"
+          - "DOWNLOAD"
+          - "RATE"
+      description: "One entry of the history of this package."
+    ArrayOfPackageHistoryEntry:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/PackageHistoryEntry"
+    AuthenticationToken:
+      type: "string"
+      description: "The spec permits you to use any token format you like. You could,\
+        \ for example, look into JSON Web Tokens (\"JWT\", pronounced \"jots\"): https://jwt.io."
+    User:
+      required:
+      - "isAdmin"
+      - "name"
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        isAdmin:
+          type: "boolean"
+          description: "Is this user an admin?"
+    PackageQuery:
+      required:
+      - "Name"
+      type: "object"
+      properties:
+        Version:
+          $ref: "#/components/schemas/SemverRange"
+        Name:
+          $ref: "#/components/schemas/PackageName"
+    PackageName:
+      type: "string"
+      description: "Name of a package.\n\n- Names should only use typical \"keyboard\"\
+        \ characters.\n- The name \"*\" is reserved. See the `/packages` API for its\
+        \ meaning."
+    SemverRange:
+      type: "string"
+    MODEL199ce7:
+      type: "object"
+      properties:
+        plannedTracks:
+          type: "array"
+          description: "List of tracks the student plans to implement"
+          items:
+            type: "string"
+            enum:
+            - "Performance track"
+            - "Access control track"
+            - "High assurance track"
+            - "ML inside track"
+    PackageRegEx:
+      required:
+      - "RegEx"
+      type: "object"
+      properties:
+        RegEx:
+          type: "string"
+          description: "A regular expression over package names and READMEs that is\
+            \ used for searching for a package"
+    UserAuthenticationInfo:
+      required:
+      - "password"
+      type: "object"
+      properties:
+        password:
+          type: "string"
+          description: "Password for a user. Per the spec, this should be a \"strong\"\
+            \ password."
+      description: "Authentication info for a user"
+    Empty:
+      title: "Empty Schema"
+      type: "object"
+    ArrayOfPackageQuery:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/PackageQuery"
+    ArrayOfPackageMetadata:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/PackageMetadata"
+    PackageMetadata:
+      required:
+      - "ID"
+      - "Name"
+      - "Version"
+      type: "object"
+      properties:
+        Name:
+          $ref: "#/components/schemas/PackageName"
+        Version:
+          type: "string"
+          description: "Package version"
+        ID:
+          $ref: "#/components/schemas/PackageID"
+      description: "The \"Name\" and \"Version\" are used as a unique identifier pair\
+        \ when uploading a package.\n\nThe \"ID\" is used as an internal identifier\
+        \ for interacting with existing packages."
+    PackageID:
+      pattern: "^[a-zA-Z0-9\\-]+$"
+      type: "string"
+      description: "Unique ID for use with the /package/{id} endpoint."
+    Package:
+      required:
+      - "data"
+      - "metadata"
+      type: "object"
+      properties:
+        metadata:
+          $ref: "#/components/schemas/PackageMetadata"
+        data:
+          $ref: "#/components/schemas/PackageData"
+    AuthenticationRequest:
+      required:
+      - "Secret"
+      - "User"
+      type: "object"
+      properties:
+        User:
+          $ref: "#/components/schemas/User"
+        Secret:
+          $ref: "#/components/schemas/UserAuthenticationInfo"
+    PackageCost:
+      type: "object"
+      additionalProperties:
+        required:
+        - "totalCost"
+        type: "object"
+        properties:
+          standaloneCost:
+            type: "number"
+            description: "The stand alone cost of this package excluding dependencies.\
+              \ This field is only required in case `dependency = true`, in the request."
+          totalCost:
+            type: "number"
+            description: "The total cost of the package. When `dependency` is not\
+              \ set, this should return the standalone cost, \nand when it is set,\
+              \ this field should return the sum of the costs of all the dependencies.\n\
+              \nFor example:\n  \n  Package 1 -> Package 2 -> Package 3, Package 4.\n\
+              \    \n    If dependency = false\n      totalCost = (Package 1).size()\n\
+              \    If dependency = true \n    totalCost = (Package 1 + Package 2 +\
+              \ Package 3 + Package 4).size()\n"
+      description: "Package Cost is the collection of total cost of package given\
+        \ in terms of total Megabytes (mb) that needs to be downloaded. It consists\
+        \ of a map with key of the map as the package ID and it's value consists of\
+        \ total cost as describe below."
+    PackageData:
+      type: "object"
+      properties:
+        Content:
+          type: "string"
+          description: "Package contents. This is the zip file uploaded by the user.\
+            \ (Encoded as text using a Base64 encoding).\n\nThis will be a zipped\
+            \ version of an npm package's GitHub repository, minus the \".git/\" directory.\"\
+            \ It will, for example, include the \"package.json\" file that can be\
+            \ used to retrieve the project homepage.\n\nSee https://docs.npmjs.com/cli/v7/configuring-npm/package-json#homepage."
+        URL:
+          type: "string"
+          description: "Package URL (for use in public ingest)."
+        debloat:
+          type: "boolean"
+          description: "If true, remove uneccessary bloat from the package. You may\
+            \ wish to read about tree shaking, minification, etc"
+        JSProgram:
+          type: "string"
+          description: "A JavaScript program (for use with sensitive modules)."
+      description: "This is a \"union\" type.\n- On package upload, either Content\
+        \ or URL should be set. If both are set, returns 400.\n- On package update,\
+        \ exactly one field should be set.\n- On download, the Content field should\
+        \ be set."
+    PackageRating:
+      required:
+      - "BusFactor"
+      - "BusFactorLatency"
+      - "Correctness"
+      - "CorrectnessLatency"
+      - "GoodPinningPractice"
+      - "GoodPinningPracticeLatency"
+      - "LicenseScore"
+      - "LicenseScoreLatency"
+      - "NetScore"
+      - "NetScoreLatency"
+      - "PullRequest"
+      - "PullRequestLatency"
+      - "RampUp"
+      - "RampUpLatency"
+      - "ResponsiveMaintainer"
+      - "ResponsiveMaintainerLatency"
+      type: "object"
+      properties:
+        BusFactor:
+          type: "number"
+          format: "double"
+        BusFactorLatency:
+          type: "number"
+          format: "double"
+        Correctness:
+          type: "number"
+          format: "double"
+        CorrectnessLatency:
+          type: "number"
+          format: "double"
+        RampUp:
+          type: "number"
+          format: "double"
+        RampUpLatency:
+          type: "number"
+          format: "double"
+        ResponsiveMaintainer:
+          type: "number"
+          format: "double"
+        ResponsiveMaintainerLatency:
+          type: "number"
+          format: "double"
+        LicenseScore:
+          type: "number"
+          format: "double"
+        LicenseScoreLatency:
+          type: "number"
+          format: "double"
+        GoodPinningPractice:
+          type: "number"
+          description: "The fraction of its dependencies that are pinned to at least\
+            \ a specific major+minor version, e.g. version 2.3.X of a package. (If\
+            \ there are zero dependencies, they should receive a 1.0 rating. If there\
+            \ are two dependencies, one pinned to this degree, then they should receive\
+            \ a Â½ = 0.5 rating)."
+          format: "double"
+        GoodPinningPracticeLatency:
+          type: "number"
+          format: "double"
+        PullRequest:
+          type: "number"
+          description: "The fraction of project code that was introduced through pull\
+            \ requests with a code review."
+          format: "double"
+        PullRequestLatency:
+          type: "number"
+          description: "The fraction of project code that was introduced through pull\
+            \ requests with a code review."
+          format: "double"
+        NetScore:
+          type: "number"
+          description: "Scores calculated from other seven metrics."
+          format: "double"
+        NetScoreLatency:
+          type: "number"
+          description: "Scores calculated from other seven metrics."
+          format: "double"
+      description: "Package rating (cf. Project 1).\n\nIf the Project 1 that you inherited\
+        \ does not support one or more of the original properties, denote this with\
+        \ the value \"-1\"."
+  securitySchemes:
+    api_key:
+      type: "apiKey"
+      name: "x-api-key"
+      in: "header"

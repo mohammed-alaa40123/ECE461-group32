@@ -1,3 +1,24 @@
+/**
+ * @file handlerhelper.ts
+ * @description
+ * This file provides helper functions and type definitions for managing package-related operations
+ * within the backend service. It includes utilities for fetching GitHub repository information,
+ * logging activities, calculating various metrics scores, and interacting with the PostgreSQL database.
+ *
+ * @imports
+ * - `getGithubRepoInfoFromUrl` from `./rating/processURL`: Fetches GitHub repository details based on a given URL.
+ * - `getLogger`, `logTestResults` from `./rating/logger`: Provides logging utilities for monitoring and debugging.
+ * - `calculateNetScore` from `./rating/metrics/netScore`: Computes the net score for a package based on multiple metrics.
+ * - `crypto` from `crypto`: Node.js module for cryptographic functionalities.
+ * - `pool` from `./services/dbService`: PostgreSQL client for executing database queries.
+ *
+ *  *
+ * @author
+ * Mohamed Ahmed
+ * @date
+ * 2024-12-07
+ */
+
 import { getGithubRepoInfoFromUrl } from "./rating/processURL";
 import {getLogger, logTestResults} from "./rating/logger";
 import { calculateNetScore } from "./rating/metrics/netScore";

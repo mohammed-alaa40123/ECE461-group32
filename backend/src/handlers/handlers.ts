@@ -1,4 +1,61 @@
 // src/handlers/handlers.ts
+/**
+ * @file handlers.ts
+ * @description
+ * This file contains the AWS Lambda handlers for managing package-related operations in the backend service.
+ * It handles various API endpoints, including creating, retrieving, updating, and deleting packages, as well as managing
+ * package ratings. The handlers interact with the PostgreSQL database and AWS S3 for data storage and retrieval.
+ *
+ * @imports
+ * - AWS Lambda types for defining handler responses.
+ * - Database services for interacting with PostgreSQL.
+ * - S3 services for managing package content.
+ * - Data models for packages and package history.
+ * - Utility functions for sending responses and authentication.
+ * - Helper functions for metrics calculation, package ID generation, and repository details fetching.
+ * - Logging utilities for monitoring and debugging.
+ * - External libraries such as AdmZip for ZIP file handling, JWT for authentication tokens, and bcrypt for password hashing.
+ *
+ * @functions
+ * - `handleProcessPackage`: Handles the creation and processing of new packages.
+ * - `handleGetPackageRating`: Retrieves ratings for a specific package.
+ * - Additional handlers for other package-related operations.
+ *
+ * @middleware
+ * - Authentication middleware to verify user tokens and permissions.
+ *
+ * @errorHandling
+ * - Consistent error responses with appropriate HTTP status codes.
+ * - Logging of errors for monitoring and debugging purposes.
+ *
+ * @logging
+ * - Utilizes a custom logger for tracking the flow of operations and capturing debug information.
+ *
+ * @security
+ * - Implements JWT-based authentication to secure API endpoints.
+ * - Uses bcrypt for hashing sensitive information like passwords.
+ *
+ * @dependencies
+ * - AWS SDK for interacting with AWS services.
+ * - PostgreSQL client (`pg`) for database operations.
+ * - AdmZip for handling ZIP file operations.
+ * - JSON Web Token (`jsonwebtoken`) for token management.
+ * - Bcrypt for hashing.
+ *
+ * @example
+ * ```typescript
+ * import { handleProcessPackage } from './handlers';
+ *
+ * export const processPackage = async (event: any): Promise<APIGatewayProxyResult> => {
+ *   return await handleProcessPackage(event);
+ * };
+ * ```
+ *
+ * @author
+ * Mohamed Ahmed
+ * @date
+ * 2024-12-07
+ */
 import { APIGatewayProxyResult } from 'aws-lambda';
 import pool, { getUserByName, insertIntoDB } from '../services/dbService';
 import { uploadPackageContent, getPackageContent, deletePackageContent } from '../services/s3Service';
@@ -125,39 +182,6 @@ function convertGitUrlToHttpsFlexible(gitUrl: string): string {
 
   return httpsUrl;
 }
-
-// // Example usage:
-// const url = convertGitUrlToHttpsFlexible("https://taylorhakes@github.com/taylorhakes/fecha.git");
-// console.log(url); // Output: "https://github.com/taylorhakes/fecha"
-
-// // Example usage:
-// async function fetchRepoDetails(packageName: string): Promise<{ url: string, owner: string, name: string, defaultBranch: string } | null> {
-//   try {
-//     const repoDetailsUrl = `https://api.github.com/repos/${packageName}`;
-//     const repoDetailsResponse = await fetch(repoDetailsUrl, {
-//       headers: {
-//         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-//         Accept: 'application/vnd.github.v3+json',
-//       },
-//     });
-
-//     if (!repoDetailsResponse.ok) {
-//       console.error(`Failed to fetch repository details for ${packageName}`);
-//       return null;
-//     }
-
-//     const repoDetails = await repoDetailsResponse.json() as unknown as any;
-//     return {
-//       url: repoDetails.html_url,
-//       owner: repoDetails.owner.login,
-//       name: repoDetails.name,
-//       defaultBranch: repoDetails.default_branch,
-//     };
-//   } catch (error) {
-//     console.error(`Error fetching repository details for ${packageName}:`, error);
-//     return null;
-//   }
-// }
 
 
 // Handler for /package - POST (Create Package)

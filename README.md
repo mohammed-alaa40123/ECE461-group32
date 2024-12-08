@@ -1,154 +1,449 @@
+# ECE 461 - Fall 2024 - Project Phase 2: Trustworthy Module Registry
 
-# Project Part 1 - Software Engineering
-
-## Team Members:
-- Kevin Chang
-- Aditya Sivathnu
-- Ellis Selznick
-
-**Date:** 9/19/24  
-
----
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+- [API Documentation](#api-documentation)
+  - [Authentication](#authentication)
+  - [Package Management](#package-management)
+  - [Package Ratings](#package-ratings)
+- [Usage](#usage)
+  - [Using Postman](#using-postman)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ## Project Overview
 
-We have implemented a system in TypeScript that evaluates external package URLs and assigns them a **NetScore** rating between 0 and 1. This score is based on five key metrics:
-- **Bus Factor (15%)**
-- **Correctness (30%)**
-- **Ramp-Up Time (10%)**
-- **Responsive Maintainer (15%)**
-- **License Compatibility (30%)**
+**ECE 461 - Fall 2024 - Project Phase 2** presents a **Trustworthy Module Registry**, an API-driven service designed to manage software packages effectively. This registry facilitates operations such as creating, retrieving, updating, deleting, and searching for packages. It ensures data integrity, supports pagination, and provides comprehensive package ratings to aid users in evaluating package quality.
 
-Each metric is rated from 0 to 1, and their weighted sum forms the final NetScore. The program outputs the individual metric scores and the overall NetScore in **NDJSON** format to both the console and a log file. If an invalid URL is encountered (one that is not a GitHub or NPMJS URL), the system logs it as invalid and does not assign a score. Metric data for Bus Factor, Responsive Maintainer, License, and Ramp-Up Time is retrieved via GitHub’s GraphQL API, while Correctness is determined by cloning the repository and analyzing it using ESLint. The program was tested using Vitest and code quality was ensured through ESLint and Prettier. The program was parallelized via `promise.all()` so that multiple metrics can be calculated separately, rather than sequentially and waiting for one metric to finish at a time before moving to the next one.
+## Features
 
-## System Requirements
+- **Authentication:** Secure access using JWT-based tokens.
+- **Package Management:** Create, retrieve, update, and delete packages with unique identifiers.
+- **Pagination Support:** Efficiently handle large datasets with offset-based pagination.
+- **Search Functionality:** Search packages using regular expressions.
+- **Package Ratings:** Comprehensive scoring system evaluating various aspects of packages.
+- **Error Handling:** Consistent and meaningful HTTP status codes for better client-side handling.
+- **Logging:** Enhanced monitoring and debugging through detailed logs.
+- **Database Integration:** Robust interaction with PostgreSQL for data persistence.
+- **GitHub Integration:** Fetch and process repository information from GitHub URLs.
 
-| Requirement          | Description                                                                                             |
-|----------------------|---------------------------------------------------------------------------------------------------------|
-| **System Input**      | The system supports CLI inputs, e.g., `./run` commands for metrics calculation and dependency installation. |
-| **System Implementation** | The system is implemented in TypeScript and uses a mix of GraphQL and repository cloning to calculate metrics. |
-| **System Output**     | Outputs metrics in **NDJSON** format, with console logging for metrics and latency values.               |
-| **Response Time**     | Latency times for each metric are calculated and logged alongside the metric score.                     |
-| **Parallel Processing** | Utilizes asynchronous programming for parallel execution of metrics.                                   |
+## Architecture
 
-## Open Issues
-There are currently **0 open issues** in the [GitHub Issue Tracker](https://github.com/asivath/ECE461-group31/issues).
+The project leverages **AWS Lambda** functions to handle API requests, ensuring scalability and efficient resource utilization. Key components include:
 
-## Modularity
+- **API Gateway:** Manages and routes incoming HTTP requests to appropriate Lambda handlers.
+- **PostgreSQL Database:** Stores package metadata, ratings, and history.
+- **AWS S3:** (Optional) For storing package content if needed.
+- **Helper Modules:** Facilitate operations like GitHub repository information fetching, logging, and metrics calculations.
 
-- **Decomposition:** The system is divided into modules for:
-  - **Testing:** Unit tests for each `.ts` file in the `src` folder.
-  - **Metrics Calculation:** Separate files for each metric, joined by `netScore.ts`.
-  - **Processing:** Handles URL processing, logging, and GraphQL queries.
-  
-- **Composability:** Each module is self-contained with no global state, allowing the modules to be imported into others without conflict.
+[Architecture Diagram and Plan](https://drive.google.com/file/d/1-B_BJKH-HF2FismHCk340Z5jAGJi-wbi/view?usp=sharing) <!-- Replace with actual diagram if available -->
 
-- **Understandability:** Each module can be understood individually, though some familiarity with **GraphQL** and **Vitest** might be required for testing.
+## Getting Started
 
-- **Continuity:** Modifying metric weights or constants is easy, but significant changes to the calculation logic will require corresponding updates to the tests. Adding metrics will not be an issue.
+### Prerequisites
 
-- **Isolation:** Errors are handled locally within each module, and failing metrics return a value of 0 without crashing the system.
+- **Node.js** (v14.x or later)
+- **npm** (v6.x or later)
+- **PostgreSQL** Database
+- **AWS Account** with permissions to deploy Lambda functions and API Gateway
+- **GitHub Account** (for repository access and integration)
 
-## Dependencies
+### Installation
 
-The project dependencies are listed in `package.json`.
+1. **Clone the Repository:**
 
-| Dependency                    | Purpose                                                        |
-|-------------------------------|----------------------------------------------------------------|
-| **cloc**                      | Counts lines of code                                            |
-| **date-fns**                  | Calculates the difference in days                               |
-| **dotenv**                    | Imports environment variables from `.env`                       |
-| **eslint**                    | Code quality check                                              |
-| **eslint-config-prettier**    | Ensures eslint does not conflict with prettier                  |
-| **eslint-plugin-security**    | Enhances correctness lint check                                 |
-| **graphql**                   | For all API calls to GitHub                                     |
-| **graphql-request**           | Simplifies GitHub GraphQL requests                              |
-| **prettier**                  | Formats code for consistent coding standards                    |
-| **simple-git**                | Provides a simple way to clone a repo                           |
-| **tsx**                       | Allows running `.ts` files without compiling                    |
-| **vitest**                    | Testing framework                                               |
-| **typescript**                | TypeScript project setup                                        |
+   ```bash
+   git clone https://github.com/mohammed-alaa40123/ECE461-group32
+   cd trustworthy-module-registry
+   ```
 
-## Configuration
+2. **Install Dependencies:**
 
-The project can be configured via the `.env` file. Key configurations include:
-- **GITHUB_TOKEN=PERSONAL_ACCESS_TOKEN**
-- **LOG_FILE=PATH_TO_LOG_FILE**
-- **LOG_LEVEL**
+   ```bash
+   cd backend/src
+   npm install serverless
+   npm install
+   ```
 
-Without the first two, the program will not make valid API calls or log properly.
+3. **Environment Configuration:**
 
-## Build and Version Control
+   Create a `.env` file in the root directory and configure the necessary environment variables:
 
-There are no build steps for this project; it can be run directly using `npm start`. For version control, we used GitHub, and branches were created for each feature or bug fix, linked to issues in the project tracker.
+   ```env
+   DATABASE_URL=your_postgresql_database_url
+   GITHUB_TOKEN=your_github_access_token
+   JWT_SECRET=your_jwt_secret
+   AWS_REGION=your_aws_region
+   S3_BUCKET=your_S3_bucket
+   RDS_HOST= your_RDS_HOST
+   RDS_USER= your_RDS_host
+   RDS_PASSWORD= your_RDS_ppassword
+   RDS_DATABASE= your_RDS_DATABASE
+   RDS_PORT= your_RDS_PORT
+   ```
 
-## Test Plan
+### Configuration
 
-- **Automated Tests:** We use **Vitest** for unit and end-to-end testing, covering system input, output, and response time. Most tests are automated.
-- **Test Coverage:** The system requires 90% code coverage before merging. This can be checked via:
+Ensure that the PostgreSQL database is set up with the required schemas and tables. Update the `ECE 461 - Fall 2024 - Project Phase 2-front-oas30-postman.yaml` file as needed to reflect any changes in the API specifications.
 
-  ```bash
-  npm run test:coverage
+## API Documentation
+
+The API adheres to the **OpenAPI 3.0.1** specification, ensuring clear and structured documentation. Below is a summary of the primary endpoints and their functionalities.
+
+### Authentication
+
+#### Create Authentication Token
+
+- **Endpoint:** `/authenticate`
+- **Method:** `PUT`
+- **Description:** Generates a JWT token for authenticated access.
+- **Request Body:**
+
+  ```json
+  {
+    "username": "your_username",
+    "password": "your_password"
+  }
   ```
 
-## Test Execution
+- **Responses:**
+  - `200 OK`: Returns the authentication token.
+  - `400 Bad Request`: Missing or invalid fields.
+  - `403 Forbidden`: Authentication failed.
 
-Run the tests using either of the following commands:
+### Package Management
 
-```bash
-npm test
-npm run test:watch
+#### Create a New Package
+
+- **Endpoint:** `/packages`
+- **Method:** `POST`
+- **Description:** Creates and processes a new package.
+- **Headers:**
+  - `X-Authorization`: Your authentication token.
+- **Request Body:**
+
+  ```json
+  {
+    "metadata": {
+      "Name": "packageName",
+      "Version": "1.0.0",
+      "ID": "unique_package_id",
+      "Owner": "owner_name"
+    },
+    "data": {
+      "Content": "package_content",
+      "JSProgram": "javascript_program_code"
+    }
+  }
+  ```
+
+- **Responses:**
+  - `200 OK`: Package created successfully.
+  - `400 Bad Request`: Missing `metadata` or `data`.
+  - `403 Forbidden`: Insufficient permissions.
+  - `409 Conflict`: Package already exists.
+  - `500 Internal Server Error`: Server-side error.
+
+#### Retrieve a Package
+
+- **Endpoint:** `/package/{id}`
+- **Method:** `GET`
+- **Description:** Retrieves details of a specific package by its ID.
+- **Headers:**
+  - `X-Authorization`: Your authentication token.
+- **Responses:**
+  - `200 OK`: Returns package details.
+  - `404 Not Found`: Package does not exist.
+  - `500 Internal Server Error`: Server-side error.
+
+#### Update a Package
+
+- **Endpoint:** `/package/{id}`
+- **Method:** `PUT`
+- **Description:** Updates information of an existing package.
+- **Headers:**
+  - `X-Authorization`: Your authentication token.
+- **Request Body:**
+
+  ```json
+  {
+    "metadata": {
+      "Name": "updatedPackageName",
+      "Version": "1.1.0",
+      "ID": "unique_package_id",
+      "Owner": "updated_owner_name"
+    },
+    "data": {
+      "Content": "updated_package_content",
+      "JSProgram": "updated_javascript_program_code"
+    }
+  }
+  ```
+
+- **Responses:**
+  - `200 OK`: Package updated successfully.
+  - `400 Bad Request`: Missing `metadata` or `data`, or mismatch in ID.
+  - `403 Forbidden`: Insufficient permissions.
+  - `404 Not Found`: Package does not exist.
+  - `409 Conflict`: Package with updated details already exists.
+  - `500 Internal Server Error`: Server-side error.
+
+#### Delete a Package
+
+- **Endpoint:** `/package/{id}`
+- **Method:** `DELETE`
+- **Description:** Deletes a package by its ID.
+- **Headers:**
+  - `X-Authorization`: Your authentication token.
+- **Responses:**
+  - `200 OK`: Package deleted successfully.
+  - `403 Forbidden`: Insufficient permissions.
+  - `404 Not Found`: Package does not exist.
+  - `500 Internal Server Error`: Server-side error.
+
+#### List Packages
+
+- **Endpoint:** `/packages`
+- **Method:** `POST`
+- **Description:** Lists packages based on query parameters with pagination support.
+- **Headers:**
+  - `X-Authorization`: Your authentication token.
+- **Query Parameters:**
+  - `offset` (optional): For pagination.
+- **Request Body:**
+
+  ```json
+  [
+    {
+      "name": "packageName",
+      "version": "1.0.0"
+    }
+  ]
+  ```
+
+- **Responses:**
+  - `200 OK`: Returns a list of packages with pagination offset.
+  - `400 Bad Request`: Missing or invalid query parameters.
+  - `403 Forbidden`: Insufficient permissions.
+  - `413 Payload Too Large`: Too many packages returned.
+  - `500 Internal Server Error`: Server-side error.
+
+### Package Ratings
+
+#### Get Package Rating
+
+- **Endpoint:** `/package/{id}/rate`
+- **Method:** `GET`
+- **Description:** Retrieves the rating of a specific package.
+- **Headers:**
+  - `X-Authorization`: Your authentication token.
+- **Responses:**
+  - `200 OK`: Returns package rating details.
+  - `403 Forbidden`: Authentication failed.
+  - `404 Not Found`: Package does not exist.
+  - `500 Internal Server Error`: Server-side error.
+
+## Usage
+
+### Using Postman
+
+To interact with the API endpoints effectively, you can use **Postman**. Below is a guide to configure and send requests using Postman.
+
+#### Adding the `offset` Parameter in Postman for a POST Request
+
+1. **Open Postman and Create a New Request:**
+   - Click on the **"New"** button and select **"Request"**.
+   - Name your request (e.g., `List Packages`) and choose a collection to save it in.
+
+2. **Set the Request Method and URL:**
+   - Set the request method to **POST**.
+   - Enter the endpoint URL, for example:
+     ```
+     https://zy5br6rkxd.execute-api.us-east-1.amazonaws.com/front/packages
+     ```
+
+3. **Add the `offset` Query Parameter:**
+   - Click on the **"Params"** tab located below the URL field.
+   - In the key-value table, add a new parameter:
+     - **Key:** `offset`
+     - **Value:** `3` *(or your desired offset value)*
+
+   ![Postman Params Tab](./docs/postman-params.png) <!-- Replace with actual screenshot -->
+
+4. **Set Up the Request Body:**
+   - Click on the **"Body"** tab.
+   - Select **"raw"** and choose **"JSON"** from the dropdown.
+   - Enter the JSON array as per your API specification. For example:
+     ```json
+     [
+       {
+         "name": "*",
+         "version": "1.0.0"
+       }
+     ]
+     ```
+
+5. **Add Required Headers:**
+   - Click on the **"Headers"** tab.
+   - Add the `X-Authorization` header:
+     - **Key:** `X-Authorization`
+     - **Value:** `your-authentication-token`
+
+   ![Postman Headers Tab](./docs/postman-headers.png) <!-- Replace with actual screenshot -->
+
+6. **Send the Request:**
+   - Review all the settings to ensure correctness.
+   - Click the **"Send"** button to execute the request.
+   - Inspect the response in the lower pane to verify the results.
+
+#### Example Request Summary
+
+- **Method:** POST
+- **URL:** `https://zy5br6rkxd.execute-api.us-east-1.amazonaws.com/front/packages`
+- **Params:**
+  | Key    | Value |
+  |--------|-------|
+  | offset | 3     |
+- **Headers:**
+  | Key             | Value                     |
+  |-----------------|---------------------------|
+  | X-Authorization | your-authentication-token |
+- **Body (JSON):**
+  ```json
+  [
+    {
+      "name": "*",
+      "version": "1.0.0"
+    }
+  ]
+  ```
+
+## Technologies Used
+
+- **AWS Lambda:** Serverless functions handling API requests.
+- **API Gateway:** Managing and routing HTTP requests.
+- **PostgreSQL:** Relational database for storing package data.
+- **TypeScript:** Enhancing JavaScript with static typing.
+- **Node.js:** Server-side runtime environment.
+- **dotenv:** Managing environment variables.
+- **jsonwebtoken:** Handling JWT authentication.
+- **bcrypt:** Securing passwords through hashing.
+- **p-limit:** Controlling concurrency in file operations.
+- **Prettier:** Code formatting tool.
+- **AdmZip:** Handling ZIP file operations.
+- **AWS SDK:** Interacting with AWS services.
+- **Postman:** API testing and documentation.
+
+## Project Structure
+
 ```
-test:watch will rerun tests whenever changes are detected in the files
+trustworthy-module-registry/
+├── src/
+│   ├── handlers/
+│   │   ├── handlers.ts
+│   │   └── handlerhelper.ts
+│   ├── services/
+│   │   └── dbService.ts
+│   ├── rating/
+│   │   ├── processURL.ts
+│   │   ├── logger.ts
+│   │   └── metrics/
+│   │       └── netScore.ts
+│   ├── utils/
+│   │   └── response.ts
+│   ├── index.ts
+│   └── ...other modules
+├── tests/
+│   └── ...test files
+├── ECE 461 - Fall 2024 - Project Phase 2-front-oas30-postman.yaml
+├── 
 
-**Things to Note with Testing:**
-- All tests are automated with unit tests created using Vitest and mocks. There are unit tests for each metric, URL processing, loggers, and the utility functions for cloning repositories.
-- End-to-end testing ensures the program correctly makes GraphQL calls and logs outputs.
-- When running E2E tests, the test calls `./run test`. To avoid a circular call, an env variable (`NODE_ENV == "test"`) ensures the test runner doesn't call `index.test.ts` recursively.
+README.md
 
-### Important Notes for Modifying/Deleting Tests:
-When making new tests or deleting tests, be sure to update the following code block found in `index.test.ts`:
 
-```javascript
-expect(totalTests).toBe(number);
-expect(totalPassed).toBe(number);
-expect(lineCoverage).toBe(coverage);
+├── 
+
+package.json
+
+
+├── 
+
+tsconfig.json
+
+
+├── .env
+└── ...other configuration files
 ```
 
-- **DO NOT** simply change the number to whatever is expected if the test fails. This defeats the purpose of the test by comparing incorrect values.
-- If your code is supposed to pass correctly, run the following command to update the numbers and coverage values:
+## Contributing
 
-  ```bash
-  npm run test
-  npm run test:coverage
-  ```
+Contributions are welcome! To contribute:
 
-- You should see an output like the following:
+1. **Fork the Repository:**
 
-  ```
-  Test Files 1 failed | 9 passed (10)
-  Tests 2 failed | 53 passed (55)
-  ```
+   Click the **"Fork"** button at the top-right corner of the repository page.
 
-  In this case, your test amount should be calculated as `55 - 3 = 52 tests`. Coverage information can be checked via `npm run test:coverage`.
+2. **Clone Your Fork:**
 
-  The reason for subtracting 3 is that `index.test.ts` is excluded (as explained earlier) and contains 3 tests.
+   ```bash
+   git clone https://github.com/mohammed-alaa40123/ECE461-group32
+   cd ECE461-group32
+   ```
 
-- **IMPORTANT:** You aren't allowed to merge if tests are failing or you don't meet 90% code coverage.
+3. **Create a New Branch:**
 
-## Running the Project
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
-To run the project, use the following commands:
+4. **Make Your Changes:**
 
-- **Start the program:**
-  ```bash
-  npm start
-  ```
+   Implement your feature or bug fix ensuring adherence to the project's coding standards.
 
-- **Run tests:**
-  ```bash
-  npm run test
-  npm run test:coverage
-  ```
+5. **Commit Your Changes:**
 
-Ensure the `.env` file contains valid GitHub token and log file path settings before running the program.
+   ```bash
+   git commit -m "Add feature: your feature description"
+   ```
+
+6. **Push to Your Fork:**
+
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+7. **Create a Pull Request:**
+
+   Navigate to the original repository and click on **"Compare & pull request"**.
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+## Contact
+
+For any questions or feedback, please contact:
+
+- **Name:** Mohamed Ahmed
+- **Email:** mohame43@purdue.edu
+
+- **Name:** Amar AlAzizy 
+- **Email:** alazizy@purdue.edu
+
+- **Name:** Bola Warsy
+- **Email:** bwarsy@purdue.edu
+
+- **Name:** Andrew Cali
+- **Email:** acali@purdue.edu
+- **GitHub:** [@mohammed-alaa40123](https://github.com/mohammed-alaa40123)
+
+
