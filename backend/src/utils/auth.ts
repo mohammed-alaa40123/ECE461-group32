@@ -3,7 +3,7 @@
 import jwt from 'jsonwebtoken';
 import pool from '../services/dbService';
 
-export interface AuthenticatedUser {
+export type AuthenticatedUser ={
   sub: number;
   name: string;
   isAdmin: boolean;

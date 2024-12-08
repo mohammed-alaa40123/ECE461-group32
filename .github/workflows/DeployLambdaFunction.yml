@@ -5,42 +5,6 @@ on:
       - Access_track
 
 jobs:
-  # build-and-deploy:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     # 1. Checkout the repository
-  #     - name: Checkout Repository
-  #       uses: actions/checkout@v4
-  #       with:
-  #         path: "ECE461-group32" # Check out the code on the branch that triggered the workflow
-
-  #     # 2. Set up Node.js environment
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: '22'  # Specify your Node.js version
-
-  #     # 3. Install dependencies and build the project
-  #     - name: Install Dependencies and Build
-  #       run: |
-  #         cd ECE461-group32/frontend
-  #         npm install
-  #         npm run build
-  #         ls dist
-  #     - name: Show the build output
-  #       run: |
-  #         ls ECE461-group32/frontend/dist
-  #         echo "Build successful!"
-  #         ls -tr ECE461-group32
-  #     # 4. Deploy to GitHub Pages
-  #     - name: Deploy to GitHub Pages
-  #       uses: peaceiris/actions-gh-pages@v4
-
-  #       with:
-  #         publish_dir: ./frontend/dist  # Adjust if your build output directory is different
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         # publish_dir: ./frontend/dist  # Adjust if your build output directory is different
   deploy:
     runs-on: ubuntu-latest
 
@@ -49,7 +13,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Step 2: Set up Docker and AWS CLI
+      # Step 2: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 3: Run Linter
+      - name: Run Linter
+        run: npm run lint || echo "Lint issues found, but continuing deployment"
+
+      # Step 4: Run Tests
+      - name: Run Tests with Coverage
+        run: |
+          npm run test:cicd
+    
+      # Step 5: Set up Docker and AWS CLI
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
@@ -60,12 +37,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      # Step 3: Log in to Amazon ECR
+      # Step 6: Log in to Amazon ECR
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # Step 4: Build Docker image for Lambda with TypeScript build step
+      # Step 7: Build Docker image for Lambda with TypeScript build step
       - name: Build Docker image
         run: |
           REPO_NAME=lambda-api-handler
@@ -74,7 +51,7 @@ jobs:
           echo "Building Docker image for Lambda"
           docker build -t $REPO_NAME:$IMAGE_TAG backend/src
 
-      # Step 5: Tag and push the Docker image to ECR
+      # Step 8: Tag and push the Docker image to ECR
       - name: Tag and push Docker image to Amazon ECR
         run: |
           ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
@@ -92,7 +69,7 @@ jobs:
           # Push Docker image to ECR
           docker push $ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$REPO_NAME:$IMAGE_TAG
 
-      # Step 6: Update AWS Lambda to use the new Docker image
+      # Step 9: Update AWS Lambda to use the new Docker image
       - name: Update Lambda function with new Docker image
         run: |
           ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)

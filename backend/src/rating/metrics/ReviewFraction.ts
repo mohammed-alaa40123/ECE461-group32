@@ -4,14 +4,6 @@ import { getLogger } from "../logger";
 
 const logger = getLogger();
 
-async function fetchPullRequests(repoOwner: string, repoName: string, cursor: string | null = null): Promise<CodeReviewResponse> {
-  return await graphqlClient.request(GET_VALUES_FOR_CODE_REVIEW_METRIC, {
-    repoOwner,
-    repoName,
-    after: cursor, // Pagination cursor
-  });
-}
-
 async function fetchMergedPullRequests(repoOwner: string, repoName: string, cursor: string | null = null): Promise<CodeReviewResponseNew> {
   return await graphqlClient.request(GET_VALUES_FOR_CODE_REVIEW_METRIC, {
     repoOwner,

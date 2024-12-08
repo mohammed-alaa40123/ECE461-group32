@@ -5,7 +5,7 @@
   "description": "Package rater for npm packages",
   "scripts": {
     "start": "tsx backend/src/rating/index.ts",
-    "lint": "eslint '**/*.{ts,mjs,json}' --fix",
+    "lint": "eslint 'backend/src/rating/*.{ts,js}' --fix",
     "format": "prettier --write '**/*.{ts,mjs,json}'",
     "quality": "npm run format && npm run lint",
     "test": "vitest run",

@@ -2,12 +2,10 @@
  * Utility functions for the application. These functions are used to clone repositories and validate file paths.
  */
 import path from "path";
-import { fileURLToPath } from 'url';
 import fspromises from "fs/promises";
 import dotenv from "dotenv";
 import { getLogger } from "./logger";
 import { graphqlClient } from "./graphqlClient";
-import {dirname} from "path";
 const logger = getLogger();
 import * as git from 'isomorphic-git';
 import fs from 'fs';
@@ -79,9 +77,7 @@ export async function cloneRepo(repoUrl: string, repoName: string): Promise<stri
     return null;
   }
 }
-// util.ts
-import axios from 'axios';
-import AdmZip from 'adm-zip';
+
 /**
  * Download and extract a GitHub repository as a ZIP file
  * @param repoUrl The URL of the repository to download
@@ -106,7 +102,7 @@ export async function deleteRepo(repoName: string): Promise<void> {
     logger.debug(`Attempting to delete repository directory: ${repoDir}`);
     await fspromises.rm(repoDir, { recursive: true, force: true });
     logger.info(`Successfully deleted repository directory: ${repoDir}`);
-  } catch (error: any) {
+  } catch (error:any) {
     logger.error(`Error deleting repository directory ${repoDir}: ${error.message}`);
   }
 }
@@ -150,7 +146,7 @@ export const validateGithubToken = async (): Promise<boolean> => {
 
 
 
-interface LineCountResult {
+type LineCountResult = {
   totalLinesCorrectness: number;
   totalLinesRamp: number;
 }

@@ -87,7 +87,7 @@ import {
 
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  const { httpMethod, path, pathParameters, queryStringParameters, headers, body } = event;
+  const { httpMethod, path, queryStringParameters, headers, body } = event;
   // console.log(`Received event: ${JSON.stringify(event)}`)
   try {
     // Routing logic based on path and method
@@ -132,8 +132,6 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     } else if (path && path.startsWith('/package/') && httpMethod === 'DELETE') {
       const id = path.split('/')[2];
       return await handleDeletePackage(id, headers);
-    } else if (path === '/tracks' && httpMethod === 'GET') {
-      return await handleGetTracks(headers);
     } else if (path === '/groups' && httpMethod === 'POST') {
       return await handleCreateGroup(body || '{}', headers);
     } else if (path === '/permissions' && httpMethod === 'POST') {

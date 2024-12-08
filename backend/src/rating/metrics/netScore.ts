@@ -10,8 +10,6 @@ import { calculateBusFactorScore } from "./busFactor";
 import {calculateCodeReviewFractionMetric} from "./ReviewFraction";
 import {DependencyPinningCalc} from "./dependencyPinning";
 import { getLogger } from "../logger";
-import { promisify } from "util";
-import { exec } from "child_process";
 import { cloneRepo,deleteRepo,calculateLinesOfCode } from "../util";
 
 const logger = getLogger();

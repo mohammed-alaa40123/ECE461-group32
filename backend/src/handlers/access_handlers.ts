@@ -1,17 +1,10 @@
 
-import semver from 'semver';
 
 import { APIGatewayProxyResult } from 'aws-lambda';
-import pool, { getUserByName, insertIntoDB } from '../services/dbService';
+import pool from '../services/dbService';
 import { sendResponse } from '../utils/response';
 import { authenticate, AuthenticatedUser } from '../utils/auth';
-import { getLogger } from '../rating/logger';
 import bcrypt from 'bcrypt';
-import { send } from 'process';
-
-
-
-const logger = getLogger();
 
 export const handleCreateGroup = async (
   body: string,
@@ -27,7 +20,7 @@ export const handleCreateGroup = async (
   }
 
   if (!user.isAdmin) {
-    return sendResponse(403, { message: 'Admin privileges required to create groups.' });
+    return sendResponse(401, { message: 'Admin privileges required to create groups.' });
   }
 
   const { name, permissions = [] } = JSON.parse(body);
@@ -87,7 +80,7 @@ export const handleCreatePermission = async (body: string, headers: { [key: stri
   }
 
   if (!user.isAdmin) {
-    return sendResponse(403, { message: 'Admin privileges required to create permissions.' });
+    return sendResponse(401, { message: 'Admin privileges required to create permissions.' });
   }
 
   const { name } = JSON.parse(body);
@@ -139,17 +132,17 @@ export const handleRegisterUser = async (
   body: string,
   headers: { [key: string]: string | undefined }
 ): Promise<APIGatewayProxyResult> => {
-  // let user: AuthenticatedUser;
-  // try {
-  //   user = await authenticate(headers);
-  //   console.log('User authenticated:', user);
-  // } catch (err: any) {
-  //   return sendResponse(err.statusCode, { message: err.message });
-  // }
+  let user: AuthenticatedUser;
+  try {
+    user = await authenticate(headers);
+    console.log('User authenticated:', user);
+  } catch (err: any) {
+    return sendResponse(err.statusCode, { message: err.message });
+  }
 
-  // if (!user.isAdmin) {
-  //   return sendResponse(403, { message: 'Admin privileges required to register users.' });
-  // }
+  if (!user.isAdmin) {
+    return sendResponse(401, { message: 'Admin privileges required to register users.' });
+  }
 
   const { name, password, isAdmin = false, groups = [], permissions = [] } = JSON.parse(body);
 
@@ -265,7 +258,7 @@ export const handleRegisterUser = async (
     }
   
     if (!user.isAdmin) {
-      return sendResponse(403, { message: 'Admin privileges required to delete users.' });
+      return sendResponse(401, { message: 'Admin privileges required to delete users.' });
     }
   
     try {
@@ -292,7 +285,7 @@ export const handleRegisterUser = async (
     }
   
     if (!user.isAdmin) {
-      return sendResponse(403, { message: 'Admin privileges required to delete groups.' });
+      return sendResponse(401, { message: 'Admin privileges required to delete groups.' });
     }
   
     try {
@@ -319,7 +312,7 @@ export const handleRegisterUser = async (
     }
   
     if (!user.isAdmin) {
-      return sendResponse(403, { message: 'Admin privileges required to delete permissions.' });
+      return sendResponse(401, { message: 'Admin privileges required to delete permissions.' });
     }
   
     try {
@@ -351,7 +344,7 @@ export const handleEditUserGroupsAndPermissions = async (
   }
 
   if (!user.isAdmin) {
-    return sendResponse(403, {
+    return sendResponse(401, {
       message: 'Admin privileges required to edit user groups and permissions.',
     });
   }
@@ -425,7 +418,7 @@ export const handleRetrieveUserGroupsAndPermissions = async (headers: { [key: st
   }
 
   if (!user.isAdmin) {
-    return sendResponse(403, { message: 'Admin privileges required to retrieve user groups and permissions.' });
+    return sendResponse(401, { message: 'Admin privileges required to retrieve user groups and permissions.' });
   }
 
   try {
@@ -456,7 +449,7 @@ export const handleRetrieveUserGroupsAndPermissionsForUser = async (userId: stri
   }
 
   if (!user.isAdmin) {
-    return sendResponse(403, { message: 'Admin privileges required to retrieve user groups and permissions.' });
+    return sendResponse(401, { message: 'Admin privileges required to retrieve user groups and permissions.' });
   }
   const userIdINT= parseInt(userId);
   try {
@@ -473,6 +466,6 @@ export const handleRetrieveUserGroupsAndPermissionsForUser = async (userId: stri
     return sendResponse(200, { groups: userGroups, permissions: userPermissions });
   } catch (error: any) {
     console.error('Error retrieving user groups and permissions:', error);
-    return sendResponse(500, { message: 'Internal server error.' });
-  }
+    return sendResponse(500, { message: 'Internal server error.'});
+}
 };

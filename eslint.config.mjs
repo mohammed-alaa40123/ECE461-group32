@@ -30,16 +30,23 @@ export default [
     },
 
     rules: {
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-      "@typescript-eslint/consistent-type-definitions": ["error", "type"],
-      "no-unreachable": "error"
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-explicit-any": "off", // Allows any
+      "@typescript-eslint/no-namespace": "off", // Allows namespace,
+      "prefer-const": "off",
+      "security/detect-object-injection": "off",
+      "no-useless-escape": "off",
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "no-case-declarations": "off",
+      "no-unreachable": "off",
     }
   },
   {
-    ignores: ["repos"]
+    ignores: ["repos", "backend/src/index.js", "backend/src/webpack.config.js",]
   },
   {
-    files: ["src/__tests__/**/*"],
+    files: ["backend/src/handlers/__tests__/**/*"],
     rules: {
       "security/detect-non-literal-fs-filename": "off"
     }

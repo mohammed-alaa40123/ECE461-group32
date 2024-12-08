@@ -20,11 +20,10 @@
  */
 
 import { getGithubRepoInfoFromUrl } from "./rating/processURL";
-import {getLogger, logTestResults} from "./rating/logger";
 import { calculateNetScore } from "./rating/metrics/netScore";
 import crypto from "crypto";
 import  pool from "./services/dbService";
-export interface PackageInfo {
+export type PackageInfo ={
   ID: string;
   NAME: string;
   OWNER: string;
@@ -48,7 +47,7 @@ export interface PackageInfo {
   PINNED_DEPENDENCIES_SCORE_LATENCY: number;
 }
 
-interface ConvertedPackageInfo {
+type ConvertedPackageInfo = {
   BusFactor: number;
   BusFactorLatency: number;
   Correctness: number;
@@ -87,8 +86,6 @@ export function convertPackageInfo(newRating: PackageInfo): ConvertedPackageInfo
     NetScoreLatency: newRating.NET_SCORE_LATENCY
   };
 }
-const logger = getLogger();
-
 export async function metricCalcFromUrlUsingNetScore(url: string,ID?:string): Promise<PackageInfo | null> {
   const repoInfo = await getGithubRepoInfoFromUrl(url);
   if (!repoInfo) {
@@ -387,36 +384,20 @@ export async function fetchRepoDetails(packageName: string): Promise<{packageId:
 // Helper function to fetch package size from GitHub
 export async function fetchPackageSize(pkgOwner: string, pkgName: string, defaultBranch: string): Promise<number> {
   try {
-    const releasesUrl = `https://api.github.com/repos/${pkgOwner}/${pkgName}/tags`;
-    const releasesResponse = await fetch(releasesUrl, {
+    const zipUrl = `https://codeload.github.com/${pkgOwner}/${pkgName}/zip/refs/heads/${defaultBranch}`;
+    const response = await fetch(zipUrl, {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         Accept: 'application/vnd.github.v3+json',
       },
     });
 
-    if (!releasesResponse.ok) {
-      throw new Error('Failed to fetch releases from GitHub');
+    if (!response.ok) {
+      throw new Error('Failed to fetch package size from GitHub');
     }
 
-    const releases = await releasesResponse.json() as any[];
-    if (releases.length === 0) {
-      throw new Error('No releases found for the repository');
-    }
-
-    const tarballUrl = releases[0].zipball_url;
-    const tarballResponse = await fetch(tarballUrl, {
-      headers: {
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
-
-    if (!tarballResponse.ok) {
-      throw new Error('Failed to fetch tarball from GitHub');
-    }
-
-    const arrayBuffer = await tarballResponse.arrayBuffer();
+    const arrayBuffer = await response.arrayBuffer();
+    console.log("Array Buffer", arrayBuffer);
     const sizeInMB = arrayBuffer.byteLength / (1024 * 1024); // Convert bytes to MB
     return sizeInMB;
   } catch (error) {

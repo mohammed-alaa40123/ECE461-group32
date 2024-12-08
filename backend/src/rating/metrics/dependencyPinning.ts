@@ -16,16 +16,7 @@ interface RepoInfo {
   name: string;
 }
 
-interface RepositoryResponse {
-  repository: {
-    defaultBranchRef: {
-      name: string;
-    };
-    object: {
-      text: string;
-    } | null;
-  } | null;
-}
+
 
 // Function to check if a version string is pinned
 function isPinned(version: string): boolean {

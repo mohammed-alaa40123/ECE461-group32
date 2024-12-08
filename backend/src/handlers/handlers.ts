@@ -35,21 +35,6 @@
  * - Implements JWT-based authentication to secure API endpoints.
  * - Uses bcrypt for hashing sensitive information like passwords.
  *
- * @dependencies
- * - AWS SDK for interacting with AWS services.
- * - PostgreSQL client (`pg`) for database operations.
- * - AdmZip for handling ZIP file operations.
- * - JSON Web Token (`jsonwebtoken`) for token management.
- * - Bcrypt for hashing.
- *
- * @example
- * ```typescript
- * import { handleProcessPackage } from './handlers';
- *
- * export const processPackage = async (event: any): Promise<APIGatewayProxyResult> => {
- *   return await handleProcessPackage(event);
- * };
- * ```
  *
  * @author
  * Mohamed Ahmed
@@ -68,8 +53,7 @@ import { getLogger } from '../rating/logger';
 import AdmZip from 'adm-zip';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { fetchRepoDetails } from '../handlerhelper';
-import { send } from 'process';
+import { fetchRepoDetails, fetchPackageSize } from '../handlerhelper';
 
 
 
@@ -194,7 +178,7 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
     return sendResponse(err.statusCode, { message: err.message });
   }
   if (!user.permissions.includes('upload')) {
-    return sendResponse(403, { message: 'You do not have permission to upload packages.' });
+    return sendResponse(401, { message: 'You do not have permission to upload packages.' });
   }
 
   const packageData = JSON.parse(body);
@@ -452,7 +436,7 @@ export const handleRetrievePackage = async (id: string, headers: { [key: string]
   }
 
   if (!user.permissions.includes('download')) {
-    return sendResponse(403, { message: 'You do not have permission to download packages.' });
+    return sendResponse(401, { message: 'You do not have permission to download packages.' });
   }
   try {
     const queryText = 'SELECT * FROM packages WHERE id = $1';
@@ -512,7 +496,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     return sendResponse(err.statusCode, { message: err.message });
   }
   if (!user.permissions.includes('upload')) {
-    return sendResponse(403, { message: 'You do not have permission to update packages.' });
+    return sendResponse(401, { message: 'You do not have permission to update packages.' });
   }
 
   const result = await pool.query('select * from packages where id=$1', [id]);
@@ -726,7 +710,7 @@ export const handleDeletePackage = async (id: string, headers: { [key: string]: 
     return sendResponse(err.statusCode, { message: err.message });
   }
   if (!user.permissions.includes('upload')) {
-    return sendResponse(403, { message: 'You do not have permission to upload/delete packages.' });
+    return sendResponse(401, { message: 'You do not have permission to upload/delete packages.' });
   }
 
   try {
@@ -772,7 +756,7 @@ export const handleListPackages = async (
     return sendResponse(err.statusCode || 403, { message: err.message || 'Authentication failed.' });
   }
   if (!user.permissions.includes('search')) {
-    return sendResponse(403, { message: 'You do not have permission to search packages.' });
+    return sendResponse(401, { message: 'You do not have permission to search packages.' });
   }
   let queries: any[];
   try {
@@ -940,7 +924,7 @@ export const handleResetRegistry = async (headers: { [key: string]: string | und
   // try {
   //   user = await authenticate(headers);
   //   if (!user.isAdmin) {
-  //     return sendResponse(403, { message: 'Admin privileges required.' });
+  //     return sendResponse(401, { message: 'Admin privileges required.' });
   //   }
   // } catch (err: any) {
   //   return sendResponse(err.statusCode, { message: err.message });
@@ -985,7 +969,7 @@ export const handleGetPackageHistoryByName = async (name: string, headers: { [ke
     return sendResponse(err.statusCode, { message: err.message });
   }
   if (!user.permissions.includes('search')) {
-    return sendResponse(403, { message: 'You do not have permission to search packages.' });
+    return sendResponse(413, { message: 'You do not have permission to search packages.' });
   }
 
   try {
@@ -1035,7 +1019,7 @@ export const handleSearchPackagesByRegEx = async (body: string, headers: { [key:
     return sendResponse(err.statusCode, { message: err.message });
   }
   if (!user.permissions.includes('search')) {
-    return sendResponse(403, { message: 'You do not have permission to search packages.' });
+    return sendResponse(401, { message: 'You do not have permission to search packages.' });
   }
   
   const { RegEx } = JSON.parse(body);
@@ -1471,30 +1455,7 @@ export const handleGetPackageCost = async (
   }
 };
 
-// Helper function to fetch package size
-async function fetchPackageSize(pkgOwner: string, pkgName: string, defaultBranch: string): Promise<number> {
-  try {
-    const zipUrl = `https://codeload.github.com/${pkgOwner}/${pkgName}/zip/refs/heads/${defaultBranch}`;
-    const response = await fetch(zipUrl, {
-      headers: {
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch package size from GitHub');
-    }
-
-    const arrayBuffer = await response.arrayBuffer();
-    console.log("Array Buffer", arrayBuffer);
-    const sizeInMB = arrayBuffer.byteLength / (1024 * 1024); // Convert bytes to MB
-    return sizeInMB;
-  } catch (error) {
-    console.error('Error fetching package size:', error);
-    throw error;
-  }
-}
 // Handler for /tracks - GET (Get Planned Tracks)
 
 /**

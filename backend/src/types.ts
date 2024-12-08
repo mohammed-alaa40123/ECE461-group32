@@ -1,17 +1,17 @@
 // src/types.ts
 
-export interface User {
+export type User= {
     id: number;
     name: string;
     isAdmin: boolean;
   }
   
-  export interface UserAuthenticationInfo {
+  export type UserAuthenticationInfo= {
     user_id: number;
     password: string;
   }
   
-  export interface AuthenticatedUser {
+  export type AuthenticatedUser= {
     sub: number;
     name: string;
     isAdmin: boolean;
@@ -20,20 +20,20 @@ export interface User {
   }
   
 
-  interface PackageMetadata {
+  type PackageMetadata= {
     Name: string;
     Version: string;
     ID: string;
   }
   
-  interface PackageData {
+  type PackageData= {
     Content?: string; // Base64-encoded zip file
     URL?: string;     // Package URL
     debloat?: boolean;
     JSProgram?: string;
   }
   
-  interface Package {
+  export type Package ={
     metadata: PackageMetadata;
     data: PackageData;
   }

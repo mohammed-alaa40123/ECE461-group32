@@ -130,7 +130,7 @@ export type CodeReviewResponse = {
   };
 };
 
-export interface CodeReviewResponseNew {
+export type CodeReviewResponseNew ={
   repository: {
     pullRequests: {
       edges: Array<{

@@ -4,7 +4,6 @@
 import winston from "winston";
 import path from "path";
 import { readFile } from "fs/promises";
-import { fileURLToPath } from "url";
 import { exec } from "child_process";
 import { promisify } from "util";
 import "dotenv/config";

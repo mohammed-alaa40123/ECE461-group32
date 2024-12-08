@@ -11,7 +11,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { calculateNetScore } from "./metrics/netScore";
 import "dotenv/config";
-import { validateGithubToken } from "./util";
 
 // Immediately Invoked Async Function Expression (IIAFE)
 (async () => {
