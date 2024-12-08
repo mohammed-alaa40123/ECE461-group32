@@ -8,7 +8,7 @@ export default defineConfig({
     }
   },
   test: {
-    include: ["handlers/__tests__/**.test.ts"],
+    include: ["handlers/__tests__/**.test.ts","rating/__tests__/**.test.ts"],
     coverage: {
       provider: 'v8', // Ensure you're using the 'v8' coverage provider
       reporter: ['text', 'text-summary', 'json', 'html'], // Include 'text-summary' for percentage
