@@ -1,0 +1,1 @@
+01/02/2021 00:00:00 [debug]: This is a debug message
