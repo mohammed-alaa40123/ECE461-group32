@@ -1,0 +1,8965 @@
+Testing request: /prod/packages POST
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 6, type: restler_fuzzable_string
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+
+Suspect sequence: 502
+POST /prod/packages
+Fuzzing request block 20, type: restler_fuzzable_string
+Tested 200 combinations for request /prod/packages POST, combination 1
+Testing request: /prod/package/fuzzstring GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+Fuzzing request block 11, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring
+Tested 200 combinations for request /prod/package/fuzzstring GET, combination 1
+Testing request: /prod/package/fuzzstring POST
+Found 9 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+POST /prod/package/fuzzstring
+Fuzzing request block 16, type: restler_fuzzable_string
+Fuzzing request block 18, type: restler_fuzzable_string
+Fuzzing request block 20, type: restler_fuzzable_string
+Fuzzing request block 22, type: restler_fuzzable_object
+Fuzzing request block 24, type: restler_fuzzable_string
+Fuzzing request block 26, type: restler_fuzzable_string
+Fuzzing request block 28, type: restler_fuzzable_bool
+Fuzzing request block 30, type: restler_fuzzable_string
+Tested 900 combinations for request /prod/package/fuzzstring POST, combination 1
+Testing request: /prod/package POST
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 20, type: restler_fuzzable_bool
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+Tested 100 combinations for request /prod/package POST, combination 1
+Testing request: /prod/package/fuzzstring/rate GET
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/rate
+Tested 100 combinations for request /prod/package/fuzzstring/rate GET, combination 1
+Testing request: /prod/package/fuzzstring/cost GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+Fuzzing request block 10, type: restler_fuzzable_bool
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/package/fuzzstring/cost
+Tested 200 combinations for request /prod/package/fuzzstring/cost GET, combination 1
+Testing request: /prod/authenticate PUT
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 14, type: restler_fuzzable_string
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+Fuzzing request block 16, type: restler_fuzzable_bool
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+Tested 200 combinations for request /prod/authenticate PUT, combination 1
+Testing request: /prod/package/byRegEx POST
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 19, type: restler_fuzzable_string
+Tested 100 combinations for request /prod/package/byRegEx POST, combination 1
+Testing request: /prod/tracks GET
+Testing request: /prod/tracks GET
+Testing request: /prod/packages POST
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 6, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+Fuzzing request block 20, type: restler_fuzzable_string
+Tested 200 combinations for request /prod/packages POST, combination 1
+Testing request: /prod/package/fuzzstring GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+Fuzzing request block 11, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+Tested 200 combinations for request /prod/package/fuzzstring GET, combination 1
+Testing request: /prod/package/fuzzstring POST
+Found 9 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+Fuzzing request block 16, type: restler_fuzzable_string
+Fuzzing request block 18, type: restler_fuzzable_string
+Fuzzing request block 20, type: restler_fuzzable_string
+Fuzzing request block 22, type: restler_fuzzable_object
+Fuzzing request block 24, type: restler_fuzzable_string
+Fuzzing request block 26, type: restler_fuzzable_string
+Fuzzing request block 28, type: restler_fuzzable_bool
+Fuzzing request block 30, type: restler_fuzzable_string
+Tested 900 combinations for request /prod/package/fuzzstring POST, combination 1
+Testing request: /prod/package POST
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 20, type: restler_fuzzable_bool
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+Tested 100 combinations for request /prod/package POST, combination 1
+Testing request: /prod/package/fuzzstring/rate GET
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+Tested 100 combinations for request /prod/package/fuzzstring/rate GET, combination 1
+Testing request: /prod/package/fuzzstring/cost GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+Fuzzing request block 10, type: restler_fuzzable_bool
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+Tested 200 combinations for request /prod/package/fuzzstring/cost GET, combination 1
+Testing request: /prod/authenticate PUT
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 14, type: restler_fuzzable_string
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+Fuzzing request block 16, type: restler_fuzzable_bool
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+Tested 200 combinations for request /prod/authenticate PUT, combination 1
+Testing request: /prod/package/byRegEx POST
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 19, type: restler_fuzzable_string
+Tested 100 combinations for request /prod/package/byRegEx POST, combination 1
+Testing request: /prod/tracks GET
+Testing request: /prod/tracks GET
+Testing request: /prod/packages POST
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 6, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+Fuzzing request block 20, type: restler_fuzzable_string
+Tested 200 combinations for request /prod/packages POST, combination 1
+Testing request: /prod/package/fuzzstring GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+Fuzzing request block 11, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+Tested 200 combinations for request /prod/package/fuzzstring GET, combination 1
+Testing request: /prod/package/fuzzstring POST
+Found 9 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+Fuzzing request block 16, type: restler_fuzzable_string
+Fuzzing request block 18, type: restler_fuzzable_string
+Fuzzing request block 20, type: restler_fuzzable_string
+Fuzzing request block 22, type: restler_fuzzable_object
+Fuzzing request block 24, type: restler_fuzzable_string
+Fuzzing request block 26, type: restler_fuzzable_string
+Fuzzing request block 28, type: restler_fuzzable_bool
+Fuzzing request block 30, type: restler_fuzzable_string
+Tested 900 combinations for request /prod/package/fuzzstring POST, combination 1
+Testing request: /prod/package POST
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 20, type: restler_fuzzable_bool
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+Tested 100 combinations for request /prod/package POST, combination 1
+Testing request: /prod/package/fuzzstring/rate GET
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+Tested 100 combinations for request /prod/package/fuzzstring/rate GET, combination 1
+Testing request: /prod/package/fuzzstring/cost GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+Fuzzing request block 10, type: restler_fuzzable_bool
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+Tested 200 combinations for request /prod/package/fuzzstring/cost GET, combination 1
+Testing request: /prod/authenticate PUT
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 14, type: restler_fuzzable_string
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+Fuzzing request block 16, type: restler_fuzzable_bool
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+Tested 200 combinations for request /prod/authenticate PUT, combination 1
+Testing request: /prod/package/byRegEx POST
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 19, type: restler_fuzzable_string
+Tested 100 combinations for request /prod/package/byRegEx POST, combination 1
+Testing request: /prod/tracks GET
+Testing request: /prod/tracks GET
+Testing request: /prod/packages POST
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 6, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+Fuzzing request block 20, type: restler_fuzzable_string
+Tested 200 combinations for request /prod/packages POST, combination 1
+Testing request: /prod/package/fuzzstring GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+Fuzzing request block 11, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+Tested 200 combinations for request /prod/package/fuzzstring GET, combination 1
+Testing request: /prod/package/fuzzstring POST
+Found 9 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+Fuzzing request block 16, type: restler_fuzzable_string
+Fuzzing request block 18, type: restler_fuzzable_string
+Fuzzing request block 20, type: restler_fuzzable_string
+Fuzzing request block 22, type: restler_fuzzable_object
+Fuzzing request block 24, type: restler_fuzzable_string
+Fuzzing request block 26, type: restler_fuzzable_string
+Fuzzing request block 28, type: restler_fuzzable_bool
+Fuzzing request block 30, type: restler_fuzzable_string
+Tested 900 combinations for request /prod/package/fuzzstring POST, combination 1
+Testing request: /prod/package POST
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 20, type: restler_fuzzable_bool
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package
+Tested 100 combinations for request /prod/package POST, combination 1
+Testing request: /prod/package/fuzzstring/rate GET
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/rate
+Tested 100 combinations for request /prod/package/fuzzstring/rate GET, combination 1
+Testing request: /prod/package/fuzzstring/cost GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+Fuzzing request block 10, type: restler_fuzzable_bool
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring/cost
+Tested 200 combinations for request /prod/package/fuzzstring/cost GET, combination 1
+Testing request: /prod/authenticate PUT
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 14, type: restler_fuzzable_string
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+Fuzzing request block 16, type: restler_fuzzable_bool
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+
+Suspect sequence: 500
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+PUT /prod/authenticate
+Tested 200 combinations for request /prod/authenticate PUT, combination 1
+Testing request: /prod/package/byRegEx POST
+Found 1 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 19, type: restler_fuzzable_string
+Tested 100 combinations for request /prod/package/byRegEx POST, combination 1
+Testing request: /prod/tracks GET
+Testing request: /prod/tracks GET
+Testing request: /prod/packages POST
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 6, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/packages
+Fuzzing request block 20, type: restler_fuzzable_string
+Tested 200 combinations for request /prod/packages POST, combination 1
+Testing request: /prod/package/fuzzstring GET
+Found 2 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+Fuzzing request block 11, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/package/fuzzstring
+Tested 200 combinations for request /prod/package/fuzzstring GET, combination 1
+Testing request: /prod/package/fuzzstring POST
+Found 9 fuzzable blocks.
+Budget: 100 values per parameter.
+Fuzzing request block 5, type: restler_fuzzable_string
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+
+Suspect sequence: 502
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+GET /prod/tracks
+POST /prod/package/fuzzstring
+Fuzzing request block 16, type: restler_fuzzable_string
+Fuzzing request block 18, type: restler_fuzzable_string
+Fuzzing request block 20, type: restler_fuzzable_string
+Fuzzing request block 22, type: restler_fuzzable_object
+Fuzzing request block 24, type: restler_fuzzable_string
+Fuzzing request block 26, type: restler_fuzzable_string
+Fuzzing request block 28, type: restler_fuzzable_bool
+Fuzzing request block 30, type: restler_fuzzable_string
+Tested 900 combinations for request /prod/package/fuzzstring POST, combination 1

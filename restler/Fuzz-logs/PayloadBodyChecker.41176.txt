@@ -1,0 +1,337 @@
+fuzzing valid True
+fuzzing invalid True
+start with examples True
+size dep budget True
+use feedback True
+skip_uuid_substitution False
+recipe None
+Start fuzzing request: POST /packages
+#node: 4
+Fuzz using dynamic feedback
+#N: 4, #max: 200, #width: 20
+Task begin Invalid-JSON
+Tracker begin (Invalid-JSON):
+    Valid: 12
+    Invalid: 0
+Tracker end
+Task end Invalid-JSON
+
+Task begin Structure
+Tracker begin (Structure):
+    Valid: 12
+    Invalid: 0
+Tracker end
+Task end Structure
+
+Task begin Type
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+
+Suspect sequence: 500
+POST /prod/packages
+Tracker begin (Type):
+    Valid: 68
+    Invalid: 32
+    misc: 2 (32: 16 16)
+Tracker end
+Task end Type
+Start fuzzing request: POST /package/{id}
+#node: 13
+Fuzz using dynamic feedback
+#N: 13, #max: 200, #width: 20
+Task begin Invalid-JSON
+Tracker begin (Invalid-JSON):
+    Valid: 0
+    Invalid: 44
+    misc: 1 (44: 44)
+Tracker end
+Task end Invalid-JSON
+
+Task begin Structure
+Tracker begin (Structure):
+    Valid: 0
+    Invalid: 76
+    misc: 1 (76: 76)
+Tracker end
+Task end Structure
+
+Task begin Type
+Tracker begin (Type):
+    Valid: 0
+    Invalid: 88
+    misc: 1 (88: 88)
+Tracker end
+Task end Type
+Start fuzzing request: POST /package
+#node: 6
+Fuzz using dynamic feedback
+#N: 6, #max: 200, #width: 20
+Task begin Invalid-JSON
+Tracker begin (Invalid-JSON):
+    Valid: 0
+    Invalid: 12
+    misc: 1 (12: 12)
+Tracker end
+Task end Invalid-JSON
+
+Task begin Structure
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+Tracker begin (Structure):
+    Valid: 0
+    Invalid: 12
+    misc: 2 (12: 8 4)
+Tracker end
+Task end Structure
+
+Task begin Type
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+
+Suspect sequence: 500
+POST /prod/package
+Tracker begin (Type):
+    Valid: 0
+    Invalid: 26
+    misc: 2 (26: 22 4)
+Tracker end
+Task end Type
+Start fuzzing request: PUT /authenticate
+#node: 8
+Fuzz using dynamic feedback
+#N: 8, #max: 200, #width: 20
+Task begin Invalid-JSON
+Tracker begin (Invalid-JSON):
+    Valid: 0
+    Invalid: 12
+    misc: 1 (12: 12)
+Tracker end
+Task end Invalid-JSON
+
+Task begin Structure
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+Tracker begin (Structure):
+    Valid: 0
+    Invalid: 14
+    misc: 3 (14: 8 4 2)
+Tracker end
+Task end Structure
+
+Task begin Type
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+
+Suspect sequence: 500
+PUT /prod/authenticate
+Tracker begin (Type):
+    Valid: 0
+    Invalid: 98
+    misc: 3 (98: 28 62 8)
+Tracker end
+Task end Type
+Start fuzzing request: POST /package/byRegEx
+#node: 2
+Fuzz using dynamic feedback
+#N: 2, #max: 200, #width: 20
+Task begin Invalid-JSON
+Tracker begin (Invalid-JSON):
+    Valid: 0
+    Invalid: 4
+    misc: 1 (4: 4)
+Tracker end
+Task end Invalid-JSON
+
+Task begin Structure
+Tracker begin (Structure):
+    Valid: 0
+    Invalid: 2
+    misc: 1 (2: 2)
+Tracker end
+Task end Structure
+
+Task begin Type
+Tracker begin (Type):
+    Valid: 0
+    Invalid: 18
+    misc: 1 (18: 18)
+Tracker end
+Task end Type
+Skip visited request /packages
+Skip visited request /package/{id}
+Skip visited request /package
+Skip visited request /authenticate
+Skip visited request /package/byRegEx
+Skip visited request /packages
+Skip visited request /package/{id}
+Skip visited request /package
+Skip visited request /authenticate
+Skip visited request /package/byRegEx
+Skip visited request /packages
+Skip visited request /package/{id}
+Skip visited request /package
+Skip visited request /authenticate
+Skip visited request /package/byRegEx
+Skip visited request /packages
+Skip visited request /package/{id}

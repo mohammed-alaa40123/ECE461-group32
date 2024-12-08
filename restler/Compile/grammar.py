@@ -7,7 +7,7 @@ from engine.errors import ResponseParsingException
 from engine import dependencies
 req_collection = requests.RequestCollection([])
 
-token = "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzI0ODU3ODMsImV4cCI6MTczMjUyMTc4M30.6Q-CqtktIYmTlrMBGa8zXZHKy6WTHaUXb1P_f5Vz6j0"
+token = "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM"
 # Endpoint: /packages, method: Post
 request = requests.Request([
     primitives.restler_static_string("POST "),
@@ -44,27 +44,6 @@ request = requests.Request([
 
 ],
 requestId="/packages"
-)
-req_collection.add_request(request)
-
-# Endpoint: /reset, method: Delete
-request = requests.Request([
-    primitives.restler_static_string("DELETE "),
-    primitives.restler_basepath("/prod"),
-    primitives.restler_static_string("/"),
-    primitives.restler_static_string("reset"),
-    primitives.restler_static_string(" HTTP/1.1\r\n"),
-    primitives.restler_static_string("Accept: application/json\r\n"),
-    primitives.restler_static_string("Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n"),
-    primitives.restler_static_string("X-Authorization: "),
-    primitives.restler_static_string(token),
-    # primitives.restler_fuzzable_string("fuzzstring", quoted=False),
-    primitives.restler_static_string("\r\n"),
-    primitives.restler_refreshable_authentication_token("authentication_token_tag"),
-    primitives.restler_static_string("\r\n"),
-
-],
-requestId="/reset"
 )
 req_collection.add_request(request)
 
@@ -277,11 +256,11 @@ request = requests.Request([
     primitives.restler_refreshable_authentication_token("authentication_token_tag"),
     primitives.restler_static_string("\r\n"),
     primitives.restler_static_string("{"),
+    #primitives.restler_static_string(""""user": {"name": "", "isAdmin": true}, "Secret": {"password": "correcthorsebatterystaple123(!__+@**(A'\\\"`;DROP TABLE packages;\"}"""),
     primitives.restler_static_string("""
     "User":
-        {
-            "name":"""),
-    primitives.restler_fuzzable_string("fuzzstring", quoted=True, examples=["Alfalfa"]),
+        {"name":"""),
+    primitives.restler_fuzzable_string("fuzzstring", quoted=True, examples=["acali"]),
     primitives.restler_static_string(""",
             "isAdmin":"""),
     primitives.restler_fuzzable_bool("true"),
@@ -291,7 +270,7 @@ request = requests.Request([
     "Secret":
         {
             "password":"""),
-    primitives.restler_fuzzable_string("fuzzstring", quoted=True),
+    primitives.restler_static_string("caliand000", quoted=True),
     primitives.restler_static_string("""
         }
     }"""),
@@ -352,3 +331,24 @@ request = requests.Request([
 requestId="/tracks"
 )
 req_collection.add_request(request)
+
+# # Endpoint: /reset, method: Delete
+# request = requests.Request([
+#     primitives.restler_static_string("DELETE "),
+#     primitives.restler_basepath("/prod"),
+#     primitives.restler_static_string("/"),
+#     primitives.restler_static_string("reset"),
+#     primitives.restler_static_string(" HTTP/1.1\r\n"),
+#     primitives.restler_static_string("Accept: application/json\r\n"),
+#     primitives.restler_static_string("Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n"),
+#     primitives.restler_static_string("X-Authorization: "),
+#     primitives.restler_static_string(token),
+#     # primitives.restler_fuzzable_string("fuzzstring", quoted=False),
+#     primitives.restler_static_string("\r\n"),
+#     primitives.restler_refreshable_authentication_token("authentication_token_tag"),
+#     primitives.restler_static_string("\r\n"),
+
+# ],
+# requestId="/reset"
+# )
+# req_collection.add_request(request)
