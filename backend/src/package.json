@@ -28,8 +28,6 @@
         "node-fetch": "^3.3.2",
         "pg": "^8.13.0",
         "prettier": "^3.3.3",
-        "serverless": "^4.4.10",
-        "serverless-offline": "^14.3.4",
         "winston": "^3.15.0"
     },
     "devDependencies": {
