@@ -246,9 +246,9 @@ export const handleCreatePackage = async (body: string, headers: { [key: string]
       const repoUrlFixed = convertGitUrlToHttpsFlexible(URL);
       const info = await metricCalcFromUrlUsingNetScore(repoUrlFixed, metadata.ID);
 
-      // if (!info || info.NET_SCORE < 0.5) {
-      //   return sendResponse(424, { message: 'Package disqualified due to low rating' });
-      // }
+      if (!info || info.NET_SCORE < 0.5) {
+        return sendResponse(424, { message: 'Package disqualified due to low rating' });
+      }
 
       metadata.Name = Name ? Name:info!.NAME;
       metadata.Version = info!.VERSION;
@@ -491,6 +491,11 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     return sendResponse(403, { message: 'You do not have permission to update packages.' });
   }
 
+  const result = await pool.query('select * from packages where id=$1', [id]);
+  if (result.rows.length == 0) {
+    return sendResponse(404, { message: 'Package does not exist.' });
+  }
+
   let updatedPackage: Package;
   try {
       updatedPackage = JSON.parse(body);
@@ -509,10 +514,7 @@ export const handleUpdatePackage = async (id: string, body: string, headers: { [
     return sendResponse(400, { message: 'There is missing field(s) in the PackageID or it is formed improperly, or is invalid.' });
   }
 
-  const result = await pool.query('select * from packages where id=$1', [updatedPackage.metadata.ID]);
-  if (result.rows.length == 0) {
-    return sendResponse(404, { message: 'Package does not exist.' });
-  }
+
   const existingResult = await pool.query(
     "SELECT id FROM packages WHERE name = $1 AND version = $2;",
     [metadata.Name, metadata.Version]
