@@ -1,0 +1,429 @@
+
+2024-12-07 17:17:07.760: Generation-1
+2024-12-07 17:17:07.760: 	Rendered requests: 9 / 9
+2024-12-07 17:17:07.760: 	Rendered requests with "valid" status codes: 1 / 9
+2024-12-07 17:17:07.760: 	Rendered requests determined to be fully valid (no resource creation failures): 1 / 9
+2024-12-07 17:17:07.760: List of failing requests:
+	Request: 0
+		- restler_static_string: 'POST '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'packages'
+		- restler_static_string: '?'
+		- restler_static_string: 'offset='
+		+ restler_fuzzable_string: [1, fuzzstring, ...]
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		- restler_static_string: 'Content-Type: '
+		- restler_static_string: 'application/json'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '['
+		- restler_static_string: '\n    {\n        "Version":\n            "Exact (1.2.3)\nBounded range (1.2.3-2.1.0)\nCarat (^1.2.3)\nTilde (~1.2.0)"\n        ,\n        "Name":\n            '
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: '\n    }]'
+		- restler_static_string: '\r\n'
+
+	Request: 1
+		- restler_static_string: 'GET '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		+ restler_fuzzable_string: [123567192081501, fuzzstring, ...]
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		+ restler_fuzzable_string: [bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c, fuzzstring, ...]
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+
+	Request: 2
+		- restler_static_string: 'POST '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		+ restler_fuzzable_string: [123567192081501, fuzzstring, ...]
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '{'
+		- restler_static_string: '\n    "metadata":\n        {\n            "Name":\n                '
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: '\n            ,\n            "Version":'
+		+ restler_fuzzable_string: ["1.2.3", "fuzzstring", ...]
+		- restler_static_string: ',\n            "ID":\n                '
+		+ restler_fuzzable_string: ["123567192081501", "fuzzstring", ...]
+		- restler_static_string: '\n        }\n    ,\n    "data":\n        {\n            "Name":\n                '
+		- restler_fuzzable_object: '{ "fuzz": false }'
+		- restler_static_string: '\n            ,\n            "Content":'
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: ',\n            "URL":'
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: ',\n            "debloat":'
+		- restler_fuzzable_bool: 'true'
+		- restler_static_string: ',\n            "JSProgram":'
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: '\n        }\n    }'
+		- restler_static_string: '\r\n'
+
+	Request: 3
+		- restler_static_string: 'POST '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Content-Type: '
+		- restler_static_string: 'application/json'
+		- restler_static_string: '\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '{'
+		- restler_static_string: '\n    "JSProgram":'
+		- restler_static_string: '\n    "if (process.argv.length === 7) {\\nconsole.log(\'Success\')\\nprocess.exit(0)\\n} else {\\nconsole.log(\'Failed\')\\nprocess.exit(1)\\n}",'
+		- restler_static_string: '\n    "URL":'
+		- restler_static_string: '\n    "https://github.com/lodash/lodash",'
+		- restler_static_string: '\n    "debloat":'
+		- restler_fuzzable_bool: 'true'
+		- restler_static_string: '}'
+
+	Request: 4
+		- restler_static_string: 'GET '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		+ restler_fuzzable_string: [123567192081501, fuzzstring, ...]
+		- restler_static_string: '/'
+		- restler_static_string: 'rate'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+
+	Request: 5
+		- restler_static_string: 'GET '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		+ restler_fuzzable_string: [123567192081501, fuzzstring, ...]
+		- restler_static_string: '/'
+		- restler_static_string: 'cost'
+		- restler_static_string: '?'
+		- restler_static_string: 'dependency='
+		- restler_fuzzable_bool: 'true'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+
+	Request: 6
+		- restler_static_string: 'PUT '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'authenticate'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'Content-Type: '
+		- restler_static_string: 'application/json'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '{'
+		- restler_static_string: '\n    "User":\n        {"name":'
+		+ restler_fuzzable_string: ["acali", "fuzzstring", ...]
+		- restler_static_string: ',\n            "isAdmin":'
+		- restler_fuzzable_bool: 'true'
+		- restler_static_string: '\n        }\n    ,\n    "Secret":\n        {\n            "password":'
+		- restler_static_string: '"caliand000"'
+		- restler_static_string: '\n        }\n    }'
+		- restler_static_string: '\r\n'
+
+	Request: 7
+		- restler_static_string: 'POST '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		- restler_static_string: 'byRegEx'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		- restler_static_string: 'Content-Type: '
+		- restler_static_string: 'application/json'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '{'
+		- restler_static_string: '\n    "RegEx":'
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: '}'
+		- restler_static_string: '\r\n'
+
+-------------------------
+
+
+2024-12-07 17:17:20.084: Generation-2
+2024-12-07 17:17:20.084: 	Rendered requests: 9 / 9
+2024-12-07 17:17:20.084: 	Rendered requests with "valid" status codes: 1 / 9
+2024-12-07 17:17:20.084: 	Rendered requests determined to be fully valid (no resource creation failures): 1 / 9
+2024-12-07 17:17:20.084: List of failing requests:
+	Request: 0
+		- restler_static_string: 'POST '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'packages'
+		- restler_static_string: '?'
+		- restler_static_string: 'offset='
+		+ restler_fuzzable_string: [1, fuzzstring, ...]
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		- restler_static_string: 'Content-Type: '
+		- restler_static_string: 'application/json'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '['
+		- restler_static_string: '\n    {\n        "Version":\n            "Exact (1.2.3)\nBounded range (1.2.3-2.1.0)\nCarat (^1.2.3)\nTilde (~1.2.0)"\n        ,\n        "Name":\n            '
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: '\n    }]'
+		- restler_static_string: '\r\n'
+
+	Request: 1
+		- restler_static_string: 'GET '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		+ restler_fuzzable_string: [123567192081501, fuzzstring, ...]
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		+ restler_fuzzable_string: [bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c, fuzzstring, ...]
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+
+	Request: 2
+		- restler_static_string: 'POST '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		+ restler_fuzzable_string: [123567192081501, fuzzstring, ...]
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '{'
+		- restler_static_string: '\n    "metadata":\n        {\n            "Name":\n                '
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: '\n            ,\n            "Version":'
+		+ restler_fuzzable_string: ["1.2.3", "fuzzstring", ...]
+		- restler_static_string: ',\n            "ID":\n                '
+		+ restler_fuzzable_string: ["123567192081501", "fuzzstring", ...]
+		- restler_static_string: '\n        }\n    ,\n    "data":\n        {\n            "Name":\n                '
+		- restler_fuzzable_object: '{ "fuzz": false }'
+		- restler_static_string: '\n            ,\n            "Content":'
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: ',\n            "URL":'
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: ',\n            "debloat":'
+		- restler_fuzzable_bool: 'true'
+		- restler_static_string: ',\n            "JSProgram":'
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: '\n        }\n    }'
+		- restler_static_string: '\r\n'
+
+	Request: 3
+		- restler_static_string: 'POST '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Content-Type: '
+		- restler_static_string: 'application/json'
+		- restler_static_string: '\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '{'
+		- restler_static_string: '\n    "JSProgram":'
+		- restler_static_string: '\n    "if (process.argv.length === 7) {\\nconsole.log(\'Success\')\\nprocess.exit(0)\\n} else {\\nconsole.log(\'Failed\')\\nprocess.exit(1)\\n}",'
+		- restler_static_string: '\n    "URL":'
+		- restler_static_string: '\n    "https://github.com/lodash/lodash",'
+		- restler_static_string: '\n    "debloat":'
+		- restler_fuzzable_bool: 'true'
+		- restler_static_string: '}'
+
+	Request: 4
+		- restler_static_string: 'GET '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		+ restler_fuzzable_string: [123567192081501, fuzzstring, ...]
+		- restler_static_string: '/'
+		- restler_static_string: 'rate'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+
+	Request: 5
+		- restler_static_string: 'GET '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		+ restler_fuzzable_string: [123567192081501, fuzzstring, ...]
+		- restler_static_string: '/'
+		- restler_static_string: 'cost'
+		- restler_static_string: '?'
+		- restler_static_string: 'dependency='
+		- restler_fuzzable_bool: 'true'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+
+	Request: 6
+		- restler_static_string: 'PUT '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'authenticate'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'Content-Type: '
+		- restler_static_string: 'application/json'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '{'
+		- restler_static_string: '\n    "User":\n        {"name":'
+		+ restler_fuzzable_string: ["acali", "fuzzstring", ...]
+		- restler_static_string: ',\n            "isAdmin":'
+		- restler_fuzzable_bool: 'true'
+		- restler_static_string: '\n        }\n    ,\n    "Secret":\n        {\n            "password":'
+		- restler_static_string: '"caliand000"'
+		- restler_static_string: '\n        }\n    }'
+		- restler_static_string: '\r\n'
+
+	Request: 7
+		- restler_static_string: 'POST '
+		- restler_static_string: '/prod'
+		- restler_static_string: '/'
+		- restler_static_string: 'package'
+		- restler_static_string: '/'
+		- restler_static_string: 'byRegEx'
+		- restler_static_string: ' HTTP/1.1\r\n'
+		- restler_static_string: 'Accept: application/json\r\n'
+		- restler_static_string: 'Host: zy5br6rkxd.execute-api.us-east-1.amazonaws.com\r\n'
+		- restler_static_string: 'X-Authorization: '
+		- restler_static_string: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsIm5hbWUiOiJlY2UzMDg2MWRlZmF1bHRhZG1pbnVzZXIiLCJpYXQiOjE3MzM1OTYzMTksImV4cCI6MTczMzYzMjMxOX0.g-Hz6r0utSzdmuT9iv-3eeplXj8fWgqSWDHxOLpaxhM'
+		- restler_static_string: '\r\n'
+		- restler_static_string: 'Content-Type: '
+		- restler_static_string: 'application/json'
+		- restler_static_string: '\r\n'
+		+ restler_refreshable_authentication_token: [token_auth_method, token_refresh_interval, ...]
+		- restler_static_string: '\r\n'
+		- restler_static_string: '{'
+		- restler_static_string: '\n    "RegEx":'
+		- restler_fuzzable_string: '"fuzzstring"'
+		- restler_static_string: '}'
+		- restler_static_string: '\r\n'
+
+-------------------------
+
+
+2024-12-07 17:27:09.374: Generation-3
+2024-12-07 17:27:09.374: 	Rendered requests: 9 / 9
+2024-12-07 17:27:09.374: 	Rendered requests with "valid" status codes: 9 / 9
+2024-12-07 17:27:09.374: 	Rendered requests determined to be fully valid (no resource creation failures): 9 / 9
+
+2024-12-07 17:27:18.026: Generation-4
+2024-12-07 17:27:18.026: 	Rendered requests: 9 / 9
+2024-12-07 17:27:18.026: 	Rendered requests with "valid" status codes: 9 / 9
+2024-12-07 17:27:18.026: 	Rendered requests determined to be fully valid (no resource creation failures): 9 / 9
+
+2024-12-07 17:40:30.832: Generation-5
+2024-12-07 17:40:30.832: 	Rendered requests: 9 / 9
+2024-12-07 17:40:30.832: 	Rendered requests with "valid" status codes: 9 / 9
+2024-12-07 17:40:30.832: 	Rendered requests determined to be fully valid (no resource creation failures): 9 / 9
+
+2024-12-07 17:40:41.054: Generation-6
+2024-12-07 17:40:41.054: 	Rendered requests: 9 / 9
+2024-12-07 17:40:41.054: 	Rendered requests with "valid" status codes: 9 / 9
+2024-12-07 17:40:41.054: 	Rendered requests determined to be fully valid (no resource creation failures): 9 / 9
+
+2024-12-07 17:56:43.864: Generation-7
+2024-12-07 17:56:43.864: 	Rendered requests: 9 / 9
+2024-12-07 17:56:43.864: 	Rendered requests with "valid" status codes: 9 / 9
+2024-12-07 17:56:43.864: 	Rendered requests determined to be fully valid (no resource creation failures): 9 / 9
+
+2024-12-07 17:56:54.901: Generation-8
+2024-12-07 17:56:54.901: 	Rendered requests: 9 / 9
+2024-12-07 17:56:54.901: 	Rendered requests with "valid" status codes: 9 / 9
+2024-12-07 17:56:54.901: 	Rendered requests determined to be fully valid (no resource creation failures): 9 / 9
+
+2024-12-07 18:07:33.367: Generation-9
+2024-12-07 18:07:33.367: 	Rendered requests: 9 / 9
+2024-12-07 18:07:33.367: 	Rendered requests with "valid" status codes: 9 / 9
+2024-12-07 18:07:33.367: 	Rendered requests determined to be fully valid (no resource creation failures): 9 / 9
+
+2024-12-07 18:07:33.443: 	Never Rendered requests:
+-------------------------
+

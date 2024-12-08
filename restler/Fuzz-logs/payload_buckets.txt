@@ -1,0 +1,42 @@
+POST /packages
+	TypeMismatch_Version
+	[{'Version': {'fuzz': False}, 'Name': 'fuzzstring'}]
+
+POST /package
+	StructMissing_/Name/URL/debloat/JSProgram
+	{'Content': 'fuzzstring'}
+
+	StructMissing_/Name/Content/debloat/JSProgram
+	{'URL': 'fuzzstring'}
+
+	TypeMismatch_Content
+	{'Content': {'fuzz': False}}
+
+PUT /authenticate
+	StructMissing_/+isAdmin/Secret{...}
+	{'User': {'name': 'fuzzstring'}}
+
+	StructMissing_/+name/Secret{...}
+	{'User': {'isAdmin': False}}
+
+	StructMissing_/Secret{...}
+	{'User': {'name': 'fuzzstring', 'isAdmin': False}}
+
+	StructMissing_/User{...}
+	{'Secret': {'password': 'fuzzstring'}}
+
+	TypeMismatch_User_name
+	{'User': {'name': {'fuzz': False}}}
+
+	InvalidJson
+	false
+
+	TypeMismatch_User__object
+	{'User': False}
+
+	StructMissing_/+name/+isAdmin/Secret{...}
+	{'User': {'fuzz': False}}
+
+	StructMissing_/User{...}/Secret{...}
+	{'fuzz': False}
+
