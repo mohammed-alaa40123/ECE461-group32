@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import { getLogger } from "./logger";
 import { graphqlClient } from "./graphqlClient";
 const logger = getLogger();
-import * as git from 'isomorphic-git';
+import git from 'isomorphic-git';
 import fs from 'fs';
 import http from 'isomorphic-git/http/node';
 dotenv.config();
